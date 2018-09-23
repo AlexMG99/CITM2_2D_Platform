@@ -1,2 +1,8 @@
-# CITM2_2D_Platform
-A repository of a 2D Platform Videogame for Game Development subject.
+# CITM 2D Platform
+## Presentation
+This Project is a 2D Platform named '' made by two students of CITM Terrassa (UPC). 
+
+## Team
+* GitHub: [LaiaMartinezMotis](https://github.com/LaiaMartinezMotis)
+* GitHub: [AlexMG99](https://github.com/AlexMG99)
+
