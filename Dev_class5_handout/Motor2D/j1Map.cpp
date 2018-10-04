@@ -103,8 +103,6 @@ bool j1Map::CleanUp()
 	}
 	data.layers.clear();
 
-	//Programa de correcio de codi: sonar lint
-
 	// Clean up the pugui tree
 	map_file.reset();
 

@@ -1,14 +1,17 @@
 #include "p2Defs.h"
 #include "p2Log.h"
+#include "p2Point.h"
 #include "j1App.h"
 #include "j1Player.h"
-
-#include "SDL_image/include/SDL_image.h"
-#pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
+#include "j1Textures.h"
+#include "j1Render.h"
 
 j1Player::j1Player() : j1Module()
 {
 	name.create("player");
+
+	position.y = 0;
+	position.x = 0;
 }
 
 //Destructor
@@ -22,6 +25,8 @@ bool j1Player::Awake(pugi::xml_node& config)
 	LOG("Init SDL player");
 	bool ret = true;
 
+	path.create(config.child("path").child_value());
+
 	return ret;
 }
 
@@ -29,10 +34,36 @@ bool j1Player::Start()
 {
 	LOG("start player");
 	bool ret = true;
+
+	player_spritesheet = App->tex->Load(path.GetString());
+	if (player_spritesheet == nullptr) {
+		LOG("Error loading");
+		ret = false;
+	}
+	else {
+		LOG("Loaded player texture succesfully");
+	}
 	return ret;
+}
+
+bool j1Player::PostUpdate()
+{
+	Draw();
+	LOG("Updating");
+	return true;
 }
 
 bool j1Player::CleanUp()
 {
+	return true;
+}
+
+bool j1Player::Draw() {
+	SDL_Rect rect;
+	rect.x = 0;
+	rect.y = 0;
+	rect.w = 20;
+	rect.h = 40;
+	App->render->Blit(player_spritesheet, position.x, position.y, &rect);
 	return true;
 }

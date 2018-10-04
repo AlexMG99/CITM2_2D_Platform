@@ -7,6 +7,7 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Map.h"
+#include "j1Player.h"
 #include "j1Scene.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -61,17 +62,22 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x += 1;
 
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		App->player->position.x += 0.1F;
+
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		App->player->position.y += 0.1F;
+
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		App->player->position.x -= 0.1F;
+
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		App->player->position.y -= 0.1F;
+
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw();
 
-	// TODO 7: Set the window title like
-	// "Map:%dx%d Tiles:%dx%d Tilesets:%d"
-	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
-					App->map->data.width, App->map->data.height,
-					App->map->data.tile_width, App->map->data.tile_height,
-					App->map->data.tilesets.count());
-
-	App->win->SetTitle(title.GetString());
+	
 	return true;
 }
 

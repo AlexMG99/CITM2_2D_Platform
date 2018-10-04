@@ -3,6 +3,10 @@
 
 #include "j1Module.h"
 
+struct SDL_Texture;
+struct SDL_Rect;
+
+
 class j1Player : public j1Module
 {
 public:
@@ -17,8 +21,22 @@ public:
 	// Called before the first frame
 	bool Start();
 
+	//Called every loop iteration
+	bool PostUpdate();
+
 	//Called before quitting
 	bool CleanUp();
+
+	bool Draw();
+
+private:
+	//Load Player Texture
+	//bool LoadPlayerImage(SDL_Texture*);
+
+public:
+	SDL_Texture* player_spritesheet;
+	p2SString path;
+	fPoint position;
 };
 
 
