@@ -318,8 +318,8 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 			set->tex_height = h;
 		}
 
-		set->num_tiles_width = set->tex_width / set->tile_width;
-		set->num_tiles_height = set->tex_height / set->tile_height;
+		set->num_tiles_width = set->tex_width / (set->spacing +set->tile_width);
+		set->num_tiles_height = set->tex_height / (set->spacing + set->tile_height);
 	}
 
 	return ret;

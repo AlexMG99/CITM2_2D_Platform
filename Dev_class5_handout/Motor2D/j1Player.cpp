@@ -49,7 +49,6 @@ bool j1Player::Start()
 bool j1Player::PostUpdate()
 {
 	Draw();
-	LOG("Updating");
 	return true;
 }
 
@@ -60,8 +59,8 @@ bool j1Player::CleanUp()
 
 bool j1Player::Draw() {
 	SDL_Rect rect;
-	rect.x = 0;
-	rect.y = 0;
+	rect.x = 1;
+	rect.y = 1;
 	rect.w = 20;
 	rect.h = 40;
 	App->render->Blit(player_spritesheet, position.x, position.y, &rect);

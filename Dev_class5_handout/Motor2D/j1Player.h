@@ -2,6 +2,7 @@
 #define __J1PLAYER_H_
 
 #include "j1Module.h"
+#include "p2Animation.h"
 
 struct SDL_Texture;
 struct SDL_Rect;
@@ -34,9 +35,13 @@ private:
 	//bool LoadPlayerImage(SDL_Texture*);
 
 public:
-	SDL_Texture* player_spritesheet;
 	p2SString path;
 	fPoint position;
+
+private:
+	SDL_Texture* player_spritesheet;
+	Animation*	 current_animation;
+	Animation	 idle;
 };
 
 
