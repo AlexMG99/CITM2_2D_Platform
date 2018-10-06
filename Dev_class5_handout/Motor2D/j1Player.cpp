@@ -36,14 +36,25 @@ bool j1Player::Start()
 	LOG("start player");
 	bool ret = true;
 
-	player_spritesheet = App->tex->Load(path.GetString());
-	if (player_spritesheet == nullptr) {
-		LOG("Error loading");
+	pugi::xml_parse_result	result = player_file.load_file(path.GetString());
+	pugi::xml_node			player_node = player_file.child("player");
+	if (result == NULL) {
+		LOG("Error loading player XML! Error: %s", result.description());
 		ret = false;
 	}
-	else {
-		LOG("Loaded player texture succesfully");
+	else
+	{
+		player_spritesheet = App->tex->Load(player_node.child("image").attribute("source").value());
+
+		if (player_spritesheet == nullptr) {
+			LOG("Error loading player texture!");
+			ret = false;
+		}
+		else {
+			LOG("Loaded player texture succesfully");
+		}
 	}
+
 	return ret;
 }
 
@@ -60,8 +71,19 @@ bool j1Player::CleanUp()
 }
 
 bool j1Player::Load(pugi::xml_node& player_node) {
-	//position.x = player_node.child
-	//position.y = data.child("camera").attribute("y").as_int();
+
+	position.x = player_node.child("position").attribute("x").as_float();
+	position.y = player_node.child("position").attribute("y").as_float();
+	return true;
+}
+
+bool j1Player::Save(pugi::xml_node& player_node) const
+{
+	pugi::xml_node pos = player_node.append_child("position");
+
+	pos.append_attribute("x") = position.x;
+	pos.append_attribute("y") = position.y;
+
 	return true;
 }
 

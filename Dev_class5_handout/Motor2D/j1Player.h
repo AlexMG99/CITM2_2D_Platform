@@ -38,7 +38,7 @@ public:
 	bool Load(pugi::xml_node&);
 
 	//Save Game State
-	/*bool Save(pugi::xml_node&) const;*/
+	bool Save(pugi::xml_node&) const;
 
 private:
 	//Draw player in screen
@@ -47,13 +47,13 @@ private:
 	//bool LoadPlayerImage(SDL_Texture*);
 
 public:
-	p2SString path;
 	fPoint position;
 
 private:
-	SDL_Texture*	player_spritesheet;
-	p2Animation*	current_animation;
-	p2Animation		idle;
+	p2SString path;
+
+	pugi::xml_document  player_file;
+	SDL_Texture*		player_spritesheet;
 	
 };
 
