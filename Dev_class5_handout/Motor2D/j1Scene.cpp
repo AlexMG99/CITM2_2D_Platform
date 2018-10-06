@@ -65,7 +65,7 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		App->player->position.x += 0.1F;
 
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
 		App->player->position.y += 0.1F;
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)

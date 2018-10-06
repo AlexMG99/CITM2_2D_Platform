@@ -22,15 +22,27 @@ public:
 	// Called before the first frame
 	bool Start();
 
+	//// Called each loop iteration
+	//bool PreUpdate();
+
+	//// Called each loop iteration
+	//bool Update(float dt);
+
 	//Called every loop iteration
 	bool PostUpdate();
 
 	//Called before quitting
 	bool CleanUp();
 
-	bool Draw();
+	//Load Game State
+	bool Load(pugi::xml_node&);
+
+	//Save Game State
+	/*bool Save(pugi::xml_node&) const;*/
 
 private:
+	//Draw player in screen
+	bool Draw();
 	//Load Player Texture
 	//bool LoadPlayerImage(SDL_Texture*);
 
@@ -42,6 +54,7 @@ private:
 	SDL_Texture*	player_spritesheet;
 	p2Animation*	current_animation;
 	p2Animation		idle;
+	
 };
 
 

@@ -4,10 +4,12 @@
   <app>
     <title>Game Development Testbed</title>
     <organization>UPC</organization>
+    <path>save_game.xml</path>
   </app>
 	
   <renderer>
     <vsync value="false"/>
+    <camera x="0" y="0"/>
   </renderer>
 
   <window>

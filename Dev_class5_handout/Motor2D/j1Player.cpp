@@ -59,6 +59,13 @@ bool j1Player::CleanUp()
 	return true;
 }
 
+bool j1Player::Load(pugi::xml_node& player_node) {
+	//position.x = player_node.child
+	//position.y = data.child("camera").attribute("y").as_int();
+	return true;
+}
+
+
 bool j1Player::Draw() {
 	SDL_Rect rect;
 	rect.x = 1;
