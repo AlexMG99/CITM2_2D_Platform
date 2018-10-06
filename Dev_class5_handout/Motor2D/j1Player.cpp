@@ -12,6 +12,7 @@ j1Player::j1Player() : j1Module()
 
 	position.y = 0;
 	position.x = 0;
+
 }
 
 //Destructor

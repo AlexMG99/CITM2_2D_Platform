@@ -33,12 +33,14 @@ void j1Map::Draw()
 
 	p2List_item<LayerMap*>* item_layer = data.layers.start;
 	p2List_item<TileSet*>* item_tileset = data.tilesets.start;
+	
 	while (item_layer != NULL)
 	{
+
 		LayerMap* l = item_layer->data;
-		for (uint row = 0; row < l->width; row++) 
+		for (uint row = 0; row < l->width; row++)
 		{
-			for (uint col = 0; col < l->height; col++) 
+			for (uint col = 0; col < l->height; col++)
 			{
 				if (l->data[Get(row, col)] != 0) {
 					iPoint rect = MapToWorld(row, col);
@@ -47,8 +49,12 @@ void j1Map::Draw()
 				}
 			}
 		}
+
+
 		item_layer = item_layer->next;
 	}
+		
+	
 	
 
 }
