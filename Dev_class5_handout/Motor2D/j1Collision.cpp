@@ -6,15 +6,28 @@
 
 j1Collision::j1Collision()
 {
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-		colliders[i] = nullptr;
-
+	name.create("collision");
 }
 
 // Destructor
 j1Collision::~j1Collision()
-{}
+{
 
+}
+
+//Called before render is aviable
+bool j1Collision::Awake(pugi::xml_node& config)
+{
+	LOG("Init SDL Collision");
+	bool ret = true;
+
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+		colliders[i] = nullptr;
+
+	return ret;
+}
+
+//Called every loop iteration
 bool j1Collision::PreUpdate()
 {
 	// Remove all colliders scheduled for deletion
@@ -63,7 +76,7 @@ bool j1Collision::PreUpdate()
 }
 
 // Called before render is available
-bool j1Collision::Update()
+bool j1Collision::PostUpdate()
 {
 
 	DebugDraw();
@@ -73,7 +86,7 @@ bool j1Collision::Update()
 
 void j1Collision::DebugDraw()
 {
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 		debug = !debug;
 
 	if (debug == false)
@@ -89,6 +102,12 @@ void j1Collision::DebugDraw()
 		{
 		case COLLIDER_NONE: // white
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
+			break;
+		case COLLIDER_GROUND: // blue
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+			break;
+		case COLLIDER_PLAYER: //green
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
 			break;
 		}
 	}

@@ -6,6 +6,7 @@
 
 struct SDL_Texture;
 struct SDL_Rect;
+struct Collider;
 
 
 class j1Player : public j1Module
@@ -53,7 +54,8 @@ private:
 	p2SString path;
 
 	pugi::xml_document  player_file;
-	SDL_Texture*		player_spritesheet;
+	SDL_Texture*		player_spritesheet = nullptr;
+	Collider*			player_coll = nullptr;
 	
 };
 

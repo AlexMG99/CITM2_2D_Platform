@@ -9,6 +9,7 @@
 	<player>
 		<position x="0" y="0" />
 	</player>
+	<collision />
 	<renderer>
 		<camera x="0" y="0" />
 	</renderer>

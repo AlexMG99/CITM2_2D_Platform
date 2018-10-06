@@ -4,14 +4,12 @@
 #include "j1App.h"
 #include "j1Player.h"
 #include "j1Textures.h"
+#include "j1Collision.h"
 #include "j1Render.h"
 
 j1Player::j1Player() : j1Module()
 {
 	name.create("player");
-
-	position.y = 0;
-	position.x = 0;
 
 }
 
@@ -20,7 +18,7 @@ j1Player::~j1Player()
 {
 }
 
-// Called before player is available
+// Called before render is available
 bool j1Player::Awake(pugi::xml_node& config)
 {
 	LOG("Init SDL player");
@@ -38,6 +36,7 @@ bool j1Player::Start()
 
 	pugi::xml_parse_result	result = player_file.load_file(path.GetString());
 	pugi::xml_node			player_node = player_file.child("player");
+	pugi::xml_node			player_collider = player_node.child("collider");
 	if (result == NULL) {
 		LOG("Error loading player XML! Error: %s", result.description());
 		ret = false;
@@ -55,18 +54,28 @@ bool j1Player::Start()
 		}
 	}
 
+	player_coll = App->collision->AddCollider({ player_collider.attribute("x").as_int(),
+		player_collider.attribute("y").as_int(),
+		player_collider.attribute("w").as_int(),
+		player_collider.attribute("h").as_int() },
+		COLLIDER_PLAYER);
+
 	return ret;
 }
 
 bool j1Player::PostUpdate()
 {
 	Draw();
+	player_coll->SetPos(position.x, position.y);
 	//App->render->camera.x = -position.x;
 	return true;
 }
 
 bool j1Player::CleanUp()
 {
+	if (player_coll != nullptr) {
+		player_coll->to_delete = true;
+	}
 	return true;
 }
 

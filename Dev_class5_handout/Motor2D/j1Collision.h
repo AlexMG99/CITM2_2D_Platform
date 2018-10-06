@@ -44,9 +44,19 @@ public:
 	j1Collision();
 	~j1Collision();
 
+	//Called before render is aviable
+	bool Awake(pugi::xml_node&);
+
+	//Called every loop iteration
 	bool PreUpdate();
-	bool Update();
-	//update_status PostUpdate();
+
+	//Called every loop iteration
+	bool PostUpdate();
+
+	//Called every loop iteration
+	//bool PostUpdate();
+
+	//Called every loop iteration
 	bool CleanUp();
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);

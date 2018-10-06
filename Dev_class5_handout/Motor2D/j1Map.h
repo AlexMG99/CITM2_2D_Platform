@@ -6,7 +6,6 @@
 #include "p2Point.h"
 #include "j1Module.h"
 
-// TODO 1: Create a struct for the map layer
 // ----------------------------------------------------
 
 struct LayerMap {
@@ -23,13 +22,10 @@ struct LayerMap {
 	}
 };
 
-	// TODO 6: Short function to get the value of x,y
-
 
 // ----------------------------------------------------
 struct TileSet
 {
-	// TODO 7: Create a method that receives a tile id and returns it's Rectfind the Rect associated with a specific tile id
 	SDL_Rect GetTileRect(int id) const;
 
 	p2SString			name;
@@ -90,7 +86,9 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
-	// TODO 8: Create a method that translates x,y coordinates from map positions to world positions
+	//Check Collision with Map
+	//void OnCollision(Collider* c1, Collider* c2);
+
 	iPoint MapToWorld(int x, int y) const;
 
 private:
