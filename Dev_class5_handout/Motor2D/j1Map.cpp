@@ -37,8 +37,7 @@ void j1Map::Draw()
 	while (item_layer != NULL)
 	{
 		LayerMap* l = item_layer->data;
-		TileSet* t = item_tileset->data;
-		while (item_tileset->next != NULL && l->data[0] < t->firstgid) {
+		while (item_tileset->next != NULL && l->data[0] > item_tileset->next->data->firstgid) {
 			item_tileset = item_tileset->next;
 		}
 		for (uint row = 0; row < l->width; row++)

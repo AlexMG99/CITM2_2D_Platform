@@ -50,6 +50,7 @@ bool j1Player::Start()
 bool j1Player::PostUpdate()
 {
 	Draw();
+	//App->render->camera.x = -position.x;
 	return true;
 }
 

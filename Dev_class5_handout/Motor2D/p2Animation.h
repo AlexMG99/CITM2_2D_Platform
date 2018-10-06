@@ -1,10 +1,10 @@
-#ifndef __ANIMATION_H__
-#define __ANIMATION_H__
+#ifndef __P2ANIMATION_H__
+#define __P2ANIMATION_H__
 
 #include "SDL/include/SDL_rect.h"
 #define MAX_FRAMES 35
 
-class Animation
+class p2Animation
 {
 public:
 	bool loop = true;
@@ -18,10 +18,10 @@ private:
 
 public:
 
-	Animation()
+	p2Animation()
 	{}
 
-	Animation(const Animation& anim) : loop(anim.loop), speed(anim.speed), last_frame(anim.last_frame)
+	p2Animation(const p2Animation& anim) : loop(anim.loop), speed(anim.speed), last_frame(anim.last_frame)
 	{
 		SDL_memcpy(&frames, anim.frames, sizeof(frames));
 	}

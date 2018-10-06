@@ -39,9 +39,9 @@ public:
 	fPoint position;
 
 private:
-	SDL_Texture* player_spritesheet;
-	Animation*	 current_animation;
-	Animation	 idle;
+	SDL_Texture*	player_spritesheet;
+	p2Animation*	current_animation;
+	p2Animation		idle;
 };
 
 
