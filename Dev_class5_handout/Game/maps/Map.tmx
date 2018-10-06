@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="10" tilewidth="16" tileheight="16" nextobjectid="1">
+  <tileset firstgid="243" name="Background" tilewidth="16" tileheight="16" margin="1" tilecount="704" columns="32">
+    <image source="Background.png" width="514" height="355"/>
+  </tileset>
  <tileset firstgid="1" name="warped_caves_png" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="242" columns="22">
   <image source="warped_caves_spacing.png" width="384" height="192"/>
  </tileset>
- <tileset firstgid="243" name="Background" tilewidth="16" tileheight="16" margin="1" tilecount="704" columns="32">
-  <image source="Background.png" width="514" height="355"/>
- </tileset>
- <layer name="Capa de patrones 3" width="30" height="10">
+ <layer name="Background" width="30" height="10">
   <data>
    <tile gid="292"/>
    <tile gid="293"/>
@@ -310,7 +310,7 @@
    <tile gid="594"/>
   </data>
  </layer>
- <layer name="Capa de patrones 4" width="30" height="10">
+ <layer name="CaveBackground" width="30" height="10">
   <data>
    <tile gid="275"/>
    <tile gid="276"/>
@@ -614,7 +614,7 @@
    <tile gid="575"/>
   </data>
  </layer>
- <layer name="Capa de Patrones 1" width="30" height="10">
+ <layer name="Ground" width="30" height="10">
   <data>
    <tile gid="111"/>
    <tile gid="112"/>
@@ -918,7 +918,7 @@
    <tile gid="93"/>
   </data>
  </layer>
- <layer name="Capa de patrones 2" width="30" height="10">
+ <layer name="Details" width="30" height="10">
   <data>
    <tile gid="0"/>
    <tile gid="0"/>

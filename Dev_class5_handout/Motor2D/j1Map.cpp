@@ -36,8 +36,11 @@ void j1Map::Draw()
 	
 	while (item_layer != NULL)
 	{
-
 		LayerMap* l = item_layer->data;
+		TileSet* t = item_tileset->data;
+		while (item_tileset->next != NULL && l->data[0] < t->firstgid) {
+			item_tileset = item_tileset->next;
+		}
 		for (uint row = 0; row < l->width; row++)
 		{
 			for (uint col = 0; col < l->height; col++)
@@ -49,14 +52,8 @@ void j1Map::Draw()
 				}
 			}
 		}
-
-
 		item_layer = item_layer->next;
 	}
-		
-	
-	
-
 }
 
 
@@ -324,8 +321,8 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 			set->tex_height = h;
 		}
 
-		set->num_tiles_width = set->tex_width / (set->spacing +set->tile_width);
-		set->num_tiles_height = set->tex_height / (set->spacing + set->tile_height);
+		set->num_tiles_width = (set->tex_width - 2*set->margin) / (set->spacing +set->tile_width);
+		set->num_tiles_height = (set->tex_height - 2 * set->margin) / (set->spacing + set->tile_height);
 	}
 
 	return ret;
