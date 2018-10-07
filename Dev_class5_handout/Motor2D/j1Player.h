@@ -29,7 +29,7 @@ public:
 
 	//Called every loop iteration
 	bool PostUpdate();
-    bool LoadPlayerAnimations(pugi::xml_node&);
+    bool LoadPlayerAnimations(pugi::xml_node&, p2Animation* animation);
 	//Called before quitting
 	bool CleanUp();
 

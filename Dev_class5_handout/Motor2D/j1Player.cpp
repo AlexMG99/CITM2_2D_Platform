@@ -39,7 +39,8 @@ bool j1Player::Start()
 
 	pugi::xml_parse_result	result = player_file.load_file(path.GetString());
 	pugi::xml_node			player_node = player_file.child("player");
-	/*SDL_Rect Frames;*/
+	pugi::xml_node           animation_node = player_node.child("animation");
+	
 
 	if (result == NULL) {
 		LOG("Error loading player XML! Error: %s", result.description());
@@ -56,15 +57,8 @@ bool j1Player::Start()
 		else {
 			LOG("Loaded player texture succesfully");
 		}
-		bool LoadPlayerAnimations(player_node.child("animation"));
-		/*for (pugi::xml_node animations = player_node.child("idle").child("frame"); animations; animations = animations.next_sibling("frame")) {
-			{
-				Frames.x = animations.attribute("x").as_int();
-				Frames.y = animations.attribute("y").as_int();
-				Frames.h = animations.attribute("h").as_int();
-				Frames.w = animations.attribute("w").as_int();
-				idle.PushBack(Frames);
-			}*/
+		LoadPlayerAnimations(player_node.child("animation"), &idle);
+		
 			/*idle.PushBack({ 1,1,20,40 });
 			idle.PushBack({ 22,1,20,40 });
 			idle.PushBack({ 43,1,20,40 });
@@ -76,17 +70,21 @@ bool j1Player::Start()
 		
 }
 
-bool j1Player::LoadPlayerAnimations(pugi::xml_node& player_node) {
-	SDL_Rect Frames;
-	for (pugi::xml_node animations = player_node.child("idle").child("frame"); animations; animations = animations.next_sibling("frame")) 
-		{
-			Frames.x = animations.attribute("x").as_int();
-			Frames.y = animations.attribute("y").as_int();
-			Frames.h = animations.attribute("h").as_int();
-			Frames.w = animations.attribute("w").as_int();
-			idle.PushBack(Frames);
-		}
-	idle.speed = 0.01f;
+bool j1Player::LoadPlayerAnimations(pugi::xml_node& animation_node, p2Animation* animation) {
+	SDL_Rect frames;
+	for (pugi::xml_node frames_node = animation_node.child("idle").child("frame"); animation_node; animation_node = animation_node.next_sibling("frame"))
+	{
+		frames.x = frames_node.attribute("x").as_int();
+		frames.y = frames_node.attribute("y").as_int();
+		frames.h = frames_node.attribute("h").as_int();
+		frames.w = frames_node.attribute("w").as_int();
+
+		/*idle.PushBack(Frames);*/
+		animation->PushBack({ frames.x, frames.y, frames.w, frames.h });
+	
+	}
+	animation->speed = 0.5f;
+	
 
 	return true;
 
