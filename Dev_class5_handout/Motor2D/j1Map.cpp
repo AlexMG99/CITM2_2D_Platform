@@ -34,7 +34,8 @@ void j1Map::Draw()
 
 	p2List_item<MapLayer*>* item_layer = data.layers.start;
 	p2List_item<TileSet*>* item_tileset = data.tilesets.start;
-	
+	p2List_item<CollisionLayer*>* item_coll = data.collision_layer.start;
+
 	while (item_layer != NULL)
 	{
 		MapLayer* l = item_layer->data;
@@ -56,6 +57,15 @@ void j1Map::Draw()
 			}
 		}
 		item_layer = item_layer->next;
+	}
+	CollisionLayer*c = item_coll->data;
+	while (item_coll != NULL) {
+		c->rect.h = item_coll->data->height;
+		c->rect.w = item_coll->data->width;
+		c->rect.x = item_coll->data->x;
+		c->rect.y = item_coll->data->y;
+		App->collision->AddCollider({ c->rect.x, c->rect.y, c->rect.w, c->rect.h }, COLLIDER_GROUND);
+		item_coll = item_coll->next;
 	}
 }
 
@@ -376,22 +386,23 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	return true;
 }
 
-bool j1Map::LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer) 
+bool j1Map::LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer)
 {
 	coll_layer->name = node.parent().attribute("name").as_string();
-	coll_layer->x = node.attribute("x").as_int();
-	coll_layer->y = node.attribute("y").as_int();
-	coll_layer->width = node.attribute("width").as_int();
-	coll_layer->height = node.attribute("height").as_int();
+	coll_layer->obj_id = node.parent().attribute("name").as_int();
+	coll_layer->x = node.attribute("x").as_float();
+	coll_layer->y = node.attribute("y").as_float();
+	coll_layer->width = node.attribute("width").as_float();
+	coll_layer->height = node.attribute("height").as_float();
 
 	return true;
 }
 
-bool j1Map::LoadColliders(SDL_Rect rect, Collider* coll)
-{
-	coll = App->collision->AddCollider({ rect.x, rect.y, rect.w, rect.h }, COLLIDER_GROUND);
-	return true;
-}
+//bool j1Map::LoadColliders(SDL_Rect rect, Collider* coll)
+//{
+//	coll = App->collision->AddCollider({ rect.x, rect.y, rect.w, rect.h }, COLLIDER_GROUND);
+//	return true;
+//}
 
 void j1Map::OnCollision(Collider* c1, Collider* c2) {
 	LOG("Collision");

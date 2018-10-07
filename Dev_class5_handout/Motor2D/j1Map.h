@@ -7,15 +7,17 @@
 #include "j1Module.h"
 
 // ----------------------------------------------------
-struct Collider;
 
-struct CollisionLayer 
+
+struct CollisionLayer
 {
 	p2SString	name;
-	int		x = 0;
-	int		y = 0;
-	int		width = 0;
-	int		height = 0;
+	SDL_Rect    rect;
+	int         obj_id;
+	float		x = 0.0f;
+	float		y = 0.0f;
+	float		width = 0.0f;
+	float		height = 0.0f;
 
 };
 struct MapLayer 
@@ -112,7 +114,7 @@ private:
 	// TODO 3: Create a method that loads a single laye
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer);
-	bool LoadColliders(SDL_Rect, Collider* );
+	/*bool LoadColliders(SDL_Rect, Collider* );*/
 
 public:
 
