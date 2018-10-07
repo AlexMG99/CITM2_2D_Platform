@@ -58,15 +58,6 @@ void j1Map::Draw()
 		}
 		item_layer = item_layer->next;
 	}
-	CollisionLayer*c = item_coll->data;
-	while (item_coll != NULL) {
-		c->rect.h = item_coll->data->height;
-		c->rect.w = item_coll->data->width;
-		c->rect.x = item_coll->data->x;
-		c->rect.y = item_coll->data->y;
-		App->collision->AddCollider({ c->rect.x, c->rect.y, c->rect.w, c->rect.h }, COLLIDER_GROUND);
-		item_coll = item_coll->next;
-	}
 }
 
 iPoint j1Map::MapToWorld(int x, int y) const
@@ -178,7 +169,7 @@ bool j1Map::Load(const char* file_name)
 
 	// Load collision layer info ----------------------------------------------
 
-	for (pugi::xml_node collision_layer = map_file.child("map").child("objectgroup").child("object"); collision_layer; collision_layer = collision_layer.next_sibling("object"))
+	for (pugi::xml_node collision_layer = map_file.child("map").child("objectgroup"); collision_layer; collision_layer = collision_layer.next_sibling("objectgroup"))
 	{
 
 		CollisionLayer* collision = new CollisionLayer();
@@ -188,14 +179,6 @@ bool j1Map::Load(const char* file_name)
 		}
 		data.collision_layer.add(collision);
 	}
-
-	//Create Colliders
-	//SDL_Rect coll_rect = { data.collision.x, data.collision.y,data.collision.width,data.collision.height };
-	//if (ret == true) {
-
-	//	//LoadColliders(coll_rect, ground_collider);
-
-	//}
 
 	if (ret == true)
 	{
@@ -232,14 +215,21 @@ bool j1Map::Load(const char* file_name)
 			CollisionLayer* c = item_col_layer->data;
 			LOG("Collision Layer -----");
 			LOG("name: %s", c->name.GetString());
-			LOG("x: %i y: %i width: %i height: %i", c->x, c->y, c->width, c->height);
+			p2List_item<CollObject*>* item_coll_object = c->coll_object.start;
+			while (item_coll_object != NULL) 
+			{
+				CollObject* collobject = item_coll_object->data;
+				LOG("x: %f y: %f width: %f height: %f", collobject->x, collobject->y, collobject->width, collobject->height);
+				item_coll_object=item_coll_object->next;
+			}
 			item_col_layer = item_col_layer->next;
 		}
 
 		map_loaded = ret;
 
-		return ret;
+		
 	}
+	return ret;
 }
 
 // Load map general properties
@@ -388,21 +378,33 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 
 bool j1Map::LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer)
 {
-	coll_layer->name = node.parent().attribute("name").as_string();
-	coll_layer->obj_id = node.parent().attribute("name").as_int();
-	coll_layer->x = node.attribute("x").as_float();
-	coll_layer->y = node.attribute("y").as_float();
-	coll_layer->width = node.attribute("width").as_float();
-	coll_layer->height = node.attribute("height").as_float();
+	coll_layer->name = node.attribute("name").as_string();
+
+	LOG("%s", coll_layer->name.GetString());
+	for (pugi::xml_node object_node = node.child("object"); object_node; object_node = object_node.next_sibling("object")) {
+		CollObject* collobject = new CollObject();
+		LoadObject(object_node, collobject);
+		coll_layer->coll_object.add(collobject);
+	}
 
 	return true;
 }
 
-//bool j1Map::LoadColliders(SDL_Rect rect, Collider* coll)
-//{
-//	coll = App->collision->AddCollider({ rect.x, rect.y, rect.w, rect.h }, COLLIDER_GROUND);
-//	return true;
-//}
+bool j1Map::LoadObject(pugi::xml_node& node, CollObject* coll_object)
+{
+	coll_object->id = node.attribute("id").as_int();
+	LOG("%i", coll_object->id);
+	coll_object->x = node.attribute("x").as_float();
+	LOG("%f", coll_object->x);
+	coll_object->y = node.attribute("y").as_float();
+	LOG("%f", coll_object->y);
+	coll_object->width = node.attribute("width").as_float();
+	LOG("%f", coll_object->width);
+	coll_object->height = node.attribute("height").as_float();
+	LOG("%f", coll_object->height);
+
+	return true;
+}
 
 void j1Map::OnCollision(Collider* c1, Collider* c2) {
 	LOG("Collision");
