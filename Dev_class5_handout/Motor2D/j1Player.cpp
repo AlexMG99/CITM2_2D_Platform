@@ -72,7 +72,7 @@ bool j1Player::Start()
 
 bool j1Player::LoadPlayerAnimations(pugi::xml_node& animation_node, p2Animation* animation) {
 	SDL_Rect frames;
-	for (pugi::xml_node frames_node = animation_node.child("idle").child("frame"); animation_node; animation_node = animation_node.next_sibling("frame"))
+	for (pugi::xml_node frames_node = animation_node.child("idle").child("frame"); frames_node; frames_node = frames_node.next_sibling("frame"))
 	{
 		frames.x = frames_node.attribute("x").as_int();
 		frames.y = frames_node.attribute("y").as_int();
@@ -83,8 +83,7 @@ bool j1Player::LoadPlayerAnimations(pugi::xml_node& animation_node, p2Animation*
 		animation->PushBack({ frames.x, frames.y, frames.w, frames.h });
 	
 	}
-	animation->speed = 0.5f;
-	
+	animation->speed = 0.007f;
 
 	return true;
 
