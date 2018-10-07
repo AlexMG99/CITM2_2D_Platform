@@ -72,7 +72,7 @@ struct MapData
 	MapTypes			type;
 	p2List<TileSet*>	tilesets;
 	p2List<MapLayer*>	layers;
-	CollisionLayer		collision;
+	p2List<CollisionLayer*>		collision_layer;
 	
 	// TODO 2: Add a list/array of layers to the map!
 };

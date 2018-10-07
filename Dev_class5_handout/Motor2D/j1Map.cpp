@@ -122,30 +122,30 @@ bool j1Map::Load(const char* file_name)
 
 	pugi::xml_parse_result result = map_file.load_file(tmp.GetString());
 
-	if(result == NULL)
+	if (result == NULL)
 	{
 		LOG("Could not load map xml file %s. pugi error: %s", file_name, result.description());
 		ret = false;
 	}
 
 	// Load general info ----------------------------------------------
-	if(ret == true)
+	if (ret == true)
 	{
 		ret = LoadMap();
 	}
 
 	// Load all tilesets info ----------------------------------------------
 	pugi::xml_node tileset;
-	for(tileset = map_file.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+	for (tileset = map_file.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
 	{
 		TileSet* set = new TileSet();
 
-		if(ret == true)
+		if (ret == true)
 		{
 			ret = LoadTilesetDetails(tileset, set);
 		}
 
-		if(ret == true)
+		if (ret == true)
 		{
 			ret = LoadTilesetImage(tileset, set);
 		}
@@ -154,11 +154,11 @@ bool j1Map::Load(const char* file_name)
 	}
 
 	// Load layer info ----------------------------------------------
-	
+
 	for (pugi::xml_node layers = map_file.child("map").child("layer"); layers; layers = layers.next_sibling("layer"))
 	{
 		MapLayer* layer_map = new MapLayer();
-		if (ret == true) 
+		if (ret == true)
 		{
 			LoadLayer(layers, layer_map);
 		}
@@ -168,28 +168,33 @@ bool j1Map::Load(const char* file_name)
 
 	// Load collision layer info ----------------------------------------------
 
-	pugi::xml_node collision_layer = map_file.child("map").child("objectgroup").child("object");
-	if (ret == true) 
+	for (pugi::xml_node collision_layer = map_file.child("map").child("objectgroup").child("object"); collision_layer; collision_layer = collision_layer.next_sibling("object"))
 	{
-		LoadCollisionLayer(collision_layer, &data.collision);
+
+		CollisionLayer* collision = new CollisionLayer();
+		if (ret == true)
+		{
+			LoadCollisionLayer(collision_layer, collision);
+		}
+		data.collision_layer.add(collision);
 	}
 
 	//Create Colliders
-	SDL_Rect coll_rect = { data.collision.x, data.collision.y,data.collision.width,data.collision.height };
-	if (ret == true) {
+	//SDL_Rect coll_rect = { data.collision.x, data.collision.y,data.collision.width,data.collision.height };
+	//if (ret == true) {
 
-		//LoadColliders(coll_rect, ground_collider);
+	//	//LoadColliders(coll_rect, ground_collider);
 
-	}
+	//}
 
-	if(ret == true)
+	if (ret == true)
 	{
 		LOG("Successfully parsed map XML file: %s", file_name);
 		LOG("width: %d height: %d", data.width, data.height);
 		LOG("tile_width: %d tile_height: %d", data.tile_width, data.tile_height);
 
 		p2List_item<TileSet*>* item = data.tilesets.start;
-		while(item != NULL)
+		while (item != NULL)
 		{
 			TileSet* s = item->data;
 			LOG("Tileset ----");
@@ -200,9 +205,9 @@ bool j1Map::Load(const char* file_name)
 		}
 
 		// Adapt this vcode with your own variables
-		
+
 		p2List_item<MapLayer*>* item_layer = data.layers.start;
-		while(item_layer != NULL)
+		while (item_layer != NULL)
 		{
 			MapLayer* l = item_layer->data;
 			LOG("Layer ----");
@@ -211,15 +216,20 @@ bool j1Map::Load(const char* file_name)
 			item_layer = item_layer->next;
 		}
 
-		CollisionLayer col_layer = data.collision;
-		LOG("Collision Layer -----");
-		LOG("name: %s", col_layer.name.GetString());
-		LOG("x: %i y: %i width: %i height: %i", col_layer.x, col_layer.y, col_layer.width, col_layer.height);
+		p2List_item<CollisionLayer*>* item_col_layer = data.collision_layer.start;
+		while (item_col_layer != NULL)
+		{
+			CollisionLayer* c = item_col_layer->data;
+			LOG("Collision Layer -----");
+			LOG("name: %s", c->name.GetString());
+			LOG("x: %i y: %i width: %i height: %i", c->x, c->y, c->width, c->height);
+			item_col_layer = item_col_layer->next;
+		}
+
+		map_loaded = ret;
+
+		return ret;
 	}
-
-	map_loaded = ret;
-
-	return ret;
 }
 
 // Load map general properties
