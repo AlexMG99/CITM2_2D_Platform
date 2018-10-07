@@ -29,7 +29,7 @@ public:
 
 	//Called every loop iteration
 	bool PostUpdate();
-
+    bool LoadPlayerAnimations(pugi::xml_node&);
 	//Called before quitting
 	bool CleanUp();
 
@@ -47,11 +47,12 @@ private:
 
 public:
 	fPoint position;
-
+	
 private:
 	p2SString path;
 
 	pugi::xml_document  player_file;
+
 	SDL_Texture*		player_spritesheet = nullptr;
 	p2Animation*        current_animation = nullptr;
 	p2Animation			idle;

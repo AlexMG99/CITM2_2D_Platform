@@ -39,6 +39,8 @@ bool j1Player::Start()
 
 	pugi::xml_parse_result	result = player_file.load_file(path.GetString());
 	pugi::xml_node			player_node = player_file.child("player");
+	/*SDL_Rect Frames;*/
+
 	if (result == NULL) {
 		LOG("Error loading player XML! Error: %s", result.description());
 		ret = false;
@@ -54,18 +56,44 @@ bool j1Player::Start()
 		else {
 			LOG("Loaded player texture succesfully");
 		}
+		bool LoadPlayerAnimations(player_node.child("animation"));
+		/*for (pugi::xml_node animations = player_node.child("idle").child("frame"); animations; animations = animations.next_sibling("frame")) {
+			{
+				Frames.x = animations.attribute("x").as_int();
+				Frames.y = animations.attribute("y").as_int();
+				Frames.h = animations.attribute("h").as_int();
+				Frames.w = animations.attribute("w").as_int();
+				idle.PushBack(Frames);
+			}*/
+			/*idle.PushBack({ 1,1,20,40 });
+			idle.PushBack({ 22,1,20,40 });
+			idle.PushBack({ 43,1,20,40 });
+			idle.PushBack({ 64,1,20,40 });
+			idle.speed;*/
+		
+		return ret;
 	}
-
-	return ret;
+		
 }
 
+bool j1Player::LoadPlayerAnimations(pugi::xml_node& player_node) {
+	SDL_Rect Frames;
+	for (pugi::xml_node animations = player_node.child("idle").child("frame"); animations; animations = animations.next_sibling("frame")) 
+		{
+			Frames.x = animations.attribute("x").as_int();
+			Frames.y = animations.attribute("y").as_int();
+			Frames.h = animations.attribute("h").as_int();
+			Frames.w = animations.attribute("w").as_int();
+			idle.PushBack(Frames);
+		}
+	idle.speed = 0.01f;
+
+	return true;
+
+}
 
 bool j1Player::PreUpdate() 
 {
-	idle.PushBack({ 1,1,20,40 });
-	idle.PushBack({ 22,1,20,40 });
-	idle.PushBack({ 43,1,20,40 });
-	idle.PushBack({ 64,1,20,40 });
 	return true;
 }
 
