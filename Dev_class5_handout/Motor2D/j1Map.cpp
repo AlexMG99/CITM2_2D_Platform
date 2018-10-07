@@ -38,8 +38,11 @@ void j1Map::Draw()
 	while (item_layer != NULL)
 	{
 		MapLayer* l = item_layer->data;
-		while (item_tileset->next != NULL && l->data[0] > item_tileset->next->data->firstgid) {
-			item_tileset = item_tileset->next;
+		for (uint i = 0; i < (data.width*data.height); ++i) {
+			while (item_tileset->next != NULL && l->data[i] >= item_tileset->next->data->firstgid) {
+				item_tileset = item_tileset->next;
+				break;
+			}
 		}
 		for (uint row = 0; row < l->width; row++)
 		{
@@ -166,7 +169,6 @@ bool j1Map::Load(const char* file_name)
 	// Load collision layer info ----------------------------------------------
 
 	pugi::xml_node collision_layer = map_file.child("map").child("objectgroup").child("object");
-	LOG("%s", collision_layer.name());
 	if (ret == true) 
 	{
 		LoadCollisionLayer(collision_layer, &data.collision);

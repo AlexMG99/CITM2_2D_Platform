@@ -6,7 +6,6 @@
 
 struct SDL_Texture;
 struct SDL_Rect;
-struct Collider;
 
 
 class j1Player : public j1Module
@@ -23,8 +22,7 @@ public:
 	// Called before the first frame
 	bool Start();
 
-	//// Called each loop iteration
-	//bool PreUpdate();
+	bool PreUpdate();
 
 	//// Called each loop iteration
 	//bool Update(float dt);
@@ -44,6 +42,8 @@ public:
 private:
 	//Draw player in screen
 	bool Draw();
+	//Load Player Texture
+	//bool LoadPlayerImage(SDL_Texture*);
 
 public:
 	fPoint position;
@@ -52,9 +52,9 @@ private:
 	p2SString path;
 
 	pugi::xml_document  player_file;
-	SDL_Texture*		player_spritesheet = nullptr;
-	Collider*			player_coll = nullptr;
-	
+	SDL_Texture*		player_spritesheet;
+	p2Animation*        current_animation;
+	p2Animation			idle;
 };
 
 
