@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Textures.h"
+#include "j1Collision.h"
 #include "j1Map.h"
 #include <math.h>
 
@@ -31,14 +32,17 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
-	p2List_item<LayerMap*>* item_layer = data.layers.start;
+	p2List_item<MapLayer*>* item_layer = data.layers.start;
 	p2List_item<TileSet*>* item_tileset = data.tilesets.start;
 	
 	while (item_layer != NULL)
 	{
-		LayerMap* l = item_layer->data;
-		while (item_tileset->next != NULL && l->data[0] > item_tileset->next->data->firstgid) {
-			item_tileset = item_tileset->next;
+		MapLayer* l = item_layer->data;
+		for (uint i = 0; i < (data.width*data.height); ++i) {
+			while (item_tileset->next != NULL && l->data[i] >= item_tileset->next->data->firstgid) {
+				item_tileset = item_tileset->next;
+				break;
+			}
 		}
 		for (uint row = 0; row < l->width; row++)
 		{
@@ -54,7 +58,6 @@ void j1Map::Draw()
 		item_layer = item_layer->next;
 	}
 }
-
 
 iPoint j1Map::MapToWorld(int x, int y) const
 {
@@ -95,7 +98,7 @@ bool j1Map::CleanUp()
 
 
 	// Remove all layers
-	p2List_item<LayerMap*>* items;
+	p2List_item<MapLayer*>* items;
 	items = data.layers.start;
 
 	while (items != NULL)
@@ -154,7 +157,7 @@ bool j1Map::Load(const char* file_name)
 	
 	for (pugi::xml_node layers = map_file.child("map").child("layer"); layers; layers = layers.next_sibling("layer"))
 	{
-		LayerMap* layer_map = new LayerMap();
+		MapLayer* layer_map = new MapLayer();
 		if (ret == true) 
 		{
 			LoadLayer(layers, layer_map);
@@ -163,7 +166,21 @@ bool j1Map::Load(const char* file_name)
 		data.layers.add(layer_map);
 	}
 
+	// Load collision layer info ----------------------------------------------
 
+	pugi::xml_node collision_layer = map_file.child("map").child("objectgroup").child("object");
+	if (ret == true) 
+	{
+		LoadCollisionLayer(collision_layer, &data.collision);
+	}
+
+	//Create Colliders
+	SDL_Rect coll_rect = { data.collision.x, data.collision.y,data.collision.width,data.collision.height };
+	if (ret == true) {
+
+		//LoadColliders(coll_rect, ground_collider);
+
+	}
 
 	if(ret == true)
 	{
@@ -184,15 +201,20 @@ bool j1Map::Load(const char* file_name)
 
 		// Adapt this vcode with your own variables
 		
-		p2List_item<LayerMap*>* item_layer = data.layers.start;
+		p2List_item<MapLayer*>* item_layer = data.layers.start;
 		while(item_layer != NULL)
 		{
-			LayerMap* l = item_layer->data;
+			MapLayer* l = item_layer->data;
 			LOG("Layer ----");
 			LOG("name: %s", l->name.GetString());
 			LOG("tile width: %d tile height: %d", l->width, l->height);
 			item_layer = item_layer->next;
 		}
+
+		CollisionLayer col_layer = data.collision;
+		LOG("Collision Layer -----");
+		LOG("name: %s", col_layer.name.GetString());
+		LOG("x: %i y: %i width: %i height: %i", col_layer.x, col_layer.y, col_layer.width, col_layer.height);
 	}
 
 	map_loaded = ret;
@@ -327,7 +349,7 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	return ret;
 }
 
-bool j1Map::LoadLayer(pugi::xml_node& node, LayerMap* layer)
+bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 {
 	layer->name = node.attribute("name").as_string();
 	layer->width = node.attribute("width").as_uint();
@@ -342,4 +364,25 @@ bool j1Map::LoadLayer(pugi::xml_node& node, LayerMap* layer)
 	}
 
 	return true;
+}
+
+bool j1Map::LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer) 
+{
+	coll_layer->name = node.parent().attribute("name").as_string();
+	coll_layer->x = node.attribute("x").as_int();
+	coll_layer->y = node.attribute("y").as_int();
+	coll_layer->width = node.attribute("width").as_int();
+	coll_layer->height = node.attribute("height").as_int();
+
+	return true;
+}
+
+bool j1Map::LoadColliders(SDL_Rect rect, Collider* coll)
+{
+	coll = App->collision->AddCollider({ rect.x, rect.y, rect.w, rect.h }, COLLIDER_GROUND);
+	return true;
+}
+
+void j1Map::OnCollision(Collider* c1, Collider* c2) {
+	LOG("Collision");
 }

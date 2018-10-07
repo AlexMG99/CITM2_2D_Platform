@@ -6,15 +6,25 @@
 #include "p2Point.h"
 #include "j1Module.h"
 
-// TODO 1: Create a struct for the map layer
 // ----------------------------------------------------
+struct Collider;
 
-struct LayerMap {
+struct CollisionLayer 
+{
+	p2SString	name;
+	int		x = 0;
+	int		y = 0;
+	int		width = 0;
+	int		height = 0;
+
+};
+struct MapLayer 
+{
 	p2SString	name;
 	uint		width = 0u;
 	uint		height = 0u;
 	uint*		data = nullptr;
-	~LayerMap()
+	~MapLayer()
 	{
 		if (data != nullptr) 
 		{
@@ -23,13 +33,10 @@ struct LayerMap {
 	}
 };
 
-	// TODO 6: Short function to get the value of x,y
-
 
 // ----------------------------------------------------
 struct TileSet
 {
-	// TODO 7: Create a method that receives a tile id and returns it's Rectfind the Rect associated with a specific tile id
 	SDL_Rect GetTileRect(int id) const;
 
 	p2SString			name;
@@ -64,7 +71,9 @@ struct MapData
 	SDL_Color			background_color;
 	MapTypes			type;
 	p2List<TileSet*>	tilesets;
-	p2List<LayerMap*>	layers;
+	p2List<MapLayer*>	layers;
+	CollisionLayer		collision;
+	
 	// TODO 2: Add a list/array of layers to the map!
 };
 
@@ -90,7 +99,9 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
-	// TODO 8: Create a method that translates x,y coordinates from map positions to world positions
+	//Check Collision with Map
+	void OnCollision(Collider* c1, Collider* c2);
+
 	iPoint MapToWorld(int x, int y) const;
 
 private:
@@ -99,7 +110,9 @@ private:
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	// TODO 3: Create a method that loads a single laye
-	bool LoadLayer(pugi::xml_node& node, LayerMap* layer);
+	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
+	bool LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer);
+	bool LoadColliders(SDL_Rect, Collider* );
 
 public:
 
@@ -112,6 +125,7 @@ public:
 private:
 
 	pugi::xml_document	map_file;
+	
 	p2SString			folder;
 	bool				map_loaded;
 };

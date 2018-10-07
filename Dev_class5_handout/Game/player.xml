@@ -3,9 +3,10 @@
 <player>
   <image source="player.png"/>
   <position x="0" y="0"/>
+  <collider x="0" y="0" w="20" h="40"/>
   <animation>
     <idle>
-      <frame x="0" y="0" w="20" h="40"/>
+      <frame x="1" y="1" w="20" h="40"/>
     </idle>
   </animation>
 </player>

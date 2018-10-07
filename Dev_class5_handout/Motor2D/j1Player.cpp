@@ -4,6 +4,7 @@
 #include "j1App.h"
 #include "j1Player.h"
 #include "j1Textures.h"
+#include "j1Collision.h"
 #include "j1Render.h"
 
 j1Player::j1Player() : j1Module()
@@ -58,6 +59,16 @@ bool j1Player::Start()
 	return ret;
 }
 
+
+bool j1Player::PreUpdate() 
+{
+	idle.PushBack({ 1,1,20,40 });
+	idle.PushBack({ 22,1,20,40 });
+	idle.PushBack({ 43,1,20,40 });
+	idle.PushBack({ 64,1,20,40 });
+	return true;
+}
+
 bool j1Player::PostUpdate()
 {
 	Draw();
@@ -67,6 +78,7 @@ bool j1Player::PostUpdate()
 
 bool j1Player::CleanUp()
 {
+	
 	return true;
 }
 
@@ -89,11 +101,8 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 
 
 bool j1Player::Draw() {
-	SDL_Rect rect;
-	rect.x = 1;
-	rect.y = 1;
-	rect.w = 20;
-	rect.h = 40;
+	current_animation = &idle;
+	SDL_Rect rect = current_animation->GetCurrentFrame();
 	App->render->Blit(player_spritesheet, position.x, position.y, &rect);
 	return true;
 }

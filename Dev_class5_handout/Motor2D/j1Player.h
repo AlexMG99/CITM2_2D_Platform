@@ -22,8 +22,7 @@ public:
 	// Called before the first frame
 	bool Start();
 
-	//// Called each loop iteration
-	//bool PreUpdate();
+	bool PreUpdate();
 
 	//// Called each loop iteration
 	//bool Update(float dt);
@@ -53,8 +52,9 @@ private:
 	p2SString path;
 
 	pugi::xml_document  player_file;
-	SDL_Texture*		player_spritesheet;
-	
+	SDL_Texture*		player_spritesheet = nullptr;
+	p2Animation*        current_animation = nullptr;
+	p2Animation			idle;
 };
 
 
