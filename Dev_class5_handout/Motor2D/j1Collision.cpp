@@ -15,7 +15,7 @@ j1Collision::j1Collision()
 // Destructor
 j1Collision::~j1Collision()
 {
-
+	
 }
 
 //Called before render is aviable
