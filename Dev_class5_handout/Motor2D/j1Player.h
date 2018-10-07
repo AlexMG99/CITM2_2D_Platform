@@ -44,8 +44,6 @@ public:
 private:
 	//Draw player in screen
 	bool Draw();
-	//Load Player Texture
-	//bool LoadPlayerImage(SDL_Texture*);
 
 public:
 	fPoint position;
