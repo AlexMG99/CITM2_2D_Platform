@@ -34,7 +34,6 @@ void j1Map::Draw()
 
 	p2List_item<MapLayer*>* item_layer = data.layers.start;
 	p2List_item<TileSet*>* item_tileset = data.tilesets.start;
-	p2List_item<CollisionLayer*>* item_coll = data.collision_layer.start;
 
 	while (item_layer != NULL)
 	{
@@ -171,7 +170,6 @@ bool j1Map::Load(const char* file_name)
 
 	for (pugi::xml_node collision_layer = map_file.child("map").child("objectgroup"); collision_layer; collision_layer = collision_layer.next_sibling("objectgroup"))
 	{
-
 		CollisionLayer* collision = new CollisionLayer();
 		if (ret == true)
 		{
@@ -180,6 +178,33 @@ bool j1Map::Load(const char* file_name)
 		data.collision_layer.add(collision);
 	}
 
+	//Create Colliders ----------------------------------------------------------
+	p2List_item<CollisionLayer*>* item_collision_layer = data.collision_layer.start;
+	COLLIDER_TYPE coll_type = COLLIDER_NONE;
+	while (item_collision_layer!=NULL)
+	{
+		if (item_collision_layer->next != NULL) 
+		{
+			coll_type = COLLIDER_GROUND;
+		}
+		else
+		{
+			coll_type = COLLIDER_PLATFORM;
+		}
+
+		p2List_item<CollObject*>* item_coll_object = item_collision_layer->data->coll_object.start;
+		while (item_coll_object != NULL) 
+		{
+			SDL_Rect r = { item_coll_object->data->x, item_coll_object->data->y, item_coll_object->data->width, item_coll_object->data->height };
+			Collider* coll = new Collider();
+			CreateCollider(r, coll, coll_type);
+			collider_list.add(coll);
+			item_coll_object = item_coll_object->next;
+		}
+		item_collision_layer = item_collision_layer->next;
+	}
+
+	//Show info
 	if (ret == true)
 	{
 		LOG("Successfully parsed map XML file: %s", file_name);
@@ -196,8 +221,6 @@ bool j1Map::Load(const char* file_name)
 			LOG("spacing: %d margin: %d", s->spacing, s->margin);
 			item = item->next;
 		}
-
-		// Adapt this vcode with your own variables
 
 		p2List_item<MapLayer*>* item_layer = data.layers.start;
 		while (item_layer != NULL)
@@ -403,6 +426,12 @@ bool j1Map::LoadObject(pugi::xml_node& node, CollObject* coll_object)
 	coll_object->height = node.attribute("height").as_float();
 	LOG("%f", coll_object->height);
 
+	return true;
+}
+
+bool j1Map::CreateCollider(SDL_Rect rect, Collider* coll, COLLIDER_TYPE coll_type) 
+{
+	App->collision->AddCollider({ rect.x,rect.y,rect.w,rect.h }, coll_type);
 	return true;
 }
 

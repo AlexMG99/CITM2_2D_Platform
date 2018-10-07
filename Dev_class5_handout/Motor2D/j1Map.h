@@ -5,6 +5,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "j1Module.h"
+#include "j1Collision.h"
 
 // ----------------------------------------------------
 
@@ -122,7 +123,7 @@ private:
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer);
 	bool LoadObject(pugi::xml_node& node, CollObject* coll_obj);
-	/*bool LoadColliders(SDL_Rect, Collider* );*/
+	bool CreateCollider(SDL_Rect rect, Collider* coll, COLLIDER_TYPE coll_type);
 
 public:
 
@@ -131,6 +132,8 @@ public:
 	inline uint Get(int x, int y) const {
 		return y * (data.width) + x;
 	}
+
+	p2List<Collider*> collider_list;
 
 private:
 

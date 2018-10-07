@@ -11,6 +11,7 @@ enum COLLIDER_TYPE
 	COLLIDER_NONE = -1,
 	COLLIDER_GROUND,
 	COLLIDER_PLAYER,
+	COLLIDER_PLATFORM,
 
 	COLLIDER_MAX
 };
@@ -22,6 +23,7 @@ struct Collider
 	COLLIDER_TYPE type;
 	j1Module* callback = nullptr;
 
+	Collider() {};
 	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback = nullptr) :
 		rect(rectangle),
 		type(type),
