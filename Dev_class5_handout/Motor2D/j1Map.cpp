@@ -431,10 +431,13 @@ bool j1Map::LoadObject(pugi::xml_node& node, CollObject* coll_object)
 
 bool j1Map::CreateCollider(SDL_Rect rect, Collider* coll, COLLIDER_TYPE coll_type) 
 {
-	App->collision->AddCollider({ rect.x,rect.y,rect.w,rect.h }, coll_type);
+	App->collision->AddCollider({ rect.x,rect.y,rect.w,rect.h }, coll_type, App->map);
 	return true;
 }
 
 void j1Map::OnCollision(Collider* c1, Collider* c2) {
+
+
+
 	LOG("Collision");
 }
