@@ -12,8 +12,9 @@ j1Player::j1Player() : j1Module()
 {
 	name.create("player");
 
-	position.y = 0;
-	position.x = 0;
+	position.y = 0.0F;
+	position.x = 0.0F;
+	acceleration.y = 0.001F;
 
 }
 
@@ -40,6 +41,7 @@ bool j1Player::Start()
 
 	pugi::xml_parse_result	result = player_file.load_file(path.GetString());
 	pugi::xml_node			player_node = player_file.child("player");
+	pugi::xml_node			coll_node = player_node.child("collider");
 	pugi::xml_node          animation_node = player_node.child("animation");
 	
 
@@ -57,11 +59,13 @@ bool j1Player::Start()
 		}
 		else {
 			LOG("Loaded player texture succesfully");
+			//Load Animations & Colliders
 			idle = LoadAnimations(animation_node, "idle");
 			jump_anim = LoadAnimations(animation_node, "jump");
+
+			player_coll = App->collision->AddCollider({ coll_node.attribute("x").as_int(),coll_node.attribute("y").as_int(),coll_node.attribute("w").as_int(),coll_node.attribute("h").as_int() }, COLLIDER_PLAYER);
 		}
 	}
-	player_coll = App->collision->AddCollider({ 0,0,20,40 }, COLLIDER_PLAYER);
 	return ret;
 }
 
@@ -72,23 +76,64 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) 
+	{
 		App->player->position.x += 0.1F;
+		flipper = SDL_FLIP_NONE;
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		App->player->position.y += 0.1F;
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) 
+	{
 		App->player->position.x -= 0.1F;
+		flipper = SDL_FLIP_HORIZONTAL;
+	}
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		App->player->position.y -= 0.1F;
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+		aired = true;
+	}
 	return true;
 }
 bool j1Player::PostUpdate()
 {
 	Draw();
 	player_coll->SetPos(position.x, position.y);
+	if (grounded)
+	{
+		velocity.y = 0;
+	}
+	else
+	{
+		if (!aired) {
+			AddForce(acceleration.y);
+		}
+	}
+
+	if(aired)
+	{
+		velocity.y -= acceleration.y;
+		if (velocity.y < -0.3F) 
+		{
+			aired = false;
+		}
+	}
+	else 
+	{
+		grounded = true;
+	}
+
+	if (position.y > 100) {
+		grounded = true;
+		
+	}
+	else {
+		grounded = false;
+	}
+
+	position.y += velocity.y;
+	LOG("%f", velocity.y);
 	return true;
 }
 
@@ -118,7 +163,7 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 void j1Player::Draw() {
 	current_animation = &idle;
 	SDL_Rect rect = current_animation->GetCurrentFrame();
-	App->render->Blit(player_spritesheet, position.x, position.y, &rect);
+	App->render->Blit(player_spritesheet, position.x, position.y, &rect, flipper);
 }
 
 p2Animation j1Player::LoadAnimations(pugi::xml_node& anim_node, p2SString name) {
@@ -136,5 +181,12 @@ p2Animation j1Player::LoadAnimations(pugi::xml_node& anim_node, p2SString name) 
 	anim.speed = 0.007F;
 
 	return anim;
+
+}
+
+void j1Player::AddForce(float gravity) 
+{
+
+	velocity.y += acceleration.y;
 
 }
