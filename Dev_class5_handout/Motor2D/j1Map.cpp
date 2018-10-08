@@ -195,7 +195,7 @@ bool j1Map::Load(const char* file_name)
 		p2List_item<CollObject*>* item_coll_object = item_collision_layer->data->coll_object.start;
 		while (item_coll_object != NULL) 
 		{
-			SDL_Rect r = { item_coll_object->data->x, item_coll_object->data->y, item_coll_object->data->width, item_coll_object->data->height };
+			SDL_Rect r = { (int)item_coll_object->data->x, (int)item_coll_object->data->y, (int)item_coll_object->data->width, (int)item_coll_object->data->height };
 			Collider* coll = new Collider();
 			CreateCollider(r, coll, coll_type);
 			collider_list.add(coll);

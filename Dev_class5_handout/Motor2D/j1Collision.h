@@ -56,9 +56,6 @@ public:
 	bool PostUpdate();
 
 	//Called every loop iteration
-	//bool PostUpdate();
-
-	//Called every loop iteration
 	bool CleanUp();
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);

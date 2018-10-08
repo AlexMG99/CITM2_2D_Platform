@@ -6,10 +6,20 @@
   <collider x="0" y="0" w="20" h="40"/>
   <animation>
     <idle>
+      <name title="idle"/>
       <frame x="1" y="1" w="20" h="40"/>
       <frame x="22" y="1" w="20" h="40"/>
       <frame x="43" y="1" w="20" h="40"/>
       <frame x="64" y="1" w="20" h="40"/>
     </idle>
+    <jump>
+      <name title="jump"/>
+      <frame x="1" y="83" w="30" h="39"/>
+      <frame x="32" y="83" w="30" h="39"/>
+      <frame x="63" y="83" w="30" h="39"/>
+      <frame x="94" y="83" w="30" h="39"/>
+      <frame x="125" y="83" w="30" h="39"/>
+      <frame x="156" y="83" w="30" h="39"/>
+    </jump>
   </animation>
 </player>

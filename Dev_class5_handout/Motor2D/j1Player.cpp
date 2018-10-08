@@ -3,6 +3,7 @@
 #include "p2Point.h"
 #include "j1App.h"
 #include "j1Player.h"
+#include "j1Input.h"
 #include "j1Textures.h"
 #include "j1Collision.h"
 #include "j1Render.h"
@@ -39,7 +40,7 @@ bool j1Player::Start()
 
 	pugi::xml_parse_result	result = player_file.load_file(path.GetString());
 	pugi::xml_node			player_node = player_file.child("player");
-	pugi::xml_node           animation_node = player_node.child("animation");
+	pugi::xml_node          animation_node = player_node.child("animation");
 	
 
 	if (result == NULL) {
@@ -56,48 +57,36 @@ bool j1Player::Start()
 		}
 		else {
 			LOG("Loaded player texture succesfully");
+			idle = LoadAnimations(animation_node, "idle");
+			jump_anim = LoadAnimations(animation_node, "jump");
 		}
-		LoadPlayerAnimations(player_node.child("animation"), &idle);
-		
-			/*idle.PushBack({ 1,1,20,40 });
-			idle.PushBack({ 22,1,20,40 });
-			idle.PushBack({ 43,1,20,40 });
-			idle.PushBack({ 64,1,20,40 });
-			idle.speed;*/
-		
-		return ret;
 	}
-		
+	return ret;
 }
 
-bool j1Player::LoadPlayerAnimations(pugi::xml_node& animation_node, p2Animation* animation) {
-	SDL_Rect frames;
-	for (pugi::xml_node frames_node = animation_node.child("idle").child("frame"); frames_node; frames_node = frames_node.next_sibling("frame"))
-	{
-		frames.x = frames_node.attribute("x").as_int();
-		frames.y = frames_node.attribute("y").as_int();
-		frames.h = frames_node.attribute("h").as_int();
-		frames.w = frames_node.attribute("w").as_int();
-
-		/*idle.PushBack(Frames);*/
-		animation->PushBack({ frames.x, frames.y, frames.w, frames.h });
-	
-	}
-	animation->speed = 0.007f;
-
-	return true;
-
-}
-
-bool j1Player::PreUpdate() 
+bool j1Player::PreUpdate()
 {
 	return true;
 }
 
+bool j1Player::Update(float dt)
+{
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		App->player->position.x += 0.1F;
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		App->player->position.y += 0.1F;
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		App->player->position.x -= 0.1F;
+
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		App->player->position.y -= 0.1F;
+	return true;
+}
 bool j1Player::PostUpdate()
 {
 	Draw();
-	//App->render->camera.x = -position.x;
 	return true;
 }
 
@@ -124,10 +113,26 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 	return true;
 }
 
-
-bool j1Player::Draw() {
+void j1Player::Draw() {
 	current_animation = &idle;
 	SDL_Rect rect = current_animation->GetCurrentFrame();
 	App->render->Blit(player_spritesheet, position.x, position.y, &rect);
-	return true;
+}
+
+p2Animation j1Player::LoadAnimations(pugi::xml_node& anim_node, p2SString name) {
+	SDL_Rect frames;
+	p2Animation anim;
+	for (pugi::xml_node frames_node = anim_node.child(name.GetString()).child("frame"); frames_node; frames_node = frames_node.next_sibling("frame"))
+	{
+		frames.x = frames_node.attribute("x").as_int();
+		frames.y = frames_node.attribute("y").as_int();
+		frames.h = frames_node.attribute("h").as_int();
+		frames.w = frames_node.attribute("w").as_int();
+
+		anim.PushBack({ frames.x, frames.y, frames.w, frames.h });
+	}
+	anim.speed = 0.007F;
+
+	return anim;
+
 }

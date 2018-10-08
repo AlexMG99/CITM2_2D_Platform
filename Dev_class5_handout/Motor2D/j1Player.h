@@ -3,6 +3,7 @@
 
 #include "j1Module.h"
 #include "p2Animation.h"
+#include "p2List.h"
 
 struct SDL_Texture;
 struct SDL_Rect;
@@ -22,14 +23,15 @@ public:
 	// Called before the first frame
 	bool Start();
 
+	//Called every loop iteration
 	bool PreUpdate();
 
-	//// Called each loop iteration
-	//bool Update(float dt);
+	//Called every loop iteration
+	bool Update(float dt);
 
 	//Called every loop iteration
 	bool PostUpdate();
-    bool LoadPlayerAnimations(pugi::xml_node&, p2Animation* animation);
+  
 	//Called before quitting
 	bool CleanUp();
 
@@ -41,9 +43,9 @@ public:
 
 private:
 	//Draw player in screen
-	bool Draw();
-	//Load Player Texture
-	//bool LoadPlayerImage(SDL_Texture*);
+	void Draw();
+	//Load Player Animations
+	p2Animation LoadAnimations(pugi::xml_node&, p2SString name);
 
 public:
 	fPoint position;
@@ -56,6 +58,7 @@ private:
 	SDL_Texture*		player_spritesheet = nullptr;
 	p2Animation*        current_animation = nullptr;
 	p2Animation			idle;
+	p2Animation			jump_anim;
 };
 
 
