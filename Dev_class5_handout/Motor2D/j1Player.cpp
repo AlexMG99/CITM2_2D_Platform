@@ -61,6 +61,7 @@ bool j1Player::Start()
 			jump_anim = LoadAnimations(animation_node, "jump");
 		}
 	}
+	player_coll = App->collision->AddCollider({ 0,0,20,40 }, COLLIDER_PLAYER);
 	return ret;
 }
 
@@ -87,6 +88,7 @@ bool j1Player::Update(float dt)
 bool j1Player::PostUpdate()
 {
 	Draw();
+	player_coll->SetPos(position.x, position.y);
 	return true;
 }
 

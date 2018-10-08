@@ -59,6 +59,7 @@ private:
 	p2Animation*        current_animation = nullptr;
 	p2Animation			idle;
 	p2Animation			jump_anim;
+	Collider*			player_coll = nullptr;
 };
 
 
