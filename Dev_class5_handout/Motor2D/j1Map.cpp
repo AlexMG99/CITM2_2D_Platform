@@ -52,7 +52,7 @@ void j1Map::Draw()
 				if (l->data[Get(row, col)] != 0) {
 					iPoint rect = MapToWorld(row, col);
 					SDL_Rect tile = item_tileset->data->GetTileRect(l->data[Get(row, col)]);
-					App->render->Blit(item_tileset->data->texture, rect.x, rect.y, &tile);
+					App->render->Blit(item_tileset->data->texture, rect.x, rect.y, &tile, SDL_FLIP_NONE, l->parallax_speed);
 				}
 			}
 		}
@@ -184,14 +184,23 @@ bool j1Map::Load(const char* file_name)
 	COLLIDER_TYPE coll_type = COLLIDER_NONE;
 	while (item_collision_layer!=NULL)
 	{
-		if (item_collision_layer->next != NULL) 
+		if (coll_layer == 0) 
 		{
 			coll_type = COLLIDER_GROUND;
 		}
-		else
+		else if (coll_layer == 1)
+		{
+			coll_type = COLLIDER_WALL;
+		}
+		else if (coll_layer == 2)
 		{
 			coll_type = COLLIDER_PLATFORM;
 		}
+		else if (coll_layer == 3) {
+			coll_type = COLLIDER_LEAVE;
+		}
+
+		coll_layer++;
 
 		p2List_item<CollObject*>* item_coll_object = item_collision_layer->data->coll_object.start;
 		while (item_coll_object != NULL) 
@@ -229,6 +238,7 @@ bool j1Map::Load(const char* file_name)
 			MapLayer* l = item_layer->data;
 			LOG("Layer ----");
 			LOG("name: %s", l->name.GetString());
+			LOG("parallax_speed: %f", l->parallax_speed);
 			LOG("tile width: %d tile height: %d", l->width, l->height);
 			item_layer = item_layer->next;
 		}
@@ -388,6 +398,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->name = node.attribute("name").as_string();
 	layer->width = node.attribute("width").as_uint();
 	layer->height = node.attribute("height").as_uint();
+	layer->parallax_speed = node.child("properties").child("property").attribute("value").as_float();
 	layer->data = new uint[layer->width*layer->height];
 	memset(layer->data, 0, sizeof(uint)*layer->width*layer->height);
 
@@ -444,13 +455,23 @@ void j1Map::OnCollision(Collider* c1, Collider* c2)
 		{
 			App->player->position.y = c1->rect.y - c2->rect.h;
 			App->player->grounded = true;
+
 		}
-		if (c1->type == COLLIDER_PLATFORM) 
+		else if(c1->type == COLLIDER_PLATFORM)
 		{
-			if ((App->player->position.y + c2->rect.h) > c1->rect.y)
+			if ((App->player->position.y) < c1->rect.y - 30)
 			{
-				LOG("potatoe");
+				App->player->position.y = c1->rect.y - c2->rect.h;
+				App->player->grounded = true;
 			}
+		}
+		else if (c1->type == COLLIDER_LEAVE)
+		{
+			App->player->grounded = false;
+		}
+		else if(c1->type == COLLIDER_WALL)
+		{
+			App->player->position.x = c1->rect.x + c1->rect.w;
 		}
 	}
 }
