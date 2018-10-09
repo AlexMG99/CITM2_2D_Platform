@@ -9,6 +9,13 @@
 struct SDL_Texture;
 struct SDL_Rect;
 
+enum player_state {
+	IDLE,
+	RUN,
+	JUMP,
+	DUCK,
+};
+
 class j1Player : public j1Module
 {
 public:
@@ -41,6 +48,12 @@ public:
 	//Save Game State
 	bool Save(pugi::xml_node&) const;
 
+	//Check Player State
+	void CheckState();
+
+	//Perform Player Actions
+	void PerformActions();
+
 private:
 	//Draw player in screen
 	void Draw();
@@ -54,6 +67,7 @@ public:
 	Collider*	player_coll = nullptr;
 	bool grounded = false;
 	bool aired = false;
+	player_state state = IDLE;
 	
 private:
 	p2SString path;
@@ -66,6 +80,7 @@ private:
 	SDL_RendererFlip	flipper = SDL_FLIP_NONE;
 	p2Animation*        current_animation = nullptr;
 	p2Animation			idle;
+	p2Animation         run;
 	p2Animation			jump_anim;
 };
 

@@ -62,7 +62,7 @@ bool j1Player::Start()
 			//Load Animations & Colliders
 			idle = LoadAnimations(animation_node, "idle");
 			jump_anim = LoadAnimations(animation_node, "jump");
-
+			run = LoadAnimations(animation_node, "run");
 			player_coll = App->collision->AddCollider({ coll_node.attribute("x").as_int(),coll_node.attribute("y").as_int(),coll_node.attribute("w").as_int(),coll_node.attribute("h").as_int() }, COLLIDER_PLAYER);
 		}
 	}
@@ -100,7 +100,9 @@ bool j1Player::PostUpdate()
 {
 	Draw();
 	player_coll->SetPos(position.x, position.y);
-	if (grounded)
+	CheckState();
+	PerformActions();
+if (grounded)
 	{
 		velocity.y = 0;
 	}
@@ -177,4 +179,54 @@ void j1Player::AddForce(float gravity)
 
 	velocity.y += acceleration.y;
 
+}
+
+void j1Player::CheckState()
+{
+	
+
+	switch (state) {
+
+	case IDLE:
+		break;
+
+	case RUN:
+		
+		break;
+
+	case JUMP:
+		
+		break;
+
+	case DUCK:
+		break;
+
+	}
+
+
+}
+void j1Player::PerformActions()
+{
+	switch (state) {
+	case IDLE:
+	
+		break;
+
+
+
+	case RUN:
+
+		break;
+
+	case JUMP:
+
+		break;
+
+	case DUCK:
+		break;
+
+
+
+
+	}
 }
