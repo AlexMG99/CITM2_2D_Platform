@@ -10,6 +10,7 @@ j1Collision::j1Collision()
 
 	matrix[COLLIDER_GROUND][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_GROUND] = true;
+	matrix[COLLIDER_PLATFORM][COLLIDER_PLAYER] = true;
 }
 
 // Destructor

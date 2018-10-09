@@ -438,9 +438,19 @@ bool j1Map::CreateCollider(SDL_Rect rect, Collider* coll, COLLIDER_TYPE coll_typ
 
 void j1Map::OnCollision(Collider* c1, Collider* c2) 
 {
-	if(c1->type==COLLIDER_GROUND && c2==App->player->player_coll)
+	if (c2 == App->player->player_coll)
 	{
-		App->player->position.y = c1->rect.y - c2->rect.h;
-		App->player->grounded = true;
+		if (c1->type == COLLIDER_GROUND)
+		{
+			App->player->position.y = c1->rect.y - c2->rect.h;
+			App->player->grounded = true;
+		}
+		if (c1->type == COLLIDER_PLATFORM) 
+		{
+			if ((App->player->position.y + c2->rect.h) > c1->rect.y)
+			{
+				LOG("potatoe");
+			}
+		}
 	}
 }
