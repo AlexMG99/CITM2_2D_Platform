@@ -9,11 +9,11 @@
 struct SDL_Texture;
 struct SDL_Rect;
 
-enum player_state {
-	IDLE,
-	RUN,
-	JUMP,
-	DUCK,
+enum Player_State {
+	IDLE_STATE,
+	RUN_STATE,
+	JUMP_STATE,
+	DUCK_STATE,
 };
 
 class j1Player : public j1Module
@@ -67,7 +67,7 @@ public:
 	Collider*	player_coll = nullptr;
 	bool grounded = false;
 	bool aired = false;
-	player_state state = IDLE;
+	
 	
 private:
 	p2SString path;
@@ -78,6 +78,7 @@ private:
 
 	SDL_Texture*		player_spritesheet = nullptr;
 	SDL_RendererFlip	flipper = SDL_FLIP_NONE;
+	Player_State state = IDLE_STATE;
 	p2Animation*        current_animation = nullptr;
 	p2Animation			idle;
 	p2Animation         run;
