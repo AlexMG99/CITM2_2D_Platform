@@ -4,6 +4,7 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Collision.h"
+#include "j1Player.h"
 #include "j1Map.h"
 #include <math.h>
 
@@ -435,9 +436,11 @@ bool j1Map::CreateCollider(SDL_Rect rect, Collider* coll, COLLIDER_TYPE coll_typ
 	return true;
 }
 
-void j1Map::OnCollision(Collider* c1, Collider* c2) {
-
-
-
-	LOG("Collision");
+void j1Map::OnCollision(Collider* c1, Collider* c2) 
+{
+	if(c1->type==COLLIDER_GROUND && c2==App->player->player_coll)
+	{
+		App->player->position.y = c1->rect.y - c2->rect.h;
+		App->player->grounded = true;
+	}
 }

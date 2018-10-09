@@ -50,15 +50,15 @@ private:
 	void AddForce(float gravity);
 
 public:
-	fPoint position;
-	
+	fPoint		position;
+	Collider*	player_coll = nullptr;
+	bool grounded = false;
+	bool aired = false;
 	
 private:
 	p2SString path;
 	fPoint velocity;
 	fPoint acceleration;
-	bool grounded = false;
-	bool aired = false;
 
 	pugi::xml_document  player_file;
 
@@ -67,7 +67,6 @@ private:
 	p2Animation*        current_animation = nullptr;
 	p2Animation			idle;
 	p2Animation			jump_anim;
-	Collider*			player_coll = nullptr;
 };
 
 #endif

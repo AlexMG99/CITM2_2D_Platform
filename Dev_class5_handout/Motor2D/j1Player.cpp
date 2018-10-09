@@ -14,7 +14,7 @@ j1Player::j1Player() : j1Module()
 
 	position.y = 0.0F;
 	position.x = 0.0F;
-	acceleration.y = 0.001F;
+	acceleration.y = 0.01F;
 
 }
 
@@ -78,16 +78,16 @@ bool j1Player::Update(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) 
 	{
-		App->player->position.x += 0.1F;
+		App->player->position.x += 0.5F;
 		flipper = SDL_FLIP_NONE;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		App->player->position.y += 0.1F;
+		App->player->position.y += 0.5F;
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) 
 	{
-		App->player->position.x -= 0.1F;
+		App->player->position.x -= 0.5F;
 		flipper = SDL_FLIP_HORIZONTAL;
 	}
 
@@ -114,26 +114,17 @@ bool j1Player::PostUpdate()
 	if(aired)
 	{
 		velocity.y -= acceleration.y;
-		if (velocity.y < -0.3F) 
+		if (velocity.y < -0.9F) 
 		{
 			aired = false;
 		}
-	}
-	else 
-	{
-		grounded = true;
-	}
-
-	if (position.y > 100) {
-		grounded = true;
-		
-	}
-	else {
 		grounded = false;
 	}
 
 	position.y += velocity.y;
+
 	LOG("%f", velocity.y);
+
 	return true;
 }
 
@@ -188,5 +179,6 @@ void j1Player::AddForce(float gravity)
 {
 
 	velocity.y += acceleration.y;
+	LOG("Hey");
 
 }
