@@ -33,6 +33,7 @@ struct MapLayer
 	p2SString	name;
 	uint		width = 0u;
 	uint		height = 0u;
+	float		parallax_speed = 0.0F;
 	uint*		data = nullptr;
 	~MapLayer()
 	{
@@ -141,6 +142,7 @@ private:
 	
 	p2SString			folder;
 	bool				map_loaded;
+	int					coll_layer = 0;
 };
 
 #endif // __j1MAP_H__
