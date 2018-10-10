@@ -150,9 +150,10 @@ bool j1Player::PostUpdate()
 
 {	
 	player_coll->SetPos(position.x, position.y);
-	Draw();
 	CheckState();
 	PerformActions();
+	Draw();
+	
 	
 //if (grounded)
 //	{
@@ -203,7 +204,7 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 }
 
 void j1Player::Draw() {
-	current_animation = &idle;
+	
 	SDL_Rect rect = current_animation->GetCurrentFrame();
 	App->render->Blit(player_spritesheet, position.x, position.y, &rect, flipper);
 }
@@ -221,7 +222,7 @@ p2Animation j1Player::LoadAnimations(pugi::xml_node& anim_node, p2SString name) 
 		anim.PushBack({ frames.x, frames.y, frames.w, frames.h });
 		LOG("Animation: %s", name.GetString());
 	}
-	anim.speed = 0.007F;
+	anim.speed = 0.06F;
 
 	return anim;
 
@@ -243,7 +244,7 @@ void j1Player::CheckState()
 	case IDLE_STATE:
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 
-			state=Player_State::RUN_STATE;
+			state=RUN_STATE;
 			
 		}
 		/*if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN){
@@ -255,6 +256,11 @@ void j1Player::CheckState()
 		break;
 
 	case RUN_STATE:
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP) {
+
+			state = IDLE_STATE;
+
+		}
 		/*if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 
 			state = Player_State::JUMP_STATE;
@@ -281,15 +287,12 @@ void j1Player::PerformActions()
 	switch (state) {
 
 	case IDLE_STATE:
-
+		current_animation = &idle;
 		break;
 
 
 
 	case RUN_STATE:
-		grounded = true;
-			App->player->velocity.y = 0;
-
 			current_animation = &run;
 		
 	
