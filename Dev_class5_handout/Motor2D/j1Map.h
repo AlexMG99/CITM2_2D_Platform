@@ -42,6 +42,11 @@ struct MapLayer
 			delete[] data;
 		}
 	}
+
+	inline uint Get(int x, int y) const
+	{
+		return data[(y*width) + x];
+	}
 };
 
 
@@ -126,13 +131,11 @@ private:
 	bool LoadObject(pugi::xml_node& node, CollObject* coll_obj);
 	bool CreateCollider(SDL_Rect rect, Collider* coll, COLLIDER_TYPE coll_type);
 
+	TileSet* GetTilesetFromTileId(int id) const;
+
 public:
 
 	MapData data;
-
-	inline uint Get(int x, int y) const {
-		return y * (data.width) + x;
-	}
 
 	p2List<Collider*> collider_list;
 

@@ -33,30 +33,28 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
-	p2List_item<MapLayer*>* item_layer = data.layers.start;
-	p2List_item<TileSet*>* item_tileset = data.tilesets.start;
-
-	while (item_layer != NULL)
-	{
-		MapLayer* l = item_layer->data;
-		for (uint i = 0; i < (data.width*data.height); ++i) {
-			while (item_tileset->next != NULL && l->data[i] >= item_tileset->next->data->firstgid) {
-				item_tileset = item_tileset->next;
-				break;
-			}
-		}
-		for (uint row = 0; row < l->width; row++)
+	p2List_item<MapLayer*>* map_item = data.layers.start;
+	while (map_item != NULL) {
+		MapLayer* layer = map_item->data;
+		for (int y = 0; y < data.height; ++y)
 		{
-			for (uint col = 0; col < l->height; col++)
+			for (int x = 0; x < data.width; ++x)
 			{
-				if (l->data[Get(row, col)] != 0) {
-					iPoint rect = MapToWorld(row, col);
-					SDL_Rect tile = item_tileset->data->GetTileRect(l->data[Get(row, col)]);
-					App->render->Blit(item_tileset->data->texture, rect.x, rect.y, &tile, SDL_FLIP_NONE, l->parallax_speed);
+				int tile_id = layer->Get(x, y);
+				if (tile_id > 0)
+				{
+					TileSet* tileset = GetTilesetFromTileId(tile_id);
+					if (tileset != nullptr)
+					{
+						SDL_Rect r = tileset->GetTileRect(tile_id);
+						iPoint pos = MapToWorld(x, y);
+
+						App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+					}
 				}
 			}
 		}
-		item_layer = item_layer->next;
+		map_item = map_item->next;
 	}
 }
 
@@ -79,6 +77,16 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	rect.x = margin + ((rect.w + spacing) * (relative_id % num_tiles_width));
 	rect.y = margin + ((rect.h + spacing) * (relative_id / num_tiles_width));
 	return rect;
+}
+
+TileSet* j1Map::GetTilesetFromTileId(int id) const
+{
+	p2List_item<TileSet*>* item_tileset = data.tilesets.end;
+	while (item_tileset->data->firstgid > id)
+	{
+		item_tileset = item_tileset->prev;
+	}
+	return item_tileset->data;
 }
 
 // Called before quitting
