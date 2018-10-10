@@ -63,6 +63,7 @@ bool j1Player::Start()
 			idle = LoadAnimations(animation_node, "idle");
 			jump_anim = LoadAnimations(animation_node, "jump");
 			run = LoadAnimations(animation_node, "run");
+			duck = LoadAnimations(animation_node, "duck");
 			player_coll = App->collision->AddCollider({ coll_node.attribute("x").as_int(),coll_node.attribute("y").as_int(),coll_node.attribute("w").as_int(),coll_node.attribute("h").as_int() }, COLLIDER_PLAYER);
 		}
 	}
@@ -71,63 +72,14 @@ bool j1Player::Start()
 
 bool j1Player::PreUpdate()
 {
-	//OTHER METHOD
-	/*player_coll->SetPos(position.x, position.y);
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
-		
-			state = Player_State::RUN_STATE;
-
-			App->player->position.x += 0.1F;
-			flipper = SDL_FLIP_NONE;
-		
-	}
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
-		
-			state = Player_State::RUN_STATE;
-
-			App->player->position.x -= 0.1F;
-			flipper = SDL_FLIP_HORIZONTAL;
-		
-	}
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
-		state = Player_State::JUMP_STATE;
-		aired = true;
-	}
-	else (state = Player_State::IDLE_STATE); {
-		App->player->position.x = 50.0F;
-	}
-	position.y += velocity.y;*/
 	return true;
 }
 
 bool j1Player::Update(float dt)
 {
-	//OTHER METHOD
-	//SDL_Rect CurrentFrame;
-	//if (state == Player_State::IDLE_STATE)
-	//{
-	//	CurrentFrame = idle.GetCurrentFrame();
-	//}
-	//if (state == Player_State::RUN_STATE)
-	//{
-	//	CurrentFrame = run.GetCurrentFrame();
-	//}
-	//if (state == Player_State::JUMP_STATE)
-	//{
-	//	CurrentFrame = jump_anim.GetCurrentFrame();
-	//}
-	//
-	//
-	//current_animation = &idle;
-	//SDL_Rect rect = current_animation->GetCurrentFrame();
-	//App->render->Blit(player_spritesheet, position.x, position.y, &CurrentFrame, flipper);
-
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) 
 	{
-		
 		App->player->position.x += 0.1F;
-		
 		flipper = SDL_FLIP_NONE;
 	}
 
@@ -176,7 +128,7 @@ bool j1Player::PostUpdate()
 //		grounded = false;
 //	}
 
-	//position.y += velocity.y;
+	position.y += velocity.y;
 	return true;
 }
 
@@ -204,7 +156,6 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 }
 
 void j1Player::Draw() {
-	
 	SDL_Rect rect = current_animation->GetCurrentFrame();
 	App->render->Blit(player_spritesheet, position.x, position.y, &rect, flipper);
 }
@@ -222,7 +173,7 @@ p2Animation j1Player::LoadAnimations(pugi::xml_node& anim_node, p2SString name) 
 		anim.PushBack({ frames.x, frames.y, frames.w, frames.h });
 		LOG("Animation: %s", name.GetString());
 	}
-	anim.speed = 0.06F;
+	anim.speed = 0.005F;
 
 	return anim;
 
@@ -247,11 +198,16 @@ void j1Player::CheckState()
 			state=RUN_STATE;
 			
 		}
-		/*if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN){
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN){
 
-			state = Player_State::JUMP_STATE;
+			state = JUMP_STATE;
 
-		}*/
+		}
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
+
+			state = DUCK_STATE;
+
+		}
 		
 		break;
 
@@ -261,19 +217,75 @@ void j1Player::CheckState()
 			state = IDLE_STATE;
 
 		}
-		/*if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 
-			state = Player_State::JUMP_STATE;
+			state = JUMP_STATE;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 
-		}*/
+			state = JUMP_STATE;
+		}
 
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP) {
+
+			state = DUCK_STATE;
+
+		}
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP) {
+
+			state = DUCK_STATE;
+
+		}
 		break;
 
 	case JUMP_STATE:
-		
+		if (grounded) {
+			state = IDLE_STATE;
+			}
+
+	    if (grounded && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+
+				state = RUN_STATE;
+
+			}
+
+		if (grounded && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+
+			state = RUN_STATE;
+
+		}
+		if (grounded && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
+
+			state = DUCK_STATE;
+
+		}
+
 		break;
 
 	case DUCK_STATE:
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
+
+			state = IDLE_STATE;
+
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+
+			state = RUN_STATE;
+
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+
+			state = RUN_STATE;
+
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+
+			state = JUMP_STATE;
+
+		}
 		break;
 
 	}
@@ -282,8 +294,6 @@ void j1Player::CheckState()
 }
 void j1Player::PerformActions()
 {
-	/*SDL_Rect CurrentFrame;*/
-
 	switch (state) {
 
 	case IDLE_STATE:
@@ -293,6 +303,15 @@ void j1Player::PerformActions()
 
 
 	case RUN_STATE:
+		if (grounded) {
+			velocity.y = 0;
+		}
+		else
+				{
+					if (!aired) {
+						AddForce(acceleration.y);
+					}
+				}
 			current_animation = &run;
 		
 	
@@ -300,7 +319,8 @@ void j1Player::PerformActions()
 		break;
 
 	case JUMP_STATE:
-		/*if (aired)
+		
+		if (aired)
 		{
 			velocity.y -= acceleration.y;
 			if (velocity.y < -0.25F)
@@ -308,12 +328,20 @@ void j1Player::PerformActions()
 				aired = false;
 			}
 			grounded = false;
+			position.y += velocity.y;
 		}
-		position.y += velocity.y;
-		current_animation = &jump_anim;*/
+		else
+		{
+			if (!aired) {
+				AddForce(acceleration.y);
+			}
+		}
+		current_animation = &jump_anim;
 		break;
 
 	case DUCK_STATE:
+		
+		current_animation = &duck;
 		break;
 
 

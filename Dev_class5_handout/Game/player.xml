@@ -34,5 +34,9 @@
       <frame x="125" y="83" w="30" h="39"/>
       <frame x="156" y="83" w="30" h="39"/>
     </jump>
+     <duck>
+      <name title="duck"/>
+     <frame x="1" y="124" w="23" h="24"/>
+    </duck>
   </animation>
 </player>

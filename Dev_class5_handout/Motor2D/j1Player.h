@@ -83,6 +83,7 @@ private:
 	p2Animation			idle;
 	p2Animation         run;
 	p2Animation			jump_anim;
+	p2Animation         duck;
 };
 
 #endif
