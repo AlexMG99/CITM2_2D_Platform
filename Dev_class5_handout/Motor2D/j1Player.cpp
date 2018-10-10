@@ -16,7 +16,9 @@ j1Player::j1Player() : j1Module()
 	position.x = 0.0F;
 	acceleration.y = 0.001F;
 	acceleration.x = 0.02F;
+	acceleration.y = 0.02F;
 	maxVelocity.x = 0.3F;
+	maxVelocity.y = 0.3F;
 
 }
 
@@ -89,10 +91,6 @@ bool j1Player::PreUpdate()
 		flipper = SDL_FLIP_HORIZONTAL;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) 
-	{
-
-	}
 	return true;
 }
 
@@ -107,6 +105,7 @@ bool j1Player::Update(float dt)
 bool j1Player::PostUpdate()
 {	
 	position.x += velocity.x;
+	position.y -= velocity.y;
 	Draw();
 	return true;
 }
@@ -160,160 +159,97 @@ p2Animation j1Player::LoadAnimations(p2SString name) {
 
 void j1Player::CheckState()
 {
+	bool pressed_right = App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT;
+	bool pressed_left = App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT;
+	bool pressed_down = App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT;
+	bool released_right = App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP;
+	bool released_left = App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP;
+	bool released_down = App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP;
+	bool press_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN;
 
-	switch (state) {
-
+	switch (state) 
+	{
 	case IDLE_STATE:
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT){
-
+		if (pressed_right || pressed_left)
+		{
 			state=RUN_STATE;
-			
 		}
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN){
 
+		if (press_space)
+		{
 			state = JUMP_STATE;
-
 		}
-		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
 
+		if (pressed_down) {
 			state = DUCK_STATE;
-
 		}
-		
 		break;
 
 	case RUN_STATE:
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP) {
-
+		if (released_right || released_left) 
+		{
 			state = IDLE_STATE;
-
 		}
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 
-			state = JUMP_STATE;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
-
+		if (press_space)
+		{
 			state = JUMP_STATE;
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP) {
-
+		if (pressed_down) 
+		{
 			state = DUCK_STATE;
-
-		}
-		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP) {
-
-			state = DUCK_STATE;
-
 		}
 		break;
 
 	case JUMP_STATE:
-		/*if (grounded) {
-			state = IDLE_STATE;
-			}
-
-	    if (grounded && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
-
-				state = RUN_STATE;
-
-			}
-
-		if (grounded && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
-
-			state = RUN_STATE;
-
+		if(jump_anim.Finished())
+		{
+			state = AIR_STATE;
 		}
-		if (grounded && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
+		break;
 
-			state = DUCK_STATE;
-
-		}*/
-
+	case AIR_STATE:
+		LOG("Hello");
 		break;
 
 	case DUCK_STATE:
-		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
-
+		if (released_down) 
+		{
 			state = IDLE_STATE;
-
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
-
-			state = RUN_STATE;
-
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
-
-			state = RUN_STATE;
-
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
-
-			state = JUMP_STATE;
-
 		}
 		break;
-
 	}
 
 
 }
 void j1Player::PerformActions()
 {
-	switch (state) {
-
+	switch (state) 
+	{
 	case IDLE_STATE:
 		velocity.x = (1 - acceleration.x)*velocity.x;
+		velocity.y = (1 - acceleration.y)*velocity.y;
 		current_animation = &idle;
 		break;
 
 	case RUN_STATE:
-		/*if (grounded) {
-			velocity.y = 0;
-		}
-		else
-				{
-					if (!aired) {
-						AddForce(acceleration.y);
-					}
-				}*/
 		current_animation = &run;
-
 		break;
 
 	case JUMP_STATE:
-		
-		/*if (aired)
-		{
-			velocity.y -= acceleration.y;
-			if (velocity.y < -0.25F)
-			{
-				aired = false;
-			}
-			grounded = false;
-			position.y += velocity.y;
-		}
-		else
-		{
-			if (!aired) {
-				AddForce(acceleration.y);
-			}
-		}*/
+		velocity.y = acceleration.y*maxVelocity.y + (1 - acceleration.y)*velocity.y;
 		current_animation = &jump_anim;
 		break;
 
-	case DUCK_STATE:
-		
-		current_animation = &duck;
+	case AIR_STATE:
+		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
+		current_animation = &idle;
 		break;
 
-
-
+	case DUCK_STATE:
+		current_animation = &duck;
+		break;
 	}
 	
 }

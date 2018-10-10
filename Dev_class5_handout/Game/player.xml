@@ -35,6 +35,7 @@
       <frame x="94" y="83" w="30" h="39"/>
       <frame x="125" y="83" w="30" h="39"/>
       <frame x="156" y="83" w="30" h="39"/>
+      <speed value="0.02"/>
     </jump>
     <duck>
       <name title="duck"/>

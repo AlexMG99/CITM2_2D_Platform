@@ -13,6 +13,7 @@ enum Player_State {
 	IDLE_STATE,
 	RUN_STATE,
 	JUMP_STATE,
+	AIR_STATE,
 	DUCK_STATE,
 };
 
