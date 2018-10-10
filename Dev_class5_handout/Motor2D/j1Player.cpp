@@ -12,15 +12,8 @@ j1Player::j1Player() : j1Module()
 {
 	name.create("player");
 
-	position.y = 0.0F;
-	position.x = 0.0F;
-	acceleration.y = 0.01F;
 	acceleration.x = 0.2F;
 	acceleration.y = 1.0F;
-	maxVelocity.x = 3.0F;
-	maxVelocity.y = 3.0F;
-	jumpMaxVelocity = 3.0F;
-	jumpAcceleration = 1.0F;
 
 }
 
@@ -55,20 +48,31 @@ bool j1Player::Start()
 	}
 	else
 	{
-		player_spritesheet = App->tex->Load(player_node.child("image").attribute("source").value());
+		playerSpritesheet = App->tex->Load(player_node.child("image").attribute("source").value());
 
-		if (player_spritesheet == nullptr) {
+		if (playerSpritesheet == nullptr) {
 			LOG("Error loading player texture!");
 			ret = false;
 		}
 		else {
-			LOG("Loaded player texture succesfully");
-			//Load Animations & Colliders
-			idle = LoadAnimations("idle");
+			idle_anim = LoadAnimations("idle");
 			jump_anim = LoadAnimations("jump");
-			run = LoadAnimations("run");
-			duck = LoadAnimations("duck");
-			player_coll = App->collision->AddCollider({ coll_node.attribute("x").as_int(),coll_node.attribute("y").as_int(),coll_node.attribute("w").as_int(),coll_node.attribute("h").as_int() }, COLLIDER_PLAYER, App->player);
+			run_anim = LoadAnimations("run");
+			duckAnim = LoadAnimations("duck");
+			p2SString coll_name(coll_node.attribute("type").as_string());
+			if (coll_name == "COLLIDER_PLAYER") {
+				coll_type = COLLIDER_PLAYER;
+			}
+			coll_rect = { coll_node.attribute("x").as_int() ,coll_node.attribute("y").as_int(),coll_node.attribute("w").as_int(),coll_node.attribute("h").as_int() };
+			player_coll = App->collision->AddCollider({ coll_rect.x, coll_rect.y, coll_rect.w, coll_rect.h }, coll_type, App->player);
+			position.x = player_node.child("position").attribute("x").as_float();
+			position.y = player_node.child("position").attribute("y").as_float();
+			velocity.x = player_node.child("velocity").attribute("x").as_float();
+			velocity.y = player_node.child("velocity").attribute("y").as_float();
+			maxVelocity.x = player_node.child("maxVelocity").attribute("x").as_float();
+			maxVelocity.y = player_node.child("maxVelocity").attribute("y").as_float();
+			jumpAcceleration = player_node.child("jump").child("acceleration").attribute("value").as_float();
+			jumpMaxVelocity = player_node.child("jump").child("maxVelocity").attribute("value").as_float();
 		}
 	}
 	return ret;
@@ -79,7 +83,7 @@ bool j1Player::PreUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
 		velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
-		flipper = SDL_FLIP_NONE;
+		flipX = SDL_FLIP_NONE;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
@@ -88,7 +92,7 @@ bool j1Player::PreUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
-		flipper = SDL_FLIP_HORIZONTAL;
+		flipX = SDL_FLIP_HORIZONTAL;
 	}
 
 	CheckState();
@@ -122,22 +126,72 @@ bool j1Player::Load(pugi::xml_node& player_node) {
 
 	position.x = player_node.child("position").attribute("x").as_float();
 	position.y = player_node.child("position").attribute("y").as_float();
+	velocity.x = player_node.child("velocity").attribute("x").as_float();
+	velocity.y = player_node.child("velocity").attribute("y").as_float();
+	p2SString state_name = player_node.child("state").attribute("value").as_string();
+	if (state_name == "IDLE_STATE") 
+	{
+		state = IDLE_STATE;
+	}
+	else if (state_name == "RUN_STATE")
+	{
+		state = RUN_STATE;
+	}
+	else if (state_name == "JUMP_STATE")
+	{
+		state = JUMP_STATE;
+	}
+	else if (state_name == "AIR_STATE")
+	{
+		state = AIR_STATE;
+	}
+	else if (state_name == "DUCK_STATE")
+	{
+		state = DUCK_STATE;
+	}
+	
 	return true;
 }
 
 bool j1Player::Save(pugi::xml_node& player_node) const
 {
 	pugi::xml_node pos = player_node.append_child("position");
+	pugi::xml_node vel = player_node.append_child("velocity");
+	pugi::xml_node state_node = player_node.append_child("state");
 
 	pos.append_attribute("x") = position.x;
 	pos.append_attribute("y") = position.y;
+	vel.append_attribute("x") = velocity.x;
+	vel.append_attribute("y") = velocity.y;
+	p2SString state_name;
+	if (state == 0)
+	{
+		state_name = "IDLE_STATE";
+	}
+	else if (state == 1)
+	{
+		state_name = "RUN_STATE";
+	}
+	else if (state == 2)
+	{
+		state_name = "JUMP_STATE";
+	}
+	else if (state == 3)
+	{
+		state_name = "AIR_STATE";
+	}
+	else if (state == 4)
+	{
+		state_name = "DUCK_STATE";
+	}
+	state_node.append_attribute("value") = state_name.GetString();
 
 	return true;
 }
 
 void j1Player::Draw() {
 	SDL_Rect rect = current_animation->GetCurrentFrame();
-	App->render->Blit(player_spritesheet, position.x, position.y, &rect, flipper);
+	App->render->Blit(playerSpritesheet, position.x, position.y, &rect, flipX);
 }
 
 p2Animation j1Player::LoadAnimations(p2SString name) {
@@ -151,9 +205,8 @@ p2Animation j1Player::LoadAnimations(p2SString name) {
 		frames.w = frames_node.attribute("w").as_int();
 
 		anim.PushBack({ frames.x, frames.y, frames.w, frames.h });
-		LOG("Animation: %s", name.GetString());
 	}
-	anim.speed = player_file.child("player").child("animation").child(name.GetString()).child("speed").attribute("value").as_float();
+	anim.speed = player_file.child("player").child("animation").child(name.GetString()).attribute("speed").as_float();
 
 	return anim;
 
@@ -235,11 +288,11 @@ void j1Player::PerformActions()
 	case IDLE_STATE:
 		velocity.x = (1 - acceleration.x)*velocity.x;
 		velocity.y = (1 - acceleration.y)*velocity.y;
-		current_animation = &idle;
+		current_animation = &idle_anim;
 		break;
 
 	case RUN_STATE:
-		current_animation = &run;
+		current_animation = &run_anim;
 		break;
 
 	case JUMP_STATE:
@@ -253,7 +306,7 @@ void j1Player::PerformActions()
 		break;
 
 	case DUCK_STATE:
-		current_animation = &duck;
+		current_animation = &duckAnim;
 		break;
 	}
 	

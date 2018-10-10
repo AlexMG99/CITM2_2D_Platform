@@ -3,6 +3,7 @@
 
 #include "j1Module.h"
 #include "p2Animation.h"
+#include "j1Collision.h"
 #include "p2List.h"
 #include "SDL/include/SDL_render.h"
 
@@ -10,7 +11,7 @@ struct SDL_Texture;
 struct SDL_Rect;
 
 enum Player_State {
-	IDLE_STATE,
+	IDLE_STATE = 0,
 	RUN_STATE,
 	JUMP_STATE,
 	AIR_STATE,
@@ -65,28 +66,33 @@ private:
 	p2Animation LoadAnimations(p2SString name);
 
 public:
-	fPoint		position;
+	
 	Collider*	player_coll = nullptr;
 	
 private:
-	p2SString	path;
+	
+	fPoint		position;
 	fPoint		velocity;
 	fPoint		maxVelocity;
+	fPoint		acceleration;
 	float		jumpAcceleration;
 	float		jumpMaxVelocity;
-	fPoint		acceleration;
+
+	p2SString		path;
+	p2Animation*    current_animation = nullptr;
+	p2Animation		idle_anim;
+	p2Animation     run_anim;
+	p2Animation		jump_anim;
+	p2Animation     duckAnim;
 
 	pugi::xml_document  player_file;
 
-	SDL_Texture*		player_spritesheet = nullptr;
-	SDL_RendererFlip	flipper = SDL_FLIP_NONE;
+	SDL_Texture*		playerSpritesheet = nullptr;
+	SDL_Rect			coll_rect;
+	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
 	Player_State		state = AIR_STATE;
-	p2Animation*        current_animation = nullptr;
-	p2Animation			idle;
-	p2Animation         run;
-	p2Animation			jump_anim;
-	p2Animation			air_anim;
-	p2Animation         duck;
+	COLLIDER_TYPE		coll_type = COLLIDER_NONE;
+	
 };
 
 #endif

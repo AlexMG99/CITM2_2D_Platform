@@ -7,10 +7,12 @@
 	<map />
 	<scene />
 	<player>
-		<position x="38" y="93" />
+		<position x="81.0127563" y="24" />
+		<velocity x="6.15573072e-07" y="-3" />
+		<state value="AIR_STATE" />
 	</player>
 	<collision />
 	<renderer>
-		<camera x="164" y="-187" />
+		<camera x="0" y="0" />
 	</renderer>
 </game_state>
