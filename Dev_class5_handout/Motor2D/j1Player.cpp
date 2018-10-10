@@ -59,6 +59,7 @@ bool j1Player::Start()
 			jump_anim = LoadAnimations("jump");
 			run_anim = LoadAnimations("run");
 			duckAnim = LoadAnimations("duck");
+			deadAnim = LoadAnimations("dead");
 			p2SString coll_name(coll_node.attribute("type").as_string());
 			if (coll_name == "COLLIDER_PLAYER") {
 				coll_type = COLLIDER_PLAYER;
@@ -149,6 +150,10 @@ bool j1Player::Load(pugi::xml_node& player_node) {
 	{
 		state = DUCK_STATE;
 	}
+	else if (state_name == "DEAD_STATE")
+	{
+		state = DEAD_STATE;
+	}
 	
 	return true;
 }
@@ -183,6 +188,10 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 	else if (state == 4)
 	{
 		state_name = "DUCK_STATE";
+	}
+	else if (state == 5)
+	{
+		state_name = "DEAD_STATE";
 	}
 	state_node.append_attribute("value") = state_name.GetString();
 
@@ -221,13 +230,13 @@ void j1Player::CheckState()
 	bool released_left = App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP;
 	bool released_down = App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP;
 	bool press_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN;
-
-	switch (state) 
+	
+	switch (state)
 	{
 	case IDLE_STATE:
 		if (pressed_right || pressed_left)
 		{
-			state=RUN_STATE;
+			state = RUN_STATE;
 		}
 
 		if (press_space)
@@ -241,7 +250,7 @@ void j1Player::CheckState()
 		break;
 
 	case RUN_STATE:
-		if (released_right || released_left) 
+		if (released_right || released_left)
 		{
 			state = IDLE_STATE;
 		}
@@ -251,14 +260,15 @@ void j1Player::CheckState()
 			state = JUMP_STATE;
 		}
 
-		if (pressed_down) 
+		if (pressed_down)
 		{
 			state = DUCK_STATE;
 		}
+		
 		break;
 
 	case JUMP_STATE:
-		if(jump_anim.Finished())
+		if (jump_anim.Finished())
 		{
 			state = AIR_STATE;
 			jump_anim.Reset();
@@ -274,10 +284,11 @@ void j1Player::CheckState()
 		break;
 
 	case DUCK_STATE:
-		if (released_down) 
+		if (released_down)
 		{
 			state = IDLE_STATE;
 		}
+	case DEAD_STATE:
 		break;
 	}
 }
@@ -306,7 +317,14 @@ void j1Player::PerformActions()
 		break;
 
 	case DUCK_STATE:
+		velocity.x = 0;
+		velocity.y = 0;
 		current_animation = &duckAnim;
+		break;
+
+	case DEAD_STATE:
+	
+		current_animation = &deadAnim;
 		break;
 	}
 	

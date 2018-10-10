@@ -207,6 +207,9 @@ bool j1Map::Load(const char* file_name)
 		else if (coll_layer == 3) {
 			coll_type = COLLIDER_LEAVE;
 		}
+		else if (coll_layer == 4) {
+			coll_type = COLLIDER_DEAD;
+		}
 
 		coll_layer++;
 

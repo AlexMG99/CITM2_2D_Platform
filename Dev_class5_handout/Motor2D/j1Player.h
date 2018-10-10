@@ -16,6 +16,7 @@ enum Player_State {
 	JUMP_STATE,
 	AIR_STATE,
 	DUCK_STATE,
+	DEAD_STATE,
 };
 
 class j1Player : public j1Module
@@ -84,6 +85,7 @@ private:
 	p2Animation     run_anim;
 	p2Animation		jump_anim;
 	p2Animation     duckAnim;
+	p2Animation     deadAnim;
 
 	pugi::xml_document  player_file;
 
