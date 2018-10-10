@@ -14,11 +14,13 @@ j1Player::j1Player() : j1Module()
 
 	position.y = 0.0F;
 	position.x = 0.0F;
-	acceleration.y = 0.001F;
-	acceleration.x = 0.02F;
-	acceleration.y = 0.02F;
-	maxVelocity.x = 0.3F;
-	maxVelocity.y = 0.3F;
+	acceleration.y = 0.01F;
+	acceleration.x = 0.2F;
+	acceleration.y = 1.0F;
+	maxVelocity.x = 3.0F;
+	maxVelocity.y = 3.0F;
+	jumpMaxVelocity = 3.0F;
+	jumpAcceleration = 1.0F;
 
 }
 
@@ -46,8 +48,6 @@ bool j1Player::Start()
 	pugi::xml_parse_result	result = player_file.load_file(path.GetString());
 	pugi::xml_node			player_node = player_file.child("player");
 	pugi::xml_node			coll_node = player_node.child("collider");
-	pugi::xml_node          animation_node = player_node.child("animation");
-	
 
 	if (result == NULL) {
 		LOG("Error loading player XML! Error: %s", result.description());
@@ -68,7 +68,7 @@ bool j1Player::Start()
 			jump_anim = LoadAnimations("jump");
 			run = LoadAnimations("run");
 			duck = LoadAnimations("duck");
-			player_coll = App->collision->AddCollider({ coll_node.attribute("x").as_int(),coll_node.attribute("y").as_int(),coll_node.attribute("w").as_int(),coll_node.attribute("h").as_int() }, COLLIDER_PLAYER);
+			player_coll = App->collision->AddCollider({ coll_node.attribute("x").as_int(),coll_node.attribute("y").as_int(),coll_node.attribute("w").as_int(),coll_node.attribute("h").as_int() }, COLLIDER_PLAYER, App->player);
 		}
 	}
 	return ret;
@@ -90,6 +90,8 @@ bool j1Player::PreUpdate()
 		velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
 		flipper = SDL_FLIP_HORIZONTAL;
 	}
+
+	CheckState();
 
 	return true;
 }
@@ -206,11 +208,16 @@ void j1Player::CheckState()
 		if(jump_anim.Finished())
 		{
 			state = AIR_STATE;
+			jump_anim.Reset();
 		}
 		break;
 
 	case AIR_STATE:
-		LOG("Hello");
+		if (jump_anim.Finished())
+		{
+			state = IDLE_STATE;
+			jump_anim.Reset();
+		}
 		break;
 
 	case DUCK_STATE:
@@ -220,8 +227,6 @@ void j1Player::CheckState()
 		}
 		break;
 	}
-
-
 }
 void j1Player::PerformActions()
 {
@@ -238,13 +243,13 @@ void j1Player::PerformActions()
 		break;
 
 	case JUMP_STATE:
-		velocity.y = acceleration.y*maxVelocity.y + (1 - acceleration.y)*velocity.y;
+		velocity.y = jumpAcceleration*jumpMaxVelocity + (1 - acceleration.y)*velocity.y;
 		current_animation = &jump_anim;
 		break;
 
 	case AIR_STATE:
 		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
-		current_animation = &idle;
+		current_animation = &jump_anim;
 		break;
 
 	case DUCK_STATE:
@@ -252,4 +257,13 @@ void j1Player::PerformActions()
 		break;
 	}
 	
+}
+
+void j1Player::OnCollision(Collider* c1, Collider* c2)
+{
+	if(c1==player_coll && c2->type==COLLIDER_GROUND)
+	{
+		position.y = c2->rect.y - 40;
+		state = IDLE_STATE;
+	}
 }

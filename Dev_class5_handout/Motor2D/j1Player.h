@@ -55,6 +55,9 @@ public:
 	//Perform Player Actions
 	void PerformActions();
 
+	//Check Collision
+	void OnCollision(Collider* c1, Collider* c2);
+
 private:
 	//Draw player in screen
 	void Draw();
@@ -69,17 +72,20 @@ private:
 	p2SString	path;
 	fPoint		velocity;
 	fPoint		maxVelocity;
+	float		jumpAcceleration;
+	float		jumpMaxVelocity;
 	fPoint		acceleration;
 
 	pugi::xml_document  player_file;
 
 	SDL_Texture*		player_spritesheet = nullptr;
 	SDL_RendererFlip	flipper = SDL_FLIP_NONE;
-	Player_State		state = IDLE_STATE;
+	Player_State		state = AIR_STATE;
 	p2Animation*        current_animation = nullptr;
 	p2Animation			idle;
 	p2Animation         run;
 	p2Animation			jump_anim;
+	p2Animation			air_anim;
 	p2Animation         duck;
 };
 

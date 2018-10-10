@@ -99,7 +99,7 @@ public:
 	{
 		finished = false;
 		current_frame = 0;
-
+		loops = 0;
 	}
 
 	//Added methods--------------------------------------------------------------------------------
