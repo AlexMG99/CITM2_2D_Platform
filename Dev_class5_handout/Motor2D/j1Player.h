@@ -58,27 +58,23 @@ private:
 	//Draw player in screen
 	void Draw();
 	//Load Player Animations
-	p2Animation LoadAnimations(pugi::xml_node&, p2SString name);
-	//Gravity Effect
-	void AddForce(float gravity);
+	p2Animation LoadAnimations(p2SString name);
 
 public:
 	fPoint		position;
 	Collider*	player_coll = nullptr;
-	bool grounded = false;
-	bool aired = false;
-	
 	
 private:
-	p2SString path;
-	fPoint velocity;
-	fPoint acceleration;
+	p2SString	path;
+	fPoint		velocity;
+	fPoint		maxVelocity;
+	fPoint		acceleration;
 
 	pugi::xml_document  player_file;
 
 	SDL_Texture*		player_spritesheet = nullptr;
 	SDL_RendererFlip	flipper = SDL_FLIP_NONE;
-	Player_State state = IDLE_STATE;
+	Player_State		state = IDLE_STATE;
 	p2Animation*        current_animation = nullptr;
 	p2Animation			idle;
 	p2Animation         run;

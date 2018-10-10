@@ -11,6 +11,7 @@
       <frame x="22" y="1" w="20" h="40"/>
       <frame x="43" y="1" w="20" h="40"/>
       <frame x="64" y="1" w="20" h="40"/>
+      <speed value="0.01"/>
     </idle>
     <run>
       <name title="run"/>
@@ -24,6 +25,7 @@
       <frame x="232" y="44" w="32" h="37"/>
       <frame x="265" y="44" w="32" h="37"/>
       <frame x="298" y="44" w="32" h="37"/>
+      <speed value="0.02"/>
     </run>
     <jump>
       <name title="jump"/>
@@ -34,9 +36,9 @@
       <frame x="125" y="83" w="30" h="39"/>
       <frame x="156" y="83" w="30" h="39"/>
     </jump>
-     <duck>
+    <duck>
       <name title="duck"/>
-     <frame x="1" y="124" w="23" h="24"/>
-    </duck>
+      <frame x="1" y="124" w="23" h="24"/>
+   </duck>
   </animation>
 </player>

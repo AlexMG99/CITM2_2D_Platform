@@ -15,6 +15,8 @@ j1Player::j1Player() : j1Module()
 	position.y = 0.0F;
 	position.x = 0.0F;
 	acceleration.y = 0.001F;
+	acceleration.x = 0.02F;
+	maxVelocity.x = 0.3F;
 
 }
 
@@ -60,10 +62,10 @@ bool j1Player::Start()
 		else {
 			LOG("Loaded player texture succesfully");
 			//Load Animations & Colliders
-			idle = LoadAnimations(animation_node, "idle");
-			jump_anim = LoadAnimations(animation_node, "jump");
-			run = LoadAnimations(animation_node, "run");
-			duck = LoadAnimations(animation_node, "duck");
+			idle = LoadAnimations("idle");
+			jump_anim = LoadAnimations("jump");
+			run = LoadAnimations("run");
+			duck = LoadAnimations("duck");
 			player_coll = App->collision->AddCollider({ coll_node.attribute("x").as_int(),coll_node.attribute("y").as_int(),coll_node.attribute("w").as_int(),coll_node.attribute("h").as_int() }, COLLIDER_PLAYER);
 		}
 	}
@@ -72,63 +74,40 @@ bool j1Player::Start()
 
 bool j1Player::PreUpdate()
 {
-	return true;
-}
-
-bool j1Player::Update(float dt)
-{
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) 
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		App->player->position.x += 0.1F;
+		velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
 		flipper = SDL_FLIP_NONE;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		App->player->position.y += 0.1F;
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) 
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		App->player->position.x -= 0.1F;
+		velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
 		flipper = SDL_FLIP_HORIZONTAL;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
-		aired = true;
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) 
+	{
+
 	}
-	
 	return true;
 }
-bool j1Player::PostUpdate()
 
-{	
+bool j1Player::Update(float dt)
+{
 	player_coll->SetPos(position.x, position.y);
 	CheckState();
 	PerformActions();
-	Draw();
-	
-	
-//if (grounded)
-//	{
-//		velocity.y = 0;
-//	}
-//	else
-//	{
-//		if (!aired) {
-//			AddForce(acceleration.y);
-//		}
-//	}
-//
-//	if(aired)
-//	{
-//		velocity.y -= acceleration.y;
-//		if (velocity.y < -0.25F) 
-//		{
-//			aired = false;
-//		}
-//		grounded = false;
-//	}
 
-	position.y += velocity.y;
+	return true;
+}
+bool j1Player::PostUpdate()
+{	
+	position.x += velocity.x;
+	Draw();
 	return true;
 }
 
@@ -160,10 +139,10 @@ void j1Player::Draw() {
 	App->render->Blit(player_spritesheet, position.x, position.y, &rect, flipper);
 }
 
-p2Animation j1Player::LoadAnimations(pugi::xml_node& anim_node, p2SString name) {
+p2Animation j1Player::LoadAnimations(p2SString name) {
 	SDL_Rect frames;
 	p2Animation anim;
-	for (pugi::xml_node frames_node = anim_node.child(name.GetString()).child("frame"); frames_node; frames_node = frames_node.next_sibling("frame"))
+	for (pugi::xml_node frames_node = player_file.child("player").child("animation").child(name.GetString()).child("frame"); frames_node; frames_node = frames_node.next_sibling("frame"))
 	{
 		frames.x = frames_node.attribute("x").as_int();
 		frames.y = frames_node.attribute("y").as_int();
@@ -173,27 +152,19 @@ p2Animation j1Player::LoadAnimations(pugi::xml_node& anim_node, p2SString name) 
 		anim.PushBack({ frames.x, frames.y, frames.w, frames.h });
 		LOG("Animation: %s", name.GetString());
 	}
-	anim.speed = 0.005F;
+	anim.speed = player_file.child("player").child("animation").child(name.GetString()).child("speed").attribute("value").as_float();
 
 	return anim;
 
 }
 
-void j1Player::AddForce(float gravity) 
-{
-
-	velocity.y += acceleration.y;
-
-}
-
 void j1Player::CheckState()
 {
-	
 
 	switch (state) {
 
 	case IDLE_STATE:
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT){
 
 			state=RUN_STATE;
 			
@@ -239,7 +210,7 @@ void j1Player::CheckState()
 		break;
 
 	case JUMP_STATE:
-		if (grounded) {
+		/*if (grounded) {
 			state = IDLE_STATE;
 			}
 
@@ -258,7 +229,7 @@ void j1Player::CheckState()
 
 			state = DUCK_STATE;
 
-		}
+		}*/
 
 		break;
 
@@ -297,13 +268,12 @@ void j1Player::PerformActions()
 	switch (state) {
 
 	case IDLE_STATE:
+		velocity.x = (1 - acceleration.x)*velocity.x;
 		current_animation = &idle;
 		break;
 
-
-
 	case RUN_STATE:
-		if (grounded) {
+		/*if (grounded) {
 			velocity.y = 0;
 		}
 		else
@@ -311,16 +281,14 @@ void j1Player::PerformActions()
 					if (!aired) {
 						AddForce(acceleration.y);
 					}
-				}
-			current_animation = &run;
-		
-	
-		
+				}*/
+		current_animation = &run;
+
 		break;
 
 	case JUMP_STATE:
 		
-		if (aired)
+		/*if (aired)
 		{
 			velocity.y -= acceleration.y;
 			if (velocity.y < -0.25F)
@@ -335,7 +303,7 @@ void j1Player::PerformActions()
 			if (!aired) {
 				AddForce(acceleration.y);
 			}
-		}
+		}*/
 		current_animation = &jump_anim;
 		break;
 

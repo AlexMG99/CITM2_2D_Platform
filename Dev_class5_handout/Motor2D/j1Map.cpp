@@ -454,32 +454,3 @@ bool j1Map::CreateCollider(SDL_Rect rect, Collider* coll, COLLIDER_TYPE coll_typ
 	App->collision->AddCollider({ rect.x,rect.y,rect.w,rect.h }, coll_type, App->map);
 	return true;
 }
-
-void j1Map::OnCollision(Collider* c1, Collider* c2) 
-{
-	if (c2 == App->player->player_coll)
-	{
-		if (c1->type == COLLIDER_GROUND)
-		{
-			App->player->position.y = c1->rect.y - c2->rect.h;
-			App->player->grounded = true;
-
-		}
-		else if(c1->type == COLLIDER_PLATFORM)
-		{
-			if ((App->player->position.y) < c1->rect.y - 30)
-			{
-				App->player->position.y = c1->rect.y - c2->rect.h;
-				App->player->grounded = true;
-			}
-		}
-		else if (c1->type == COLLIDER_LEAVE)
-		{
-			App->player->grounded = false;
-		}
-		else if(c1->type == COLLIDER_WALL)
-		{
-			App->player->position.x = c1->rect.x + c1->rect.w;
-		}
-	}
-}
