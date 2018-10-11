@@ -219,7 +219,7 @@ bool j1Map::Load(const char* file_name)
 			SDL_Rect r = { (int)item_coll_object->data->x, (int)item_coll_object->data->y, (int)item_coll_object->data->width, (int)item_coll_object->data->height };
 			Collider* coll = new Collider();
 			CreateCollider(r, coll, coll_type);
-			collider_list.add(coll);
+			data.collider_list.add(coll);
 			item_coll_object = item_coll_object->next;
 		}
 		item_collision_layer = item_collision_layer->next;

@@ -109,7 +109,7 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
-	player_coll->SetPos(position.x, position.y);
+	player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h);
 	CheckState();
 	PerformActions();
 
@@ -125,7 +125,11 @@ bool j1Player::PostUpdate()
 
 bool j1Player::CleanUp()
 {
-	
+	App->tex->UnLoad(playerSpritesheet);
+	if (player_coll != nullptr)
+	{
+		player_coll->to_delete = true;
+	}
 	return true;
 }
 
@@ -206,7 +210,7 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 
 void j1Player::Draw() {
 	SDL_Rect rect = current_animation->GetCurrentFrame();
-	App->render->Blit(playerSpritesheet, position.x, position.y, &rect, flipX);
+	App->render->Blit(playerSpritesheet, position.x - coll_rect.w/2, position.y - coll_rect.h, &rect, flipX);
 }
 
 p2Animation j1Player::LoadAnimations(p2SString name) {
@@ -343,8 +347,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	}
 	else 
 	{
-	position.y = c2->rect.y - c1->rect.h;
-	state = IDLE_STATE;
+		position.y--;
+		state = IDLE_STATE;
 	}
 
 }

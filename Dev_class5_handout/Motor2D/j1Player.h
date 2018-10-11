@@ -71,6 +71,7 @@ private:
 public:
 	
 	Collider*	player_coll = nullptr;
+	bool		grounded = false;
 	
 private:
 	

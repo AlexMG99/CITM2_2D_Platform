@@ -89,6 +89,7 @@ struct MapData
 	p2List<TileSet*>		tilesets;
 	p2List<MapLayer*>		layers;
 	p2List<CollisionLayer*>	collision_layer;
+	p2List<Collider*>		collider_list;
 	
 	// TODO 2: Add a list/array of layers to the map!
 };
@@ -132,8 +133,6 @@ private:
 public:
 
 	MapData data;
-
-	p2List<Collider*> collider_list;
 
 private:
 
