@@ -2,7 +2,7 @@
 
 <player>
   <image source="player.png"/>
-  <position x="0" y="0"/>
+  <position x="0" y="128"/>
   <velocity x="0" y="0"/>
   <maxVelocity x="3" y="3"/>
   <state type="AIR_STATE"/>

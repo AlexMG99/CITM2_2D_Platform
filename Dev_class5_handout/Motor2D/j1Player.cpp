@@ -345,17 +345,5 @@ void j1Player::PerformActions()
 
 void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
-	int i = (c2->rect.y + c2->rect.w - 20);
-	LOG("%i", i);
-	LOG("%f", position.y);
-	if((c2->rect.y+c2->rect.w-20)<position.y)
-	{
-		position.x++;
-	}
-	else 
-	{
-		position.y--;
-		state = IDLE_STATE;
-	}
 
 }

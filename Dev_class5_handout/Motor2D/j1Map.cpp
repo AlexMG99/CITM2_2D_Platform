@@ -461,7 +461,6 @@ bool j1Map::LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer)
 {
 	coll_layer->name = node.attribute("name").as_string();
 
-	LOG("%s", coll_layer->name.GetString());
 	for (pugi::xml_node object_node = node.child("object"); object_node; object_node = object_node.next_sibling("object")) {
 		CollObject* collobject = new CollObject();
 		LoadObject(object_node, collobject);
@@ -474,15 +473,10 @@ bool j1Map::LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer)
 bool j1Map::LoadObject(pugi::xml_node& node, CollObject* coll_object)
 {
 	coll_object->id = node.attribute("id").as_int();
-	LOG("%i", coll_object->id);
 	coll_object->x = node.attribute("x").as_float();
-	LOG("%f", coll_object->x);
 	coll_object->y = node.attribute("y").as_float();
-	LOG("%f", coll_object->y);
 	coll_object->width = node.attribute("width").as_float();
-	LOG("%f", coll_object->width);
 	coll_object->height = node.attribute("height").as_float();
-	LOG("%f", coll_object->height);
 
 	return true;
 }
@@ -491,4 +485,20 @@ bool j1Map::CreateCollider(SDL_Rect rect, Collider* coll, COLLIDER_TYPE coll_typ
 {
 	App->collision->AddCollider({ rect.x,rect.y,rect.w,rect.h }, coll_type, App->map);
 	return true;
+}
+
+void j1Map::OnCollision(Collider* c1, Collider* c2)
+{
+	if (c1->type == COLLIDER_GROUND) 
+	{
+		if (c1->rect.x + c1->rect.w < App->player->position.x) {
+			//App->player->position.x = c1->rect.x + c1->rect.w + 12;
+		}
+		else
+		{
+			App->player->position.y = c1->rect.y;
+			App->player->state = IDLE_STATE;
+		}
+	}
+
 }

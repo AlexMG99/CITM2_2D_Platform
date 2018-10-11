@@ -72,6 +72,7 @@ public:
 	
 	fPoint		position;
 	Collider*	player_coll = nullptr;
+	Player_State		state = NONE_STATE;
 	bool		grounded = false;
 	
 private:
@@ -97,7 +98,6 @@ private:
 	SDL_Texture*		playerSpritesheet = nullptr;
 	SDL_Rect			coll_rect;
 	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
-	Player_State		state = NONE_STATE;
 	COLLIDER_TYPE		coll_type = COLLIDER_NONE;
 	
 };

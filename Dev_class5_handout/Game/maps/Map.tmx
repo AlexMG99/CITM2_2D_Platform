@@ -8,7 +8,7 @@
  </tileset>
  <layer name="Background" width="40" height="15">
   <properties>
-   <property name="parallax_speed" type="float" value="0.5"/>
+   <property name="parallax_speed" type="float" value="0.1"/>
   </properties>
   <data>
    <tile gid="50"/>
@@ -615,7 +615,7 @@
  </layer>
  <layer name="CaveBackground" width="40" height="15">
   <properties>
-   <property name="parallax_speed" type="float" value="0.25"/>
+   <property name="parallax_speed" type="float" value="0.05"/>
   </properties>
   <data>
    <tile gid="33"/>
