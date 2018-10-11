@@ -38,29 +38,30 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
+	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+		App->LoadGame();
+
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		App->SaveGame();
+
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		App->render->camera.y -= 10;
+
+	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
+		App->render->camera.y += 10;
+
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		App->render->camera.x -= 10;
+
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		App->render->camera.x += 10;
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	if(App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		App->LoadGame();
-
-	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		App->SaveGame();
-
-	if(App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		App->render->camera.y -= 1;
-
-	if(App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
-		App->render->camera.y += 1;
-
-	if(App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		App->render->camera.x -= 1;
-
-	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		App->render->camera.x += 1;
+	
 
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw();

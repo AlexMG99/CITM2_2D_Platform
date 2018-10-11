@@ -61,8 +61,13 @@ bool j1Player::Start()
 			duckAnim = LoadAnimations("duck");
 			deadAnim = LoadAnimations("dead");
 			p2SString coll_name(coll_node.attribute("type").as_string());
+			p2SString state_name(player_node.child("state").attribute("type").as_string());
 			if (coll_name == "COLLIDER_PLAYER") {
 				coll_type = COLLIDER_PLAYER;
+			}
+			if (state_name == "AIR_STATE")
+			{
+				state = AIR_STATE;
 			}
 			coll_rect = { coll_node.attribute("x").as_int() ,coll_node.attribute("y").as_int(),coll_node.attribute("w").as_int(),coll_node.attribute("h").as_int() };
 			player_coll = App->collision->AddCollider({ coll_rect.x, coll_rect.y, coll_rect.w, coll_rect.h }, coll_type, App->player);
@@ -83,7 +88,7 @@ bool j1Player::PreUpdate()
 {
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
+		if(state != DUCK_STATE)velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
 		flipX = SDL_FLIP_NONE;
 	}
 
@@ -92,7 +97,7 @@ bool j1Player::PreUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
+		if (state != DUCK_STATE)velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
 		flipX = SDL_FLIP_HORIZONTAL;
 	}
 
@@ -276,11 +281,7 @@ void j1Player::CheckState()
 		break;
 
 	case AIR_STATE:
-		if (jump_anim.Finished())
-		{
-			state = IDLE_STATE;
-			jump_anim.Reset();
-		}
+		jump_anim.Reset();
 		break;
 
 	case DUCK_STATE:
@@ -288,6 +289,7 @@ void j1Player::CheckState()
 		{
 			state = IDLE_STATE;
 		}
+		break;
 	case DEAD_STATE:
 		break;
 	}
@@ -303,6 +305,7 @@ void j1Player::PerformActions()
 		break;
 
 	case RUN_STATE:
+		velocity.y = (1 - acceleration.y)*velocity.y;
 		current_animation = &run_anim;
 		break;
 
@@ -313,17 +316,14 @@ void j1Player::PerformActions()
 
 	case AIR_STATE:
 		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
-		current_animation = &jump_anim;
+		current_animation = &idle_anim;
 		break;
 
 	case DUCK_STATE:
-		velocity.x = 0;
-		velocity.y = 0;
 		current_animation = &duckAnim;
 		break;
 
 	case DEAD_STATE:
-	
 		current_animation = &deadAnim;
 		break;
 	}
@@ -332,9 +332,8 @@ void j1Player::PerformActions()
 
 void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
-	if(c1==player_coll && c2->type==COLLIDER_GROUND)
-	{
-		position.y = c2->rect.y - 40;
-		state = IDLE_STATE;
-	}
+
+	position.y--;
+	state = IDLE_STATE;
+
 }

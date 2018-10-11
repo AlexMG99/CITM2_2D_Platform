@@ -11,7 +11,9 @@ struct SDL_Texture;
 struct SDL_Rect;
 
 enum Player_State {
-	IDLE_STATE = 0,
+	NONE_STATE = -1,
+
+	IDLE_STATE,
 	RUN_STATE,
 	JUMP_STATE,
 	AIR_STATE,
@@ -92,7 +94,7 @@ private:
 	SDL_Texture*		playerSpritesheet = nullptr;
 	SDL_Rect			coll_rect;
 	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
-	Player_State		state = AIR_STATE;
+	Player_State		state = NONE_STATE;
 	COLLIDER_TYPE		coll_type = COLLIDER_NONE;
 	
 };

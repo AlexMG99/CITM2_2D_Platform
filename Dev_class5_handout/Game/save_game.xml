@@ -7,9 +7,9 @@
 	<map />
 	<scene />
 	<player>
-		<position x="81.0127563" y="24" />
-		<velocity x="6.15573072e-07" y="-3" />
-		<state value="AIR_STATE" />
+		<position x="48.2199211" y="100" />
+		<velocity x="5.19524185e-15" y="-0" />
+		<state value="IDLE_STATE" />
 	</player>
 	<collision />
 	<renderer>
