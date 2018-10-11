@@ -32,6 +32,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	App->map->Load("Map.tmx");
+	App->audio->PlayMusic("audio/music/Resistors.ogg");
 	return true;
 }
 
