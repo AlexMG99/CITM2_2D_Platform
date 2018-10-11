@@ -58,8 +58,9 @@ bool j1Player::Start()
 			idle_anim = LoadAnimations("idle");
 			jump_anim = LoadAnimations("jump");
 			run_anim = LoadAnimations("run");
-			duckAnim = LoadAnimations("duck");
-			deadAnim = LoadAnimations("dead");
+			duck_anim = LoadAnimations("duck");
+			dead_anim = LoadAnimations("dead");
+			air_anim = LoadAnimations("air");
 			p2SString coll_name(coll_node.attribute("type").as_string());
 			p2SString state_name(player_node.child("state").attribute("type").as_string());
 			if (coll_name == "COLLIDER_PLAYER") {
@@ -277,11 +278,12 @@ void j1Player::CheckState()
 		{
 			state = AIR_STATE;
 			jump_anim.Reset();
+			air_anim.Reset();
 		}
 		break;
 
 	case AIR_STATE:
-		jump_anim.Reset();
+		
 		break;
 
 	case DUCK_STATE:
@@ -316,15 +318,15 @@ void j1Player::PerformActions()
 
 	case AIR_STATE:
 		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
-		current_animation = &idle_anim;
+		current_animation = &air_anim;
 		break;
 
 	case DUCK_STATE:
-		current_animation = &duckAnim;
+		current_animation = &duck_anim;
 		break;
 
 	case DEAD_STATE:
-		current_animation = &deadAnim;
+		current_animation = &dead_anim;
 		break;
 	}
 	
@@ -332,8 +334,17 @@ void j1Player::PerformActions()
 
 void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
-
-	position.y--;
+	int i = (c2->rect.y + c2->rect.w - 20);
+	LOG("%i", i);
+	LOG("%f", position.y);
+	if((c2->rect.y+c2->rect.w-20)<position.y)
+	{
+		position.x++;
+	}
+	else 
+	{
+	position.y = c2->rect.y - c1->rect.h;
 	state = IDLE_STATE;
+	}
 
 }

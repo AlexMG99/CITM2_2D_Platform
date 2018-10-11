@@ -86,8 +86,9 @@ private:
 	p2Animation		idle_anim;
 	p2Animation     run_anim;
 	p2Animation		jump_anim;
-	p2Animation     duckAnim;
-	p2Animation     deadAnim;
+	p2Animation		air_anim;
+	p2Animation     duck_anim;
+	p2Animation     dead_anim;
 
 	pugi::xml_document  player_file;
 
