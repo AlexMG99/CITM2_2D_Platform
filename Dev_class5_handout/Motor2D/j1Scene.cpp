@@ -32,7 +32,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	App->map->Load("Map.tmx");
-	App->audio->PlayMusic("audio/music/Resistors.ogg");
+	//App->audio->PlayMusic("audio/music/Resistors.ogg");
 	return true;
 }
 
@@ -62,9 +62,12 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	
+	LOG("%f", App->player->position.x);
+	LOG("Width: %u", (App->win->GetWindowWidth() / App->win->GetScale()) / 2);
+	if (App->player->position.x > (App->win->GetWindowWidth() / App->win->GetScale())/2) {
+		App->render->camera.x = -App->player->position.x*App->win->GetScale() + App->win->GetWindowWidth() / 2;
+	}
 
-	//App->render->Blit(img, 0, 0);
 	App->map->Draw();
 
 	

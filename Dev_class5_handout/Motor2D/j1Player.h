@@ -70,12 +70,13 @@ private:
 
 public:
 	
+	fPoint		position;
 	Collider*	player_coll = nullptr;
 	bool		grounded = false;
 	
 private:
 	
-	fPoint		position;
+
 	fPoint		velocity;
 	fPoint		maxVelocity;
 	fPoint		acceleration;

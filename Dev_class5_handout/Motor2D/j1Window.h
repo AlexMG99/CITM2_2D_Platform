@@ -27,6 +27,9 @@ public:
 	// Retrive window size
 	void GetWindowSize(uint& width, uint& height) const;
 
+	// Retrive window width
+	uint GetWindowWidth() const;
+
 	// Retrieve window scale
 	uint GetScale() const;
 

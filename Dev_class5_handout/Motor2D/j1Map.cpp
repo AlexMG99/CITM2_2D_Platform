@@ -100,6 +100,8 @@ bool j1Map::CleanUp()
 
 	while(item != NULL)
 	{
+
+		App->tex->UnLoad(item->data->texture);
 		RELEASE(item->data);
 		item = item->next;
 	}
@@ -116,6 +118,39 @@ bool j1Map::CleanUp()
 		items = items->next;
 	}
 	data.layers.clear();
+
+	// Remove all collision layers
+	p2List_item<CollisionLayer*>* item_coll_layers;
+	item_coll_layers = data.collision_layer.start;
+
+	while (item_coll_layers != NULL)
+	{
+		// Remove all coll objects
+		p2List_item<CollObject*>* item_coll_objects;
+		item_coll_objects = item_coll_layers->data->coll_object.start;
+
+		while (item_coll_objects != NULL)
+		{
+			RELEASE(item_coll_objects->data);
+			item_coll_objects = item_coll_objects->next;
+		}
+
+		data.collider_list.clear();
+		RELEASE(item_coll_layers->data);
+		item_coll_layers = item_coll_layers->next;
+	}
+	data.collision_layer.clear();
+
+	// Remove all colliders
+	p2List_item<Collider*>* item_coll;
+	item_coll = data.collider_list.start;
+
+	while (item_coll != NULL)
+	{
+		RELEASE(item_coll->data);
+		item_coll = item_coll->next;
+	}
+	data.collider_list.clear();
 
 	// Clean up the pugui tree
 	map_file.reset();

@@ -5,6 +5,8 @@
 #include "j1Player.h"
 #include "j1Input.h"
 #include "j1Textures.h"
+#include "j1FadeToBlack.h"
+#include "j1Scene.h"
 #include "j1Collision.h"
 #include "j1Render.h"
 
@@ -100,6 +102,11 @@ bool j1Player::PreUpdate()
 	{
 		if (state != DUCK_STATE)velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
 		flipX = SDL_FLIP_HORIZONTAL;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_REPEAT)
+	{
+		App->fadeToBlack->FadeToBlack(App->scene, App->scene);
 	}
 
 	CheckState();
