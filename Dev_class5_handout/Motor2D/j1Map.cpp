@@ -464,6 +464,10 @@ bool j1Map::LoadObject(pugi::xml_node& node, CollObject* coll_object)
 	{
 		coll_object->coll_type = COLLIDER_PLATFORM;
 	}
+	else if (coll_name == "WALL_COLLIDER")
+	{
+		coll_object->coll_type = COLLIDER_WALL;
+	}
 	return true;
 }
 
