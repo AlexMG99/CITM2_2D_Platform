@@ -372,10 +372,9 @@ void j1Player::PerformActions()
 
 void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c2->type == COLLIDER_GROUND)
+	switch(c2->type)
 	{
-		LOG("%f", position.y);
-		LOG("%i", c2->rect.y);
+	case COLLIDER_GROUND:
 		if (c2->rect.x + c2->rect.w < position.x) {
 			position.x += maxVelocity.x;
 		}
@@ -395,5 +394,22 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			state = AIR_STATE;
 			position.y = c2->rect.y + c2->rect.h + c1->rect.h;
 		}
+		break;
+	case COLLIDER_PLATFORM:
+		if (velocity.y > 0) 
+		{
+			if (position.y < c2->rect.y)
+			{
+				jump_anim.Reset();
+				state = IDLE_STATE;
+			}
+		}
+		else 
+		{
+			position.y = c2->rect.y;
+			jump_anim.Reset();
+			state = IDLE_STATE;
+		}
+		break;
 	}
 }
