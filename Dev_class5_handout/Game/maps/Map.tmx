@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="15" tilewidth="16" tileheight="16" nextobjectid="62">
  <properties>
+  <property name="camera.x" type="int" value="0"/>
+  <property name="camera.y" type="int" value="0"/>
+  <property name="col.x" type="int" value="0"/>
+  <property name="coll.h" type="int" value="40"/>
+  <property name="coll.w" type="int" value="20"/>
+  <property name="coll.y" type="int" value="0"/>
+  <property name="coll_type" value="COLLIDER_PLAYER"/>
   <property name="gravity.x" type="float" value="0.2"/>
   <property name="gravity.y" type="float" value="1"/>
   <property name="jumpForce" type="float" value="1"/>
   <property name="jumpMaxVelocity" type="float" value="2"/>
   <property name="maxVelocity.x" type="float" value="3"/>
   <property name="maxVelocity.y" type="float" value="3"/>
-  <property name="playerPosition.x" type="float" value="0"/>
+  <property name="playerPosition.x" type="float" value="10"/>
   <property name="playerPosition.y" type="float" value="128"/>
+  <property name="state" value="AIR_STATE"/>
  </properties>
  <tileset firstgid="1" name="Background" tilewidth="16" tileheight="16" margin="1" tilecount="704" columns="32">
   <image source="Background.png" width="514" height="355"/>

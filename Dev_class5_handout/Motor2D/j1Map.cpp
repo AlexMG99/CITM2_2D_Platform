@@ -135,12 +135,13 @@ bool j1Map::CleanUp()
 			item_coll_objects = item_coll_objects->next;
 		}
 
-		data.collider_list.clear();
+		item_coll_layers->data->coll_object.clear();
 		RELEASE(item_coll_layers->data);
 		item_coll_layers = item_coll_layers->next;
 	}
 	data.collision_layer.clear();
 
+	//Remove al Colliders
 	p2List_item<Collider*>* item_collider;
 	item_collider = data.collider_list.start;
 	while (item_collider != NULL)
@@ -487,37 +488,76 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 		LOG("%s", property_name.GetString());
 		if(property_name=="gravity.x") 
 		{
-			properties.acceleration.x = property_node.attribute("value").as_float();
+			App->player->acceleration.x = property_node.attribute("value").as_float();
 		}
 		if (property_name == "gravity.y")
 		{
-			properties.acceleration.y = property_node.attribute("value").as_float();
+			App->player->acceleration.y = property_node.attribute("value").as_float();
 		}
 		if (property_name == "playerPosition.x")
 		{
-			properties.position.x = property_node.attribute("value").as_float();
+			App->player->position.x = property_node.attribute("value").as_float();
 		}
 		if (property_name == "playerPosition.y")
 		{
-			properties.position.y = property_node.attribute("value").as_float();
+			App->player->position.y = property_node.attribute("value").as_float();
 		}
 		if (property_name == "maxVelocity.x")
 		{
-			properties.maxVelocity.x = property_node.attribute("value").as_float();
+			App->player->maxVelocity.x = property_node.attribute("value").as_float();
 		}
 		if (property_name == "maxVelocity.y")
 		{
-			properties.maxVelocity.y = property_node.attribute("value").as_float();
+			App->player->maxVelocity.y = property_node.attribute("value").as_float();
 		}
 		if (property_name == "jumpForce")
 		{
-			properties.jumpAcceleration = property_node.attribute("value").as_float();
+			App->player->jumpAcceleration = property_node.attribute("value").as_float();
 		}
 		if (property_name == "jumpMaxVelocity")
 		{
-			properties.jumpMaxVelocity = property_node.attribute("value").as_float();
+			App->player->jumpMaxVelocity = property_node.attribute("value").as_float();
 		}
-		
+		if (property_name == "coll.x")
+		{
+			App->player->coll_rect.x = property_node.attribute("value").as_float();
+		}
+		if (property_name == "coll.y")
+		{
+			App->player->coll_rect.y = property_node.attribute("value").as_float();
+		}
+		if (property_name == "coll.w")
+		{
+			App->player->coll_rect.w = property_node.attribute("value").as_float();
+		}
+		if (property_name == "coll.h")
+		{
+			App->player->coll_rect.h = property_node.attribute("value").as_float();
+		}
+		if (property_name == "state")
+		{
+			p2SString state_name(property_node.attribute("value").as_string());
+			if (state_name == "AIR_STATE")
+			{
+				App->player->state = AIR_STATE;
+			}
+		}
+		if (property_name == "coll_type")
+		{
+			p2SString coll_name(property_node.attribute("value").as_string());
+			if (coll_name == "COLLIDER_PLAYER")
+			{
+				App->player->coll_type = COLLIDER_PLAYER;
+			}
+		}
+		if (property_name == "camera.x")
+		{
+			App->render->camera.x = property_node.attribute("value").as_float();
+		}
+		if (property_name == "camera.y")
+		{
+			App->render->camera.y = property_node.attribute("value").as_float();
+		}
 	}
 
 	return true;

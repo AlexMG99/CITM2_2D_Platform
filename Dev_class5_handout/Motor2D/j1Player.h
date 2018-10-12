@@ -71,19 +71,20 @@ private:
 
 public:
 	
-	fPoint			position;
+	fPoint	position;
+	fPoint	velocity;
+	fPoint	maxVelocity;
+	fPoint	acceleration;
+	float	jumpAcceleration;
+	float	jumpMaxVelocity;
+
+	SDL_Rect		coll_rect;
 	Collider*		player_coll = nullptr;
+	COLLIDER_TYPE	coll_type = COLLIDER_NONE;
 	Player_State	state = NONE_STATE;
 	bool			grounded = false;
 	
 private:
-	
-
-	fPoint		velocity;
-	fPoint		maxVelocity;
-	fPoint		acceleration;
-	float		jumpAcceleration;
-	float		jumpMaxVelocity;
 
 	p2SString		path;
 	p2Animation*    current_animation = nullptr;
@@ -98,9 +99,7 @@ private:
 	pugi::xml_document  player_file;
 
 	SDL_Texture*		playerSpritesheet = nullptr;
-	SDL_Rect			coll_rect;
 	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
-	COLLIDER_TYPE		coll_type = COLLIDER_NONE;
 	
 };
 

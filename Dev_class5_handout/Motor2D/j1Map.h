@@ -10,11 +10,12 @@
 // ----------------------------------------------------
 struct Properties
 {
-	fPoint	position = { 0.0F,0.0F };
-	fPoint	acceleration = { 0.0F,0.0F };
-	fPoint	maxVelocity = { 0.0F,0.0F };
-	float	jumpAcceleration = 0.0F;
-	float	jumpMaxVelocity = 0.0F;
+	SDL_Rect	coll = { 0,0,0,0 };
+	fPoint		position = { 0.0F,0.0F };
+	fPoint		acceleration = { 0.0F,0.0F };
+	fPoint		maxVelocity = { 0.0F,0.0F };
+	float		jumpAcceleration = 0.0F;
+	float		jumpMaxVelocity = 0.0F;
 };
 
 struct CollObject

@@ -2,15 +2,6 @@
 
 <player>
   <image source="player.png"/>
-  <position x="0" y="128"/>
-  <velocity x="0" y="0"/>
-  <maxVelocity x="3" y="3"/>
-  <state type="AIR_STATE"/>
-  <collider type="COLLIDER_PLAYER" x="0" y="0" w="20" h="40"/>
-  <jump>
-    <acceleration value="1"/>
-    <maxVelocity value="2"/>
-  </jump>
   <animation>
     <idle title="idle" speed="0.1">
       <frame x="1" y="1" w="20" h="40"/>
@@ -45,11 +36,9 @@
       <frame x="63" y="83" w="30" h="39"/>
       <frame x="32" y="83" w="30" h="39"/>
     </air>
-    
     <cling title="cling" speed="0.1">
       <frame x="1" y="186" w="31" h="32"/>
     </cling>
-    
     <duck title="duck" speed="0.1">
       <frame x="112" y="1" w="23" h="40"/>
     </duck>
@@ -57,7 +46,5 @@
       <frame x="1" y="151" w="25" h="34"/>
       <frame x="27" y="151" w="25" h="34"/>
     </dead>
-    
-    
   </animation>
 </player>

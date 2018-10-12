@@ -65,23 +65,8 @@ bool j1Player::Start()
 			dead_anim = LoadAnimations("dead");
 			air_anim = LoadAnimations("air");
 			cling_anim = LoadAnimations("cling");
-			p2SString coll_name(coll_node.attribute("type").as_string());
-			p2SString state_name(player_node.child("state").attribute("type").as_string());
-			if (coll_name == "COLLIDER_PLAYER") {
-				coll_type = COLLIDER_PLAYER;
-			}
-			if (state_name == "AIR_STATE")
-			{
-				state = AIR_STATE;
-			}
-			coll_rect = { coll_node.attribute("x").as_int() ,coll_node.attribute("y").as_int(),coll_node.attribute("w").as_int(),coll_node.attribute("h").as_int() };
+
 			player_coll = App->collision->AddCollider({ coll_rect.x, coll_rect.y, coll_rect.w, coll_rect.h }, coll_type, App->player);
-			acceleration = { App->map->data.properties_map.acceleration.x, App->map->data.properties_map.acceleration.y };
-			position = { App->map->data.properties_map.position.x, App->map->data.properties_map.position.y };
-			velocity = { 0,0 };
-			maxVelocity = { App->map->data.properties_map.maxVelocity.x, App->map->data.properties_map.maxVelocity.y };
-			jumpAcceleration = App->map->data.properties_map.jumpAcceleration;
-			jumpMaxVelocity = App->map->data.properties_map.jumpMaxVelocity;
 		}
 	}
 	return ret;
@@ -347,6 +332,7 @@ void j1Player::PerformActions()
 		break;
 
 	case AIR_STATE:
+		grounded = false;
 		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
 		current_animation = &air_anim;
 		break;
