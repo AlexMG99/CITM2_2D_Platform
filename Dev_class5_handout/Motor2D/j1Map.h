@@ -11,11 +11,12 @@
 
 struct CollObject
 {
-	int         id = 0;
-	float		x = 0.0f;
-	float		y = 0.0f;
-	float		width = 0.0f;
-	float		height = 0.0f;
+	int				id = 0;
+	float			x = 0.0f;
+	float			y = 0.0f;
+	float			width = 0.0f;
+	float			height = 0.0f;
+	COLLIDER_TYPE	coll_type = COLLIDER_NONE;
 };
 
 struct CollisionLayer
@@ -129,7 +130,6 @@ private:
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer);
 	bool LoadObject(pugi::xml_node& node, CollObject* coll_obj);
-	bool CreateCollider(SDL_Rect rect, Collider* coll, COLLIDER_TYPE coll_type);
 
 	TileSet* GetTilesetFromTileId(int id) const;
 
@@ -143,7 +143,6 @@ private:
 	
 	p2SString			folder;
 	bool				map_loaded;
-	int					coll_layer = 0;
 };
 
 #endif // __j1MAP_H__

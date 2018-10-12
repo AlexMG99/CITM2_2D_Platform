@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="16" tileheight="16" nextobjectid="46">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="16" tileheight="16" nextobjectid="50">
  <tileset firstgid="1" name="Background" tilewidth="16" tileheight="16" margin="1" tilecount="704" columns="32">
   <image source="Background.png" width="514" height="355"/>
  </tileset>
@@ -1234,8 +1234,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="820"/>
-   <tile gid="821"/>
+   <tile gid="0"/>
+   <tile gid="965"/>
+   <tile gid="966"/>
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
@@ -1249,10 +1250,8 @@
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="757"/>
-   <tile gid="757"/>
-   <tile gid="823"/>
-   <tile gid="824"/>
+   <tile gid="968"/>
+   <tile gid="969"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1274,10 +1273,10 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="797"/>
-   <tile gid="844"/>
-   <tile gid="757"/>
-   <tile gid="757"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="988"/>
+   <tile gid="989"/>
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
@@ -1291,8 +1290,8 @@
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="800"/>
-   <tile gid="801"/>
+   <tile gid="991"/>
+   <tile gid="992"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1314,11 +1313,10 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="820"/>
-   <tile gid="821"/>
-   <tile gid="822"/>
-   <tile gid="821"/>
-   <tile gid="822"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="1011"/>
+   <tile gid="1012"/>
    <tile gid="821"/>
    <tile gid="822"/>
    <tile gid="821"/>
@@ -1331,8 +1329,9 @@
    <tile gid="822"/>
    <tile gid="821"/>
    <tile gid="822"/>
-   <tile gid="823"/>
-   <tile gid="824"/>
+   <tile gid="821"/>
+   <tile gid="1014"/>
+   <tile gid="1015"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1354,27 +1353,25 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="843"/>
-   <tile gid="844"/>
-   <tile gid="845"/>
-   <tile gid="844"/>
-   <tile gid="845"/>
-   <tile gid="844"/>
-   <tile gid="845"/>
-   <tile gid="844"/>
-   <tile gid="845"/>
-   <tile gid="844"/>
-   <tile gid="845"/>
-   <tile gid="844"/>
-   <tile gid="845"/>
-   <tile gid="844"/>
-   <tile gid="845"/>
-   <tile gid="844"/>
-   <tile gid="845"/>
-   <tile gid="846"/>
-   <tile gid="847"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="988"/>
+   <tile gid="989"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="990"/>
+   <tile gid="991"/>
+   <tile gid="992"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1394,29 +1391,27 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="866"/>
-   <tile gid="867"/>
-   <tile gid="868"/>
-   <tile gid="867"/>
-   <tile gid="868"/>
-   <tile gid="867"/>
-   <tile gid="868"/>
-   <tile gid="867"/>
-   <tile gid="868"/>
-   <tile gid="867"/>
-   <tile gid="868"/>
-   <tile gid="867"/>
-   <tile gid="868"/>
-   <tile gid="867"/>
-   <tile gid="868"/>
-   <tile gid="867"/>
-   <tile gid="868"/>
-   <tile gid="869"/>
-   <tile gid="870"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="1011"/>
+   <tile gid="1012"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1013"/>
+   <tile gid="1014"/>
+   <tile gid="1015"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1440,6 +1435,23 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="1011"/>
+   <tile gid="1012"/>
+   <tile gid="1013"/>
+   <tile gid="1014"/>
+   <tile gid="1012"/>
+   <tile gid="1013"/>
+   <tile gid="1014"/>
+   <tile gid="1012"/>
+   <tile gid="1012"/>
+   <tile gid="1012"/>
+   <tile gid="1012"/>
+   <tile gid="1012"/>
+   <tile gid="1013"/>
+   <tile gid="1014"/>
+   <tile gid="1012"/>
+   <tile gid="1012"/>
+   <tile gid="1015"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1463,35 +1475,23 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="1034"/>
+   <tile gid="1035"/>
+   <tile gid="1036"/>
+   <tile gid="1037"/>
+   <tile gid="1035"/>
+   <tile gid="1036"/>
+   <tile gid="1037"/>
+   <tile gid="1035"/>
+   <tile gid="1035"/>
+   <tile gid="1035"/>
+   <tile gid="1035"/>
+   <tile gid="1035"/>
+   <tile gid="1036"/>
+   <tile gid="1037"/>
+   <tile gid="1035"/>
+   <tile gid="1035"/>
+   <tile gid="1038"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2435,13 +2435,14 @@
   </data>
  </layer>
  <objectgroup name="Ground Collisions">
-  <object id="2" x="149" y="131.5" width="300.879" height="27"/>
-  <object id="19" x="451" y="160" width="58.6667" height="37.8182"/>
-  <object id="20" x="510.727" y="198.727" width="65" height="32"/>
-  <object id="38" x="579.5" y="233" width="60.5" height="7"/>
-  <object id="41" x="117.5" y="161" width="32.5" height="40.5"/>
-  <object id="42" x="0" y="201" width="116" height="38.5"/>
-  <object id="44" x="147" y="32.5" width="288" height="31.5"/>
+  <object id="2" name="GROUND" type="GROUND_COLLIDER" x="149" y="134.5" width="300.879" height="24"/>
+  <object id="19" name="GROUND" type="GROUND_COLLIDER" x="451" y="160" width="58.6667" height="37.8182"/>
+  <object id="20" name="GROUND" type="GROUND_COLLIDER" x="510.727" y="198.727" width="65" height="32"/>
+  <object id="38" name="GROUND" type="GROUND_COLLIDER" x="579.5" y="233" width="60.5" height="7"/>
+  <object id="41" name="GROUND" type="GROUND_COLLIDER" x="117.5" y="161" width="32.5" height="40.5"/>
+  <object id="42" name="GROUND" type="GROUND_COLLIDER" x="0" y="201" width="116" height="38.5"/>
+  <object id="46" type="GROUND_COLLIDER" x="170" y="35.5" width="23" height="73"/>
+  <object id="48" type="GROUND_COLLIDER" x="192.5" y="86.5" width="233.5" height="23"/>
  </objectgroup>
  <objectgroup name="Platform Collisions"/>
 </map>

@@ -224,29 +224,14 @@ bool j1Map::Load(const char* file_name)
 
 	//Create Colliders ----------------------------------------------------------
 	p2List_item<CollisionLayer*>* item_collision_layer = data.collision_layer.start;
-	COLLIDER_TYPE coll_type = COLLIDER_NONE;
 	while (item_collision_layer!=NULL)
 	{
-		if (coll_layer == 0) 
-		{
-			coll_type = COLLIDER_GROUND;
-		}
-		else if (coll_layer == 2)
-		{
-			coll_type = COLLIDER_PLATFORM;
-		}
-		else if (coll_layer == 4) {
-			coll_type = COLLIDER_DEAD;
-		}
-
-		coll_layer++;
-
 		p2List_item<CollObject*>* item_coll_object = item_collision_layer->data->coll_object.start;
 		while (item_coll_object != NULL) 
 		{
 			SDL_Rect r = { (int)item_coll_object->data->x, (int)item_coll_object->data->y, (int)item_coll_object->data->width, (int)item_coll_object->data->height };
 			Collider* coll = new Collider();
-			CreateCollider(r, coll, coll_type);
+			App->collision->AddCollider({ r.x, r.y, r.w, r.h }, item_coll_object->data->coll_type, App->map);
 			data.collider_list.add(coll);
 			item_coll_object = item_coll_object->next;
 		}
@@ -470,13 +455,15 @@ bool j1Map::LoadObject(pugi::xml_node& node, CollObject* coll_object)
 	coll_object->y = node.attribute("y").as_float();
 	coll_object->width = node.attribute("width").as_float();
 	coll_object->height = node.attribute("height").as_float();
-
-	return true;
-}
-
-bool j1Map::CreateCollider(SDL_Rect rect, Collider* coll, COLLIDER_TYPE coll_type) 
-{
-	App->collision->AddCollider({ rect.x,rect.y,rect.w,rect.h }, coll_type, App->map);
+	p2SString coll_name(node.attribute("type").as_string());
+	if (coll_name == "GROUND_COLLIDER") 
+	{
+		coll_object->coll_type = COLLIDER_GROUND;
+	}
+	else if (coll_name == "PLATFORM_COLLIDER")
+	{
+		coll_object->coll_type = COLLIDER_PLATFORM;
+	}
 	return true;
 }
 

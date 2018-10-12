@@ -5,15 +5,15 @@
 	<textures />
 	<audio />
 	<player>
-		<position x="430.579895" y="117" />
-		<velocity x="-2.99619722" y="-3" />
-		<state value="AIR_STATE" />
+		<position x="41.0145454" y="201" />
+		<velocity x="0.246364385" y="-0" />
+		<state value="IDLE_STATE" />
 	</player>
 	<map />
 	<scene />
 	<:anonymous />
 	<collision />
 	<renderer>
-		<camera x="-1044" y="42" />
+		<camera x="0" y="0" />
 	</renderer>
 </game_state>

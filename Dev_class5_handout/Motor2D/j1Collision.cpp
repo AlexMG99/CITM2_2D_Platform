@@ -139,6 +139,12 @@ void j1Collision::DebugDraw()
 		}
 	}
 }
+void j1Collision::ChangeSize(Collider* collider, uint height, uint width)
+{
+	collider->rect.h = height;
+	collider->rect.w = width;
+}
+
 
 // Called before quitting
 bool j1Collision::CleanUp()

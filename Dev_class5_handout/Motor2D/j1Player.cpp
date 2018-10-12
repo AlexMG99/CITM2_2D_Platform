@@ -90,16 +90,13 @@ bool j1Player::Start()
 
 bool j1Player::PreUpdate()
 {
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
 	{
-		if(state != (DUCK_STATE))velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
+		if (state != (DUCK_STATE))velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
 		flipX = SDL_FLIP_NONE;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		App->player->position.y += 0.1F;
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
 	{
 		if (state != DUCK_STATE)velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
 		flipX = SDL_FLIP_HORIZONTAL;
@@ -117,8 +114,9 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
-	player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h);
-	CheckState();
+	if(state!=DUCK_STATE)player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h);
+	else { player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h / 2); }
+
 	PerformActions();
 
 	return true;
@@ -335,6 +333,7 @@ void j1Player::PerformActions()
 		velocity.x = (1 - acceleration.x)*velocity.x;
 		velocity.y = (1 - acceleration.y)*velocity.y;
 		current_animation = &idle_anim;
+		App->collision->ChangeSize(player_coll, 40, 20);
 		break;
 
 	case RUN_STATE:
@@ -352,13 +351,8 @@ void j1Player::PerformActions()
 		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
 		current_animation = &air_anim;
 		break;
+
 	case CLING_STATE:
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
-			flipX = SDL_FLIP_HORIZONTAL;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
-			flipX = SDL_FLIP_NONE;
-		}
 		velocity.x = 0;
 		velocity.y = 0;
 		current_animation = &cling_anim;
@@ -366,6 +360,7 @@ void j1Player::PerformActions()
 
 	case DUCK_STATE:
 		current_animation = &duck_anim;
+		App->collision->ChangeSize(player_coll, 20, 20);
 		break;
 
 	case DEAD_STATE:
