@@ -32,7 +32,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	App->map->Load("Map.tmx");
-	App->audio->PlayMusic("audio/music/Resistors.ogg");
+	//App->audio->PlayMusic("audio/music/Resistors.ogg");
 	return true;
 }
 
@@ -44,27 +44,20 @@ bool j1Scene::PreUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		App->SaveGame();
-
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		App->render->camera.y -= 10;
-
-	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
-		App->render->camera.y += 10;
-
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		App->render->camera.x -= 10;
-
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		App->render->camera.x += 10;
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	
+	if (App->player->position.x > (App->win->GetWidth() / App->win->GetScale())/4) {
+		App->render->camera.x = -App->player->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
+	}
+	if (App->player->position.y < (App->win->GetHeight() / App->win->GetScale()) / 2)
+	{
+		App->render->camera.y = -App->player->position.y*App->win->GetScale() + App->win->GetHeight() / 2;
+	}
 
-	//App->render->Blit(img, 0, 0);
 	App->map->Draw();
 
 	
