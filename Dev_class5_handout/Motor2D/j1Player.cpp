@@ -374,22 +374,26 @@ void j1Player::PerformActions()
 
 void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
-	switch(c2->type)
+	switch (c2->type)
 	{
 	case COLLIDER_GROUND:
+		//Check collision from right
 		if (c2->rect.x + c2->rect.w < position.x) {
 			position.x += maxVelocity.x;
 		}
+		//Check collision from left
 		else if (position.x < c2->rect.x)
 		{
 			position.x -= maxVelocity.x;
 		}
+		//Check collision from up
 		else if (position.y < c2->rect.y + c2->rect.h)
 		{
 			position.y = c2->rect.y;
 			state = IDLE_STATE;
 			grounded = true;
 		}
+		//Check collision from down
 		else
 		{
 			velocity.y = 0;
@@ -410,9 +414,11 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 				flipX = SDL_FLIP_HORIZONTAL;
 			}
 		}
+		break;
 
 	case COLLIDER_PLATFORM:
-		if (velocity.y > 0) 
+		//Check if it's jumping or falling
+		if (velocity.y > 0)
 		{
 			if (position.y < c2->rect.y)
 			{
@@ -420,12 +426,25 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 				state = IDLE_STATE;
 			}
 		}
-		else 
+		else
 		{
-			position.y = c2->rect.y;
-			jump_anim.Reset();
-			state = IDLE_STATE;
+			//Check collision form right
+			if (position.x > c2->rect.x + c2->rect.w)
+			{
+				position.x += maxVelocity.x;
+			}
+			//Check collision form left
+			else if (position.x < c2->rect.x)
+			{
+				position.x -= maxVelocity.x;
+			}
+			else {
+				position.y = c2->rect.y;
+				jump_anim.Reset();
+				state = IDLE_STATE;
+			}
 		}
 		break;
 	}
+
 }
