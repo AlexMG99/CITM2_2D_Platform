@@ -5332,22 +5332,22 @@
   <properties>
    <property name="coll_type" value="COLLIDER_GROUND"/>
   </properties>
-  <object id="1" x="124.333" y="172.667" width="54" height="178"/>
-  <object id="3" x="-2.5" y="325" width="125.5" height="26.5"/>
-  <object id="7" x="268.667" y="124" width="54.3333" height="228.333"/>
-  <object id="8" x="388" y="16.5" width="31" height="134.5"/>
-  <object id="9" x="477" y="92.5" width="53" height="259.5"/>
-  <object id="10" x="-0.666667" y="0" width="640.667" height="16"/>
-  <object id="11" x="-0.666667" y="18" width="67.3333" height="255.333"/>
-  <object id="12" x="67" y="16.5" width="26" height="49.5"/>
+  <object id="1" name="GROUND" type="COLLIDER_GROUND" x="124.333" y="172.667" width="54" height="178"/>
+  <object id="3" name="GROUND" type="COLLIDER_GROUND" x="-2.5" y="325" width="125.5" height="26.5"/>
+  <object id="7" name="GROUND" type="COLLIDER_GROUND" x="268.667" y="124" width="54.3333" height="228.333"/>
+  <object id="8" name="GROUND" type="COLLIDER_GROUND" x="388" y="16.5" width="31" height="134.5"/>
+  <object id="9" name="GROUND" type="COLLIDER_GROUND" x="477" y="92.5" width="53" height="259.5"/>
+  <object id="10" name="GROUND" type="COLLIDER_GROUND" x="-0.666667" y="0" width="640.667" height="16"/>
+  <object id="11" name="GROUND" type="COLLIDER_GROUND" x="-0.666667" y="18" width="67.3333" height="255.333"/>
+  <object id="12" name="GROUND" type="COLLIDER_GROUND" x="67" y="16.5" width="26" height="49.5"/>
  </objectgroup>
  <objectgroup name="Platform Collision">
   <properties>
    <property name="coll_type" value="COLLIDER_PLATFORM"/>
   </properties>
-  <object id="4" x="178.545" y="208.727" width="24.1818" height="14.5455"/>
-  <object id="5" x="324.182" y="208.182" width="86.1818" height="15.4545"/>
-  <object id="6" x="323.818" y="144.182" width="22" height="15.4545"/>
+  <object id="4" name="PLATFORM" type="COLLIDER_PLATFORM" x="178.545" y="208.727" width="24.1818" height="14.5455"/>
+  <object id="5" name="PLATFORM" type="COLLIDER_PLATFORM" x="324.182" y="208.182" width="86.1818" height="15.4545"/>
+  <object id="6" name="PLATFORM" type="COLLIDER_PLATFORM" x="323.818" y="144.182" width="22" height="15.4545"/>
  </objectgroup>
  <objectgroup name="Death Collision">
   <properties>
