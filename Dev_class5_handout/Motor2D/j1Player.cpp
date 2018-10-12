@@ -126,7 +126,10 @@ bool j1Player::Update(float dt)
 bool j1Player::PostUpdate()
 {	
 	position.x += velocity.x;
-	position.y -= velocity.y;
+	if (!grounded) 
+	{
+		position.y -= velocity.y;
+	}
 	Draw();
 	return true;
 }
@@ -295,11 +298,10 @@ void j1Player::CheckState()
 		break;
 
 	case JUMP_STATE:
+		air_anim.Reset();
 		if (jump_anim.Finished())
 		{
 			state = AIR_STATE;
-			jump_anim.Reset();
-			air_anim.Reset();
 		}
 		if (press_letter) {
 			state = CLING_STATE;
@@ -307,7 +309,7 @@ void j1Player::CheckState()
 		break;
 
 	case AIR_STATE:
-		
+		jump_anim.Reset();
 		break;
 	case CLING_STATE:
 		if (released_letter) {
@@ -341,6 +343,7 @@ void j1Player::PerformActions()
 		break;
 
 	case JUMP_STATE:
+		grounded = false;
 		velocity.y = jumpAcceleration*jumpMaxVelocity + (1 - acceleration.y)*velocity.y;
 		current_animation = &jump_anim;
 		break;
@@ -374,5 +377,28 @@ void j1Player::PerformActions()
 
 void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
-
+	if (c2->type == COLLIDER_GROUND)
+	{
+		LOG("%f", position.y);
+		LOG("%i", c2->rect.y);
+		if (c2->rect.x + c2->rect.w < position.x) {
+			position.x += maxVelocity.x;
+		}
+		else if (position.x < c2->rect.x)
+		{
+			position.x -= maxVelocity.x;
+		}
+		else if (position.y < c2->rect.y + c2->rect.h)
+		{
+			position.y = c2->rect.y;
+			state = IDLE_STATE;
+			grounded = true;
+		}
+		else
+		{
+			velocity.y = 0;
+			state = AIR_STATE;
+			position.y = c2->rect.y + c2->rect.h + c1->rect.h;
+		}
+	}
 }

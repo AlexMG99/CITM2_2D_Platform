@@ -231,16 +231,9 @@ bool j1Map::Load(const char* file_name)
 		{
 			coll_type = COLLIDER_GROUND;
 		}
-		else if (coll_layer == 1)
-		{
-			coll_type = COLLIDER_WALL;
-		}
 		else if (coll_layer == 2)
 		{
 			coll_type = COLLIDER_PLATFORM;
-		}
-		else if (coll_layer == 3) {
-			coll_type = COLLIDER_LEAVE;
 		}
 		else if (coll_layer == 4) {
 			coll_type = COLLIDER_DEAD;
@@ -489,16 +482,6 @@ bool j1Map::CreateCollider(SDL_Rect rect, Collider* coll, COLLIDER_TYPE coll_typ
 
 void j1Map::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1->type == COLLIDER_GROUND) 
-	{
-		if (c1->rect.x + c1->rect.w < App->player->position.x) {
-			//App->player->position.x = c1->rect.x + c1->rect.w + 12;
-		}
-		else
-		{
-			App->player->position.y = c1->rect.y;
-			App->player->state = IDLE_STATE;
-		}
-	}
+	
 
 }

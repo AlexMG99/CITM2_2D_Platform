@@ -71,10 +71,10 @@ private:
 
 public:
 	
-	fPoint		position;
-	Collider*	player_coll = nullptr;
-	Player_State		state = NONE_STATE;
-	bool		grounded = false;
+	fPoint			position;
+	Collider*		player_coll = nullptr;
+	Player_State	state = NONE_STATE;
+	bool			grounded = false;
 	
 private:
 	

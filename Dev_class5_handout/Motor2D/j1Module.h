@@ -91,6 +91,7 @@ public:
 	bool IsEnabled() const { return active; }
 
 	virtual void OnCollision(Collider*, Collider*) {}
+	virtual void OffCollision(Collider*) {}
 
 public:
 

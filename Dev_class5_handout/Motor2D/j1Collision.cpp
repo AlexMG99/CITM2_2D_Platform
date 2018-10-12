@@ -8,12 +8,26 @@ j1Collision::j1Collision()
 {
 	name.create("collision");
 
+	matrix[COLLIDER_GROUND][COLLIDER_GROUND] = false;
 	matrix[COLLIDER_GROUND][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_GROUND][COLLIDER_PLATFORM] = false;
+	matrix[COLLIDER_GROUND][COLLIDER_DEAD] = false;
+
+	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_GROUND] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_PLATFORM] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_DEAD] = true;
+
+	matrix[COLLIDER_PLATFORM][COLLIDER_PLATFORM] = false;
 	matrix[COLLIDER_PLATFORM][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_LEAVE][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_PLATFORM][COLLIDER_GROUND] = false;
+	matrix[COLLIDER_PLATFORM][COLLIDER_DEAD] = false;
+
+	matrix[COLLIDER_DEAD][COLLIDER_DEAD] = false;
 	matrix[COLLIDER_DEAD][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_DEAD][COLLIDER_GROUND] = false;
+	matrix[COLLIDER_DEAD][COLLIDER_PLATFORM] = false;
+
 }
 
 // Destructor
@@ -118,12 +132,6 @@ void j1Collision::DebugDraw()
 			break;
 		case COLLIDER_PLATFORM: //red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
-			break;
-		case COLLIDER_LEAVE: //black
-			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha);
-			break;
-		case COLLIDER_WALL: //black
-			App->render->DrawQuad(colliders[i]->rect, 255, 0, 204, alpha);
 			break;
 		case COLLIDER_DEAD: //yellow
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
