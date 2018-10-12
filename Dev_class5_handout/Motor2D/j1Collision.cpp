@@ -11,32 +11,32 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_GROUND][COLLIDER_GROUND] = false;
 	matrix[COLLIDER_GROUND][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_GROUND][COLLIDER_PLATFORM] = false;
-	matrix[COLLIDER_GROUND][COLLIDER_DEAD] = false;
+	matrix[COLLIDER_GROUND][COLLIDER_DEATH] = false;
 	matrix[COLLIDER_GROUND][COLLIDER_WALL] = false;
 
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_GROUND] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLATFORM] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_DEAD] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_DEATH] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 
 	matrix[COLLIDER_PLATFORM][COLLIDER_PLATFORM] = false;
 	matrix[COLLIDER_PLATFORM][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_PLATFORM][COLLIDER_GROUND] = false;
-	matrix[COLLIDER_PLATFORM][COLLIDER_DEAD] = false;
+	matrix[COLLIDER_PLATFORM][COLLIDER_DEATH] = false;
 	matrix[COLLIDER_PLATFORM][COLLIDER_WALL] = false;
 
-	matrix[COLLIDER_DEAD][COLLIDER_DEAD] = false;
-	matrix[COLLIDER_DEAD][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_DEAD][COLLIDER_GROUND] = false;
-	matrix[COLLIDER_DEAD][COLLIDER_PLATFORM] = false;
-	matrix[COLLIDER_DEAD][COLLIDER_WALL] = false;
+	matrix[COLLIDER_DEATH][COLLIDER_DEATH] = false;
+	matrix[COLLIDER_DEATH][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_DEATH][COLLIDER_GROUND] = false;
+	matrix[COLLIDER_DEATH][COLLIDER_PLATFORM] = false;
+	matrix[COLLIDER_DEATH][COLLIDER_WALL] = false;
 
 	matrix[COLLIDER_WALL][COLLIDER_WALL] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_WALL][COLLIDER_GROUND] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLATFORM] = false;
-	matrix[COLLIDER_WALL][COLLIDER_DEAD] = false;
+	matrix[COLLIDER_WALL][COLLIDER_DEATH] = false;
 
 }
 
@@ -143,7 +143,7 @@ void j1Collision::DebugDraw()
 		case COLLIDER_PLATFORM: //red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
-		case COLLIDER_DEAD: //yellow
+		case COLLIDER_DEATH: //yellow
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
 		case COLLIDER_WALL: //pink

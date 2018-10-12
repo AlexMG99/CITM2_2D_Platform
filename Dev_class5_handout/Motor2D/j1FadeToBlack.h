@@ -11,7 +11,7 @@ public:
 	~j1FadeToBlack();
 
 	bool Start();
-	bool Update(float dt);
+	bool PostUpdate();
 	bool FadeToBlack(j1Module* module_off, j1Module* module_on, float time = 1.0f);
 	bool IsFading() const;
 

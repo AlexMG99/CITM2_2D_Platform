@@ -141,14 +141,12 @@ bool j1Map::CleanUp()
 	}
 	data.collision_layer.clear();
 
-	// Remove all colliders
-	p2List_item<Collider*>* item_coll;
-	item_coll = data.collider_list.start;
-
-	while (item_coll != NULL)
+	p2List_item<Collider*>* item_collider;
+	item_collider = data.collider_list.start;
+	while (item_collider != NULL)
 	{
-		RELEASE(item_coll->data);
-		item_coll = item_coll->next;
+		item_collider->data->to_delete = true;
+		item_collider = item_collider->next;
 	}
 	data.collider_list.clear();
 
@@ -220,6 +218,12 @@ bool j1Map::Load(const char* file_name)
 			LoadCollisionLayer(collision_layer, collision);
 		}
 		data.collision_layer.add(collision);
+	}
+
+	//Load propierties
+	if (ret == true)
+	{
+		ret = LoadProperties(map_file.child("map"), data.properties_map);
 	}
 
 	//Create Colliders ----------------------------------------------------------
@@ -468,6 +472,54 @@ bool j1Map::LoadObject(pugi::xml_node& node, CollObject* coll_object)
 	{
 		coll_object->coll_type = COLLIDER_WALL;
 	}
+	else if (coll_name == "DEATH_COLLIDER")
+	{
+		coll_object->coll_type = COLLIDER_DEATH;
+	}
+	return true;
+}
+
+bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
+{
+	for (pugi::xml_node property_node = node.child("properties").child("property"); property_node; property_node = property_node.next_sibling("property"))
+	{
+		p2SString property_name(property_node.attribute("name").as_string());
+		LOG("%s", property_name.GetString());
+		if(property_name=="gravity.x") 
+		{
+			properties.acceleration.x = property_node.attribute("value").as_float();
+		}
+		if (property_name == "gravity.y")
+		{
+			properties.acceleration.y = property_node.attribute("value").as_float();
+		}
+		if (property_name == "playerPosition.x")
+		{
+			properties.position.x = property_node.attribute("value").as_float();
+		}
+		if (property_name == "playerPosition.y")
+		{
+			properties.position.y = property_node.attribute("value").as_float();
+		}
+		if (property_name == "maxVelocity.x")
+		{
+			properties.maxVelocity.x = property_node.attribute("value").as_float();
+		}
+		if (property_name == "maxVelocity.y")
+		{
+			properties.maxVelocity.y = property_node.attribute("value").as_float();
+		}
+		if (property_name == "jumpForce")
+		{
+			properties.jumpAcceleration = property_node.attribute("value").as_float();
+		}
+		if (property_name == "jumpMaxVelocity")
+		{
+			properties.jumpMaxVelocity = property_node.attribute("value").as_float();
+		}
+		
+	}
+
 	return true;
 }
 

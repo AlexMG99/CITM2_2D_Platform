@@ -4,6 +4,7 @@
 #include "j1App.h"
 #include "j1Player.h"
 #include "j1Input.h"
+#include "j1Map.h"
 #include "j1Textures.h"
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
@@ -75,14 +76,12 @@ bool j1Player::Start()
 			}
 			coll_rect = { coll_node.attribute("x").as_int() ,coll_node.attribute("y").as_int(),coll_node.attribute("w").as_int(),coll_node.attribute("h").as_int() };
 			player_coll = App->collision->AddCollider({ coll_rect.x, coll_rect.y, coll_rect.w, coll_rect.h }, coll_type, App->player);
-			position.x = player_node.child("position").attribute("x").as_float();
-			position.y = player_node.child("position").attribute("y").as_float();
-			velocity.x = player_node.child("velocity").attribute("x").as_float();
-			velocity.y = player_node.child("velocity").attribute("y").as_float();
-			maxVelocity.x = player_node.child("maxVelocity").attribute("x").as_float();
-			maxVelocity.y = player_node.child("maxVelocity").attribute("y").as_float();
-			jumpAcceleration = player_node.child("jump").child("acceleration").attribute("value").as_float();
-			jumpMaxVelocity = player_node.child("jump").child("maxVelocity").attribute("value").as_float();
+			acceleration = { App->map->data.properties_map.acceleration.x, App->map->data.properties_map.acceleration.y };
+			position = { App->map->data.properties_map.position.x, App->map->data.properties_map.position.y };
+			velocity = { 0,0 };
+			maxVelocity = { App->map->data.properties_map.maxVelocity.x, App->map->data.properties_map.maxVelocity.y };
+			jumpAcceleration = App->map->data.properties_map.jumpAcceleration;
+			jumpMaxVelocity = App->map->data.properties_map.jumpMaxVelocity;
 		}
 	}
 	return ret;
@@ -171,7 +170,7 @@ bool j1Player::Load(pugi::xml_node& player_node) {
 	}
 	else if (state_name == "DEAD_STATE")
 	{
-		state = DEAD_STATE;
+		state = DEATH_STATE;
 	}
 	else if (state_name == "CLING_STATE")
 	{
@@ -321,7 +320,7 @@ void j1Player::CheckState()
 			state = IDLE_STATE;
 		}
 		break;
-	case DEAD_STATE:
+	case DEATH_STATE:
 		break;
 	}
 }
@@ -365,8 +364,9 @@ void j1Player::PerformActions()
 		App->collision->ChangeSize(player_coll, 20, 20);
 		break;
 
-	case DEAD_STATE:
+	case DEATH_STATE:
 		current_animation = &dead_anim;
+		App->fadeToBlack->FadeToBlack(App->scene, App->scene);
 		break;
 	}
 	
@@ -402,19 +402,19 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		}
 		break;
 
-	case COLLIDER_WALL:
-		if (c2->type == COLLIDER_WALL)
-		{
-			if (position.x < c2->rect.x) {
-				state = CLING_STATE;
-				flipX = SDL_FLIP_HORIZONTAL;
-			}
-			else if (position.x > c2->rect.x) {
-				state = CLING_STATE;
-				flipX = SDL_FLIP_HORIZONTAL;
-			}
-		}
-		break;
+	//case COLLIDER_WALL:
+	//	if (c2->type == COLLIDER_WALL)
+	//	{
+	//		if (position.x < c2->rect.x) {
+	//			state = CLING_STATE;
+	//			flipX = SDL_FLIP_HORIZONTAL;
+	//		}
+	//		else if (position.x > c2->rect.x) {
+	//			state = CLING_STATE;
+	//			flipX = SDL_FLIP_HORIZONTAL;
+	//		}
+	//	}
+	//	break;
 
 	case COLLIDER_PLATFORM:
 		//Check if it's jumping or falling
@@ -444,6 +444,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 				state = IDLE_STATE;
 			}
 		}
+		break;
+	case COLLIDER_DEATH:
+		state = DEATH_STATE;
 		break;
 	}
 

@@ -19,7 +19,7 @@ enum Player_State {
 	AIR_STATE,
 	DUCK_STATE,
 	CLING_STATE,
-	DEAD_STATE,
+	DEATH_STATE,
 };
 
 class j1Player : public j1Module

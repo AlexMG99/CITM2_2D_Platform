@@ -5,13 +5,12 @@
 	<textures />
 	<audio />
 	<player>
-		<position x="41.0145454" y="201" />
-		<velocity x="0.246364385" y="-0" />
+		<position x="0" y="0" />
+		<velocity x="0" y="-0" />
 		<state value="IDLE_STATE" />
 	</player>
 	<map />
 	<scene />
-	<:anonymous />
 	<collision />
 	<renderer>
 		<camera x="0" y="0" />

@@ -31,6 +31,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+
 	App->map->Load("Map.tmx");
 	//App->audio->PlayMusic("audio/music/Resistors.ogg");
 	return true;
@@ -79,6 +80,5 @@ bool j1Scene::PostUpdate()
 bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
-
 	return true;
 }
