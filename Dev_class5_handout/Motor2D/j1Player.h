@@ -18,6 +18,7 @@ enum Player_State {
 	JUMP_STATE,
 	AIR_STATE,
 	DUCK_STATE,
+	CLING_STATE,
 	DEAD_STATE,
 };
 
@@ -91,6 +92,7 @@ private:
 	p2Animation		jump_anim;
 	p2Animation		air_anim;
 	p2Animation     duck_anim;
+	p2Animation     cling_anim;
 	p2Animation     dead_anim;
 
 	pugi::xml_document  player_file;

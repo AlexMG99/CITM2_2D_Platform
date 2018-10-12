@@ -63,6 +63,7 @@ bool j1Player::Start()
 			duck_anim = LoadAnimations("duck");
 			dead_anim = LoadAnimations("dead");
 			air_anim = LoadAnimations("air");
+			cling_anim = LoadAnimations("cling");
 			p2SString coll_name(coll_node.attribute("type").as_string());
 			p2SString state_name(player_node.child("state").attribute("type").as_string());
 			if (coll_name == "COLLIDER_PLAYER") {
@@ -91,7 +92,7 @@ bool j1Player::PreUpdate()
 {
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		if(state != DUCK_STATE)velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
+		if(state != (DUCK_STATE))velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
 		flipX = SDL_FLIP_NONE;
 	}
 
@@ -171,7 +172,10 @@ bool j1Player::Load(pugi::xml_node& player_node) {
 	{
 		state = DEAD_STATE;
 	}
-	
+	else if (state_name == "CLING_STATE")
+	{
+		state = CLING_STATE;
+	}
 	return true;
 }
 
@@ -210,6 +214,10 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 	{
 		state_name = "DEAD_STATE";
 	}
+	else if (state == 6)
+	{
+		state_name = "CLING_STATE";
+	}
 	state_node.append_attribute("value") = state_name.GetString();
 
 	return true;
@@ -247,6 +255,8 @@ void j1Player::CheckState()
 	bool released_left = App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP;
 	bool released_down = App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP;
 	bool press_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN;
+	bool press_letter = App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT;
+	bool released_letter = App->input->GetKey(SDL_SCANCODE_C) == KEY_UP;
 	
 	switch (state)
 	{
@@ -291,10 +301,18 @@ void j1Player::CheckState()
 			jump_anim.Reset();
 			air_anim.Reset();
 		}
+		if (press_letter) {
+			state = CLING_STATE;
+		}
 		break;
 
 	case AIR_STATE:
 		
+		break;
+	case CLING_STATE:
+		if (released_letter) {
+			state = AIR_STATE;
+		}
 		break;
 
 	case DUCK_STATE:
@@ -330,6 +348,17 @@ void j1Player::PerformActions()
 	case AIR_STATE:
 		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
 		current_animation = &air_anim;
+		break;
+	case CLING_STATE:
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+			flipX = SDL_FLIP_HORIZONTAL;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+			flipX = SDL_FLIP_NONE;
+		}
+		velocity.x = 0;
+		velocity.y = 0;
+		current_animation = &cling_anim;
 		break;
 
 	case DUCK_STATE:
