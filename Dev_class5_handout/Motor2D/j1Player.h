@@ -20,6 +20,7 @@ enum Player_State {
 	DUCK_STATE,
 	CLING_STATE,
 	DEATH_STATE,
+	GOD_STATE,
 };
 
 class j1Player : public j1Module
@@ -68,6 +69,8 @@ private:
 	void Draw();
 	//Load Player Animations
 	p2Animation LoadAnimations(p2SString name);
+	//Debug functionatilly
+	void DebugInput();
 
 public:
 	
@@ -82,7 +85,7 @@ public:
 	Collider*		player_coll = nullptr;
 	COLLIDER_TYPE	coll_type = COLLIDER_NONE;
 	Player_State	state = NONE_STATE;
-	bool			grounded = false;
+	bool			godMode = false;
 	
 private:
 

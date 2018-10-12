@@ -46,6 +46,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 
 	// render last to swap buffer
 	AddModule(render);
+
 }
 
 // Destructor
@@ -98,7 +99,10 @@ bool j1App::Awake()
 
 		while(item != NULL && ret == true)
 		{
-			ret = item->data->Awake(config.child(item->data->name.GetString()));
+			if (item->data->IsEnabled())
+			{
+				ret = item->data->Awake(config.child(item->data->name.GetString()));
+			}
 			item = item->next;
 		}
 	}
@@ -115,8 +119,11 @@ bool j1App::Start()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Start();
-		item = item->next;
+		if (item->data->IsEnabled())
+		{
+			ret = item->data->Start();
+		}
+			item = item->next;
 	}
 
 	return ret;
@@ -184,13 +191,15 @@ bool j1App::PreUpdate()
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
-		pModule = item->data;
+		if (item->data->IsEnabled())
+		{
+			pModule = item->data;
 
-		if(pModule->active == false) {
-			continue;
+			if (pModule->active == false) {
+				continue;
+			}
+			ret = item->data->PreUpdate();
 		}
-
-		ret = item->data->PreUpdate();
 	}
 
 	return ret;
@@ -206,13 +215,16 @@ bool j1App::DoUpdate()
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
-		pModule = item->data;
+		if (item->data->IsEnabled())
+		{
+			pModule = item->data;
 
-		if(pModule->active == false) {
-			continue;
+			if (pModule->active == false) {
+				continue;
+			}
+
+			ret = item->data->Update(dt);
 		}
-
-		ret = item->data->Update(dt);
 	}
 
 	return ret;
@@ -227,13 +239,16 @@ bool j1App::PostUpdate()
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
-		pModule = item->data;
+		if (item->data->IsEnabled())
+		{
+			pModule = item->data;
 
-		if(pModule->active == false) {
-			continue;
+			if (pModule->active == false) {
+				continue;
+			}
+
+			ret = item->data->PostUpdate();
 		}
-
-		ret = item->data->PostUpdate();
 	}
 
 	return ret;
@@ -248,7 +263,10 @@ bool j1App::CleanUp()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->CleanUp();
+		if (item->data->IsEnabled())
+		{
+			ret = item->data->CleanUp();
+		}
 		item = item->prev;
 	}
 

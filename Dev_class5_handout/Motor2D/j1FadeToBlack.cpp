@@ -1,6 +1,7 @@
 #include <math.h>
 #include "j1App.h"
 #include "j1Window.h"
+#include "j1Input.h"
 #include "j1FadeToBlack.h"
 #include "j1Render.h"
 #include "p2Log.h"

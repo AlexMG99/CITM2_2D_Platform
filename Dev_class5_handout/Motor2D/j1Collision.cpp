@@ -100,6 +100,10 @@ bool j1Collision::PreUpdate()
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->OnCollision(c2, c1);
 			}
+			else
+			{
+				c1->callback->OffCollision(c1);
+			}
 		}
 	}
 
@@ -117,7 +121,7 @@ bool j1Collision::PostUpdate()
 
 void j1Collision::DebugDraw()
 {
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		debug = !debug;
 
 	if (debug == false)

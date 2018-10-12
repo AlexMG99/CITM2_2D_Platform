@@ -146,7 +146,10 @@ bool j1Map::CleanUp()
 	item_collider = data.collider_list.start;
 	while (item_collider != NULL)
 	{
-		item_collider->data->to_delete = true;
+		if (item_collider->data != nullptr) 
+		{
+			item_collider->data->to_delete = true;
+		}
 		item_collider = item_collider->next;
 	}
 	data.collider_list.clear();
@@ -236,7 +239,7 @@ bool j1Map::Load(const char* file_name)
 		{
 			SDL_Rect r = { (int)item_coll_object->data->x, (int)item_coll_object->data->y, (int)item_coll_object->data->width, (int)item_coll_object->data->height };
 			Collider* coll = new Collider();
-			App->collision->AddCollider({ r.x, r.y, r.w, r.h }, item_coll_object->data->coll_type, App->map);
+			coll = App->collision->AddCollider({ r.x, r.y, r.w, r.h }, item_coll_object->data->coll_type, App->map);
 			data.collider_list.add(coll);
 			item_coll_object = item_coll_object->next;
 		}
@@ -520,19 +523,19 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 		}
 		if (property_name == "coll.x")
 		{
-			App->player->coll_rect.x = property_node.attribute("value").as_float();
+			App->player->coll_rect.x = property_node.attribute("value").as_int();
 		}
 		if (property_name == "coll.y")
 		{
-			App->player->coll_rect.y = property_node.attribute("value").as_float();
+			App->player->coll_rect.y = property_node.attribute("value").as_int();
 		}
 		if (property_name == "coll.w")
 		{
-			App->player->coll_rect.w = property_node.attribute("value").as_float();
+			App->player->coll_rect.w = property_node.attribute("value").as_int();
 		}
 		if (property_name == "coll.h")
 		{
-			App->player->coll_rect.h = property_node.attribute("value").as_float();
+			App->player->coll_rect.h = property_node.attribute("value").as_int();
 		}
 		if (property_name == "state")
 		{
@@ -557,6 +560,14 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 		if (property_name == "camera.y")
 		{
 			App->render->camera.y = property_node.attribute("value").as_float();
+		}
+		if (property_name == "velocity.x")
+		{
+			App->player->velocity.x = property_node.attribute("value").as_float();
+		}
+		if (property_name == "velocity.y")
+		{
+			App->player->velocity.y = property_node.attribute("value").as_float();
 		}
 	}
 

@@ -17,6 +17,8 @@
   <property name="playerPosition.x" type="float" value="10"/>
   <property name="playerPosition.y" type="float" value="128"/>
   <property name="state" value="AIR_STATE"/>
+  <property name="velocity.x" type="float" value="0"/>
+  <property name="velocity.y" type="float" value="0"/>
  </properties>
  <tileset firstgid="1" name="Background" tilewidth="16" tileheight="16" margin="1" tilecount="704" columns="32">
   <image source="Background.png" width="514" height="355"/>

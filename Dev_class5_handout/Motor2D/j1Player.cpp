@@ -15,9 +15,6 @@ j1Player::j1Player() : j1Module()
 {
 	name.create("player");
 
-	acceleration.x = 0.2F;
-	acceleration.y = 1.0F;
-
 }
 
 //Destructor
@@ -43,7 +40,6 @@ bool j1Player::Start()
 
 	pugi::xml_parse_result	result = player_file.load_file(path.GetString());
 	pugi::xml_node			player_node = player_file.child("player");
-	pugi::xml_node			coll_node = player_node.child("collider");
 
 	if (result == NULL) {
 		LOG("Error loading player XML! Error: %s", result.description());
@@ -74,32 +70,59 @@ bool j1Player::Start()
 
 bool j1Player::PreUpdate()
 {
+
+	DebugInput();
+
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
 	{
-		if (state != (DUCK_STATE))velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
+		if (state != (DUCK_STATE) || !godMode)velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
 		flipX = SDL_FLIP_NONE;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
 	{
-		if (state != DUCK_STATE)velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
+		if (state != DUCK_STATE || !godMode)velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
 		flipX = SDL_FLIP_HORIZONTAL;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_REPEAT)
+	if(godMode)
 	{
-		App->fadeToBlack->FadeToBlack(App->scene, App->scene);
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) 
+		{
+			position.x -= 5;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			position.y -= 5;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			position.y += 5;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			position.x += 5;
+		}
 	}
-
-	CheckState();
+	else
+	{
+		CheckState();
+	}
 
 	return true;
 }
 
 bool j1Player::Update(float dt)
 {
-	if(state!=DUCK_STATE)player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h);
-	else { player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h / 2); }
+	if (!godMode) 
+	{
+		if (state != DUCK_STATE)player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h);
+		else { player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h / 2); }
+	}
+	else
+	{
+		state = GOD_STATE;
+	}
 
 	PerformActions();
 
@@ -107,9 +130,9 @@ bool j1Player::Update(float dt)
 }
 bool j1Player::PostUpdate()
 {	
-	position.x += velocity.x;
-	if (!grounded) 
+	if (!godMode) 
 	{
+		position.x += velocity.x;
 		position.y -= velocity.y;
 	}
 	Draw();
@@ -118,7 +141,11 @@ bool j1Player::PostUpdate()
 
 bool j1Player::CleanUp()
 {
-	App->tex->UnLoad(playerSpritesheet);
+	if (playerSpritesheet != nullptr)
+	{
+		App->tex->UnLoad(playerSpritesheet);
+		playerSpritesheet = nullptr;
+	}
 	if (player_coll != nullptr)
 	{
 		player_coll->to_delete = true;
@@ -293,6 +320,7 @@ void j1Player::CheckState()
 	case AIR_STATE:
 		jump_anim.Reset();
 		break;
+
 	case CLING_STATE:
 		if (released_letter) {
 			state = AIR_STATE;
@@ -306,6 +334,10 @@ void j1Player::CheckState()
 		}
 		break;
 	case DEATH_STATE:
+		break;
+
+	case GOD_STATE:
+		if (!godMode)state = AIR_STATE;
 		break;
 	}
 }
@@ -326,13 +358,11 @@ void j1Player::PerformActions()
 		break;
 
 	case JUMP_STATE:
-		grounded = false;
 		velocity.y = jumpAcceleration*jumpMaxVelocity + (1 - acceleration.y)*velocity.y;
 		current_animation = &jump_anim;
 		break;
 
 	case AIR_STATE:
-		grounded = false;
 		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
 		current_animation = &air_anim;
 		break;
@@ -353,6 +383,12 @@ void j1Player::PerformActions()
 	case DEATH_STATE:
 		current_animation = &dead_anim;
 		App->fadeToBlack->FadeToBlack(App->scene, App->scene);
+		break;
+
+	case GOD_STATE:
+		player_coll->SetPos(-200, -200);
+		current_animation = &idle_anim;
+		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
 		break;
 	}
 	
@@ -377,7 +413,6 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		{
 			position.y = c2->rect.y;
 			state = IDLE_STATE;
-			grounded = true;
 		}
 		//Check collision from down
 		else
@@ -436,4 +471,16 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		break;
 	}
 
+}
+
+void j1Player::DebugInput()
+{
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		App->fadeToBlack->FadeToBlack(App->scene, App->scene);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		godMode = !godMode;
+	}
 }
