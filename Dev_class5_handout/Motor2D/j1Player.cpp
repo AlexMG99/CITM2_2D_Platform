@@ -359,6 +359,8 @@ void j1Player::PerformActions()
 		break;
 
 	case DUCK_STATE:
+		velocity.x = 0;
+		velocity.y = 0;
 		current_animation = &duck_anim;
 		App->collision->ChangeSize(player_coll, 20, 20);
 		break;
@@ -395,6 +397,20 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			position.y = c2->rect.y + c2->rect.h + c1->rect.h;
 		}
 		break;
+
+	case COLLIDER_WALL:
+		if (c2->type == COLLIDER_WALL)
+		{
+			if (position.x < c2->rect.x) {
+				state = CLING_STATE;
+				flipX = SDL_FLIP_HORIZONTAL;
+			}
+			else if (position.x > c2->rect.x) {
+				state = CLING_STATE;
+				flipX = SDL_FLIP_HORIZONTAL;
+			}
+		}
+
 	case COLLIDER_PLATFORM:
 		if (velocity.y > 0) 
 		{
