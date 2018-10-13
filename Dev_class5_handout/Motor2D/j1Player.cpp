@@ -368,10 +368,20 @@ void j1Player::PerformActions()
 		break;
 
 	case CLING_STATE:
+		
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			flipX = SDL_FLIP_NONE;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			flipX = SDL_FLIP_NONE;
+		}
 		velocity.x = 0;
 		velocity.y = 0;
 		current_animation = &cling_anim;
 		break;
+
 
 	case DUCK_STATE:
 		velocity.x = 0;
@@ -423,19 +433,39 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		}
 		break;
 
-	//case COLLIDER_WALL:
-	//	if (c2->type == COLLIDER_WALL)
-	//	{
-	//		if (position.x < c2->rect.x) {
-	//			state = CLING_STATE;
-	//			flipX = SDL_FLIP_HORIZONTAL;
-	//		}
-	//		else if (position.x > c2->rect.x) {
-	//			state = CLING_STATE;
-	//			flipX = SDL_FLIP_HORIZONTAL;
-	//		}
-	//	}
-	//	break;
+	case COLLIDER_WALL:
+		if (c2->type == COLLIDER_WALL)
+		{
+			//Check collision from right
+			if (c2->rect.x + c2->rect.w < position.x) {
+				position.x += maxVelocity.x;
+				if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT) {
+					flipX = SDL_FLIP_NONE;
+
+				}
+			}
+
+			//Check collision from left
+			else if (position.x < c2->rect.x)
+			{
+				position.x -= maxVelocity.x;
+				if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
+				{
+					flipX = SDL_FLIP_HORIZONTAL;
+
+				}
+
+			}
+			//Check collision from down
+			else
+			{
+
+
+				position.y = c2->rect.y + c2->rect.h + c1->rect.h;
+			}
+		}
+		break;
+
 
 	case COLLIDER_PLATFORM:
 		//Check if it's jumping or falling
