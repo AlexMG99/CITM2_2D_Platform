@@ -528,6 +528,10 @@ void j1Player::DebugInput()
 	{
 		App->fadeToBlack->FadeToBlack(App->scene, App->scene);
 	}
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		App->scene->Reset();
+	}
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
 		godMode = !godMode;

@@ -2,26 +2,25 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Input.h"
-#include "j1Textures.h"
 #include "j1Audio.h"
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Player.h"
 #include "j1FadeToBlack.h"
-#include "j1Scene.h"
+#include "j1Scene2.h"
 
-j1Scene::j1Scene() : j1Module()
+j1Scene2::j1Scene2() : j1Module()
 {
-	name.create("scene");
+	name.create("scene2");
 }
 
 // Destructor
-j1Scene::~j1Scene()
+j1Scene2::~j1Scene2()
 {}
 
 // Called before render is available
-bool j1Scene::Awake()
+bool j1Scene2::Awake()
 {
 	LOG("Loading Scene");
 	bool ret = true;
@@ -30,17 +29,14 @@ bool j1Scene::Awake()
 }
 
 // Called before the first frame
-bool j1Scene::Start()
+bool j1Scene2::Start()
 {
-
-	App->map->Load("Map.tmx");
-	App->player->Enable();
-	//App->audio->PlayMusic("audio/music/Resistors.ogg");
+	App->map->Load("Level2_Map.tmx");
 	return true;
 }
 
 // Called each loop iteration
-bool j1Scene::PreUpdate()
+bool j1Scene2::PreUpdate()
 {
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame();
@@ -52,10 +48,10 @@ bool j1Scene::PreUpdate()
 }
 
 // Called each loop iteration
-bool j1Scene::Update(float dt)
+bool j1Scene2::Update(float dt)
 {
-	
-	if (App->player->position.x > (App->win->GetWidth() / App->win->GetScale()) / 4) 
+
+	if (App->player->position.x > (App->win->GetWidth() / App->win->GetScale()) / 4)
 	{
 		App->render->camera.x = -App->player->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
 	}
@@ -66,23 +62,23 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 
-	
+
 	return true;
 }
 
 // Called each loop iteration
-bool j1Scene::PostUpdate()
+bool j1Scene2::PostUpdate()
 {
 	bool ret = true;
 
-	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
 	return ret;
 }
 
 // Called before quitting
-bool j1Scene::CleanUp()
+bool j1Scene2::CleanUp()
 {
 	//App->map->Disable();
 	//App->collision->CleanUp();
@@ -91,7 +87,7 @@ bool j1Scene::CleanUp()
 }
 
 //Reload Scene
-void j1Scene::Reset() const 
+void j1Scene2::Reset() const
 {
-	App->fadeToBlack->FadeToBlack(App->scene, App->scene);
+	App->fadeToBlack->FadeToBlack(App->scene2, App->scene2);
 }
