@@ -33,7 +33,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 
-	App->map->Load("Map.tmx");
+	App->map->Load("Level1_Map.tmx");
 	App->audio->PlayMusic("audio/music/cruising_for_goblins.ogg");
 	return true;
 }
@@ -58,11 +58,7 @@ bool j1Scene::Update(float dt)
 	{
 		App->render->camera.x = -App->player->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
 	}
-	if (App->player->position.y < (App->win->GetHeight() / App->win->GetScale()) / 2)
-	{
-		App->render->camera.y = -App->player->position.y*App->win->GetScale() + App->win->GetHeight() / 2;
-	}
-
+	
 	App->map->Draw();
 
 	
@@ -83,8 +79,8 @@ bool j1Scene::PostUpdate()
 // Called before quitting
 bool j1Scene::CleanUp()
 {
-	App->map->CleanUp();
 	LOG("Freeing scene");
+	App->map->CleanUp();
 	return true;
 }
 
