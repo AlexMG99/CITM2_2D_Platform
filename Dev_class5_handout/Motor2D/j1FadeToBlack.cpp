@@ -67,7 +67,7 @@ bool j1FadeToBlack::PostUpdate()
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255.0f));
 	SDL_RenderFillRect(App->render->renderer, &screen);
 
-	return true;;
+	return true;
 }
 
 // Fade to black. At mid point deactivate one module, then activate the other

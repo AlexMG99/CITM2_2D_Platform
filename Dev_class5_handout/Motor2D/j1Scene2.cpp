@@ -55,10 +55,9 @@ bool j1Scene2::Update(float dt)
 	{
 		App->render->camera.x = -App->player->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
 	}
-	if (App->player->position.y < (App->win->GetHeight() / App->win->GetScale()) / 2)
-	{
-		App->render->camera.y = -App->player->position.y*App->win->GetScale() + App->win->GetHeight() / 2;
-	}
+
+	App->render->camera.y = -App->player->position.y*App->win->GetScale() + App->win->GetHeight() / 2;
+
 
 	App->map->Draw();
 
@@ -80,7 +79,9 @@ bool j1Scene2::PostUpdate()
 // Called before quitting
 bool j1Scene2::CleanUp()
 {
-	//App->map->Disable();
+
+	App->map->CleanUp();
+
 	//App->collision->CleanUp();
 	LOG("Freeing scene");
 	return true;

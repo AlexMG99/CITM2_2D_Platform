@@ -86,6 +86,7 @@ public:
 	COLLIDER_TYPE	coll_type = COLLIDER_NONE;
 	Player_State	state = NONE_STATE;
 	bool			godMode = false;
+	bool			falling = false;
 	
 private:
 

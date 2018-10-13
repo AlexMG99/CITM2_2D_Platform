@@ -50,8 +50,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// render last to swap buffer
 	AddModule(render);
 
-	scene2->Disable();
-
 }
 
 // Destructor
@@ -109,12 +107,15 @@ bool j1App::Awake()
 		}
 	}
 
+	scene2->Disable();
+
 	return ret;
 }
 
 // Called before the first frame
 bool j1App::Start()
 {
+
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.start;

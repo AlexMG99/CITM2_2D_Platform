@@ -34,7 +34,6 @@ bool j1Scene::Start()
 {
 
 	App->map->Load("Map.tmx");
-	App->player->Enable();
 	//App->audio->PlayMusic("audio/music/Resistors.ogg");
 	return true;
 }
@@ -84,8 +83,7 @@ bool j1Scene::PostUpdate()
 // Called before quitting
 bool j1Scene::CleanUp()
 {
-	//App->map->Disable();
-	//App->collision->CleanUp();
+	App->map->CleanUp();
 	LOG("Freeing scene");
 	return true;
 }
@@ -93,5 +91,5 @@ bool j1Scene::CleanUp()
 //Reload Scene
 void j1Scene::Reset() const 
 {
-	App->fadeToBlack->FadeToBlack(App->scene, App->scene);
+	App->fadeToBlack->FadeToBlack(App->scene, App->scene, 0.05F);
 }

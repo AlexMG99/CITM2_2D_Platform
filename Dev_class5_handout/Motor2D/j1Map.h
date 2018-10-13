@@ -8,15 +8,6 @@
 #include "j1Collision.h"
 
 // ----------------------------------------------------
-struct Properties
-{
-	SDL_Rect	coll = { 0,0,0,0 };
-	fPoint		position = { 0.0F,0.0F };
-	fPoint		acceleration = { 0.0F,0.0F };
-	fPoint		maxVelocity = { 0.0F,0.0F };
-	float		jumpAcceleration = 0.0F;
-	float		jumpMaxVelocity = 0.0F;
-};
 
 struct CollObject
 {
@@ -32,10 +23,6 @@ struct CollisionLayer
 {
 	p2SString			name;
 	p2List<CollObject*> coll_object;
-	~CollisionLayer()
-	{
-		coll_object.clear();
-	}
 };
 
 struct MapLayer 
@@ -100,9 +87,7 @@ struct MapData
 	p2List<MapLayer*>		layers;
 	p2List<CollisionLayer*>	collision_layer;
 	p2List<Collider*>		collider_list;
-	Properties				properties_map;
-	
-	// TODO 2: Add a list/array of layers to the map!
+
 };
 
 // ----------------------------------------------------
@@ -140,7 +125,7 @@ private:
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer);
 	bool LoadObject(pugi::xml_node& node, CollObject* coll_obj);
-	bool LoadProperties(pugi::xml_node& node, Properties& properties);
+	bool LoadProperties(pugi::xml_node& node);
 
 	TileSet* GetTilesetFromTileId(int id) const;
 

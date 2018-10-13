@@ -8,6 +8,7 @@
 #include "j1Textures.h"
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
+#include "j1Scene2.h"
 #include "j1Collision.h"
 #include "j1Render.h"
 
@@ -178,13 +179,17 @@ bool j1Player::Load(pugi::xml_node& player_node) {
 	{
 		state = DUCK_STATE;
 	}
-	else if (state_name == "DEAD_STATE")
+	else if (state_name == "DEATH_STATE")
 	{
 		state = DEATH_STATE;
 	}
 	else if (state_name == "CLING_STATE")
 	{
 		state = CLING_STATE;
+	}
+	else if (state_name == "GOD_STATE")
+	{
+		state = GOD_STATE;
 	}
 	return true;
 }
@@ -222,11 +227,15 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 	}
 	else if (state == 5)
 	{
-		state_name = "DEAD_STATE";
+		state_name = "DEATH_STATE";
 	}
 	else if (state == 6)
 	{
 		state_name = "CLING_STATE";
+	}
+	else if (state == 7)
+	{
+		state_name = "GOD_STATE";
 	}
 	state_node.append_attribute("value") = state_name.GetString();
 
@@ -317,6 +326,11 @@ void j1Player::CheckState()
 
 	case AIR_STATE:
 		jump_anim.Reset();
+		if (falling && press_space)
+		{
+			state = JUMP_STATE;
+			falling = false;
+		}
 		break;
 
 	case CLING_STATE:
@@ -331,6 +345,7 @@ void j1Player::CheckState()
 			state = IDLE_STATE;
 		}
 		break;
+
 	case DEATH_STATE:
 		break;
 
@@ -482,6 +497,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		if ((directionRight || directionLeft) && directionCornerUp)
 		{
 			state = AIR_STATE;
+			falling = true;
 			break;
 		}
 		//Check if it's jumping or falling
@@ -526,11 +542,18 @@ void j1Player::DebugInput()
 {
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		App->fadeToBlack->FadeToBlack(App->scene, App->scene);
+		App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		App->scene->Reset();
+		if (App->scene->IsEnabled())
+		{
+			App->scene->Reset();
+		}
+		else if (App->scene2->IsEnabled())
+		{
+			App->scene2->Reset();
+		}
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{

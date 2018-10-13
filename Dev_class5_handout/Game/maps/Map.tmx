@@ -8,6 +8,8 @@
   <property name="coll.w" type="int" value="20"/>
   <property name="coll.y" type="int" value="0"/>
   <property name="coll_type" value="COLLIDER_PLAYER"/>
+  <property name="falling" type="bool" value="false"/>
+  <property name="god_mode" type="bool" value="false"/>
   <property name="gravity.x" type="float" value="0.2"/>
   <property name="gravity.y" type="float" value="1"/>
   <property name="jumpForce" type="float" value="1"/>

@@ -28,6 +28,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	return ret;
 }
 
+
 void j1Map::Draw()
 {
 	if(map_loaded == false)
@@ -142,14 +143,14 @@ bool j1Map::CleanUp()
 
 	//Remove al Colliders
 	p2List_item<Collider*>* item_collider;
-	item_collider = data.collider_list.start;
+	item_collider = data.collider_list.end;
 	while (item_collider != NULL)
 	{
 		if (item_collider->data != nullptr) 
 		{
 			item_collider->data->to_delete = true;
 		}
-		item_collider = item_collider->next;
+		item_collider = item_collider->prev;
 	}
 	data.collider_list.clear();
 
@@ -226,7 +227,7 @@ bool j1Map::Load(const char* file_name)
 	//Load propierties
 	if (ret == true)
 	{
-		ret = LoadProperties(map_file.child("map"), data.properties_map);
+		ret = LoadProperties(map_file.child("map"));
 	}
 
 	//Create Colliders ----------------------------------------------------------
@@ -294,6 +295,7 @@ bool j1Map::Load(const char* file_name)
 
 		
 	}
+
 	return ret;
 }
 
@@ -482,7 +484,7 @@ bool j1Map::LoadObject(pugi::xml_node& node, CollObject* coll_object)
 	return true;
 }
 
-bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
+bool j1Map::LoadProperties(pugi::xml_node& node)
 {
 	for (pugi::xml_node property_node = node.child("properties").child("property"); property_node; property_node = property_node.next_sibling("property"))
 	{
@@ -567,6 +569,14 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 		if (property_name == "velocity.y")
 		{
 			App->player->velocity.y = property_node.attribute("value").as_float();
+		}
+		if (property_name == "falling")
+		{
+			App->player->falling = property_node.attribute("value").as_bool();
+		}
+		if (property_name == "god_mode")
+		{
+			App->player->godMode = property_node.attribute("value").as_bool();
 		}
 	}
 
