@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="15" tilewidth="16" tileheight="16" nextobjectid="62">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="15" tilewidth="16" tileheight="16" nextobjectid="68">
  <properties>
   <property name="camera.x" type="int" value="0"/>
   <property name="camera.y" type="int" value="0"/>
@@ -16,7 +16,7 @@
   <property name="jumpMaxVelocity" type="float" value="2"/>
   <property name="maxVelocity.x" type="float" value="3"/>
   <property name="maxVelocity.y" type="float" value="3"/>
-  <property name="playerPosition.x" type="float" value="10"/>
+  <property name="playerPosition.x" type="float" value="40"/>
   <property name="playerPosition.y" type="float" value="128"/>
   <property name="state" value="AIR_STATE"/>
   <property name="velocity.x" type="float" value="0"/>
@@ -1547,9 +1547,25 @@
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>
+   <tile gid="757"/>
+   <tile gid="800"/>
+   <tile gid="801"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="942"/>
+   <tile gid="943"/>
+   <tile gid="944"/>
+   <tile gid="945"/>
+   <tile gid="943"/>
+   <tile gid="944"/>
+   <tile gid="943"/>
+   <tile gid="944"/>
+   <tile gid="945"/>
+   <tile gid="943"/>
+   <tile gid="944"/>
+   <tile gid="945"/>
+   <tile gid="946"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1581,9 +1597,25 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="823"/>
+   <tile gid="824"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="965"/>
+   <tile gid="966"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="799"/>
+   <tile gid="969"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1615,57 +1647,25 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="800"/>
+   <tile gid="801"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="988"/>
+   <tile gid="989"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="992"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1697,9 +1697,25 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="823"/>
+   <tile gid="824"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="1011"/>
+   <tile gid="1012"/>
+   <tile gid="1013"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="844"/>
+   <tile gid="845"/>
+   <tile gid="844"/>
+   <tile gid="845"/>
+   <tile gid="844"/>
+   <tile gid="845"/>
+   <tile gid="1015"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1731,9 +1747,25 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="800"/>
+   <tile gid="801"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="1034"/>
+   <tile gid="1035"/>
+   <tile gid="1036"/>
+   <tile gid="1037"/>
+   <tile gid="1035"/>
+   <tile gid="1036"/>
+   <tile gid="1037"/>
+   <tile gid="1036"/>
+   <tile gid="1037"/>
+   <tile gid="1035"/>
+   <tile gid="1036"/>
+   <tile gid="1037"/>
+   <tile gid="1038"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1765,6 +1797,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="823"/>
+   <tile gid="824"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1812,44 +1847,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="800"/>
+   <tile gid="801"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1897,9 +1897,11 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="823"/>
+   <tile gid="824"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="870"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1945,6 +1947,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="800"/>
+   <tile gid="801"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1992,6 +1997,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="823"/>
+   <tile gid="824"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2039,17 +2047,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="800"/>
+   <tile gid="801"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2097,9 +2097,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="823"/>
+   <tile gid="824"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2147,9 +2147,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="775"/>
-   <tile gid="776"/>
-   <tile gid="775"/>
+   <tile gid="757"/>
+   <tile gid="823"/>
+   <tile gid="1031"/>
    <tile gid="776"/>
    <tile gid="775"/>
    <tile gid="776"/>
@@ -2197,9 +2197,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="798"/>
-   <tile gid="799"/>
-   <tile gid="798"/>
+   <tile gid="757"/>
+   <tile gid="1053"/>
+   <tile gid="1054"/>
    <tile gid="799"/>
    <tile gid="798"/>
    <tile gid="799"/>
@@ -2247,9 +2247,9 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="822"/>
-   <tile gid="822"/>
-   <tile gid="822"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
@@ -2360,6 +2360,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="864"/>
+   <tile gid="865"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2408,6 +2410,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="887"/>
+   <tile gid="888"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2451,9 +2455,13 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="726"/>
+   <tile gid="727"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="910"/>
+   <tile gid="911"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2497,9 +2505,13 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="749"/>
+   <tile gid="750"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="933"/>
+   <tile gid="934"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2543,6 +2555,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="749"/>
+   <tile gid="750"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2591,6 +2605,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="772"/>
+   <tile gid="773"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2639,24 +2655,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="795"/>
+   <tile gid="796"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -3058,10 +3058,16 @@
  </layer>
  <objectgroup name="Logic Collisions">
   <object id="60" name="DEATH" type="DEATH_COLLIDER" x="353.5" y="201.5" width="446" height="37.5"/>
+  <object id="66" name="WALL" type="WALL_COLLIDER" x="8.91665" y="58.4167" width="28.9167" height="53.5833"/>
+  <object id="67" name="GROUND" type="GROUND_COLLIDER" x="-0.750017" y="0.416667" width="34.1667" height="200.5"/>
  </objectgroup>
  <objectgroup name="Ground Collisions">
   <object id="41" name="GROUND" type="GROUND_COLLIDER" x="117.5" y="171" width="234.333" height="30.5"/>
-  <object id="42" name="GROUND" type="GROUND_COLLIDER" x="0" y="201" width="116" height="38.5"/>
+  <object id="42" name="GROUND" type="GROUND_COLLIDER" x="33" y="201" width="86.5" height="38.5"/>
+  <object id="65" name="GROUND" type="GROUND_COLLIDER" x="110.583" y="11.25" width="188.167" height="59.5"/>
+ </objectgroup>
+ <objectgroup name="Wall Colliders">
+  <object id="62" name="WALL" type="WALL_COLLIDER" x="107.424" y="31.1667" width="29.0758" height="31.2879"/>
  </objectgroup>
  <objectgroup name="Platform Collisions">
   <object id="54" name="PLATFORM" type="PLATFORM_COLLIDER" x="384" y="160.125" width="80" height="7.375"/>

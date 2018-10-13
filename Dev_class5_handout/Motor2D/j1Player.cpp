@@ -73,17 +73,20 @@ bool j1Player::PreUpdate()
 {
 
 	DebugInput();
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
+	if (state != DUCK_STATE && state != CLING_STATE)
 	{
-		if (state != (DUCK_STATE) || !godMode)velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
-		flipX = SDL_FLIP_NONE;
-	}
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
+		{
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
-	{
-		if (state != DUCK_STATE || !godMode)velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
-		flipX = SDL_FLIP_HORIZONTAL;
+			velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
+			flipX = SDL_FLIP_NONE;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
+		{
+
+			velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
+			flipX = SDL_FLIP_HORIZONTAL;
+		}
 	}
 
 	if(godMode)
@@ -273,9 +276,8 @@ void j1Player::CheckState()
 	bool released_right = App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP;
 	bool released_left = App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP;
 	bool released_down = App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP;
+	bool released_C = App->input->GetKey(SDL_SCANCODE_C) == KEY_UP;
 	bool press_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN;
-	bool press_letter = App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT;
-	bool released_letter = App->input->GetKey(SDL_SCANCODE_C) == KEY_UP;
 	
 	switch (state)
 	{
@@ -319,9 +321,6 @@ void j1Player::CheckState()
 		{
 			state = AIR_STATE;
 		}
-		if (press_letter) {
-			state = CLING_STATE;
-		}
 		break;
 
 	case AIR_STATE:
@@ -334,8 +333,13 @@ void j1Player::CheckState()
 		break;
 
 	case CLING_STATE:
-		if (released_letter) {
+		if (released_C) {
 			state = AIR_STATE;
+		}
+		if (press_space)
+		{
+			jump_anim.Reset();
+			state = JUMP_STATE;
 		}
 		break;
 
@@ -381,15 +385,6 @@ void j1Player::PerformActions()
 		break;
 
 	case CLING_STATE:
-		
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		{
-			flipX = SDL_FLIP_NONE;
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		{
-			flipX = SDL_FLIP_NONE;
-		}
 		velocity.x = 0;
 		velocity.y = 0;
 		current_animation = &cling_anim;
@@ -437,18 +432,18 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		}
 		//Check collision from right
 		if (directionRight && directionCornerDown) {
-			position.x += maxVelocity.x;
+			position.x = c2->rect.x + c2->rect.w + c1->rect.w / 2;
 		}
 		//Check collision from left
 		else if (directionLeft && directionCornerDown)
 		{
-			position.x -= maxVelocity.x;
+			position.x = c2->rect.x - c1->rect.w / 2;
 		}
 		//Check collision from up
 		else if (directionUp)
 		{
 			position.y = c2->rect.y;
-			if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) || state == AIR_STATE)
+			if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE) || state == AIR_STATE)
 			{
 				state = IDLE_STATE;
 			}
@@ -467,26 +462,24 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		{
 			//Check collision from right
 			if (directionRight) {
-				position.x += maxVelocity.x;
-				if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT) {
+				if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
+				{
+					state = CLING_STATE;
 					flipX = SDL_FLIP_NONE;
 
 				}
+				position.x = c2->rect.x + c2->rect.w + c1->rect.w / 2;
 			}
 			//Check collision from left
 			else if (directionLeft)
 			{
-				position.x -= maxVelocity.x;
 				if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
 				{
+					state = CLING_STATE;
 					flipX = SDL_FLIP_HORIZONTAL;
 
 				}
-			}
-			//Check collision from down
-			else
-			{
-				position.y = c2->rect.y + c2->rect.h + c1->rect.h;
+				position.x = c2->rect.x - c1->rect.w / 2;
 			}
 		}
 		break;
@@ -524,7 +517,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			else {
 				position.y = c2->rect.y;
 				jump_anim.Reset();
-				if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) || state == AIR_STATE)
+				if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE) || state == AIR_STATE)
 				{
 					state = IDLE_STATE;
 				}

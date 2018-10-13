@@ -112,9 +112,6 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
-	// Check Collision
-	void OnCollision(Collider* c1, Collider* c2);
-
 	iPoint MapToWorld(int x, int y) const;
 
 private:

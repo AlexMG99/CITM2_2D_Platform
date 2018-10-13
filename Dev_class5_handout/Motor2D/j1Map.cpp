@@ -582,9 +582,3 @@ bool j1Map::LoadProperties(pugi::xml_node& node)
 
 	return true;
 }
-
-void j1Map::OnCollision(Collider* c1, Collider* c2)
-{
-	
-
-}
