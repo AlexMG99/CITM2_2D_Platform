@@ -2,6 +2,8 @@
 #include "p2Log.h"
 #include "j1Audio.h"
 #include "p2List.h"
+#include "j1App.h"
+#include "j1Input.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL_mixer\include\SDL_mixer.h"
@@ -34,6 +36,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	// load support for the JPG and PNG image formats
 	int flags = MIX_INIT_OGG;
 	int init = Mix_Init(flags);
+	volume = config.child("volume").attribute("value").as_int(26);
 
 	if((init & flags) != flags)
 	{
@@ -52,10 +55,23 @@ bool j1Audio::Awake(pugi::xml_node& config)
 
 	return ret;
 }
+bool j1Audio::PreUpdate() {
+	
+	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_REPEAT)
+	{
+		volume++;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_KP_MINUS) == KEY_REPEAT)
+	{
+		volume--;
+	}
+	return true;
+}
 
 bool j1Audio::Update(float dt)
 {
 	Mix_VolumeMusic(volume);
+	
 	return true;
 }
 
@@ -167,13 +183,15 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 {
 	bool ret = false;
 
-	if(!active)
+	if (!active)
 		return false;
 
-	if(id > 0 && id <= fx.count())
+	if (id > 0 && id <= fx.count())
 	{
 		Mix_PlayChannel(-1, fx[id - 1], repeat);
 	}
 
 	return ret;
 }
+
+	

@@ -28,4 +28,10 @@
     <folder>maps/</folder>
   </map>
   
+  
+  <audio>
+    <volume value = "26"/>
+    </audio>
+    
+  
 </config>
