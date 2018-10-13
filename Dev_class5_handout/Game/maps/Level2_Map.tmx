@@ -17,6 +17,8 @@
   <property name="playerPosition.x" type="float" value="10"/>
   <property name="playerPosition.y" type="float" value="328"/>
   <property name="state" value="AIR_STATE"/>
+   <property name="velocity.x" type="float" value="0"/>
+   <property name="velocity.y" type="float" value="0"/>
  </properties>
  <tileset firstgid="1" name="warped_caves_spritesheet.png" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="368" columns="23">
   <image source="warped_caves_spritesheet.png.png" width="400" height="281"/>

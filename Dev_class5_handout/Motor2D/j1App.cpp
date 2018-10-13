@@ -99,10 +99,7 @@ bool j1App::Awake()
 
 		while(item != NULL && ret == true)
 		{
-			if (item->data->IsEnabled())
-			{
-				ret = item->data->Awake(config.child(item->data->name.GetString()));
-			}
+			ret = item->data->Awake(config.child(item->data->name.GetString()));
 			item = item->next;
 		}
 	}

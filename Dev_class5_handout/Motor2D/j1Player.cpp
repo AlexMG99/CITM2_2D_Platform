@@ -116,7 +116,9 @@ bool j1Player::Update(float dt)
 {
 	if (!godMode) 
 	{
-		if (state != DUCK_STATE)player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h);
+		position.x += velocity.x;
+		position.y -= velocity.y;
+		if (state != DUCK_STATE)player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h + 1);
 		else { player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h / 2); }
 	}
 	else
@@ -130,11 +132,7 @@ bool j1Player::Update(float dt)
 }
 bool j1Player::PostUpdate()
 {	
-	if (!godMode) 
-	{
-		position.x += velocity.x;
-		position.y -= velocity.y;
-	}
+
 	Draw();
 	return true;
 }
@@ -406,23 +404,39 @@ void j1Player::PerformActions()
 
 void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
+	uint directionLeft = (position.x < c2->rect.x);
+	uint directionRight = (c2->rect.x + c2->rect.w < position.x);
+	uint directionUp = (position.y < c2->rect.y + c2->rect.h);
+	//Check if it collides from up or down
+	uint directionCornerUp = (c2->rect.y + c2->rect.h / 4 > position.y);
+	uint directionCornerDown = (c2->rect.y + c2->rect.h / 4 < position.y);
+
 	switch (c2->type)
 	{
 	case COLLIDER_GROUND:
+		//Check if leaving the ground
+		if ((directionLeft || directionRight) && directionCornerUp) 
+		{
+			state = AIR_STATE;
+			break;
+		}
 		//Check collision from right
-		if (c2->rect.x + c2->rect.w < position.x) {
+		if (directionRight && directionCornerDown) {
 			position.x += maxVelocity.x;
 		}
 		//Check collision from left
-		else if (position.x < c2->rect.x)
+		else if (directionLeft && directionCornerDown)
 		{
 			position.x -= maxVelocity.x;
 		}
 		//Check collision from up
-		else if (position.y < c2->rect.y + c2->rect.h)
+		else if (directionUp)
 		{
 			position.y = c2->rect.y;
-			state = IDLE_STATE;
+			if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) || state == AIR_STATE)
+			{
+				state = IDLE_STATE;
+			}
 		}
 		//Check collision from down
 		else
@@ -437,16 +451,15 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		if (c2->type == COLLIDER_WALL)
 		{
 			//Check collision from right
-			if (c2->rect.x + c2->rect.w < position.x) {
+			if (directionRight) {
 				position.x += maxVelocity.x;
 				if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT) {
 					flipX = SDL_FLIP_NONE;
 
 				}
 			}
-
 			//Check collision from left
-			else if (position.x < c2->rect.x)
+			else if (directionLeft)
 			{
 				position.x -= maxVelocity.x;
 				if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
@@ -454,13 +467,10 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 					flipX = SDL_FLIP_HORIZONTAL;
 
 				}
-
 			}
 			//Check collision from down
 			else
 			{
-
-
 				position.y = c2->rect.y + c2->rect.h + c1->rect.h;
 			}
 		}
@@ -468,6 +478,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 
 
 	case COLLIDER_PLATFORM:
+		//Check if leaving the ground
+		if ((directionRight || directionLeft) && directionCornerUp)
+		{
+			state = AIR_STATE;
+			break;
+		}
 		//Check if it's jumping or falling
 		if (velocity.y > 0)
 		{
@@ -480,19 +496,22 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		else
 		{
 			//Check collision form right
-			if (position.x > c2->rect.x + c2->rect.w)
+			if (directionRight && directionCornerDown)
 			{
 				position.x += maxVelocity.x;
 			}
 			//Check collision form left
-			else if (position.x < c2->rect.x)
+			else if (directionLeft && directionCornerDown)
 			{
 				position.x -= maxVelocity.x;
 			}
 			else {
 				position.y = c2->rect.y;
 				jump_anim.Reset();
-				state = IDLE_STATE;
+				if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) || state == AIR_STATE)
+				{
+					state = IDLE_STATE;
+				}
 			}
 		}
 		break;

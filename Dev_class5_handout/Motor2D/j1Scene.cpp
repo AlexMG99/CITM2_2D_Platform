@@ -32,7 +32,8 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 
-	App->map->Load("Map.tmx");
+	App->map->Load("Level2_Map.tmx");
+	App->player->Enable();
 	//App->audio->PlayMusic("audio/music/Resistors.ogg");
 	return true;
 }
@@ -82,6 +83,8 @@ bool j1Scene::PostUpdate()
 // Called before quitting
 bool j1Scene::CleanUp()
 {
+	//App->map->Disable();
+	//App->collision->CleanUp();
 	LOG("Freeing scene");
 	return true;
 }
