@@ -99,6 +99,8 @@ private:
 	p2Animation     duck_anim;
 	p2Animation     cling_anim;
 	p2Animation     dead_anim;
+	uint			fx_death;
+	uint			fx_jump;
 
 	pugi::xml_document  player_file;
 

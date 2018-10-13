@@ -32,6 +32,7 @@ bool j1Scene2::Awake()
 bool j1Scene2::Start()
 {
 	App->map->Load("Level2_Map.tmx");
+	App->audio->PlayMusic("audio/music/latin_industries.ogg");
 	return true;
 }
 

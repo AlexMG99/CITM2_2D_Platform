@@ -34,7 +34,7 @@ bool j1Scene::Start()
 {
 
 	App->map->Load("Map.tmx");
-	//App->audio->PlayMusic("audio/music/Resistors.ogg");
+	App->audio->PlayMusic("audio/music/cruising_for_goblins.ogg");
 	return true;
 }
 
@@ -91,5 +91,5 @@ bool j1Scene::CleanUp()
 //Reload Scene
 void j1Scene::Reset() const 
 {
-	App->fadeToBlack->FadeToBlack(App->scene, App->scene, 0.05F);
+	App->fadeToBlack->FadeToBlack(App->scene, App->scene, 1.0F);
 }

@@ -53,6 +53,12 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	return ret;
 }
 
+bool j1Audio::Update(float dt)
+{
+	Mix_VolumeMusic(volume);
+	return true;
+}
+
 // Called before quitting
 bool j1Audio::CleanUp()
 {

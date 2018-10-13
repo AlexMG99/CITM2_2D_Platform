@@ -2,6 +2,7 @@
 #include "p2Log.h"
 #include "p2Point.h"
 #include "j1App.h"
+#include "j1Audio.h"
 #include "j1Player.h"
 #include "j1Input.h"
 #include "j1Map.h"
@@ -64,6 +65,8 @@ bool j1Player::Start()
 			cling_anim = LoadAnimations("cling");
 
 			player_coll = App->collision->AddCollider({ coll_rect.x, coll_rect.y, coll_rect.w, coll_rect.h }, coll_type, App->player);
+			fx_death = App->audio->LoadFx("audio/fx/player_death_fx.wav");
+			fx_jump = App->audio->LoadFx("audio/fx/player_jump_fx.wav");
 		}
 	}
 	return ret;
@@ -351,6 +354,7 @@ void j1Player::CheckState()
 		break;
 
 	case DEATH_STATE:
+		state = AIR_STATE;
 		break;
 
 	case GOD_STATE:
@@ -390,7 +394,6 @@ void j1Player::PerformActions()
 		current_animation = &cling_anim;
 		break;
 
-
 	case DUCK_STATE:
 		velocity.x = 0;
 		velocity.y = 0;
@@ -400,7 +403,16 @@ void j1Player::PerformActions()
 
 	case DEATH_STATE:
 		current_animation = &dead_anim;
-		App->fadeToBlack->FadeToBlack(App->scene, App->scene);
+		
+		if (App->scene->IsEnabled())
+		{
+			App->scene->Reset();
+			App->audio->PlayFx(fx_death);
+		}
+		else if (App->scene2->IsEnabled())
+		{
+			App->scene2->Reset();
+		}
 		break;
 
 	case GOD_STATE:
@@ -428,6 +440,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		if ((directionLeft || directionRight) && directionCornerUp) 
 		{
 			state = AIR_STATE;
+			falling = true;
 			break;
 		}
 		//Check collision from right
@@ -535,7 +548,14 @@ void j1Player::DebugInput()
 {
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
+		if (App->scene->IsEnabled())
+		{
+			App->scene->Reset();
+		}
+		else if (App->scene2->IsEnabled())
+		{
+			App->fadeToBlack->FadeToBlack(App->scene2, App->scene);
+		}
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
@@ -546,6 +566,13 @@ void j1Player::DebugInput()
 		else if (App->scene2->IsEnabled())
 		{
 			App->scene2->Reset();
+		}
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	{
+		if (App->scene->IsEnabled())
+		{
+			App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
 		}
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)

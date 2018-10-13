@@ -8,13 +8,13 @@
 	<scene2 />
 	<map />
 	<player>
-		<position x="30.2120953" y="201" />
-		<velocity x="0.000294233905" y="-0" />
+		<position x="93.1709747" y="325" />
+		<velocity x="-3.02446684e-29" y="-0" />
 		<state value="IDLE_STATE" />
 	</player>
 	<fadetoblack />
 	<collision />
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="-23" y="-591" />
 	</renderer>
 </game_state>

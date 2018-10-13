@@ -27,6 +27,41 @@ This Project is a 2D Platform named '' made by Laia Martinez and Alex Morales, t
 ## Credits
 * **[GitHub Project Page](https://github.com/AlexMG99/CITM2_2D_Platform)**
 
+## Disclosure
+
+
+We do not own any of the sprites, tilesets, music or sfx presented in this game. Authors credited below
+
+
+* Sprites & Tileset:
+
+-Warped Caves from Ansimuz https://ansimuz.itch.io/
+
+
+Download from: https://ansimuz.itch.io/warped-caves
+
+* Music:
+
+"Robobozo" Kevin MacLeod (incompetech.com)
+
+
+
+* Music
+
+:
+
+"Latin Industries" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 3.0 License
+http://creativecommons.org/licenses/by/3.0/
+
+"Cruising for Goblins" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 3.0 License
+http://creativecommons.org/licenses/by/3.0/
+
+-Player Death Fx & Jump from Freesound (n_audioman)
+https://freesound.org/people/n_audioman/sounds/273572/
+https://freesound.org/people/n_audioman/sounds/273566/
+
 ## Team
 * GitHub: [LaiaMartinezMotis](https://github.com/LaiaMartinezMotis)
 * GitHub: [AlexMG99](https://github.com/AlexMG99)
