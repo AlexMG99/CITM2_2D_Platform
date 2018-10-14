@@ -13,6 +13,9 @@ This Project is a 2D Platform named '' made by Laia Martinez and Alex Morales, t
 
 * __[Cling]:__ Space bar + C
 
+* __[Volume Up]:__ Keypad + (numeric keypad)
+* __[Volume Down]:__ Keypad - (numeric keypad)
+
 ## Debug Controls
 * __[F1]:__ Start from the very first level
 * __[F2]:__ Reload Level
