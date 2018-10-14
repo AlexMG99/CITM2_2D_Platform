@@ -351,7 +351,6 @@ void j1Player::PerformActions()
 	case RUN_STATE:
 		velocity.y = (1 - acceleration.y)*velocity.y;
 		current_animation = &run_anim;
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)player_coll->SetPos(position.x + 20, position.y - coll_rect.h);
 		break;
 
 	case JUMP_STATE:
