@@ -114,6 +114,8 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 
+	bool CheckScreen(const iPoint position, const int width );
+
 	//Check OffCollision
 	//void OnCollision(Collider* c2, Collider* c1);
 
