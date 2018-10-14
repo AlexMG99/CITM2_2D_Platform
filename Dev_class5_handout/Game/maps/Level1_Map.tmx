@@ -7283,13 +7283,13 @@
    <tile gid="0"/>
    <tile gid="724"/>
    <tile gid="725"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
    <tile gid="793"/>
    <tile gid="794"/>
-   <tile gid="794"/>
-   <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -7448,8 +7448,8 @@
    <tile gid="757"/>
    <tile gid="816"/>
    <tile gid="817"/>
-   <tile gid="817"/>
-   <tile gid="0"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
    <tile gid="862"/>
    <tile gid="863"/>
    <tile gid="0"/>
@@ -7608,7 +7608,7 @@
    <tile gid="757"/>
    <tile gid="839"/>
    <tile gid="840"/>
-   <tile gid="840"/>
+   <tile gid="757"/>
    <tile gid="862"/>
    <tile gid="885"/>
    <tile gid="886"/>
@@ -24724,18 +24724,18 @@
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="966"/>
-   <tile gid="967"/>
-   <tile gid="968"/>
-   <tile gid="966"/>
-   <tile gid="967"/>
-   <tile gid="968"/>
-   <tile gid="966"/>
-   <tile gid="849"/>
+   <tile gid="1007"/>
    <tile gid="1008"/>
-   <tile gid="850"/>
-   <tile gid="850"/>
-   <tile gid="757"/>
+   <tile gid="1007"/>
+   <tile gid="1008"/>
+   <tile gid="1007"/>
+   <tile gid="1008"/>
+   <tile gid="1007"/>
+   <tile gid="1008"/>
+   <tile gid="1007"/>
+   <tile gid="1008"/>
+   <tile gid="1007"/>
+   <tile gid="1008"/>
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
@@ -24883,13 +24883,13 @@
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="990"/>
-   <tile gid="991"/>
-   <tile gid="990"/>
-   <tile gid="991"/>
-   <tile gid="990"/>
-   <tile gid="991"/>
-   <tile gid="990"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
+   <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
@@ -28911,11 +28911,7 @@
   <object id="129" name="GROUND" type="GROUND_COLLIDER" x="976" y="114.667" width="146.667" height="14.6667"/>
   <object id="130" name="GROUND" type="GROUND_COLLIDER" x="1903.17" y="133.667" width="102.833" height="144.333"/>
   <object id="136" name="GROUND" type="GROUND_COLLIDER" x="2239" y="158" width="96.5" height="46"/>
- </objectgroup>
- <objectgroup name="Platform Collision">
-  <properties>
-   <property name="coll_type" value="COLLIDER_PLATFORM"/>
-  </properties>
+  <object id="151" name="GROUND" type="GROUND_COLLIDER" x="49.6667" y="144.667" width="19.3333" height="46"/>
   <object id="14" name="PLATFORM" type="PLATFORM_COLLIDER" x="464" y="176.364" width="79.8182" height="15.6364"/>
   <object id="17" name="PLATFORM" type="PLATFORM_COLLIDER" x="918.303" y="224.182" width="46.9091" height="15.0909"/>
   <object id="22" name="PLATFORM" type="PLATFORM_COLLIDER" x="1328.18" y="192" width="31.6364" height="16"/>
@@ -28924,13 +28920,15 @@
   <object id="25" name="PLATFORM" type="PLATFORM_COLLIDER" x="1536" y="208.364" width="32.1818" height="15.6364"/>
   <object id="26" name="PLATFORM" type="PLATFORM_COLLIDER" x="1616.18" y="208.182" width="31.6364" height="15.4545"/>
   <object id="27" name="PLATFORM" type="PLATFORM_COLLIDER" x="1474.55" y="176" width="24.1818" height="16"/>
-  <object id="139" name="PLATFORM" type="PLATFORM_COLLIDER" x="2032.05" y="176.042" width="31.6212" height="63.9583"/>
-  <object id="145" name="PLATFORM" x="2213" y="176.5" width="24.5" height="15"/>
+  <object id="139" name="GROUND" type="GROUND_COLLIDER" x="2032.05" y="176.042" width="31.6212" height="63.9583"/>
+  <object id="145" name="PLATFORM" type="PLATFORM_COLLIDER" x="2213" y="176.5" width="24.5" height="15"/>
   <object id="147" name="GROUND" type="GROUND_COLLIDER" x="1198.22" y="254.58" width="53.0682" height="53.5909"/>
   <object id="148" name="GROUND" type="GROUND_COLLIDER" x="1165.33" y="64.5" width="1404" height="15"/>
-  <object id="150" name="GROUND" type="GROUND_COLLIDER" x="-20.25" y="113.833" width="68.5" height="104.333"/>
+  <object id="150" name="GROUND" type="GROUND_COLLIDER" x="-20.25" y="113.833" width="69.8333" height="104.333"/>
+  <object id="131" name="WALL" type="WALL_COLLIDER" x="1799" y="158.333" width="16.6667" height="38"/>
+  <object id="133" name="WALL" type="WALL_COLLIDER" x="1896.67" y="204.667" width="14.3333" height="37.3333"/>
  </objectgroup>
- <objectgroup name="Death Collision">
+ <objectgroup name="Logic Collisions">
   <properties>
    <property name="coll_type" value="COLLIDER_DEAD"/>
   </properties>
@@ -28940,10 +28938,5 @@
   <object id="135" name="DEATH" type="DEATH_COLLIDER" x="1241.83" y="320.667" width="177.5" height="11"/>
   <object id="140" name="DEATH" type="DEATH_COLLIDER" x="2007" y="240.5" width="261.5" height="79"/>
   <object id="146" name="GROUND" type="GROUND_COLLIDER" x="720.568" y="209.576" width="50.8636" height="59.5151"/>
- </objectgroup>
- <objectgroup name="Win Collision"/>
- <objectgroup name="Wall Collision">
-  <object id="131" name="WALL" type="WALL_COLLIDER" x="1799" y="158.333" width="16.6667" height="38"/>
-  <object id="133" name="WALL" type="WALL_COLLIDER" x="1896.67" y="204.667" width="14.3333" height="37.3333"/>
  </objectgroup>
 </map>
