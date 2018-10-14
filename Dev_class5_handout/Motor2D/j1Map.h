@@ -114,6 +114,8 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 
+	bool CheckScreen(const iPoint position, const int width );
+
 private:
 
 	bool LoadMap();

@@ -486,13 +486,21 @@ bool j1Map::LoadObject(pugi::xml_node& node, CollObject* coll_object)
 	return true;
 }
 
+bool j1Map::CheckScreen(const iPoint position, const int width) {
+
+	if (position.x<(App->render->viewport.x - width) || position.x>(App->render->viewport.x + App->render->viewport.w))return false;
+
+
+	return true;
+}
+
 bool j1Map::LoadProperties(pugi::xml_node& node)
 {
 	for (pugi::xml_node property_node = node.child("properties").child("property"); property_node; property_node = property_node.next_sibling("property"))
 	{
 		p2SString property_name(property_node.attribute("name").as_string());
 		LOG("%s", property_name.GetString());
-		if(property_name=="gravity.x") 
+		if (property_name == "gravity.x")
 		{
 			App->player->acceleration.x = property_node.attribute("value").as_float();
 		}
