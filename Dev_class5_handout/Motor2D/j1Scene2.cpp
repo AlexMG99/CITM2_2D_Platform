@@ -56,9 +56,12 @@ bool j1Scene2::Update(float dt)
 	{
 		App->render->camera.x = -App->player->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
 	}
+	if (App->render->camera.h < App->map->data.height * App->map->data.tile_height*App->win->GetScale())
+	{
+		App->render->camera.y = -(int)(App->map->data.height * App->map->data.tile_height*App->win->GetScale()) + App->render->camera.h - App->player->position.y + App->win->GetHeight() / App->win->GetScale();
+	}
 
-	App->render->camera.y = -App->player->position.y*App->win->GetScale() + App->win->GetHeight() / 2;
-
+	LOG("%f", App->player->position.y );
 
 	App->map->Draw();
 
