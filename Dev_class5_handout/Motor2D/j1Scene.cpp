@@ -21,20 +21,20 @@ j1Scene::~j1Scene()
 {}
 
 // Called before render is available
-bool j1Scene::Awake()
+bool j1Scene::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
-
+	map_path.create(config.child("map").attribute("path").as_string());
+	music_path.create(config.child("audio").attribute("path").as_string());
 	return ret;
 }
 
 // Called before the first frame
 bool j1Scene::Start()
 {
-
-	App->map->Load("Level1_Map.tmx");
-	App->audio->PlayMusic("audio/music/cruising_for_goblins.ogg");
+	App->map->Load(map_path.GetString());
+	App->audio->PlayMusic(music_path.GetString());
 	return true;
 }
 

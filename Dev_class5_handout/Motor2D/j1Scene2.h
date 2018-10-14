@@ -15,7 +15,7 @@ public:
 	virtual ~j1Scene2();
 
 	// Called before render is available
-	bool Awake();
+	bool Awake(pugi::xml_node& config);
 
 	// Called before the first frame
 	bool Start();
@@ -36,6 +36,8 @@ public:
 	void Reset() const;
 
 private:
+	p2SString map_path;
+	p2SString music_path;
 };
 
 #endif // __j2SCENE_H__

@@ -27,11 +27,21 @@
   <map>
     <folder>maps/</folder>
   </map>
-  
+
+  <scene>
+    <map path="Level1_Map.tmx"/>
+    <audio path="music/cruising_for_goblins.ogg"/>
+  </scene>
+
+  <scene2>
+    <map path="Level2_Map.tmx"/>
+    <audio path="music/latin_industries.ogg"/>
+  </scene2>
   
   <audio>
+    <folder>audio/</folder>
     <volume value = "26"/>
-    </audio>
+  </audio>
     
   
 </config>

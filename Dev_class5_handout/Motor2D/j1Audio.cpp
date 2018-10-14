@@ -53,6 +53,8 @@ bool j1Audio::Awake(pugi::xml_node& config)
 		ret = true;
 	}
 
+	folder.create(config.child("folder").child_value());
+
 	return ret;
 }
 bool j1Audio::PreUpdate() {
@@ -105,6 +107,7 @@ bool j1Audio::CleanUp()
 bool j1Audio::PlayMusic(const char* path, float fade_time)
 {
 	bool ret = true;
+	p2SString tmp("%s%s", folder.GetString(), path);
 
 	if(!active)
 		return false;
@@ -124,7 +127,7 @@ bool j1Audio::PlayMusic(const char* path, float fade_time)
 		Mix_FreeMusic(music);
 	}
 
-	music = Mix_LoadMUS(path);
+	music = Mix_LoadMUS(tmp.GetString());
 
 	if(music == NULL)
 	{
@@ -194,4 +197,18 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 	return ret;
 }
 
+//Load
+bool j1Audio::Load(pugi::xml_node& data)
+{
+	volume = data.child("volume").attribute("value").as_uint();
+	return true;
+}
+bool j1Audio::Save(pugi::xml_node& data) const
+{
+	pugi::xml_node vol = data.append_child("volume");
+
+	vol.append_attribute("value") = volume;
+
+	return true;
+}
 	

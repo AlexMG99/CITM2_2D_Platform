@@ -20,19 +20,20 @@ j1Scene2::~j1Scene2()
 {}
 
 // Called before render is available
-bool j1Scene2::Awake()
+bool j1Scene2::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
-
+	map_path.create(config.child("map").attribute("path").as_string());
+	music_path.create(config.child("audio").attribute("path").as_string());
 	return ret;
 }
 
 // Called before the first frame
 bool j1Scene2::Start()
 {
-	App->map->Load("Level2_Map.tmx");
-	App->audio->PlayMusic("audio/music/latin_industries.ogg");
+	App->map->Load(map_path.GetString());
+	App->audio->PlayMusic(music_path.GetString());
 	return true;
 }
 
@@ -58,7 +59,7 @@ bool j1Scene2::Update(float dt)
 	}
 	if (App->render->camera.h < App->map->data.height * App->map->data.tile_height*App->win->GetScale())
 	{
-		App->render->camera.y = -(int)(App->map->data.height * App->map->data.tile_height*App->win->GetScale()) + App->render->camera.h - App->player->position.y + App->win->GetHeight() / App->win->GetScale();
+		App->render->camera.y = -(int)(App->map->data.height * App->map->data.tile_height*App->win->GetScale()) + App->render->camera.h - App->player->position.y + App->win->GetHeight() / 2;
 	}
 
 	LOG("%f", App->player->position.y );
