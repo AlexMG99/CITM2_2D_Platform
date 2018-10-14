@@ -2052,8 +2052,8 @@
    <tile gid="250"/>
    <tile gid="251"/>
    <tile gid="252"/>
-   <tile gid="253"/>
-   <tile gid="254"/>
+   <tile gid="781"/>
+   <tile gid="782"/>
    <tile gid="255"/>
    <tile gid="256"/>
    <tile gid="242"/>
@@ -2242,8 +2242,8 @@
    <tile gid="282"/>
    <tile gid="283"/>
    <tile gid="284"/>
-   <tile gid="285"/>
-   <tile gid="286"/>
+   <tile gid="804"/>
+   <tile gid="805"/>
    <tile gid="287"/>
    <tile gid="288"/>
    <tile gid="274"/>
@@ -2266,7 +2266,7 @@
    <tile gid="276"/>
    <tile gid="277"/>
    <tile gid="278"/>
-   <tile gid="279"/>
+   <tile gid="986"/>
    <tile gid="280"/>
    <tile gid="281"/>
    <tile gid="282"/>
@@ -9920,7 +9920,7 @@
    <tile gid="748"/>
    <tile gid="862"/>
    <tile gid="863"/>
-   <tile gid="757"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -21301,7 +21301,7 @@
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="757"/>
+   <tile gid="986"/>
    <tile gid="992"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -21491,7 +21491,7 @@
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="757"/>
+   <tile gid="986"/>
    <tile gid="1015"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -21681,7 +21681,7 @@
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="757"/>
+   <tile gid="986"/>
    <tile gid="969"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -21871,7 +21871,7 @@
    <tile gid="1010"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="757"/>
+   <tile gid="986"/>
    <tile gid="992"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -22061,7 +22061,7 @@
    <tile gid="1010"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="757"/>
+   <tile gid="986"/>
    <tile gid="1015"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -22251,7 +22251,7 @@
    <tile gid="1010"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="757"/>
+   <tile gid="986"/>
    <tile gid="969"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -22441,7 +22441,7 @@
    <tile gid="1010"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="757"/>
+   <tile gid="986"/>
    <tile gid="992"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -22631,7 +22631,7 @@
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="757"/>
+   <tile gid="986"/>
    <tile gid="1015"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -22821,7 +22821,7 @@
    <tile gid="757"/>
    <tile gid="757"/>
    <tile gid="757"/>
-   <tile gid="757"/>
+   <tile gid="986"/>
    <tile gid="969"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -24893,6 +24893,10 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="781"/>
+   <tile gid="782"/>
+   <tile gid="783"/>
+   <tile gid="784"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -24910,15 +24914,11 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="865"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="1008"/>
+   <tile gid="1008"/>
+   <tile gid="1008"/>
+   <tile gid="1008"/>
+   <tile gid="1008"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -25083,6 +25083,10 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="804"/>
+   <tile gid="805"/>
+   <tile gid="806"/>
+   <tile gid="807"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -25099,11 +25103,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="1010"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -25482,8 +25482,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="933"/>
-   <tile gid="934"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -26706,15 +26706,15 @@
   <object id="147" name="GROUND" type="GROUND_COLLIDER" x="1198.22" y="254.58" width="53.0682" height="42.0909"/>
   <object id="148" name="GROUND" type="GROUND_COLLIDER" x="1165.33" y="64.5" width="643.337" height="15"/>
   <object id="150" name="GROUND" type="GROUND_COLLIDER" x="-20.25" y="113.833" width="69.8333" height="104.333"/>
-  <object id="131" name="WALL" type="WALL_COLLIDER" x="1810.67" y="158.333" width="5.00003" height="38"/>
+  <object id="131" name="WALL" type="WALL_COLLIDER" x="1810.67" y="164.958" width="5.00003" height="20.875"/>
   <object id="155" name="PLATFORM" type="PLATFORM_COLLIDER" x="2384" y="176" width="32" height="16"/>
   <object id="156" name="PLATFORM" type="PLATFORM_COLLIDER" x="2447.75" y="255.5" width="31.75" height="16"/>
   <object id="157" name="GROUND" type="GROUND_COLLIDER" x="2353" y="38" width="207" height="11"/>
   <object id="158" name="GROUND" type="GROUND_COLLIDER" x="2503" y="51.5" width="55.75" height="126.333"/>
   <object id="159" name="GROUND" type="GROUND_COLLIDER" x="2550" y="263" width="108.939" height="41.5"/>
   <object id="161" name="GROUND" type="GROUND_COLLIDER" x="2270.83" y="205.75" width="74.4167" height="100.25"/>
-  <object id="163" name="WALL" type="WALL_COLLIDER" x="2557.25" y="122.75" width="6.25" height="40.75"/>
-  <object id="164" name="WALL" type="WALL_COLLIDER" x="2608.27" y="189.045" width="3.96591" height="39.0909"/>
+  <object id="163" name="WALL" type="WALL_COLLIDER" x="2559.8" y="131.295" width="3.70455" height="23.1136"/>
+  <object id="164" name="WALL" type="WALL_COLLIDER" x="2608.27" y="200.295" width="3.96591" height="19.0909"/>
   <object id="165" name="GROUND" type="GROUND_COLLIDER" x="2612.99" y="135.167" width="45.3382" height="125.25"/>
   <object id="169" name="PLATFORM" type="PLATFORM_COLLIDER" x="2659.57" y="144.318" width="87.75" height="15.7045"/>
   <object id="171" name="PLATFORM" type="PLATFORM_COLLIDER" x="2660.36" y="207.985" width="87.1818" height="15.75"/>
@@ -26725,10 +26725,10 @@
   <object id="185" name="GROUND" type="GROUND_COLLIDER" x="2661" y="276.5" width="188.5" height="10.5"/>
   <object id="188" name="GROUND" type="GROUND_COLLIDER" x="2967.5" y="100.75" width="71.5" height="203"/>
   <object id="189" name="GROUND" type="GROUND_COLLIDER" x="2789.25" y="54.5" width="75" height="123"/>
-  <object id="191" name="WALL" type="WALL_COLLIDER" x="2865.36" y="91.5909" width="5.70455" height="39.75"/>
+  <object id="191" name="WALL" type="WALL_COLLIDER" x="2865.74" y="100.409" width="3.9506" height="20.2955"/>
   <object id="192" name="GROUND" type="GROUND_COLLIDER" x="2563" y="55" width="184" height="15.5"/>
   <object id="193" name="GROUND" type="GROUND_COLLIDER" x="2862.67" y="34.6667" width="177.939" height="13.3333"/>
-  <object id="195" name="WALL" type="WALL_COLLIDER" x="1894.91" y="208.727" width="6.90909" height="27.6364"/>
+  <object id="195" name="WALL" type="WALL_COLLIDER" x="1897.54" y="215.477" width="4.28409" height="20.8864"/>
  </objectgroup>
  <objectgroup name="Logic Collisions">
   <object id="47" name="DEATH" type="DEATH_COLLIDER" x="404" y="208.667" width="187.667" height="44.0833"/>
