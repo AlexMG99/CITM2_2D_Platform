@@ -1,6 +1,6 @@
-# CITM 2D Platform
+# Trinity's Journey
 ## Presentation
-This Project is a 2D Platform named '' made by Laia Martinez and Alex Morales, two students of CITM Terrassa(Barcelona, Spain). 
+This Project is a 2D Platform named 'Trinity's Journey' made by Laia Martinez and Alex Morales, two students of CITM Terrassa(Barcelona, Spain). 
 
 ## Installation
 > __Unzip the release folder and execute the .exe file__
