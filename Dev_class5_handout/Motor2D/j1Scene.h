@@ -34,9 +34,17 @@ public:
 
 	//Reset scene
 	void Reset() const;
+
+	//Load Game State
+	bool Load(pugi::xml_node&);
+
+	//Load Level
+	void LoadLevel();
+
 private:
 	p2SString map_path;
 	p2SString music_path;
+	p2List<j1Module*> current_level;
 };
 
 #endif // __j1SCENE_H__

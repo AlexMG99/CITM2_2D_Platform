@@ -4,6 +4,8 @@
 #include "j1Input.h"
 #include "j1FadeToBlack.h"
 #include "j1Render.h"
+#include "j1Scene.h"
+#include "j1Scene2.h"
 #include "p2Log.h"
 
 #include "SDL/include/SDL_render.h"
@@ -91,4 +93,21 @@ bool j1FadeToBlack::FadeToBlack(j1Module* module_off, j1Module* module_on, float
 bool j1FadeToBlack::IsFading() const
 {
 	return current_step != fade_step::none;
+}
+
+//Save Game State
+bool j1FadeToBlack::Save(pugi::xml_node& data) const
+{
+	pugi::xml_node fade= data.append_child("scene");
+	if (App->scene->IsEnabled())
+	{
+		scene_id = 1;
+	}
+	else if(App->scene2->IsEnabled())
+	{
+		scene_id = 2;
+	}
+	fade.append_attribute("id") = scene_id;
+
+	return true;
 }

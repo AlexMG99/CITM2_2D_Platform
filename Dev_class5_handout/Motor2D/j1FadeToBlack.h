@@ -15,6 +15,9 @@ public:
 	bool FadeToBlack(j1Module* module_off, j1Module* module_on, float time = 1.0f);
 	bool IsFading() const;
 
+	//Save Game State
+	bool Save(pugi::xml_node&) const;
+
 private:
 
 	enum fade_step
@@ -29,6 +32,9 @@ private:
 	SDL_Rect screen;
 	j1Module* to_enable = nullptr;
 	j1Module* to_disable = nullptr;
+
+public:
+	mutable int scene_id = 0;
 };
 
 #endif __J1_FADETOBALCK__

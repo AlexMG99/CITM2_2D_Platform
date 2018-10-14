@@ -8,6 +8,7 @@
 #include "j1Map.h"
 #include "j1Player.h"
 #include "j1FadeToBlack.h"
+#include "j1Scene.h"
 #include "j1Scene2.h"
 
 j1Scene2::j1Scene2() : j1Module()
@@ -32,8 +33,7 @@ bool j1Scene2::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene2::Start()
 {
-	App->map->Load(map_path.GetString());
-	App->audio->PlayMusic(music_path.GetString());
+	LoadLevel();
 	return true;
 }
 
@@ -81,9 +81,7 @@ bool j1Scene2::PostUpdate()
 // Called before quitting
 bool j1Scene2::CleanUp()
 {
-
 	App->map->CleanUp();
-
 	LOG("Freeing scene");
 	return true;
 }
@@ -92,4 +90,23 @@ bool j1Scene2::CleanUp()
 void j1Scene2::Reset() const
 {
 	App->fadeToBlack->FadeToBlack(App->scene2, App->scene2);
+}
+
+bool j1Scene2::Load(pugi::xml_node& node)
+{
+	App->fadeToBlack->scene_id = node.parent().child("fadetoblack").child("scene").attribute("id").as_int();
+	LOG("%i", node.parent().child("fadetoblack").attribute("scene").as_int());
+	if (App->scene2->IsEnabled() && App->fadeToBlack->scene_id == 1)
+	{
+		CleanUp();
+		App->scene->LoadLevel();
+	}
+	return true;
+}
+
+//Load Level
+void j1Scene2::LoadLevel()
+{
+	App->map->Load(map_path.GetString());
+	App->audio->PlayMusic(music_path.GetString());
 }

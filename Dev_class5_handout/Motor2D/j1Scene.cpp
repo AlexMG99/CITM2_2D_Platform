@@ -10,6 +10,7 @@
 #include "j1Player.h"
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
+#include "j1Scene2.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -33,8 +34,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load(map_path.GetString());
-	App->audio->PlayMusic(music_path.GetString());
+	LoadLevel();
 	return true;
 }
 
@@ -89,3 +89,25 @@ void j1Scene::Reset() const
 {
 	App->fadeToBlack->FadeToBlack(App->scene, App->scene, 1.0F);
 }
+
+
+bool j1Scene::Load(pugi::xml_node& node)
+{
+	App->fadeToBlack->scene_id = node.parent().child("fadetoblack").child("scene").attribute("id").as_int();
+	LOG("%i", node.parent().child("fadetoblack").attribute("scene").as_int());
+	if (App->scene->IsEnabled() && App->fadeToBlack->scene_id == 2)
+	{
+		CleanUp();
+		App->scene2->LoadLevel();
+	}
+	return true;
+}
+
+//Load Level
+void j1Scene::LoadLevel()
+{
+	App->map->Load(map_path.GetString());
+	App->audio->PlayMusic(music_path.GetString());
+}
+
+
