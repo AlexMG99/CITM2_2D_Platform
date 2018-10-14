@@ -100,6 +100,13 @@ bool j1Collision::PreUpdate()
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->OnCollision(c2, c1);
 			}
+			else
+			{
+				if (c1->callback != nullptr)
+				{
+					c1->callback->OffCollision(c1);
+				}
+			}
 		}
 	}
 

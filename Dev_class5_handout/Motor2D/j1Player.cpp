@@ -429,26 +429,17 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	uint directionLeft = (position.x < c2->rect.x);
 	uint directionRight = (c2->rect.x + c2->rect.w < position.x);
 	uint directionUp = (position.y < c2->rect.y + c2->rect.h);
-	//Check if it collides from up or down
-	uint directionCornerUp = (c2->rect.y + c2->rect.h / 4 > position.y);
-	uint directionCornerDown = (c2->rect.y + c2->rect.h / 4 < position.y);
 
 	switch (c2->type)
 	{
 	case COLLIDER_GROUND:
 		//Check if leaving the ground
-		if ((directionLeft || directionRight) && directionCornerUp) 
-		{
-			state = AIR_STATE;
-			falling = true;
-			break;
-		}
 		//Check collision from right
-		if (directionRight && directionCornerDown) {
+		if (directionRight) {
 			position.x = c2->rect.x + c2->rect.w + c1->rect.w / 2;
 		}
 		//Check collision from left
-		else if (directionLeft && directionCornerDown)
+		else if (directionLeft)
 		{
 			position.x = c2->rect.x - c1->rect.w / 2;
 		}
@@ -500,12 +491,6 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 
 	case COLLIDER_PLATFORM:
 		//Check if leaving the ground
-		if ((directionRight || directionLeft) && directionCornerUp)
-		{
-			state = AIR_STATE;
-			falling = true;
-			break;
-		}
 		//Check if it's jumping or falling
 		if (velocity.y > 0)
 		{
@@ -518,12 +503,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		else
 		{
 			//Check collision form right
-			if (directionRight && directionCornerDown)
+			if (directionRight)
 			{
 				position.x += maxVelocity.x;
 			}
 			//Check collision form left
-			else if (directionLeft && directionCornerDown)
+			else if (directionLeft)
 			{
 				position.x -= maxVelocity.x;
 			}
@@ -537,6 +522,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			}
 		}
 		break;
+
 	case COLLIDER_DEATH:
 		state = DEATH_STATE;
 		break;
@@ -570,10 +556,7 @@ void j1Player::DebugInput()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
-		if (App->scene->IsEnabled())
-		{
-			App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
-		}
+		App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
