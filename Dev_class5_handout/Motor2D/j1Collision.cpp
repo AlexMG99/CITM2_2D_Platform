@@ -13,30 +13,42 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_GROUND][COLLIDER_PLATFORM] = false;
 	matrix[COLLIDER_GROUND][COLLIDER_DEATH] = false;
 	matrix[COLLIDER_GROUND][COLLIDER_WALL] = false;
+	matrix[COLLIDER_GROUND][COLLIDER_WIN] = false;
 
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_GROUND] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLATFORM] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_DEATH] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_WIN] = true;
 
 	matrix[COLLIDER_PLATFORM][COLLIDER_PLATFORM] = false;
 	matrix[COLLIDER_PLATFORM][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_PLATFORM][COLLIDER_GROUND] = false;
 	matrix[COLLIDER_PLATFORM][COLLIDER_DEATH] = false;
 	matrix[COLLIDER_PLATFORM][COLLIDER_WALL] = false;
+	matrix[COLLIDER_PLATFORM][COLLIDER_WIN] = false;
 
 	matrix[COLLIDER_DEATH][COLLIDER_DEATH] = false;
 	matrix[COLLIDER_DEATH][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_DEATH][COLLIDER_GROUND] = false;
 	matrix[COLLIDER_DEATH][COLLIDER_PLATFORM] = false;
 	matrix[COLLIDER_DEATH][COLLIDER_WALL] = false;
+	matrix[COLLIDER_DEATH][COLLIDER_WIN] = false;
 
 	matrix[COLLIDER_WALL][COLLIDER_WALL] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_WALL][COLLIDER_GROUND] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLATFORM] = false;
 	matrix[COLLIDER_WALL][COLLIDER_DEATH] = false;
+	matrix[COLLIDER_WALL][COLLIDER_WIN] = false;
+
+	matrix[COLLIDER_WIN][COLLIDER_WALL] = false;
+	matrix[COLLIDER_WIN][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_WIN][COLLIDER_GROUND] = false;
+	matrix[COLLIDER_WIN][COLLIDER_PLATFORM] = false;
+	matrix[COLLIDER_WIN][COLLIDER_DEATH] = false;
+	matrix[COLLIDER_WIN][COLLIDER_WIN] = false;
 
 }
 
@@ -155,6 +167,9 @@ void j1Collision::DebugDraw()
 			break;
 		case COLLIDER_WALL: //pink
 			App->render->DrawQuad(colliders[i]->rect, 244, 114, 280, alpha);
+			break;
+		case COLLIDER_WIN: //purple
+			App->render->DrawQuad(colliders[i]->rect, 75, 0, 130, alpha);
 			break;
 		}
 	}

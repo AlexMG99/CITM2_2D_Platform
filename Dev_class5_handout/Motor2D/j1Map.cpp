@@ -482,6 +482,10 @@ bool j1Map::LoadObject(pugi::xml_node& node, CollObject* coll_object)
 	{
 		coll_object->coll_type = COLLIDER_DEATH;
 	}
+	else if (coll_name == "WIN_COLLIDER")
+	{
+		coll_object->coll_type = COLLIDER_WIN;
+	}
 	return true;
 }
 

@@ -412,6 +412,7 @@ void j1Player::PerformActions()
 		else if (App->scene2->IsEnabled())
 		{
 			App->scene2->Reset();
+			App->audio->PlayFx(fx_death);
 		}
 		break;
 
@@ -429,17 +430,18 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	uint directionLeft = (position.x < c2->rect.x);
 	uint directionRight = (c2->rect.x + c2->rect.w < position.x);
 	uint directionUp = (position.y < c2->rect.y + c2->rect.h);
+	uint directionCornerDown = (c2->rect.y + c2->rect.h / 4 < position.y);
 
 	switch (c2->type)
 	{
 	case COLLIDER_GROUND:
 		//Check if leaving the ground
 		//Check collision from right
-		if (directionRight) {
+		if (directionRight && directionCornerDown) {
 			position.x = c2->rect.x + c2->rect.w + c1->rect.w / 2;
 		}
 		//Check collision from left
-		else if (directionLeft)
+		else if (directionLeft && directionCornerDown)
 		{
 			position.x = c2->rect.x - c1->rect.w / 2;
 		}
@@ -503,12 +505,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		else
 		{
 			//Check collision form right
-			if (directionRight)
+			if (directionRight && directionCornerDown)
 			{
 				position.x += maxVelocity.x;
 			}
 			//Check collision form left
-			else if (directionLeft)
+			else if (directionLeft && directionCornerDown)
 			{
 				position.x -= maxVelocity.x;
 			}
@@ -525,6 +527,18 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 
 	case COLLIDER_DEATH:
 		state = DEATH_STATE;
+		break;
+
+	case COLLIDER_WIN:
+		LOG("win");
+		if (App->scene->IsEnabled())
+		{
+			App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
+		}
+		else if (App->scene2->IsEnabled())
+		{
+			App->fadeToBlack->FadeToBlack(App->scene2, App->scene);
+		}
 		break;
 	}
 

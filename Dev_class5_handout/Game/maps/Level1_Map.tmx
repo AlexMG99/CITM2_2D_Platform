@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="160" height="20" tilewidth="16" tileheight="16" nextobjectid="152">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="160" height="20" tilewidth="16" tileheight="16" nextobjectid="155">
  <properties>
   <property name="camera.x" type="int" value="0"/>
   <property name="camera.y" type="int" value="-150"/>
@@ -28890,9 +28890,6 @@
   </data>
  </layer>
  <objectgroup name="Colliders">
-  <properties>
-   <property name="coll_type" value="COLLIDER_GROUND"/>
-  </properties>
   <object id="3" name="GROUND" type="GROUND_COLLIDER" x="160" y="82" width="1002.67" height="15"/>
   <object id="4" name="GROUND" type="GROUND_COLLIDER" x="243.939" y="183" width="157.228" height="31.6666"/>
   <object id="5" name="GROUND" type="GROUND_COLLIDER" x="584" y="164.5" width="88.5" height="38.5"/>
@@ -28929,14 +28926,12 @@
   <object id="133" name="WALL" type="WALL_COLLIDER" x="1896.67" y="204.667" width="14.3333" height="37.3333"/>
  </objectgroup>
  <objectgroup name="Logic Collisions">
-  <properties>
-   <property name="coll_type" value="COLLIDER_DEAD"/>
-  </properties>
   <object id="47" name="DEATH" type="DEATH_COLLIDER" x="404" y="208.667" width="187.667" height="44.0833"/>
   <object id="120" name="DEATH" type="DEATH_COLLIDER" x="684.5" y="271" width="402" height="47"/>
   <object id="134" name="DEATH" type="DEATH_COLLIDER" x="1474" y="288.5" width="226" height="31.5"/>
   <object id="135" name="DEATH" type="DEATH_COLLIDER" x="1241.83" y="320.667" width="177.5" height="11"/>
   <object id="140" name="DEATH" type="DEATH_COLLIDER" x="2007" y="240.5" width="261.5" height="79"/>
   <object id="146" name="GROUND" type="GROUND_COLLIDER" x="720.568" y="209.576" width="50.8636" height="59.5151"/>
+  <object id="152" name="WIN" type="WIN_COLLIDER" x="2258" y="80" width="59" height="76"/>
  </objectgroup>
 </map>
