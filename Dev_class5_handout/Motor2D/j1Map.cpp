@@ -558,11 +558,11 @@ bool j1Map::LoadProperties(pugi::xml_node& node)
 		}
 		if (property_name == "camera.x")
 		{
-			App->render->camera.x = property_node.attribute("value").as_float();
+			App->render->camera.x = property_node.attribute("value").as_int();
 		}
 		if (property_name == "camera.y")
 		{
-			App->render->camera.y = property_node.attribute("value").as_float();
+			App->render->camera.y = property_node.attribute("value").as_int();
 		}
 		if (property_name == "velocity.x")
 		{

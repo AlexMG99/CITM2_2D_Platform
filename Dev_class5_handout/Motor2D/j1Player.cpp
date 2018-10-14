@@ -102,8 +102,8 @@ bool j1Player::Update(float dt)
 	{
 		position.x += velocity.x;
 		position.y -= velocity.y;
-		if (state != DUCK_STATE)player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h);
-		else { player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h / 2); }
+		if (state != DUCK_STATE)player_coll->SetPos((int)(position.x - coll_rect.w / 2), (int)(position.y - coll_rect.h));
+		else { player_coll->SetPos((int)(position.x - coll_rect.w / 2), (int)(position.y - coll_rect.h / 2)); }
 	}
 
 	PerformActions();
@@ -222,7 +222,7 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 
 void j1Player::Draw() {
 	SDL_Rect rect = current_animation->GetCurrentFrame();
-	App->render->Blit(playerSpritesheet, position.x - coll_rect.w/2, position.y - coll_rect.h, &rect, flipX);
+	App->render->Blit(playerSpritesheet, (int)(position.x - coll_rect.w/2), (int)(position.y - coll_rect.h), &rect, flipX);
 }
 
 p2Animation j1Player::LoadAnimations(p2SString name) {
@@ -335,6 +335,8 @@ void j1Player::CheckState()
 	case GOD_STATE:
 		if (!godMode)state = AIR_STATE;
 		break;
+	default:
+		break;
 	}
 }
 void j1Player::PerformActions()
@@ -396,6 +398,8 @@ void j1Player::PerformActions()
 		current_animation = &idle_anim;
 		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
 		break;
+	default:
+		break;
 	}
 	
 }
@@ -405,25 +409,25 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	uint directionLeft = (position.x < c2->rect.x);
 	uint directionRight = (c2->rect.x + c2->rect.w < position.x);
 	uint directionUp = (position.y < c2->rect.y + c2->rect.h);
-	uint directionCornerDown = (c2->rect.y + c2->rect.h / 4 < position.y);
+	uint directionCornerDown = (c2->rect.y + 5 < position.y);
 	if (state != DEATH_STATE) {
 		switch (c2->type)
 		{
 		case COLLIDER_GROUND:
 			//Check if leaving the ground
 			//Check collision from right
-			if (directionRight) {
-				position.x = c2->rect.x + c2->rect.w + c1->rect.w / 2;
+			if (directionRight && directionCornerDown) {
+				position.x = (float)(c2->rect.x + c2->rect.w + c1->rect.w / 2);
 			}
 			//Check collision from left
-			else if (directionLeft)
+			else if (directionLeft && directionCornerDown)
 			{
-				position.x = c2->rect.x - c1->rect.w / 2;
+				position.x = (float)(c2->rect.x - c1->rect.w / 2);
 			}
 			//Check collision from up
 			else if (directionUp)
 			{
-				position.y = c2->rect.y;
+				position.y = (float)c2->rect.y;
 				if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE) || state == AIR_STATE)
 				{
 					state = IDLE_STATE;
@@ -434,7 +438,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				velocity.y = 0;
 				state = AIR_STATE;
-				position.y = c2->rect.y + c2->rect.h + c1->rect.h;
+				position.y = (float)(c2->rect.y + c2->rect.h + c1->rect.h);
 			}
 			break;
 
@@ -449,7 +453,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 						flipX = SDL_FLIP_NONE;
 
 					}
-					position.x = c2->rect.x + c2->rect.w + c1->rect.w / 2;
+					position.x = (float)(c2->rect.x + c2->rect.w + c1->rect.w / 2);
 				}
 				//Check collision from left
 				else if (directionLeft)
@@ -460,7 +464,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 						flipX = SDL_FLIP_HORIZONTAL;
 
 					}
-					position.x = c2->rect.x - c1->rect.w / 2;
+					position.x = (float)(c2->rect.x - c1->rect.w / 2);
 				}
 			}
 			break;
@@ -489,7 +493,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 					position.x -= maxVelocity.x;
 				}
 				else {
-					position.y = c2->rect.y;
+					position.y = (float)c2->rect.y;
 					jump_anim.Reset();
 					if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE) || state == AIR_STATE)
 					{
@@ -513,6 +517,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				App->fadeToBlack->FadeToBlack(App->scene2, App->scene);
 			}
+			break;
+		default:
 			break;
 		}
 	}

@@ -114,9 +114,6 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 
-	//Check OffCollision
-	//void OnCollision(Collider* c2, Collider* c1);
-
 private:
 
 	bool LoadMap();

@@ -112,13 +112,6 @@ bool j1Collision::PreUpdate()
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->OnCollision(c2, c1);
 			}
-			else
-			{
-				if (c1->callback != nullptr)
-				{
-					c1->callback->OffCollision(c1);
-				}
-			}
 		}
 	}
 
@@ -170,6 +163,8 @@ void j1Collision::DebugDraw()
 			break;
 		case COLLIDER_WIN: //purple
 			App->render->DrawQuad(colliders[i]->rect, 75, 0, 130, alpha);
+			break;
+		default:
 			break;
 		}
 	}

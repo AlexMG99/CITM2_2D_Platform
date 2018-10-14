@@ -85,7 +85,6 @@ bool j1Scene2::CleanUp()
 
 	App->map->CleanUp();
 
-	//App->collision->CleanUp();
 	LOG("Freeing scene");
 	return true;
 }

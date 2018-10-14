@@ -63,8 +63,6 @@ public:
 
 	//Check Collision
 	void OnCollision(Collider* c1, Collider* c2);
-	//Check OffCollision
-	//void OffCollision(Collider* c1);
 
 private:
 	//Draw player in screen
