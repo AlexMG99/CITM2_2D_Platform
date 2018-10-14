@@ -53,7 +53,7 @@ bool j1Scene2::PreUpdate()
 bool j1Scene2::Update(float dt)
 {
 
-	if (App->player->position.x > (App->win->GetWidth() / App->win->GetScale()) / 4)
+	if (App->player->position.x > (App->win->GetWidth() / App->win->GetScale()) / 4 && App->player->position.x < App->map->data.width * App->map->data.tile_width - App->render->camera.w / App->win->GetScale())
 	{
 		App->render->camera.x = -App->player->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
 	}
@@ -64,7 +64,6 @@ bool j1Scene2::Update(float dt)
 
 	App->map->Draw();
 
-	LOG("%f", App->player->position.y);
 	return true;
 }
 
