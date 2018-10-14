@@ -13,21 +13,27 @@ This Project is a 2D Platform named 'Trinity's Journey' made by Laia Martinez an
 
 * __[Cling]:__ Space bar + C
 
+* __[Go down through platforms]:__ Down arrow (while standig on a platform)
+
 * __[Volume Up]:__ Keypad + (numeric keypad)
 * __[Volume Down]:__ Keypad - (numeric keypad)
 
 ## Debug Controls
 - __[F1]:__ Start from the very first level
-- __[F2]:__ Reload Level
-- __[F5]:__ Save
-- __[F6]:__ Load the previous state
-- __[F9]:__ Show colliders
+- __[F2]:__ Start from the beginning of the current level
+- __[F5]:__ Save the current state
+- __[F6]:__ Load the previous state (even across levels)
+- __[F9]:__ To view colliders / logic
 - __[F10]:__ God Mode
   - The player have no collider and can go throw walls.
   - You can move it with the arrow pads.
 
 ## Inovation
 * __Cling:__ When the player jumps towards the vines and holds C, it can hang from the wall. If the player press space while holding C it will jump.
+* __Go down through platforms:__ When the player is standing on a platform, it can go down if it presses the letter D.
+
+* __Volume up & down:__ The player can decide the volume of the music that is playing, using the + and - keys on the numeric keypad.
+
 
 ## Credits
 * **[GitHub Project Page](https://github.com/AlexMG99/CITM2_2D_Platform)**
