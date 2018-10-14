@@ -311,6 +311,7 @@ void j1Player::CheckState()
 		{
 			state = JUMP_STATE;
 			falling = false;
+			App->audio->PlayFx(fx_jump);
 		}
 		break;
 
@@ -322,6 +323,7 @@ void j1Player::CheckState()
 		{
 			jump_anim.Reset();
 			state = JUMP_STATE;
+			App->audio->PlayFx(fx_jump);
 		}
 		break;
 
