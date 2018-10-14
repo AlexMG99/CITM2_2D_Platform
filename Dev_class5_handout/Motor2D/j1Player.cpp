@@ -31,6 +31,8 @@ bool j1Player::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	path.create(config.child("path").child_value());
+	fx_death_name.create(config.child("fx_death").child_value());
+	fx_jump_name.create(config.child("fx_jump").child_value());
 
 	return ret;
 }
@@ -65,8 +67,8 @@ bool j1Player::Start()
 			cling_anim = LoadAnimations("cling");
 
 			player_coll = App->collision->AddCollider({ coll_rect.x, coll_rect.y, coll_rect.w, coll_rect.h }, coll_type, App->player);
-			fx_death = App->audio->LoadFx("audio/fx/player_death_fx.wav");
-			fx_jump = App->audio->LoadFx("player_jump.wav");
+			fx_death = App->audio->LoadFx(fx_death_name.GetString());
+			fx_jump = App->audio->LoadFx(fx_jump_name.GetString());
 		}
 	}
 	return ret;
@@ -280,6 +282,7 @@ void j1Player::CheckState()
 		if (press_space)
 		{
 			state = JUMP_STATE;
+			App->audio->PlayFx(fx_jump);
 		}
 
 		if (pressed_down)
@@ -348,6 +351,7 @@ void j1Player::PerformActions()
 	case RUN_STATE:
 		velocity.y = (1 - acceleration.y)*velocity.y;
 		current_animation = &run_anim;
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)player_coll->SetPos(position.x + 20, position.y - coll_rect.h);
 		break;
 
 	case JUMP_STATE:

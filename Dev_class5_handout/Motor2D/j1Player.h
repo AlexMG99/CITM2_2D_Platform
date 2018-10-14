@@ -93,6 +93,8 @@ public:
 private:
 
 	p2SString		path;
+	p2SString		fx_death_name;
+	p2SString		fx_jump_name;
 	p2Animation*    current_animation = nullptr;
 	p2Animation		idle_anim;
 	p2Animation     run_anim;
