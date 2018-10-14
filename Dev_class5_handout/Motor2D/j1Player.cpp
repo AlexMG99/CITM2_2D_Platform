@@ -477,6 +477,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		case COLLIDER_PLATFORM:
 			//Check if leaving the ground
 			//Check if it's jumping or falling
+			if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
+				state = AIR_STATE;
+				c2->type == COLLIDER_NONE;
+			}
+			else {
+
 			if (velocity.y > 0)
 			{
 				if (position.y < c2->rect.y)
@@ -505,6 +511,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 						state = IDLE_STATE;
 					}
 				}
+			  }
 			}
 			break;
 
