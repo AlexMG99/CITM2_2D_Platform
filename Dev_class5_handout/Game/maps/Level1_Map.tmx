@@ -9329,7 +9329,7 @@
    <tile gid="757"/>
    <tile gid="862"/>
    <tile gid="863"/>
-   <tile gid="757"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="747"/>
    <tile gid="724"/>
@@ -9940,7 +9940,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="748"/>
-   <tile gid="0"/>
+   <tile gid="757"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -10130,7 +10130,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="748"/>
-   <tile gid="0"/>
+   <tile gid="757"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
