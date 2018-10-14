@@ -136,6 +136,8 @@ bool j1Player::Load(pugi::xml_node& player_node) {
 	position.y = player_node.child("position").attribute("y").as_float();
 	velocity.x = player_node.child("velocity").attribute("x").as_float();
 	velocity.y = player_node.child("velocity").attribute("y").as_float();
+	coll_rect.x = player_node.child("collider").attribute("x").as_int();
+	coll_rect.x = player_node.child("collider").attribute("y").as_int();
 	p2SString state_name = player_node.child("state").attribute("value").as_string();
 	if (state_name == "IDLE_STATE") 
 	{
@@ -157,11 +159,11 @@ bool j1Player::Load(pugi::xml_node& player_node) {
 	{
 		state = DUCK_STATE;
 	}
-	else if (state_name == "DEATH_STATE")
+	else if (state_name == "CLING_STATE")
 	{
 		state = DEATH_STATE;
 	}
-	else if (state_name == "CLING_STATE")
+	else if (state_name == "DEATH_STATE")
 	{
 		state = CLING_STATE;
 	}
@@ -177,11 +179,14 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 	pugi::xml_node pos = player_node.append_child("position");
 	pugi::xml_node vel = player_node.append_child("velocity");
 	pugi::xml_node state_node = player_node.append_child("state");
+	pugi::xml_node coll = player_node.append_child("coll");
 
 	pos.append_attribute("x") = position.x;
 	pos.append_attribute("y") = position.y;
 	vel.append_attribute("x") = velocity.x;
 	vel.append_attribute("y") = velocity.y;
+	coll.append_attribute("x") = coll_rect.x;
+	coll.append_attribute("y") = coll_rect.y;
 	p2SString state_name;
 	if (state == 0)
 	{
@@ -205,11 +210,11 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 	}
 	else if (state == 5)
 	{
-		state_name = "DEATH_STATE";
+		state_name = "CLING_STATE";
 	}
 	else if (state == 6)
 	{
-		state_name = "CLING_STATE";
+		state_name = "DEATH_STATE";
 	}
 	else if (state == 7)
 	{
