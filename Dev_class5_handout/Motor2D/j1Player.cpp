@@ -66,7 +66,7 @@ bool j1Player::Start()
 
 			player_coll = App->collision->AddCollider({ coll_rect.x, coll_rect.y, coll_rect.w, coll_rect.h }, coll_type, App->player);
 			fx_death = App->audio->LoadFx("audio/fx/player_death_fx.wav");
-			fx_jump = App->audio->LoadFx("audio/fx/player_jump_fx.wav");
+			fx_jump = App->audio->LoadFx("player_jump.wav");
 		}
 	}
 	return ret;
@@ -325,7 +325,8 @@ void j1Player::CheckState()
 		break;
 
 	case DEATH_STATE:
-		state = AIR_STATE;
+		velocity.x = 0;
+		velocity.y = 0;
 		break;
 
 	case GOD_STATE:
@@ -402,116 +403,116 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	uint directionRight = (c2->rect.x + c2->rect.w < position.x);
 	uint directionUp = (position.y < c2->rect.y + c2->rect.h);
 	uint directionCornerDown = (c2->rect.y + c2->rect.h / 4 < position.y);
-
-	switch (c2->type)
-	{
-	case COLLIDER_GROUND:
-		//Check if leaving the ground
-		//Check collision from right
-		if (directionRight && directionCornerDown) {
-			position.x = c2->rect.x + c2->rect.w + c1->rect.w / 2;
-		}
-		//Check collision from left
-		else if (directionLeft && directionCornerDown)
+	if (state != DEATH_STATE) {
+		switch (c2->type)
 		{
-			position.x = c2->rect.x - c1->rect.w / 2;
-		}
-		//Check collision from up
-		else if (directionUp)
-		{
-			position.y = c2->rect.y;
-			if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE) || state == AIR_STATE)
-			{
-				state = IDLE_STATE;
-			}
-		}
-		//Check collision from down
-		else
-		{
-			velocity.y = 0;
-			state = AIR_STATE;
-			position.y = c2->rect.y + c2->rect.h + c1->rect.h;
-		}
-		break;
-
-	case COLLIDER_WALL:
-		if (c2->type == COLLIDER_WALL)
-		{
+		case COLLIDER_GROUND:
+			//Check if leaving the ground
 			//Check collision from right
 			if (directionRight) {
-				if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
-				{
-					state = CLING_STATE;
-					flipX = SDL_FLIP_NONE;
-
-				}
 				position.x = c2->rect.x + c2->rect.w + c1->rect.w / 2;
 			}
 			//Check collision from left
 			else if (directionLeft)
 			{
-				if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
-				{
-					state = CLING_STATE;
-					flipX = SDL_FLIP_HORIZONTAL;
-
-				}
 				position.x = c2->rect.x - c1->rect.w / 2;
 			}
-		}
-		break;
-
-	case COLLIDER_PLATFORM:
-		//Check if leaving the ground
-		//Check if it's jumping or falling
-		if (velocity.y > 0)
-		{
-			if (position.y < c2->rect.y)
+			//Check collision from up
+			else if (directionUp)
 			{
-				jump_anim.Reset();
-				state = IDLE_STATE;
-			}
-		}
-		else
-		{
-			//Check collision form right
-			if (directionRight && directionCornerDown)
-			{
-				position.x += maxVelocity.x;
-			}
-			//Check collision form left
-			else if (directionLeft && directionCornerDown)
-			{
-				position.x -= maxVelocity.x;
-			}
-			else {
 				position.y = c2->rect.y;
-				jump_anim.Reset();
 				if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE) || state == AIR_STATE)
 				{
 					state = IDLE_STATE;
 				}
 			}
-		}
-		break;
+			//Check collision from down
+			else
+			{
+				velocity.y = 0;
+				state = AIR_STATE;
+				position.y = c2->rect.y + c2->rect.h + c1->rect.h;
+			}
+			break;
 
-	case COLLIDER_DEATH:
-		state = DEATH_STATE;
-		break;
+		case COLLIDER_WALL:
+			if (c2->type == COLLIDER_WALL)
+			{
+				//Check collision from right
+				if (directionRight) {
+					if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
+					{
+						state = CLING_STATE;
+						flipX = SDL_FLIP_NONE;
 
-	case COLLIDER_WIN:
-		LOG("win");
-		if (App->scene->IsEnabled())
-		{
-			App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
+					}
+					position.x = c2->rect.x + c2->rect.w + c1->rect.w / 2;
+				}
+				//Check collision from left
+				else if (directionLeft)
+				{
+					if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
+					{
+						state = CLING_STATE;
+						flipX = SDL_FLIP_HORIZONTAL;
+
+					}
+					position.x = c2->rect.x - c1->rect.w / 2;
+				}
+			}
+			break;
+
+		case COLLIDER_PLATFORM:
+			//Check if leaving the ground
+			//Check if it's jumping or falling
+			if (velocity.y > 0)
+			{
+				if (position.y < c2->rect.y)
+				{
+					jump_anim.Reset();
+					state = IDLE_STATE;
+				}
+			}
+			else
+			{
+				//Check collision form right
+				if (directionRight && directionCornerDown)
+				{
+					position.x += maxVelocity.x;
+				}
+				//Check collision form left
+				else if (directionLeft && directionCornerDown)
+				{
+					position.x -= maxVelocity.x;
+				}
+				else {
+					position.y = c2->rect.y;
+					jump_anim.Reset();
+					if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) && (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_IDLE) || state == AIR_STATE)
+					{
+						state = IDLE_STATE;
+					}
+				}
+			}
+			break;
+
+		case COLLIDER_DEATH:
+			state = DEATH_STATE;
+			break;
+
+		case COLLIDER_WIN:
+			LOG("win");
+			if (App->scene->IsEnabled())
+			{
+				App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
+			}
+			else if (App->scene2->IsEnabled())
+			{
+				App->fadeToBlack->FadeToBlack(App->scene2, App->scene);
+			}
+			break;
 		}
-		else if (App->scene2->IsEnabled())
-		{
-			App->fadeToBlack->FadeToBlack(App->scene2, App->scene);
-		}
-		break;
 	}
-
 }
 
 void j1Player::DebugInput()

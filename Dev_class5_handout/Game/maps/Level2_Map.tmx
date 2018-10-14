@@ -13168,11 +13168,11 @@
   </data>
  </layer>
  <objectgroup name="Colliders">
-  <object id="1" name="GROUND" type="GROUND_COLLIDER" x="125.833" y="181.167" width="52.5" height="169.5"/>
+  <object id="1" name="GROUND" type="GROUND_COLLIDER" x="125.833" y="169.917" width="52.5" height="180.75"/>
   <object id="3" name="GROUND" type="GROUND_COLLIDER" x="-2.5" y="325" width="125.5" height="26.5"/>
-  <object id="7" name="GROUND" type="GROUND_COLLIDER" x="268.667" y="124" width="54.3333" height="228.333"/>
+  <object id="7" name="GROUND" type="GROUND_COLLIDER" x="268.667" y="124" width="54.3333" height="135"/>
   <object id="8" name="GROUND" type="GROUND_COLLIDER" x="380" y="16.5" width="36" height="134.5"/>
-  <object id="9" name="GROUND" type="GROUND_COLLIDER" x="480" y="92.5" width="50" height="259.5"/>
+  <object id="9" name="GROUND" type="GROUND_COLLIDER" x="480" y="92.5" width="50" height="164.833"/>
   <object id="10" name="GROUND" type="GROUND_COLLIDER" x="-0.666667" y="0" width="613.334" height="16"/>
   <object id="11" name="GROUND" type="GROUND_COLLIDER" x="-0.666667" y="18" width="67.3333" height="255.333"/>
   <object id="16" name="WALL" type="WALL_COLLIDER" x="120" y="238.727" width="5.09659" height="36.0308"/>
@@ -13180,7 +13180,6 @@
   <object id="4" name="PLATFORM" type="PLATFORM_COLLIDER" x="178.545" y="208.727" width="24.1818" height="14.5455"/>
   <object id="5" name="PLATFORM" type="PLATFORM_COLLIDER" x="324.182" y="208.182" width="86.1818" height="15.4545"/>
   <object id="6" name="PLATFORM" type="PLATFORM_COLLIDER" x="323.818" y="144.432" width="22.875" height="12.7045"/>
-  <object id="19" name="GROUND" type="GROUND_COLLIDER" x="127.545" y="169" width="48.1591" height="11.4091"/>
   <object id="20" name="WALL" type="WALL_COLLIDER" x="416.25" y="92.9375" width="11" height="38.25"/>
   <object id="21" name="WALL" type="WALL_COLLIDER" x="471.727" y="141.455" width="7.90909" height="36.0909"/>
   <object id="22" name="GROUND" type="GROUND_COLLIDER" x="613.458" y="209" width="60.875" height="69.6667"/>
@@ -13204,10 +13203,7 @@
   <object id="45" name="GROUND" type="GROUND_COLLIDER" x="1191" y="294.333" width="168.333" height="14.3333"/>
  </objectgroup>
  <objectgroup name="Logic Collisions">
-  <object id="13" name="DEATH" type="DEATH_COLLIDER" x="179" y="264" width="90" height="15"/>
-  <object id="14" name="DEATH" type="DEATH_COLLIDER" x="323.5" y="261" width="153" height="22.5"/>
-  <object id="15" name="DEATH" type="DEATH_COLLIDER" x="531.5" y="264" width="81.5" height="14"/>
-  <object id="29" name="DEATH" type="DEATH_COLLIDER" x="676.25" y="262.5" width="71.75" height="12"/>
+  <object id="13" name="DEATH" type="DEATH_COLLIDER" x="179" y="264" width="610.667" height="23"/>
   <object id="30" name="DEATH" type="DEATH_COLLIDER" x="802.5" y="104.5" width="191.5" height="12.25"/>
   <object id="42" name="DEATH" type="DEATH_COLLIDER" x="1109" y="310" width="80" height="15"/>
   <object id="46" name="WIN" type="WIN_COLLIDER" x="1338.67" y="202.167" width="20" height="91"/>
