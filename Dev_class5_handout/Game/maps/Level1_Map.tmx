@@ -26681,7 +26681,6 @@
   <object id="5" name="GROUND" type="GROUND_COLLIDER" x="584" y="164.5" width="88.5" height="38.5"/>
   <object id="7" name="GROUND" type="GROUND_COLLIDER" x="47.1667" y="218" width="196.455" height="7.16667"/>
   <object id="11" name="GROUND" type="GROUND_COLLIDER" x="673.25" y="185.25" width="47.5" height="13.0833"/>
-  <object id="12" name="GROUND" type="GROUND_COLLIDER" x="721.25" y="197.568" width="50.8636" height="12.1818"/>
   <object id="28" name="GROUND" type="GROUND_COLLIDER" x="1420.91" y="172.182" width="53.6364" height="147.151"/>
   <object id="29" name="GROUND" type="GROUND_COLLIDER" x="1727.77" y="80.5" width="81.4545" height="143.546"/>
   <object id="32" name="GROUND" type="GROUND_COLLIDER" x="1170.25" y="233.5" width="32.75" height="18.4473"/>
@@ -26706,15 +26705,15 @@
   <object id="147" name="GROUND" type="GROUND_COLLIDER" x="1198.22" y="254.58" width="53.0682" height="42.0909"/>
   <object id="148" name="GROUND" type="GROUND_COLLIDER" x="1165.33" y="64.5" width="643.337" height="15"/>
   <object id="150" name="GROUND" type="GROUND_COLLIDER" x="-20.25" y="113.833" width="69.8333" height="104.333"/>
-  <object id="131" name="WALL" type="WALL_COLLIDER" x="1810.67" y="164.958" width="5.00003" height="20.875"/>
+  <object id="131" name="WALL" type="WALL_COLLIDER" x="1810.67" y="171.958" width="5.00003" height="7.625"/>
   <object id="155" name="PLATFORM" type="PLATFORM_COLLIDER" x="2384" y="176" width="32" height="16"/>
   <object id="156" name="PLATFORM" type="PLATFORM_COLLIDER" x="2447.75" y="255.5" width="31.75" height="16"/>
   <object id="157" name="GROUND" type="GROUND_COLLIDER" x="2353" y="38" width="207" height="11"/>
   <object id="158" name="GROUND" type="GROUND_COLLIDER" x="2503" y="51.5" width="55.75" height="126.333"/>
   <object id="159" name="GROUND" type="GROUND_COLLIDER" x="2550" y="263" width="108.939" height="41.5"/>
   <object id="161" name="GROUND" type="GROUND_COLLIDER" x="2270.83" y="205.75" width="74.4167" height="100.25"/>
-  <object id="163" name="WALL" type="WALL_COLLIDER" x="2559.8" y="131.295" width="3.70455" height="23.1136"/>
-  <object id="164" name="WALL" type="WALL_COLLIDER" x="2608.27" y="200.295" width="3.96591" height="19.0909"/>
+  <object id="163" name="WALL" type="WALL_COLLIDER" x="2559.8" y="140.295" width="3.70455" height="9.44693"/>
+  <object id="164" name="WALL" type="WALL_COLLIDER" x="2608.27" y="202.962" width="3.96591" height="8.42423"/>
   <object id="165" name="GROUND" type="GROUND_COLLIDER" x="2612.99" y="135.167" width="45.3382" height="125.25"/>
   <object id="169" name="PLATFORM" type="PLATFORM_COLLIDER" x="2659.57" y="144.318" width="87.75" height="15.7045"/>
   <object id="171" name="PLATFORM" type="PLATFORM_COLLIDER" x="2660.36" y="207.985" width="87.1818" height="15.75"/>
@@ -26725,10 +26724,10 @@
   <object id="185" name="GROUND" type="GROUND_COLLIDER" x="2661" y="276.5" width="188.5" height="10.5"/>
   <object id="188" name="GROUND" type="GROUND_COLLIDER" x="2967.5" y="100.75" width="71.5" height="203"/>
   <object id="189" name="GROUND" type="GROUND_COLLIDER" x="2789.25" y="54.5" width="75" height="123"/>
-  <object id="191" name="WALL" type="WALL_COLLIDER" x="2865.74" y="100.409" width="3.9506" height="20.2955"/>
+  <object id="191" name="WALL" type="WALL_COLLIDER" x="2865.74" y="108.159" width="3.9506" height="7.6705"/>
   <object id="192" name="GROUND" type="GROUND_COLLIDER" x="2563" y="55" width="184" height="15.5"/>
   <object id="193" name="GROUND" type="GROUND_COLLIDER" x="2862.67" y="34.6667" width="177.939" height="13.3333"/>
-  <object id="195" name="WALL" type="WALL_COLLIDER" x="1897.54" y="215.477" width="4.28409" height="20.8864"/>
+  <object id="195" name="WALL" type="WALL_COLLIDER" x="1897.54" y="220.227" width="4.28409" height="8.1364"/>
  </objectgroup>
  <objectgroup name="Logic Collisions">
   <object id="47" name="DEATH" type="DEATH_COLLIDER" x="404" y="208.667" width="187.667" height="44.0833"/>
@@ -26736,7 +26735,7 @@
   <object id="134" name="DEATH" type="DEATH_COLLIDER" x="1474" y="288.5" width="226" height="31.5"/>
   <object id="135" name="DEATH" type="DEATH_COLLIDER" x="1241.83" y="302.167" width="177.5" height="16.5"/>
   <object id="140" name="DEATH" type="DEATH_COLLIDER" x="2007" y="240.5" width="261.5" height="14.3333"/>
-  <object id="146" name="GROUND" type="GROUND_COLLIDER" x="720.568" y="209.576" width="50.8636" height="59.5151"/>
+  <object id="146" name="GROUND" type="GROUND_COLLIDER" x="720.568" y="198.576" width="50.8636" height="70.5151"/>
   <object id="160" name="DEATH" type="DEATH_COLLIDER" x="2346" y="296.167" width="201.5" height="24"/>
   <object id="186" name="DEATH" type="DEATH_COLLIDER" x="2850.33" y="288.667" width="114.167" height="13.3333"/>
   <object id="194" name="WIN" type="WIN_COLLIDER" x="3013" y="48.75" width="26.25" height="51"/>

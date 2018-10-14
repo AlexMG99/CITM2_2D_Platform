@@ -4,14 +4,14 @@
 	<window />
 	<textures />
 	<audio>
-		<volume value="4294967294" />
+		<volume value="26" />
 	</audio>
 	<scene />
 	<scene2 />
 	<map />
 	<player>
-		<position x="151.489563" y="221" />
-		<velocity x="4.99974175e-21" y="-0" />
+		<position x="488.274231" y="179" />
+		<velocity x="-6.55468213e-09" y="-0" />
 		<state value="IDLE_STATE" />
 		<coll x="0" y="0" />
 	</player>
@@ -20,6 +20,6 @@
 	</fadetoblack>
 	<collision />
 	<renderer>
-		<camera x="-198" y="-150" />
+		<camera x="-1208" y="-150" />
 	</renderer>
 </game_state>
