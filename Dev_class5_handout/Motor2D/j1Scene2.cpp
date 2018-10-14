@@ -62,8 +62,6 @@ bool j1Scene2::Update(float dt)
 		App->render->camera.y = -(int)(App->map->data.height * App->map->data.tile_height*App->win->GetScale()) + App->render->camera.h - App->player->position.y + App->win->GetHeight() / 2;
 	}
 
-	LOG("%f", App->player->position.y );
-
 	App->map->Draw();
 
 

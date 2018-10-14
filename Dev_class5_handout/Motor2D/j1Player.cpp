@@ -74,13 +74,11 @@ bool j1Player::Start()
 
 bool j1Player::PreUpdate()
 {
-
 	DebugInput();
 	if (state != DUCK_STATE && state != CLING_STATE)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
 		{
-
 			velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
 			flipX = SDL_FLIP_NONE;
 		}
@@ -91,31 +89,8 @@ bool j1Player::PreUpdate()
 			flipX = SDL_FLIP_HORIZONTAL;
 		}
 	}
-
-	if(godMode)
-	{
-		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) 
-		{
-			position.x -= 5;
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		{
-			position.y -= 5;
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		{
-			position.y += 5;
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		{
-			position.x += 5;
-		}
-	}
-	else
-	{
-		CheckState();
-	}
-
+	if(!godMode)CheckState();
+	if(state!=JUMP_STATE && state != CLING_STATE)velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
 	return true;
 }
 
@@ -125,12 +100,8 @@ bool j1Player::Update(float dt)
 	{
 		position.x += velocity.x;
 		position.y -= velocity.y;
-		if (state != DUCK_STATE)player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h + 1);
+		if (state != DUCK_STATE)player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h);
 		else { player_coll->SetPos(position.x - coll_rect.w / 2, position.y - coll_rect.h / 2); }
-	}
-	else
-	{
-		state = GOD_STATE;
 	}
 
 	PerformActions();
@@ -139,7 +110,6 @@ bool j1Player::Update(float dt)
 }
 bool j1Player::PostUpdate()
 {	
-
 	Draw();
 	return true;
 }
@@ -298,6 +268,7 @@ void j1Player::CheckState()
 		if (pressed_down) {
 			state = DUCK_STATE;
 		}
+
 		break;
 
 	case RUN_STATE:
@@ -490,7 +461,6 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		}
 		break;
 
-
 	case COLLIDER_PLATFORM:
 		//Check if leaving the ground
 		//Check if it's jumping or falling
@@ -576,4 +546,27 @@ void j1Player::DebugInput()
 	{
 		godMode = !godMode;
 	}
+
+	if (godMode)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			position.x -= 5;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			position.y -= 5;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			position.y += 5;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			position.x += 5;
+		}
+
+		state = GOD_STATE;
+	}
+	
 }

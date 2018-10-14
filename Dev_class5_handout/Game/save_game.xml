@@ -10,13 +10,13 @@
 	<scene2 />
 	<map />
 	<player>
-		<position x="152.415939" y="183" />
-		<velocity x="-0.629062057" y="-0" />
+		<position x="114.838348" y="176" />
+		<velocity x="-0.503297031" y="-0" />
 		<state value="IDLE_STATE" />
 	</player>
 	<fadetoblack />
 	<collision />
 	<renderer>
-		<camera x="-203" y="-150" />
+		<camera x="-90" y="-150" />
 	</renderer>
 </game_state>

@@ -29,7 +29,6 @@ bool j1Map::Awake(pugi::xml_node& config)
 	return ret;
 }
 
-
 void j1Map::Draw()
 {
 	if(map_loaded == false)
