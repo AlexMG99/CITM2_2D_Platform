@@ -102,7 +102,8 @@ bool j1Player::Update(float dt)
 	{
 		position.x += velocity.x;
 		position.y -= velocity.y;
-		if (state != DUCK_STATE)player_coll->SetPos((int)(position.x - coll_rect.w / 2), (int)(position.y - coll_rect.h));
+		if (state != DUCK_STATE && state != RUN_STATE)player_coll->SetPos((int)(position.x - coll_rect.w / 2), (int)(position.y - coll_rect.h));
+		else if (state == RUN_STATE) player_coll->SetPos((int)(position.x - coll_rect.w/2 ), (int)(position.y - coll_rect.h)); 
 		else { player_coll->SetPos((int)(position.x - coll_rect.w / 2), (int)(position.y - coll_rect.h / 2)); }
 	}
 
@@ -356,22 +357,27 @@ void j1Player::PerformActions()
 	case RUN_STATE:
 		velocity.y = (1 - acceleration.y)*velocity.y;
 		current_animation = &run_anim;
+		/*App->collision->ChangeSize(player_coll, 40, 30);*/
+		
 		break;
 
 	case JUMP_STATE:
 		velocity.y = jumpAcceleration*jumpMaxVelocity + (1 - acceleration.y)*velocity.y;
 		current_animation = &jump_anim;
+		App->collision->ChangeSize(player_coll, 40, 20);
 		break;
 
 	case AIR_STATE:
 		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
 		current_animation = &air_anim;
+		App->collision->ChangeSize(player_coll, 40, 20);
 		break;
 
 	case CLING_STATE:
 		velocity.x = 0;
 		velocity.y = 0;
 		current_animation = &cling_anim;
+		App->collision->ChangeSize(player_coll, 40, 20);
 		break;
 
 	case DUCK_STATE:
