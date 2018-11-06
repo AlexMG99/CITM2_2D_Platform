@@ -230,7 +230,7 @@ void j1Player::Draw() {
 	App->render->Blit(playerSpritesheet, (int)(position.x - coll_rect.w/2), (int)(position.y - coll_rect.h), &rect, flipX);
 }
 
-p2Animation j1Player::LoadAnimations(p2SString name) {
+p2Animation j1Player::LoadAnimations(p2SString name) const {
 	SDL_Rect frames;
 	p2Animation anim;
 	for (pugi::xml_node frames_node = player_file.child("player").child("animation").child(name.GetString()).child("frame"); frames_node; frames_node = frames_node.next_sibling("frame"))
@@ -256,7 +256,6 @@ void j1Player::CheckState()
 	bool released_right = App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP;
 	bool released_left = App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP;
 	bool released_down = App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP;
-	bool released_C = App->input->GetKey(SDL_SCANCODE_C) == KEY_UP;
 	bool press_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN;
 	
 	switch (state)
@@ -316,9 +315,6 @@ void j1Player::CheckState()
 		break;
 
 	case CLING_STATE:
-		if (released_C) {
-			state = AIR_STATE;
-		}
 		if (press_space)
 		{
 			jump_anim.Reset();
@@ -425,11 +421,13 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			//Check collision from right
 			if (directionRight && directionCornerDown) {
 				position.x = (float)(c2->rect.x + c2->rect.w + c1->rect.w / 2);
+				velocity.x = 0;
 			}
 			//Check collision from left
 			else if (directionLeft && directionCornerDown)
 			{
 				position.x = (float)(c2->rect.x - c1->rect.w / 2);
+				velocity.x = 0;
 			}
 			//Check collision from up
 			else if (directionUp)
@@ -454,23 +452,15 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				//Check collision from right
 				if (directionRight) {
-					if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
-					{
-						state = CLING_STATE;
-						flipX = SDL_FLIP_NONE;
-
-					}
+					state = CLING_STATE;
+					flipX = SDL_FLIP_NONE;
 					position.x = (float)(c2->rect.x + c2->rect.w + c1->rect.w / 2);
 				}
 				//Check collision from left
 				else if (directionLeft)
 				{
-					if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT)
-					{
-						state = CLING_STATE;
-						flipX = SDL_FLIP_HORIZONTAL;
-
-					}
+					state = CLING_STATE;
+					flipX = SDL_FLIP_HORIZONTAL;
 					position.x = (float)(c2->rect.x - c1->rect.w / 2);
 				}
 			}
@@ -481,7 +471,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			//Check if it's jumping or falling
 			if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
 				state = AIR_STATE;
-				c2->type == COLLIDER_NONE;
+				position.y--;
 			}
 			else {
 
@@ -522,7 +512,6 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 
 		case COLLIDER_WIN:
-			LOG("win");
 			if (App->scene->IsEnabled())
 			{
 				App->fadeToBlack->FadeToBlack(App->scene, App->scene2);

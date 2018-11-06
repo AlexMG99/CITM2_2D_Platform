@@ -68,7 +68,7 @@ private:
 	//Draw player in screen
 	void Draw();
 	//Load Player Animations
-	p2Animation LoadAnimations(p2SString name);
+	p2Animation LoadAnimations(p2SString name) const;
 	//Debug functionatilly
 	void DebugInput();
 
