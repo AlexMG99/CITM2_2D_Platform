@@ -25,6 +25,10 @@
     <fx_death>fx/player_death_fx.wav</fx_death>
     <fx_jump>fx/player_jump.wav</fx_jump>
   </player>
+  
+  <entity>
+    <path>entities.xml</path>
+  </entity>
 
   <map>
     <folder>maps/</folder>

@@ -53,7 +53,8 @@ bool j1Player::Start()
 	{
 		playerSpritesheet = App->tex->Load(player_node.child("image").attribute("source").value());
 
-		if (playerSpritesheet == nullptr) {
+		if (playerSpritesheet == nullptr) 
+		{
 			LOG("Error loading player texture!");
 			ret = false;
 		}
