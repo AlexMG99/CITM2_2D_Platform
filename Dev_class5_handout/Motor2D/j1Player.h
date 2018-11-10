@@ -64,6 +64,7 @@ public:
 	//Check Collision
 	void OnCollision(Collider* c1, Collider* c2);
 
+
 private:
 	//Draw player in screen
 	void Draw();

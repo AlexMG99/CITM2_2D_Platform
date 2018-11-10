@@ -36,6 +36,9 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {
 	LoadLevel();
+
+	App->player->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
+	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };
 	return true;
 }
 
@@ -60,7 +63,7 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x = -App->player->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
 	}
 
-	App->render->camera.y = -150;
+	App->render->camera.y = (int)App->map->data.player_properties.Get("camera.y");
 	App->map->Draw();
 
 	

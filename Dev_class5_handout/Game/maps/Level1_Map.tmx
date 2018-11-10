@@ -3,25 +3,23 @@
  <properties>
   <property name="camera.x" type="int" value="0"/>
   <property name="camera.y" type="int" value="-150"/>
-  <property name="col.x" type="int" value="0"/>
   <property name="coll.h" type="int" value="40"/>
   <property name="coll.w" type="int" value="20"/>
+  <property name="coll.x" type="int" value="0"/>
   <property name="coll.y" type="int" value="0"/>
-  <property name="coll_type" value="COLLIDER_PLAYER"/>
+  <property name="entityPosition.x" type="float" value="80"/>
+  <property name="entityPosition.y" type="float" value="176"/>
+  <property name="entity_state" value="ENTITY_IDLE"/>
   <property name="gravity.x" type="float" value="0.2"/>
   <property name="gravity.y" type="float" value="1"/>
-  <property name="jumpForce" type="float" value="1"/>
+  <property name="jumpAcceleration" type="float" value="1"/>
   <property name="jumpMaxVelocity" type="float" value="2"/>
   <property name="maxVelocity.x" type="float" value="2.75"/>
   <property name="maxVelocity.y" type="float" value="3"/>
   <property name="playerPosition.x" type="float" value="80"/>
   <property name="playerPosition.y" type="float" value="176"/>
-  <property name="state" value="AIR_STATE"/>
   <property name="velocity.x" type="float" value="0"/>
   <property name="velocity.y" type="float" value="0"/>
-  <property name="entityPosition.x" type="float" value="80"/>
-  <property name="entityPosition.y" type="float" value="176"/>
-  <property name="entity_state" value="ENTITY_IDLE"/>
  </properties>
  <tileset firstgid="1" name="background" tilewidth="16" tileheight="16" margin="1" tilecount="704" columns="32">
   <image source="background.png" width="514" height="355"/>
@@ -31,6 +29,7 @@
  </tileset>
  <layer name="Background" width="190" height="20">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="0.2"/>
   </properties>
   <data>
@@ -3838,6 +3837,7 @@
  </layer>
  <layer name="Background_Cave" width="190" height="20">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="0.1"/>
   </properties>
   <data>
@@ -7645,6 +7645,7 @@
  </layer>
  <layer name="Background_Wall" width="190" height="20">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>
@@ -11452,6 +11453,7 @@
  </layer>
  <layer name="Lava_Platforms" width="190" height="20">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>
@@ -15259,6 +15261,7 @@
  </layer>
  <layer name="Platforms" width="190" height="20">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>
@@ -19066,6 +19069,7 @@
  </layer>
  <layer name="Tiles" width="190" height="20">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>
@@ -22873,6 +22877,7 @@
  </layer>
  <layer name="Front_Objects" width="190" height="20">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>

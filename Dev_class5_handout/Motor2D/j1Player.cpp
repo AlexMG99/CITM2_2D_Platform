@@ -39,7 +39,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 
 bool j1Player::Start() 
 {
-	LOG("start player");
+	LOG("Start player:");
 	bool ret = true;
 
 	pugi::xml_parse_result	result = player_file.load_file(path.GetString());
@@ -67,9 +67,21 @@ bool j1Player::Start()
 			air_anim = LoadAnimations("air");
 			cling_anim = LoadAnimations("cling");
 
-			player_coll = App->collision->AddCollider({ coll_rect.x, coll_rect.y, coll_rect.w, coll_rect.h }, coll_type, App->player);
+			coll_rect = { (int)App->map->data.player_properties.Get("coll.x"), (int)App->map->data.player_properties.Get("coll.y"), (int)App->map->data.player_properties.Get("coll.w") , (int)App->map->data.player_properties.Get("coll.h") };
+			player_coll = App->collision->AddCollider(coll_rect , COLLIDER_PLAYER, App->player);
 			fx_death = App->audio->LoadFx(fx_death_name.GetString());
 			fx_jump = App->audio->LoadFx(fx_jump_name.GetString());
+
+			position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
+			velocity = { App->map->data.player_properties.Get("velocity.x"), App->map->data.player_properties.Get("velocity.y") };
+			maxVelocity = { App->map->data.player_properties.Get("maxVelocity.x"), App->map->data.player_properties.Get("maxVelocity.y") };
+			jumpMaxVelocity = App->map->data.player_properties.Get("jumpMaxVelocity");
+			jumpAcceleration = App->map->data.player_properties.Get("jumpAcceleration");
+			acceleration = { App->map->data.player_properties.Get("gravity.x") , App->map->data.player_properties.Get("gravity.y") };
+			falling = App->map->data.player_properties.Get("falling");
+
+			state = AIR_STATE;
+
 		}
 	}
 	return ret;
@@ -92,8 +104,9 @@ bool j1Player::PreUpdate()
 			flipX = SDL_FLIP_HORIZONTAL;
 		}
 	}
+
 	if(!godMode)CheckState();
-	if(state!=JUMP_STATE && state != CLING_STATE)velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
+	if(state !=JUMP_STATE && state != CLING_STATE)velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
 	return true;
 }
 
@@ -364,6 +377,7 @@ void j1Player::PerformActions()
 
 	case JUMP_STATE:
 		velocity.y = jumpAcceleration*jumpMaxVelocity + (1 - acceleration.y)*velocity.y;
+		LOG("%f", velocity.y);
 		current_animation = &jump_anim;
 		App->collision->ChangeSize(player_coll, 40, 20);
 		break;

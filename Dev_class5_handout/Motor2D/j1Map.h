@@ -8,6 +8,32 @@
 #include "j1Collision.h"
 
 // ----------------------------------------------------
+struct Properties
+{
+	struct Property
+	{
+		p2SString name;
+		float value;
+	};
+
+	~Properties()
+	{
+		p2List_item<Property*>* item;
+		item = list.start;
+
+		while (item != NULL)
+		{
+			RELEASE(item->data);
+			item = item->next;
+		}
+
+		list.clear();
+	}
+
+	float Get(const char* name, float default_value = 0) const;
+
+	p2List<Property*>	list;
+};
 
 struct CollObject
 {
@@ -30,8 +56,8 @@ struct MapLayer
 	p2SString	name;
 	uint		width = 0u;
 	uint		height = 0u;
-	float		parallax_speed = 0.0F;
 	uint*		data = nullptr;
+	Properties	properties;
 	~MapLayer()
 	{
 		if (data != nullptr) 
@@ -87,6 +113,7 @@ struct MapData
 	p2List<MapLayer*>		layers;
 	p2List<CollisionLayer*>	collision_layer;
 	p2List<Collider*>		collider_list;
+	Properties				player_properties;
 
 };
 
@@ -124,7 +151,7 @@ private:
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer);
 	bool LoadObject(pugi::xml_node& node, CollObject* coll_obj);
-	bool LoadProperties(pugi::xml_node& node);
+	bool LoadProperties(pugi::xml_node & node, Properties & properties);
 
 	TileSet* GetTilesetFromTileId(int id) const;
 

@@ -32,12 +32,18 @@ bool j1Map::Awake(pugi::xml_node& config)
 
 void j1Map::Draw()
 {
-	if(map_loaded == false)
+	if (map_loaded == false)
 		return;
 
-	p2List_item<MapLayer*>* map_item = data.layers.start;
-	while (map_item != NULL) {
-		MapLayer* layer = map_item->data;
+	p2List_item<MapLayer*>* item = data.layers.start;
+
+	for (; item != NULL; item = item->next)
+	{
+		MapLayer* layer = item->data;
+
+		if (layer->properties.Get("draw") != 1)
+			continue;
+
 		for (int y = 0; y < data.height; ++y)
 		{
 			for (int x = 0; x < data.width; ++x)
@@ -46,17 +52,29 @@ void j1Map::Draw()
 				if (tile_id > 0)
 				{
 					TileSet* tileset = GetTilesetFromTileId(tile_id);
-					if (tileset != nullptr)
-					{
-						SDL_Rect r = tileset->GetTileRect(tile_id);
-						iPoint pos = MapToWorld(x, y);
-						App->render->Blit(tileset->texture, pos.x, pos.y, &r, SDL_FLIP_NONE, layer->parallax_speed);
-					}
+
+					SDL_Rect r = tileset->GetTileRect(tile_id);
+					iPoint pos = MapToWorld(x, y);
+
+					App->render->Blit(tileset->texture, pos.x, pos.y, &r, SDL_FLIP_NONE, layer->properties.Get("parallax_speed"));
 				}
 			}
 		}
-		map_item = map_item->next;
 	}
+}
+
+float Properties::Get(const char* value, float default_value) const
+{
+	p2List_item<Property*>* item = list.start;
+
+	while (item)
+	{
+		if (item->data->name == value)
+			return item->data->value;
+		item = item->next;
+	}
+
+	return default_value;
 }
 
 iPoint j1Map::MapToWorld(int x, int y) const
@@ -224,11 +242,8 @@ bool j1Map::Load(const char* file_name)
 		data.collision_layer.add(collision);
 	}
 
-	//Load propierties
-	if (ret == true)
-	{
-		ret = LoadProperties(map_file.child("map"));
-	}
+	// Load Player Properties
+	LoadProperties(map_file.child("map"), data.player_properties);
 
 	//Create Colliders ----------------------------------------------------------
 	p2List_item<CollisionLayer*>* item_collision_layer = data.collision_layer.start;
@@ -270,7 +285,6 @@ bool j1Map::Load(const char* file_name)
 			MapLayer* l = item_layer->data;
 			LOG("Layer ----");
 			LOG("name: %s", l->name.GetString());
-			LOG("parallax_speed: %f", l->parallax_speed);
 			LOG("tile width: %d tile height: %d", l->width, l->height);
 			item_layer = item_layer->next;
 		}
@@ -429,7 +443,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->name = node.attribute("name").as_string();
 	layer->width = node.attribute("width").as_uint();
 	layer->height = node.attribute("height").as_uint();
-	layer->parallax_speed = node.child("properties").child("property").attribute("value").as_float();
+	LoadProperties(node, layer->properties);
 	layer->data = new uint[layer->width*layer->height];
 	memset(layer->data, 0, sizeof(uint)*layer->width*layer->height);
 
@@ -494,119 +508,28 @@ bool j1Map::CheckScreen(const iPoint position, const int width) {
 	return true;
 }
 
-bool j1Map::LoadProperties(pugi::xml_node& node)
+// Load a group of properties from a node and fill a list with it
+bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 {
-	for (pugi::xml_node property_node = node.child("properties").child("property"); property_node; property_node = property_node.next_sibling("property"))
+	bool ret = false;
+	pugi::xml_node data = node.child("properties");
+
+	if (data != NULL)
 	{
-		p2SString property_name(property_node.attribute("name").as_string());
-		LOG("%s", property_name.GetString());
-		if (property_name == "gravity.x")
+		pugi::xml_node prop;
+
+		for (prop = data.child("property"); prop; prop = prop.next_sibling("property"))
 		{
-			App->player->acceleration.x = property_node.attribute("value").as_float();
-		}
-		if (property_name == "gravity.y")
-		{
-			App->player->acceleration.y = property_node.attribute("value").as_float();
-		}
-		if (property_name == "playerPosition.x")
-		{
-			App->player->position.x = property_node.attribute("value").as_float();
-		}
-		if (property_name == "playerPosition.y")
-		{
-			App->player->position.y = property_node.attribute("value").as_float();
-		}
-		if (property_name == "maxVelocity.x")
-		{
-			App->player->maxVelocity.x = property_node.attribute("value").as_float();
-		}
-		if (property_name == "maxVelocity.y")
-		{
-			App->player->maxVelocity.y = property_node.attribute("value").as_float();
-		}
-		if (property_name == "jumpForce")
-		{
-			App->player->jumpAcceleration = property_node.attribute("value").as_float();
-		}
-		if (property_name == "jumpMaxVelocity")
-		{
-			App->player->jumpMaxVelocity = property_node.attribute("value").as_float();
-		}
-		if (property_name == "coll.x")
-		{
-			App->player->coll_rect.x = property_node.attribute("value").as_int();
-		}
-		if (property_name == "coll.y")
-		{
-			App->player->coll_rect.y = property_node.attribute("value").as_int();
-		}
-		if (property_name == "coll.w")
-		{
-			App->player->coll_rect.w = property_node.attribute("value").as_int();
-		}
-		if (property_name == "coll.h")
-		{
-			App->player->coll_rect.h = property_node.attribute("value").as_int();
-		}
-		if (property_name == "state")
-		{
-			p2SString state_name(property_node.attribute("value").as_string());
-			if (state_name == "AIR_STATE")
-			{
-				App->player->state = AIR_STATE;
-			}
-		}
-		if (property_name == "coll_type")
-		{
-			p2SString coll_name(property_node.attribute("value").as_string());
-			if (coll_name == "COLLIDER_PLAYER")
-			{
-				App->player->coll_type = COLLIDER_PLAYER;
-			}
-		}
-		if (property_name == "camera.x")
-		{
-			App->render->camera.x = property_node.attribute("value").as_int();
-		}
-		if (property_name == "camera.y")
-		{
-			App->render->camera.y = property_node.attribute("value").as_int();
-		}
-		if (property_name == "velocity.x")
-		{
-			App->player->velocity.x = property_node.attribute("value").as_float();
-		}
-		if (property_name == "velocity.y")
-		{
-			App->player->velocity.y = property_node.attribute("value").as_float();
-		}
-		if (property_name == "falling")
-		{
-			App->player->falling = property_node.attribute("value").as_bool();
-		}
-		if (property_name == "god_mode")
-		{
-			App->player->godMode = property_node.attribute("value").as_bool();
-		}
-		if (property_name == "entityPosition.x")
-		{
-			App->entity->position.x = property_node.attribute("value").as_float();
-		}
-		if (property_name == "entityPosition.y")
-		{
-			App->entity->position.y = property_node.attribute("value").as_float();
-		}
-		if (property_name == "entity_state")
-		{
-			p2SString entity_state(property_node.attribute("value").as_string());
-			if (entity_state == "ENTITY_IDLE")
-			{
-				App->entity->state = ENTITY_IDLE;
-			}
+			Properties::Property* p = new Properties::Property();
+
+			p->name = prop.attribute("name").as_string();
+			p->value = prop.attribute("value").as_float();
+
+			properties.list.add(p);
 		}
 	}
 
-	return true;
+	return ret;
 }
 
 
