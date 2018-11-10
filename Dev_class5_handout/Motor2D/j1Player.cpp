@@ -90,20 +90,6 @@ bool j1Player::Start()
 bool j1Player::PreUpdate()
 {
 	DebugInput();
-	if (state != DUCK_STATE && state != CLING_STATE)
-	{
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
-		{
-			velocity.x = acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x;
-			flipX = SDL_FLIP_NONE;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
-		{
-
-			velocity.x = acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x;
-			flipX = SDL_FLIP_HORIZONTAL;
-		}
-	}
 
 	if(!godMode)CheckState();
 	if(state !=JUMP_STATE && state != CLING_STATE)velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
@@ -112,6 +98,22 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
+
+	if (state != DUCK_STATE && state != CLING_STATE)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
+		{
+			velocity.x = (acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x);
+			flipX = SDL_FLIP_NONE;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
+		{
+
+			velocity.x = (acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x);
+			flipX = SDL_FLIP_HORIZONTAL;
+		}
+	}
+
 	if (!godMode) 
 	{
 		position.x += velocity.x;
