@@ -69,7 +69,7 @@ private:
 	void Draw();
 	//Load Player Animations
 	p2Animation LoadAnimations(p2SString name) const;
-	//Debug functionatilly
+	//Debug functionallity
 	void DebugInput();
 
 public:

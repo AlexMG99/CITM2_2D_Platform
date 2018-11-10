@@ -12,21 +12,22 @@ struct SDL_Texture;
 struct SDL_Rect;
 
 enum Entity_State {
+	ENTITY_NONE=-1,
 
-	IDLE_STATE,
-	RIGHT_STATE,
+	ENTITY_IDLE,
+	/*RIGHT_STATE,
 	LEFT_STATE,
 	FALL_STATE,
-	DEATH_STATE,
+	DEATH_STATE,*/
 
 };
 
-enum Entity_Type {
-
-	CRAB,
-	BAT,
-
-};
+//enum Entity_Type {
+//
+//	CRAB,
+//	BAT,
+//
+//};
 
 class j1Entity : public j1Module
 {
@@ -55,31 +56,34 @@ public:
 	//Called before quitting
 	bool CleanUp();
 
+	//Load Game State
+	bool Load(pugi::xml_node&);
+
 	//Pathfinding functions
 
 	
 private:
 
 	//Draw Entity on screen
-	/*void Draw()*/;
+	void Draw();
 	//Load Entity Animations
 	p2Animation LoadAnimations(p2SString name) const;
+	//Debug functionallity
 
 public: 
 	fPoint position;
-	COLLIDER_TYPE coll_type = COLLIDER_NONE;
-	Collider* crab_coll=nullptr;
+	Entity_State state = ENTITY_NONE;
+	
+	
 
 private:
-	/*Entity_State estate = IDLE;*/
+	
 	p2SString path;
-
-	p2Animation idel_anim;
-	p2Animation left_anim;
-	p2Animation right_anim;
-
+    p2Animation* current_animation=nullptr;
+    p2Animation  entity_idle;
 
 	pugi::xml_document entities_file;
+
 	SDL_Texture* entitiesSpritesheet = nullptr;
 };
 

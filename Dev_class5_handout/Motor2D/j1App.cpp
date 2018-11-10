@@ -13,6 +13,7 @@
 #include "j1Map.h"
 #include "j1App.h"
 #include "j1Player.h"
+#include "j1Entity.h"
 #include "j1Collision.h"
 #include "j1FadeToBlack.h"
 
@@ -31,6 +32,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	scene2 = new j1Scene2();
 	map = new j1Map();
 	player = new j1Player();
+	entity = new j1Entity();
 	collision = new j1Collision();
 	fadeToBlack = new j1FadeToBlack();
 
@@ -44,6 +46,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene2);
 	AddModule(map);
 	AddModule(player);
+	AddModule(entity);
 	AddModule(fadeToBlack);
 	AddModule(collision);
 

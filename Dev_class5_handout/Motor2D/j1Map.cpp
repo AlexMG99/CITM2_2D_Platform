@@ -6,6 +6,7 @@
 #include "j1Textures.h"
 #include "j1Collision.h"
 #include "j1Player.h"
+#include "j1Entity.h"
 #include "j1Map.h"
 #include <math.h>
 
@@ -586,6 +587,22 @@ bool j1Map::LoadProperties(pugi::xml_node& node)
 		if (property_name == "god_mode")
 		{
 			App->player->godMode = property_node.attribute("value").as_bool();
+		}
+		if (property_name == "entityPosition.x")
+		{
+			App->entity->position.x = property_node.attribute("value").as_float();
+		}
+		if (property_name == "entityPosition.y")
+		{
+			App->entity->position.y = property_node.attribute("value").as_float();
+		}
+		if (property_name == "entity_state")
+		{
+			p2SString entity_state(property_node.attribute("value").as_string());
+			if (entity_state == "ENTITY_IDLE")
+			{
+				App->entity->state = ENTITY_IDLE;
+			}
 		}
 	}
 
