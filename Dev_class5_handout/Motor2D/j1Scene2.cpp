@@ -39,7 +39,7 @@ bool j1Scene2::Start()
 }
 
 // Called each loop iteration
-bool j1Scene2::PreUpdate()
+bool j1Scene2::PreUpdate(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame();

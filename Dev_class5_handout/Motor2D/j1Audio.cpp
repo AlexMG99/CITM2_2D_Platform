@@ -57,7 +57,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 
 	return ret;
 }
-bool j1Audio::PreUpdate() {
+bool j1Audio::PreUpdate(float dt) {
 	
 	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_REPEAT)
 	{

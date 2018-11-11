@@ -38,13 +38,13 @@ public:
 	bool Start();
 
 	//Called every loop iteration
-	bool PreUpdate();
+	bool PreUpdate(float dt) override;
 
 	//Called every loop iteration
-	bool Update(float dt);
+	bool Update(float dt) override;
 
 	//Called every loop iteration
-	bool PostUpdate();
+	bool PostUpdate() override;
   
 	//Called before quitting
 	bool CleanUp();
@@ -67,7 +67,7 @@ public:
 
 private:
 	//Draw player in screen
-	void Draw();
+	void Draw(float dt) const;
 	//Load Player Animations
 	p2Animation LoadAnimations(p2SString name) const;
 	//Debug functionallity

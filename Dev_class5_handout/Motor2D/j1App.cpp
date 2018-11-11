@@ -250,7 +250,7 @@ bool j1App::PreUpdate()
 			if (pModule->active == false) {
 				continue;
 			}
-			ret = item->data->PreUpdate();
+			ret = item->data->PreUpdate(dt);
 		}
 	}
 
@@ -300,6 +300,7 @@ bool j1App::PostUpdate()
 			}
 
 			ret = item->data->PostUpdate();
+			item->data->Draw(dt);
 		}
 	}
 
