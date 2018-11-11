@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="190" height="20" tilewidth="16" tileheight="16" nextobjectid="197">
+<<<<<<< HEAD
  <properties>
   <property name="acceleration.x" type="float" value="150"/>
   <property name="acceleration.y" type="float" value="120"/>
@@ -15,6 +16,20 @@
   <property name="velocity.y" type="float" value="0"/>
  </properties>
  <tileset firstgid="1" name="pathfinding" tilewidth="16" tileheight="16" tilecount="2" columns="2">
+  <entity_properties>
+    <property name="Crab1Position.x" type="float" value="290"/>
+    <property name="Crab1Position.y" type="float" value="156"/>
+    <property name="crabcoll.h" type="int" value="28"/>
+    <property name="crabcoll.w" type="int" value="28"/>
+    <property name="crabcoll.x" type="int" value="0"/>
+    <property name="crabcoll.y" type="int" value="0"/>
+    <property name="Bat1Position.x" type="float" value="190"/>
+    <property name="Bat1Position.y" type="float" value="156"/>
+    <property name="batcoll.h" type="int" value="30"/>
+    <property name="batcoll.w" type="int" value="31"/>
+    <property name="batcoll.x" type="int" value="0"/>
+    <property name="batcoll.y" type="int" value="0"/>
+  </entity_properties>
   <image source="pathfinding.png" width="32" height="16"/>
  </tileset>
  <tileset firstgid="3" name="background" tilewidth="16" tileheight="16" margin="1" tilecount="374" columns="17">
