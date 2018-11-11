@@ -154,7 +154,7 @@ bool j1Player::Load(pugi::xml_node& player_node) {
 	velocity.x = player_node.child("velocity").attribute("x").as_float();
 	velocity.y = player_node.child("velocity").attribute("y").as_float();
 	coll_rect.x = player_node.child("collider").attribute("x").as_int();
-	coll_rect.x = player_node.child("collider").attribute("y").as_int();
+	coll_rect.y = player_node.child("collider").attribute("y").as_int();
 	p2SString state_name = player_node.child("state").attribute("value").as_string();
 	if (state_name == "IDLE_STATE") 
 	{
