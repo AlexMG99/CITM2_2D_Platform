@@ -48,13 +48,13 @@ public:
 	bool Start();
 
 	//Called every loop iteration
-	bool PreUpdate(float dt) override;
+	bool PreUpdate();
 
 	//Called every loop iteration
-	bool Update(float dt) override;
+	bool Update(float dt);
 
 	//Called every loop iteration
-	bool PostUpdate() override;
+	bool PostUpdate();
 
 	//Called before quitting
 	bool CleanUp();
@@ -63,32 +63,47 @@ public:
 	bool Load(pugi::xml_node&);
 
 	//PerformActions
-	void PerformActions();
-
+	void PerformCrabActions(float dt);
+	void PerformBatActions(float dt);
 	//Pathfinding functions
 
-	
+
 private:
 
 	//Draw Entity on screen
 	void Draw(float dt) const;
 	//Load Entity Animations
-	p2Animation LoadAnimations(p2SString name) const;
+	p2Animation LoadCrabAnimations(p2SString name) const;
+	p2Animation LoadBatAnimations(p2SString name) const;
 	//Debug functionallity
 
-public: 
-	fPoint entity_position;
-	Entity_State state = ENTITY_NONE;
-	
-	
+public:
+	fPoint crab1_position;
+	fPoint bat1_position;
+	SDL_Rect crab_rect;
+	SDL_Rect bat_rect;
+	Collider* crab_coll = nullptr;
+	Collider* bat_coll = nullptr;
+
+
+
+	Entity_State crab1_state = ENTITY_NONE;
+	Entity_State bat1_state = ENTITY_NONE;
+
+
 
 private:
-	
+
 	p2SString path;
-    p2Animation* current_animation=nullptr;
-    p2Animation  crab1_idle;
+	p2Animation* currentcrab_animation = nullptr;
+	p2Animation* currentbat_animation = nullptr;
+	p2Animation  crab1_idle;
 	p2Animation  crab1_right;
 	p2Animation  crab1_left;
+
+	p2Animation  bat1_idle;
+	p2Animation  bat1_right;
+	p2Animation  bat1_left;
 
 	pugi::xml_document entities_file;
 

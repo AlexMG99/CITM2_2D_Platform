@@ -25,7 +25,7 @@ j1Entity::~j1Entity()
 {
 }
 
-bool j1Entity::Awake(pugi::xml_node& config) 
+bool j1Entity::Awake(pugi::xml_node& config)
 {
 	LOG("Init SDL entity");
 	bool ret = true;
@@ -56,26 +56,42 @@ bool j1Entity::Start()
 			LOG("Error loadring entities texture!");
 			ret = false;
 		}
-		else 
+		else
 		{
-			crab1_idle = LoadAnimations("idle");
-			crab1_right = LoadAnimations("right");
-			crab1_left = LoadAnimations("left");
+			crab1_idle = LoadCrabAnimations("idle");
+			crab1_right = LoadCrabAnimations("right");
+			crab1_left = LoadCrabAnimations("left");
 
-			entity_position = { App->map->data.entity_properties.Get("entityPosition.x"), App->map->data.entity_properties.Get("entityPosition.y") };
-			
-			state = ENTITY_LEFT;
+			bat1_idle = LoadBatAnimations("idle");
+			bat1_right = LoadBatAnimations("right");
+			bat1_left = LoadBatAnimations("left");
+
+
+			crab1_position = { App->map->data.entity_properties.Get("Crab1Position.x"), App->map->data.entity_properties.Get("Crab1Position.y") };
+			bat1_position = { App->map->data.entity_properties.Get("Bat1Position.x"),App->map->data.entity_properties.Get("Bat1Position.y") };
+
+			crab_rect = { (int)App->map->data.entity_properties.Get("crabcoll.x"),(int)App->map->data.entity_properties.Get("crabcoll.y"),(int)App->map->data.entity_properties.Get("crabcoll.w"),(int)App->map->data.entity_properties.Get("crabcoll.h") };
+			crab_coll = App->collision->AddCollider(crab_rect, COLLIDER_CRAB, App->entity);
+			bat_rect = { (int)App->map->data.entity_properties.Get("crabcoll.x"),(int)App->map->data.entity_properties.Get("crabcoll.y"),(int)App->map->data.entity_properties.Get("crabcoll.w"),(int)App->map->data.entity_properties.Get("crabcoll.h") };
+			bat_coll = App->collision->AddCollider(bat_rect, COLLIDER_BAT, App->entity);
+
+			crab1_state = ENTITY_IDLE;
+			bat1_state = ENTITY_IDLE;
 
 		}
-		
-		
+
+
 	}
 	return ret;
 }
 
-bool j1Entity::PreUpdate(float dt)
+bool j1Entity::PreUpdate()
 {
-	if (state == ENTITY_LEFT) 
+	if (crab1_state == ENTITY_LEFT)
+	{
+		flipX = SDL_FLIP_HORIZONTAL;
+	}
+	if (bat1_state == ENTITY_LEFT)
 	{
 		flipX = SDL_FLIP_HORIZONTAL;
 	}
@@ -84,16 +100,18 @@ bool j1Entity::PreUpdate(float dt)
 
 bool j1Entity::Update(float dt)
 {
-	PerformActions();
+	PerformCrabActions(dt);
+	PerformBatActions(dt);
 	return true;
 };
 
-bool j1Entity::PostUpdate() 
+bool j1Entity::PostUpdate()
 {
+	
 	return true;
 };
 
-bool j1Entity::CleanUp() 
+bool j1Entity::CleanUp()
 {
 	if (entitiesSpritesheet != nullptr)
 	{
@@ -105,61 +123,121 @@ bool j1Entity::CleanUp()
 
 bool j1Entity::Load(pugi::xml_node& entity_node)
 {
-	entity_position.x = entity_node.child("position").attribute("x").as_float();
-	entity_position.y = entity_node.child("position").attribute("y").as_float();
+	crab1_position.x = entity_node.child("position").attribute("x").as_float();
+	crab1_position.y = entity_node.child("position").attribute("y").as_float();
 
-	p2SString entity_state = entity_node.child("entity_state").attribute("value").as_string();
-	if (entity_state == "ENTITY_IDLE")
+	bat1_position.x = entity_node.child("position").attribute("x").as_float();
+	bat1_position.y = entity_node.child("position").attribute("y").as_float();
+
+	crab_rect.x = entity_node.child("collider").attribute("x").as_int();
+	crab_rect.y = entity_node.child("collider").attribute("y").as_int();
+
+	bat_rect.x = entity_node.child("collider").attribute("x").as_int();
+	bat_rect.y = entity_node.child("collider").attribute("y").as_int();
+
+	p2SString crab_state = entity_node.child("entity_state").attribute("value").as_string();
+
+	if (crab_state == "ENTITY_IDLE")
 	{
-		state = ENTITY_IDLE;
+		crab1_state = ENTITY_IDLE;
 	}
-	else if (entity_state == "ENTITY_RIGHT")
+	else if (crab_state == "ENTITY_RIGHT")
 	{
-		state = ENTITY_RIGHT;
+		crab1_state = ENTITY_RIGHT;
 	}
-	else if (entity_state == "ENTITY_LEFT")
+	else if (crab_state == "ENTITY_LEFT")
 	{
-		state = ENTITY_LEFT;
+		crab1_state = ENTITY_LEFT;
+	}
+
+	p2SString bat_state = entity_node.child("entity_state").attribute("value").as_string();
+
+	if (bat_state == "ENTITY_IDLE")
+	{
+		bat1_state = ENTITY_IDLE;
+	}
+	else if (bat_state == "ENTITY_RIGHT")
+	{
+		bat1_state = ENTITY_RIGHT;
+	}
+	else if (bat_state == "ENTITY_LEFT")
+	{
+		bat1_state = ENTITY_LEFT;
 	}
 	return true;
 }
 
-void j1Entity::Draw(float dt) const {
-	
-	SDL_Rect entity_rect=current_animation->GetCurrentFrame(dt);
-	
-	App->render->Blit(entitiesSpritesheet, (int)(entity_position.x), (int)(entity_position.y), &entity_rect, flipX);
+void j1Entity::Draw(float dt) const  {
+
+	SDL_Rect crab_rect = currentcrab_animation->GetCurrentFrame(dt);
+	SDL_Rect bat_rect = currentbat_animation->GetCurrentFrame(dt);
+
+	App->render->Blit(entitiesSpritesheet, (int)(crab1_position.x - crab_rect.w / 2), (int)(crab1_position.y - crab_rect.h), &crab_rect, flipX);
+	App->render->Blit(entitiesSpritesheet, (int)(bat1_position.x), (int)(bat1_position.y), &bat_rect, flipX);
 }
 
-p2Animation j1Entity::LoadAnimations(p2SString name)const {
+p2Animation j1Entity::LoadCrabAnimations(p2SString name)const {
 	SDL_Rect frames;
 	p2Animation anim;
-	for (pugi::xml_node frames_node = entities_file.child("entities").child("animation").child(name.GetString()).child("frame"); frames_node; frames_node = frames_node.next_sibling("frame"))
+	for (pugi::xml_node frames_node = entities_file.child("entities").child("animation").child("crab").child(name.GetString()).child("frame"); frames_node; frames_node = frames_node.next_sibling("frame"))
 	{
 		frames.x = frames_node.attribute("x").as_int();
 		frames.y = frames_node.attribute("y").as_int();
 		frames.h = frames_node.attribute("h").as_int();
 		frames.w = frames_node.attribute("w").as_int();
-	
+
 		anim.PushBack({ frames.x, frames.y, frames.w, frames.h });
 	}
-	anim.speed = entities_file.child("entities").child("animation").child(name.GetString()).attribute("speed").as_float();
+	anim.speed = entities_file.child("entities").child("animation").child("crab").child(name.GetString()).attribute("speed").as_float();
 
 	return anim;
 }
 
-void j1Entity::PerformActions() {
-	
-	switch (state)
+p2Animation j1Entity::LoadBatAnimations(p2SString name)const {
+	SDL_Rect frames;
+	p2Animation anim;
+	for (pugi::xml_node frames_node = entities_file.child("entities").child("animation").child("bat").child(name.GetString()).child("frame"); frames_node; frames_node = frames_node.next_sibling("frame"))
+	{
+		frames.x = frames_node.attribute("x").as_int();
+		frames.y = frames_node.attribute("y").as_int();
+		frames.h = frames_node.attribute("h").as_int();
+		frames.w = frames_node.attribute("w").as_int();
+
+		anim.PushBack({ frames.x, frames.y, frames.w, frames.h });
+	}
+	anim.speed = entities_file.child("entities").child("animation").child("bat").child(name.GetString()).attribute("speed").as_float();
+
+	return anim;
+}
+
+void j1Entity::PerformCrabActions(float dt) {
+
+	switch (crab1_state)
 	{
 	case ENTITY_IDLE:
-		current_animation = &crab1_idle;
+		currentcrab_animation = &crab1_idle;
 		break;
 	case ENTITY_RIGHT:
-		current_animation = &crab1_right;
+		currentcrab_animation = &crab1_right;
 		break;
 	case ENTITY_LEFT:
-		current_animation = &crab1_left;
+		currentcrab_animation = &crab1_left;
+		break;
+	}
+}
+
+void j1Entity::PerformBatActions(float dt) {
+
+	switch (bat1_state)
+	{
+	case ENTITY_IDLE:
+		currentbat_animation = &bat1_idle;
+		break;
+	case ENTITY_RIGHT:
+		currentbat_animation = &bat1_right;
+		break;
+	case ENTITY_LEFT:
+		currentbat_animation = &bat1_left;
 		break;
 	}
 }

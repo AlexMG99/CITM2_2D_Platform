@@ -129,6 +129,7 @@ bool j1Player::Update(float dt)
 }
 bool j1Player::PostUpdate()
 {	
+	
 	return true;
 }
 
