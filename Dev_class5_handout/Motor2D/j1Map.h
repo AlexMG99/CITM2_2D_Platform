@@ -153,7 +153,6 @@ private:
 	bool LoadCollisionLayer(pugi::xml_node& node, CollisionLayer* coll_layer);
 	bool LoadObject(pugi::xml_node& node, CollObject* coll_obj);
 	bool LoadProperties(pugi::xml_node & node, Properties & properties);
-	bool LoadEntityProperties(pugi::xml_node & node, Properties & entity_properties);
 
 	TileSet* GetTilesetFromTileId(int id) const;
 

@@ -67,8 +67,8 @@ bool j1Entity::Start()
 			bat1_left = LoadBatAnimations("left");
 
 
-			crab1_position = { App->map->data.entity_properties.Get("Crab1Position.x"), App->map->data.entity_properties.Get("Crab1Position.y") };
-			bat1_position = { App->map->data.entity_properties.Get("Bat1Position.x"),App->map->data.entity_properties.Get("Bat1Position.y") };
+			crab1_position = { App->map->data.entity_properties.Get("Bat.x"), App->map->data.entity_properties.Get("Crab1Position.y") };
+			bat1_position = { App->map->data.entity_properties.Get("Bat.x"), App->map->data.entity_properties.Get("Bat.y") };
 
 			crab_rect = { (int)App->map->data.entity_properties.Get("crabcoll.x"),(int)App->map->data.entity_properties.Get("crabcoll.y"),(int)App->map->data.entity_properties.Get("crabcoll.w"),(int)App->map->data.entity_properties.Get("crabcoll.h") };
 			crab_coll = App->collision->AddCollider(crab_rect, COLLIDER_CRAB, App->entity);

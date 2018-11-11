@@ -244,8 +244,6 @@ bool j1Map::Load(const char* file_name)
 
 	// Load Player Properties
 	LoadProperties(map_file.child("map"), data.player_properties);
-	// Load Entity Properties
-	LoadEntityProperties(map_file.child("map"), data.entity_properties);
 
 	//Create Colliders ----------------------------------------------------------
 	p2List_item<CollisionLayer*>* item_collision_layer = data.collision_layer.start;
@@ -446,6 +444,10 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->width = node.attribute("width").as_uint();
 	layer->height = node.attribute("height").as_uint();
 	LoadProperties(node, layer->properties);
+	if (layer->name == "Pathfinding Bat")
+	{
+		LoadProperties(node, data.entity_properties);
+	}
 
 	layer->data = new uint[layer->width*layer->height];
 	memset(layer->data, 0, sizeof(uint)*layer->width*layer->height);
@@ -533,28 +535,3 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 	}
 	return ret;
 }
-
-	bool j1Map::LoadEntityProperties(pugi::xml_node& node, Properties& entity_properties)
-	{
-		bool ret = false;
-		pugi::xml_node data = node.child("entity_properties");
-
-		if (data != NULL)
-		{
-			pugi::xml_node prop;
-
-			for (prop = data.child("property"); prop; prop = prop.next_sibling("property"))
-			{
-				Properties::Property* p = new Properties::Property();
-
-				p->name = prop.attribute("name").as_string();
-				p->value = prop.attribute("value").as_float();
-
-				entity_properties.list.add(p);
-			}
-		}
-
-	return ret;
-}
-
-
