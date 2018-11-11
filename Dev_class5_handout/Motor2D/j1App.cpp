@@ -190,7 +190,8 @@ void j1App::PrepareUpdate()
 	frame_count++;
 	last_sec_frame_count++;
 
-	dt = (1000.0f / avg_fps) / 1000.0f;
+	if(frame_capped) dt = (1000.0F / frame_rate) / 1000.0F;
+	else  dt = (1000.0F / avg_fps) / 1000.0F;
 
 	frame_time.Start();
 }

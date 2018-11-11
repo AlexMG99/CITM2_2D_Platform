@@ -1,35 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="115" height="22" tilewidth="16" tileheight="16" nextobjectid="82">
  <properties>
+  <property name="acceleration.x" type="float" value="150"/>
+  <property name="acceleration.y" type="int" value="120"/>
   <property name="camera.x" type="int" value="0"/>
   <property name="camera.y" type="int" value="0"/>
-  <property name="col.x" type="int" value="0"/>
-  <property name="coll.h" type="int" value="40"/>
-  <property name="coll.w" type="int" value="20"/>
-  <property name="coll.y" type="int" value="0"/>
-  <property name="coll_type" value="COLLIDER_PLAYER"/>
-  <property name="falling" type="bool" value="false"/>
-  <property name="god_mode" type="bool" value="false"/>
-  <property name="gravity.x" type="float" value="0.2"/>
-  <property name="gravity.y" type="float" value="1"/>
-  <property name="jumpForce" type="float" value="1"/>
-  <property name="jumpMaxVelocity" type="float" value="2"/>
-  <property name="maxVelocity.x" type="float" value="2.75"/>
-  <property name="maxVelocity.y" type="float" value="3"/>
   <property name="playerPosition.x" type="float" value="10"/>
   <property name="playerPosition.y" type="float" value="328"/>
-  <property name="state" value="AIR_STATE"/>
   <property name="velocity.x" type="float" value="0"/>
   <property name="velocity.y" type="float" value="0"/>
  </properties>
  <tileset firstgid="1" name="warped_caves_spritesheet.png" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="368" columns="23">
   <image source="warped_caves_spritesheet.png.png" width="400" height="281"/>
  </tileset>
- <tileset firstgid="369" name="Background" tilewidth="16" tileheight="16" margin="1" tilecount="704" columns="32">
-  <image source="Background.png" width="514" height="355"/>
+ <tileset firstgid="369" name="Background" tilewidth="16" tileheight="16" margin="1" tilecount="374" columns="17">
+  <image source="Background.png" width="274" height="355"/>
  </tileset>
  <layer name="Background" width="115" height="22">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>
@@ -2567,6 +2556,7 @@
  </layer>
  <layer name="Background_Cave" width="115" height="22">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>
@@ -5104,6 +5094,7 @@
  </layer>
  <layer name="Waterfall" width="115" height="22">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>
@@ -7641,6 +7632,7 @@
  </layer>
  <layer name="Lava" width="115" height="22">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>
@@ -10178,6 +10170,7 @@
  </layer>
  <layer name="Platforms" width="115" height="22">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_sped" type="float" value="1"/>
   </properties>
   <data>
@@ -12715,6 +12708,7 @@
  </layer>
  <layer name="Tiles" width="115" height="22">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>
@@ -15252,6 +15246,7 @@
  </layer>
  <layer name="Details" width="115" height="22">
   <properties>
+   <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>
@@ -17839,14 +17834,14 @@
   <object id="52" name="PLATFORM" type="PLATFORM_COLLIDER" x="1233.41" y="160.273" width="62.8106" height="13.0795"/>
   <object id="58" name="GROUND" type="GROUND_COLLIDER" x="1751.33" y="15.75" width="36.9997" height="337.833"/>
   <object id="59" name="GROUND" type="GROUND_COLLIDER" x="1346.75" y="201.788" width="40.2497" height="90.8785"/>
-  <object id="60" name="GROUND" type="GROUND_COLLIDER" x="1387.21" y="238.856" width="243.25" height="12.2194"/>
+  <object id="60" name="GROUND" type="GROUND_COLLIDER" x="1387.21" y="238.356" width="243.25" height="12.7194"/>
   <object id="61" name="GROUND" type="GROUND_COLLIDER" x="1235.87" y="0.66685" width="552.917" height="14.1663"/>
   <object id="62" name="GROUND" type="GROUND_COLLIDER" x="1293.45" y="56.0835" width="100.545" height="144.833"/>
   <object id="63" name="GROUND" type="GROUND_COLLIDER" x="1442.46" y="304.917" width="32.25" height="46.9996"/>
   <object id="64" name="GROUND" type="GROUND_COLLIDER" x="1661.88" y="316.5" width="86.75" height="34.4996"/>
   <object id="65" name="GROUND" type="GROUND_COLLIDER" x="1630.54" y="78.5002" width="57.5833" height="168"/>
   <object id="66" name="WALL" type="WALL_COLLIDER" x="1290.43" y="76.8428" width="7.75" height="7.46591"/>
-  <object id="67" name="PLATFORM" type="PLATFORM_COLLIDER" x="991.242" y="300.273" width="79.5151" height="15.4545"/>
+  <object id="67" name="PLATFORM" type="PLATFORM_COLLIDER" x="1008.24" y="303.273" width="79.5151" height="15.4545"/>
   <object id="70" name="PLATFORM" type="PLATFORM_COLLIDER" x="1248.91" y="240.189" width="30.5151" height="10.6212"/>
   <object id="71" name="PLATFORM" type="PLATFORM_COLLIDER" x="1394.2" y="112.794" width="77.9848" height="13.0795"/>
   <object id="72" name="PLATFORM" type="PLATFORM_COLLIDER" x="1688.2" y="95.4602" width="63.9317" height="13.0795"/>

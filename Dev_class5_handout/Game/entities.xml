@@ -4,25 +4,45 @@
   <image source="textures/entities.png"/>
   
   <animation>
-    <idle title="idle" speed="0.1">
+    <crab>
+    <idle title="idle" speed="4.0">
       <frame x="1" y="1" w="28" h="28"/>
       <frame x="30" y="1" w="28" h="28"/>
       <frame x="59" y="1" w="28" h="28"/>
       <frame x="88" y="1" w="28" h="28"/>
      </idle>
     
-    <right title="right" speed="0.1">
+    <right title="right" speed="0.5">
       <frame x="1" y="32" w="27" h="30"/>
       <frame x="29" y="32" w="27" h="30"/>
       <frame x="57" y="32" w="27" h="30"/>
       <frame x="85" y="32" w="27" h="30"/>
     </right>
     
-    <left title="left" speed="0.1">
+    <left title="left" speed="2.0">
       <frame x="1" y="32" w="27" h="30"/>
       <frame x="29" y="32" w="27" h="30"/>
       <frame x="57" y="32" w="27" h="30"/>
       <frame x="85" y="32" w="27" h="30"/>
     </left>    
+      </crab>
+    <bat>
+      <idle title="idle" speed="4.0">
+      <frame x="33" y="69" w="31" h="30"/>
+      <frame x="65" y="69" w="31" h="30"/>
+      <frame x="97" y="69" w="31" h="30"/>
+     </idle>
+      <right title="right" speed="0.2">
+        <frame x="21" y="106" w="19" h="31"/>
+        <frame x="40" y="106" w="19" h="31"/>
+        <frame x="60" y="106" w="19" h="31"/>
+      </right>
+      <left title="right" speed="0.2">
+        <frame x="21" y="106" w="19" h="31"/>
+        <frame x="40" y="106" w="19" h="31"/>
+        <frame x="60" y="106" w="19" h="31"/>
+      </left>
+      </bat>
    </animation>
+  
 </entities>

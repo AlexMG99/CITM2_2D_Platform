@@ -74,10 +74,7 @@ bool j1Player::Start()
 
 			position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
 			velocity = { App->map->data.player_properties.Get("velocity.x"), App->map->data.player_properties.Get("velocity.y") };
-			maxVelocity = { App->map->data.player_properties.Get("maxVelocity.x"), App->map->data.player_properties.Get("maxVelocity.y") };
-			jumpMaxVelocity = App->map->data.player_properties.Get("jumpMaxVelocity");
-			jumpAcceleration = App->map->data.player_properties.Get("jumpAcceleration");
-			acceleration = { App->map->data.player_properties.Get("gravity.x") , App->map->data.player_properties.Get("gravity.y") };
+			acceleration = { App->map->data.player_properties.Get("acceleration.x"), App->map->data.player_properties.Get("acceleration.y") };
 			falling = App->map->data.player_properties.Get("falling");
 
 			state = AIR_STATE;
@@ -95,19 +92,19 @@ bool j1Player::PreUpdate(float dt)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
 		{
-			velocity.x = (acceleration.x*maxVelocity.x + (10 - acceleration.x)*velocity.x) * dt;
+			velocity.x = acceleration.x * dt;
 			flipX = SDL_FLIP_NONE;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
 		{
 
-			velocity.x = (acceleration.x*-maxVelocity.x + (10 - acceleration.x)*velocity.x) * dt;
+			velocity.x = -acceleration.x * dt;
 			flipX = SDL_FLIP_HORIZONTAL;
 		}
 	}
 
 	if(!godMode)CheckState();
-	if(state !=JUMP_STATE && state != CLING_STATE)velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
+	if(state !=JUMP_STATE && state != CLING_STATE)velocity.y = -acceleration.y * dt;
 
 	return true;
 }
@@ -129,6 +126,7 @@ bool j1Player::Update(float dt)
 }
 bool j1Player::PostUpdate()
 {	
+	
 	return true;
 }
 
@@ -153,7 +151,7 @@ bool j1Player::Load(pugi::xml_node& player_node) {
 	velocity.x = player_node.child("velocity").attribute("x").as_float();
 	velocity.y = player_node.child("velocity").attribute("y").as_float();
 	coll_rect.x = player_node.child("collider").attribute("x").as_int();
-	coll_rect.x = player_node.child("collider").attribute("y").as_int();
+	coll_rect.y = player_node.child("collider").attribute("y").as_int();
 	p2SString state_name = player_node.child("state").attribute("value").as_string();
 	if (state_name == "IDLE_STATE") 
 	{
@@ -364,27 +362,26 @@ void j1Player::PerformActions(float dt)
 	switch (state) 
 	{
 	case IDLE_STATE:
-		velocity.x = ((10 - acceleration.x)*velocity.x)*dt;
-		velocity.y = ((5 - acceleration.y)*velocity.y) * dt;
+		velocity.x = 0;
+		velocity.y = 0;
 		current_animation = &idle_anim;
 		App->collision->ChangeSize(player_coll, 40, 20);
 		break;
 
 	case RUN_STATE:
-		velocity.y = ((5 - acceleration.y)*velocity.y) * dt;
+		velocity.y = 0;
 		current_animation = &run_anim;
-		/*App->collision->ChangeSize(player_coll, 40, 30);*/
 		
 		break;
 
 	case JUMP_STATE:
-		velocity.y = (jumpAcceleration*jumpMaxVelocity + (1 - acceleration.y)*velocity.y) * dt;
+		velocity.y = acceleration.y * dt;
 		current_animation = &jump_anim;
 		App->collision->ChangeSize(player_coll, 40, 20);
 		break;
 
 	case AIR_STATE:
-		velocity.y = (acceleration.y*-maxVelocity.y + (5 - acceleration.y)*velocity.y) * dt;
+		velocity.y = -acceleration.y * dt;
 		current_animation = &air_anim;
 		App->collision->ChangeSize(player_coll, 40, 20);
 		break;
@@ -421,7 +418,6 @@ void j1Player::PerformActions(float dt)
 	case GOD_STATE:
 		player_coll->SetPos(-200, -200);
 		current_animation = &idle_anim;
-		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
 		break;
 	default:
 		break;
@@ -510,12 +506,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 				//Check collision form right
 				if (directionRight && directionCornerDown)
 				{
-					position.x += maxVelocity.x;
+					//position.x += maxVelocity.x;
 				}
 				//Check collision form left
 				else if (directionLeft && directionCornerDown)
 				{
-					position.x -= maxVelocity.x;
+					//position.x -= maxVelocity.x;
 				}
 				else {
 					position.y = (float)c2->rect.y;

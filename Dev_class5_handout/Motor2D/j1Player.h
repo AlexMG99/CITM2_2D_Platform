@@ -77,10 +77,7 @@ public:
 	
 	fPoint	position;
 	fPoint	velocity;
-	fPoint	maxVelocity;
 	fPoint	acceleration;
-	float	jumpAcceleration;
-	float	jumpMaxVelocity;
 
 	SDL_Rect		coll_rect;
 	Collider*		player_coll = nullptr;

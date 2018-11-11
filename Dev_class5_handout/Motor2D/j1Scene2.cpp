@@ -35,6 +35,10 @@ bool j1Scene2::Awake(pugi::xml_node& config)
 bool j1Scene2::Start()
 {
 	LoadLevel();
+
+	App->player->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
+	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };
+
 	return true;
 }
 
@@ -53,15 +57,6 @@ bool j1Scene2::PreUpdate(float dt)
 // Called each loop iteration
 bool j1Scene2::Update(float dt)
 {
-
-	if (App->player->position.x > (App->win->GetWidth() / App->win->GetScale()) / 4 && App->player->position.x < App->map->data.width * App->map->data.tile_width - App->render->camera.w / App->win->GetScale())
-	{
-		App->render->camera.x = -App->player->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
-	}
-	if (App->player->position.y > App->player->coll_rect.h*App->win->GetScale() && App->player->position.y < App->map->data.height*App->map->data.tilesets.start->data->tile_height)
-	{
-		App->render->camera.y = -(int)(App->map->data.height * App->map->data.tile_height*App->win->GetScale()) + App->render->camera.h - App->player->position.y + App->win->GetHeight() / 2;
-	}
 
 	App->map->Draw();
 
@@ -82,15 +77,15 @@ bool j1Scene2::PostUpdate()
 // Called before quitting
 bool j1Scene2::CleanUp()
 {
-	App->map->CleanUp();
 	LOG("Freeing scene");
+	App->map->CleanUp();
 	return true;
 }
 
 //Reload Scene
 void j1Scene2::Reset() const
 {
-	App->fadeToBlack->FadeToBlack(App->scene2, App->scene2);
+	App->fadeToBlack->FadeToBlack(App->scene2, App->scene2, 1.0F);
 }
 
 bool j1Scene2::Load(pugi::xml_node& node)
@@ -110,4 +105,5 @@ void j1Scene2::LoadLevel()
 {
 	App->map->Load(map_path.GetString());
 	App->audio->PlayMusic(music_path.GetString());
+	App->player->state = AIR_STATE;
 }

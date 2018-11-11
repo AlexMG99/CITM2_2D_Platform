@@ -72,7 +72,7 @@ public:
 		break;
 		case pingpong::backward:
 		{
-			current_frame -= speed;
+			current_frame -= speed * dt;
 			if (current_frame <= 0.0f)
 			{
 				current_frame = 0.0f;

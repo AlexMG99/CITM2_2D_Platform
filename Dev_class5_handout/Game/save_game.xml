@@ -4,22 +4,23 @@
 	<window />
 	<textures />
 	<audio>
-		<volume value="3" />
+		<volume value="26" />
 	</audio>
 	<scene />
 	<scene2 />
 	<map />
 	<player>
-		<position x="1895.75" y="281" />
-		<velocity x="2.74999952" y="-0" />
-		<state value="RUN_STATE" />
+		<position x="2598" y="235.441406" />
+		<velocity x="0" y="0" />
+		<state value="CLING_STATE" />
 		<coll x="0" y="0" />
 	</player>
+	<entity />
 	<fadetoblack>
 		<scene id="1" />
 	</fadetoblack>
 	<collision />
 	<renderer>
-		<camera x="-5423" y="-150" />
+		<camera x="-7538" y="-150" />
 	</renderer>
 </game_state>

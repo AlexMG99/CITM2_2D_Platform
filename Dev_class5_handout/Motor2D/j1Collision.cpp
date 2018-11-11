@@ -152,6 +152,12 @@ void j1Collision::DebugDraw()
 		case COLLIDER_PLAYER: //green
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
 			break;
+		case COLLIDER_CRAB: //orange
+			App->render->DrawQuad(colliders[i]->rect, 255, 160, 16, alpha);
+			break;
+		case COLLIDER_BAT: //grey
+			App->render->DrawQuad(colliders[i]->rect, 128, 128, 128, alpha);
+			break;
 		case COLLIDER_PLATFORM: //red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
