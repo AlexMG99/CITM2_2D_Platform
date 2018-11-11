@@ -53,7 +53,7 @@ public:
 	bool Awake(pugi::xml_node&);
 
 	//Called every loop iteration
-	bool PreUpdate();
+	bool PreUpdate(float dt);
 
 	//Called every loop iteration
 	bool PostUpdate();

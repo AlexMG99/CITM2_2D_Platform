@@ -22,7 +22,7 @@ public:
 	// Called before render is available
 	bool Awake(pugi::xml_node&);
 
-	bool PreUpdate();
+	bool PreUpdate(float dt);
 	bool Update(float dt);
 	
 	// Called before quitting

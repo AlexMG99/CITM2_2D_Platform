@@ -73,7 +73,7 @@ bool j1Entity::Start()
 	return ret;
 }
 
-bool j1Entity::PreUpdate()
+bool j1Entity::PreUpdate(float dt)
 {
 	if (state == ENTITY_LEFT) 
 	{
@@ -90,7 +90,6 @@ bool j1Entity::Update(float dt)
 
 bool j1Entity::PostUpdate() 
 {
-	Draw();
 	return true;
 };
 
@@ -125,9 +124,9 @@ bool j1Entity::Load(pugi::xml_node& entity_node)
 	return true;
 }
 
-void j1Entity::Draw() {
+void j1Entity::Draw(float dt) const {
 	
-	SDL_Rect entity_rect=current_animation->GetCurrentFrame();
+	SDL_Rect entity_rect=current_animation->GetCurrentFrame(dt);
 	
 	App->render->Blit(entitiesSpritesheet, (int)(entity_position.x), (int)(entity_position.y), &entity_rect, flipX);
 }

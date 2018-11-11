@@ -87,17 +87,9 @@ bool j1Player::Start()
 	return ret;
 }
 
-bool j1Player::PreUpdate()
+bool j1Player::PreUpdate(float dt)
 {
 	DebugInput();
-
-	if(!godMode)CheckState();
-	if(state !=JUMP_STATE && state != CLING_STATE)velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
-	return true;
-}
-
-bool j1Player::Update(float dt)
-{
 
 	if (state != DUCK_STATE && state != CLING_STATE)
 	{
@@ -114,12 +106,20 @@ bool j1Player::Update(float dt)
 		}
 	}
 
-	if (!godMode) 
+	if(!godMode)CheckState();
+	if(state !=JUMP_STATE && state != CLING_STATE)velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
+
+	return true;
+}
+
+bool j1Player::Update(float dt)
+{
+	if (!godMode)
 	{
 		position.x += velocity.x;
 		position.y -= velocity.y;
 		if (state != DUCK_STATE && state != RUN_STATE)player_coll->SetPos((int)(position.x - coll_rect.w / 2), (int)(position.y - coll_rect.h));
-		else if (state == RUN_STATE) player_coll->SetPos((int)(position.x - coll_rect.w/2 ), (int)(position.y - coll_rect.h)); 
+		else if (state == RUN_STATE) player_coll->SetPos((int)(position.x - coll_rect.w / 2), (int)(position.y - coll_rect.h));
 		else { player_coll->SetPos((int)(position.x - coll_rect.w / 2), (int)(position.y - coll_rect.h / 2)); }
 	}
 
@@ -129,7 +129,6 @@ bool j1Player::Update(float dt)
 }
 bool j1Player::PostUpdate()
 {	
-	Draw();
 	return true;
 }
 
@@ -242,8 +241,9 @@ bool j1Player::Save(pugi::xml_node& player_node) const
 	return true;
 }
 
-void j1Player::Draw() {
-	SDL_Rect rect = current_animation->GetCurrentFrame();
+void j1Player::Draw(float dt) const 
+{
+	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
 	App->render->Blit(playerSpritesheet, (int)(position.x - coll_rect.w/2), (int)(position.y - coll_rect.h), &rect, flipX);
 }
 
@@ -365,26 +365,26 @@ void j1Player::PerformActions(float dt)
 	{
 	case IDLE_STATE:
 		velocity.x = ((10 - acceleration.x)*velocity.x)*dt;
-		velocity.y = (1 - acceleration.y)*velocity.y;
+		velocity.y = ((5 - acceleration.y)*velocity.y) * dt;
 		current_animation = &idle_anim;
 		App->collision->ChangeSize(player_coll, 40, 20);
 		break;
 
 	case RUN_STATE:
-		velocity.y = (1 - acceleration.y)*velocity.y;
+		velocity.y = ((5 - acceleration.y)*velocity.y) * dt;
 		current_animation = &run_anim;
 		/*App->collision->ChangeSize(player_coll, 40, 30);*/
 		
 		break;
 
 	case JUMP_STATE:
-		velocity.y = jumpAcceleration*jumpMaxVelocity + (1 - acceleration.y)*velocity.y;
+		velocity.y = (jumpAcceleration*jumpMaxVelocity + (1 - acceleration.y)*velocity.y) * dt;
 		current_animation = &jump_anim;
 		App->collision->ChangeSize(player_coll, 40, 20);
 		break;
 
 	case AIR_STATE:
-		velocity.y = acceleration.y*-maxVelocity.y + (1 - acceleration.y)*velocity.y;
+		velocity.y = (acceleration.y*-maxVelocity.y + (5 - acceleration.y)*velocity.y) * dt;
 		current_animation = &air_anim;
 		App->collision->ChangeSize(player_coll, 40, 20);
 		break;

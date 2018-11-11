@@ -71,7 +71,7 @@ bool j1Collision::Awake(pugi::xml_node& config)
 }
 
 //Called every loop iteration
-bool j1Collision::PreUpdate()
+bool j1Collision::PreUpdate(float dt)
 {
 	// Remove all colliders scheduled for deletion
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
