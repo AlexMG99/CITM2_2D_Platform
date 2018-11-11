@@ -59,6 +59,12 @@ bool j1Entity::Start()
 		else 
 		{
 			entity_idle = LoadAnimations("idle");
+			entity_right = LoadAnimations("right");
+			entity_left = LoadAnimations("left");
+
+			entity_position = { App->map->data.entity_properties.Get("entityPosition.x"), App->map->data.player_properties.Get("entityPosition.y") };
+			state = ENTITY_IDLE;
+
 		}
 		
 		
@@ -94,21 +100,30 @@ bool j1Entity::CleanUp()
 
 bool j1Entity::Load(pugi::xml_node& entity_node)
 {
-	position.x = entity_node.child("position").attribute("x").as_float();
-	position.y = entity_node.child("position").attribute("y").as_float();
+	entity_position.x = entity_node.child("position").attribute("x").as_float();
+	entity_position.y = entity_node.child("position").attribute("y").as_float();
 
 	p2SString entity_state = entity_node.child("entity_state").attribute("value").as_string();
 	if (entity_state == "ENTITY_IDLE")
 	{
 		state = ENTITY_IDLE;
 	}
+	else if (entity_state == "ENTITY_RIGHT")
+	{
+		state = ENTITY_RIGHT;
+	}
+	else if (entity_state == "ENTITY_RIGHT")
+	{
+		state = ENTITY_LEFT;
+	}
 	return true;
 }
 
 void j1Entity::Draw() {
-	/*SDL_Rect entity_rect;
+	current_animation = &entity_right;
+	SDL_Rect entity_rect=current_animation->GetCurrentFrame();
 	
-	App->render->Blit(entitiesSpritesheet, (int)(position.x), (int)(position.y), &entity_rect);*/
+	App->render->Blit(entitiesSpritesheet, 180, 176, &entity_rect);
 }
 
 p2Animation j1Entity::LoadAnimations(p2SString name)const {
@@ -121,9 +136,28 @@ p2Animation j1Entity::LoadAnimations(p2SString name)const {
 		frames.h = frames_node.attribute("h").as_int();
 		frames.w = frames_node.attribute("w").as_int();
 	
-		anim.PushBack({ frames.x, frames.y, frames.h, frames.w });
+		anim.PushBack({ frames.x, frames.y, frames.w, frames.h });
 	}
 	anim.speed = entities_file.child("entities").child("animation").child(name.GetString()).attribute("speed").as_float();
 
 	return anim;
+}
+
+void j1Entity::PerformActions() {
+	
+	switch (state)
+	{
+	case ENTITY_IDLE:
+		current_animation = &entity_idle;
+		break;
+	case ENTITY_RIGHT:
+		current_animation = &entity_right;
+		break;
+	case ENTITY_LEFT:
+		current_animation = &entity_left;
+		break;
+
+	}
+	/*current_animation = &entity_idle;*/
+
 }

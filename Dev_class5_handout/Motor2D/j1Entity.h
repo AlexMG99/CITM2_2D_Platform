@@ -12,9 +12,12 @@ struct SDL_Texture;
 struct SDL_Rect;
 
 enum Entity_State {
-	ENTITY_NONE=-1,
+	ENTITY_NONE = -1,
 
 	ENTITY_IDLE,
+	ENTITY_RIGHT,
+	ENTITY_LEFT,
+
 	/*RIGHT_STATE,
 	LEFT_STATE,
 	FALL_STATE,
@@ -59,6 +62,9 @@ public:
 	//Load Game State
 	bool Load(pugi::xml_node&);
 
+	//PerformActions
+	void PerformActions();
+
 	//Pathfinding functions
 
 	
@@ -71,7 +77,7 @@ private:
 	//Debug functionallity
 
 public: 
-	fPoint position;
+	fPoint entity_position;
 	Entity_State state = ENTITY_NONE;
 	
 	
@@ -81,6 +87,8 @@ private:
 	p2SString path;
     p2Animation* current_animation=nullptr;
     p2Animation  entity_idle;
+	p2Animation entity_right;
+	p2Animation entity_left;
 
 	pugi::xml_document entities_file;
 
