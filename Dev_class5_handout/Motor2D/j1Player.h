@@ -59,7 +59,7 @@ public:
 	void CheckState();
 
 	//Perform Player Actions
-	void PerformActions();
+	void PerformActions(float dt);
 
 	//Check Collision
 	void OnCollision(Collider* c1, Collider* c2);

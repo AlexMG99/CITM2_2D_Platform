@@ -103,13 +103,13 @@ bool j1Player::Update(float dt)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
 		{
-			velocity.x = (acceleration.x*maxVelocity.x + (1 - acceleration.x)*velocity.x);
+			velocity.x = (acceleration.x*maxVelocity.x + (10 - acceleration.x)*velocity.x) * dt;
 			flipX = SDL_FLIP_NONE;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
 		{
 
-			velocity.x = (acceleration.x*-maxVelocity.x + (1 - acceleration.x)*velocity.x);
+			velocity.x = (acceleration.x*-maxVelocity.x + (10 - acceleration.x)*velocity.x) * dt;
 			flipX = SDL_FLIP_HORIZONTAL;
 		}
 	}
@@ -123,7 +123,7 @@ bool j1Player::Update(float dt)
 		else { player_coll->SetPos((int)(position.x - coll_rect.w / 2), (int)(position.y - coll_rect.h / 2)); }
 	}
 
-	PerformActions();
+	PerformActions(dt);
 
 	return true;
 }
@@ -359,12 +359,12 @@ void j1Player::CheckState()
 		break;
 	}
 }
-void j1Player::PerformActions()
+void j1Player::PerformActions(float dt)
 {
 	switch (state) 
 	{
 	case IDLE_STATE:
-		velocity.x = (1 - acceleration.x)*velocity.x;
+		velocity.x = ((10 - acceleration.x)*velocity.x)*dt;
 		velocity.y = (1 - acceleration.y)*velocity.y;
 		current_animation = &idle_anim;
 		App->collision->ChangeSize(player_coll, 40, 20);
@@ -379,7 +379,6 @@ void j1Player::PerformActions()
 
 	case JUMP_STATE:
 		velocity.y = jumpAcceleration*jumpMaxVelocity + (1 - acceleration.y)*velocity.y;
-		LOG("%f", velocity.y);
 		current_animation = &jump_anim;
 		App->collision->ChangeSize(player_coll, 40, 20);
 		break;
