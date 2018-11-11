@@ -244,6 +244,7 @@ bool j1Map::Load(const char* file_name)
 
 	// Load Player Properties
 	LoadProperties(map_file.child("map"), data.player_properties);
+	LoadProperties(map_file.child("map"), data.entity_properties);
 
 	//Create Colliders ----------------------------------------------------------
 	p2List_item<CollisionLayer*>* item_collision_layer = data.collision_layer.start;

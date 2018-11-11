@@ -5,6 +5,7 @@
   <properties>
     
   </properties>
+  
   <animation>
     <idle title="idle" speed="0.1">
       <frame x="1" y="1" w="28" h="28"/>
@@ -12,6 +13,7 @@
       <frame x="59" y="1" w="28" h="28"/>
       <frame x="88" y="1" w="28" h="28"/>
      </idle>
+    
     <right title="right" speed="0.1">
       <frame x="1" y="32" w="27" h="30"/>
       <frame x="29" y="32" w="27" h="30"/>

@@ -86,13 +86,14 @@ private:
 	
 	p2SString path;
     p2Animation* current_animation=nullptr;
-    p2Animation  entity_idle;
-	p2Animation entity_right;
-	p2Animation entity_left;
+    p2Animation  crab1_idle;
+	p2Animation  crab1_right;
+	p2Animation  crab1_left;
 
 	pugi::xml_document entities_file;
 
 	SDL_Texture* entitiesSpritesheet = nullptr;
+	SDL_RendererFlip   flipX = SDL_FLIP_NONE;
 };
 
 
