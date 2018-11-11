@@ -7,9 +7,6 @@
   <property name="coll.w" type="int" value="20"/>
   <property name="coll.x" type="int" value="0"/>
   <property name="coll.y" type="int" value="0"/>
-  <property name="entityPosition.x" type="float" value="80"/>
-  <property name="entityPosition.y" type="float" value="176"/>
-  <property name="entity_state" value="ENTITY_IDLE"/>
   <property name="gravity.x" type="float" value="2"/>
   <property name="gravity.y" type="float" value="1"/>
   <property name="jumpAcceleration" type="float" value="1"/>
@@ -21,6 +18,10 @@
   <property name="velocity.x" type="float" value="0"/>
   <property name="velocity.y" type="float" value="0"/>
  </properties>
+  <entity_properties>
+    <property name="entityPosition.x" type="float" value="290"/>
+    <property name="entityPosition.y" type="float" value="156"/>
+   </entity_properties>
  <tileset firstgid="1" name="pathfinding" tilewidth="16" tileheight="16" tilecount="2" columns="2">
   <image source="pathfinding.png" width="32" height="16"/>
  </tileset>
@@ -8809,11 +8810,11 @@
    <tile gid="796"/>
    <tile gid="795"/>
    <tile gid="796"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="759"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="759"/>
+   <tile gid="759"/>
+   <tile gid="864"/>
+   <tile gid="865"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -20040,17 +20041,17 @@
    <tile gid="759"/>
    <tile gid="759"/>
    <tile gid="759"/>
-   <tile gid="759"/>
-   <tile gid="759"/>
-   <tile gid="759"/>
-   <tile gid="759"/>
-   <tile gid="759"/>
-   <tile gid="759"/>
-   <tile gid="759"/>
-   <tile gid="759"/>
-   <tile gid="759"/>
-   <tile gid="759"/>
-   <tile gid="759"/>
+   <tile gid="740"/>
+   <tile gid="741"/>
+   <tile gid="735"/>
+   <tile gid="735"/>
+   <tile gid="735"/>
+   <tile gid="735"/>
+   <tile gid="735"/>
+   <tile gid="735"/>
+   <tile gid="735"/>
+   <tile gid="735"/>
+   <tile gid="735"/>
    <tile gid="735"/>
    <tile gid="735"/>
    <tile gid="735"/>
@@ -20229,19 +20230,19 @@
    <tile gid="759"/>
    <tile gid="759"/>
    <tile gid="740"/>
-   <tile gid="846"/>
-   <tile gid="759"/>
-   <tile gid="851"/>
-   <tile gid="846"/>
-   <tile gid="846"/>
-   <tile gid="847"/>
-   <tile gid="738"/>
-   <tile gid="739"/>
-   <tile gid="740"/>
    <tile gid="741"/>
-   <tile gid="741"/>
-   <tile gid="737"/>
+   <tile gid="763"/>
+   <tile gid="764"/>
    <tile gid="758"/>
+   <tile gid="758"/>
+   <tile gid="758"/>
+   <tile gid="762"/>
+   <tile gid="763"/>
+   <tile gid="758"/>
+   <tile gid="758"/>
+   <tile gid="758"/>
+   <tile gid="762"/>
+   <tile gid="763"/>
    <tile gid="758"/>
    <tile gid="758"/>
    <tile gid="758"/>
@@ -20419,17 +20420,17 @@
    <tile gid="740"/>
    <tile gid="741"/>
    <tile gid="763"/>
-   <tile gid="870"/>
-   <tile gid="870"/>
-   <tile gid="871"/>
-   <tile gid="869"/>
-   <tile gid="870"/>
-   <tile gid="871"/>
-   <tile gid="872"/>
-   <tile gid="762"/>
-   <tile gid="763"/>
    <tile gid="764"/>
-   <tile gid="764"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -26697,7 +26698,7 @@
   <object id="32" name="GROUND" type="GROUND_COLLIDER" x="1170.25" y="233.5" width="32.75" height="18.4473"/>
   <object id="33" name="GROUND" type="GROUND_COLLIDER" x="1203.5" y="251" width="53.0682" height="5.3409"/>
   <object id="34" name="GROUND" type="GROUND_COLLIDER" x="965.886" y="210" width="204.364" height="29.4167"/>
-  <object id="105" name="GROUND" type="GROUND_COLLIDER" x="48.6667" y="98" width="341.333" height="16"/>
+  <object id="105" name="GROUND" type="GROUND_COLLIDER" x="48.6667" y="98" width="166.333" height="16"/>
   <object id="106" name="GROUND" type="GROUND_COLLIDER" x="124" y="114.5" width="68.5" height="13"/>
   <object id="124" name="GROUND" type="GROUND_COLLIDER" x="1705" y="278" width="199.667" height="42"/>
   <object id="127" name="GROUND" type="GROUND_COLLIDER" x="944.667" y="98.6667" width="188.667" height="14.6667"/>

@@ -2,9 +2,6 @@
 
 <entities>
   <image source="textures/entities.png"/>
-  <properties>
-    
-  </properties>
   
   <animation>
     <idle title="idle" speed="0.1">
