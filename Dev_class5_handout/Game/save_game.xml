@@ -4,15 +4,15 @@
 	<window />
 	<textures />
 	<audio>
-		<volume value="26" />
+		<volume value="3" />
 	</audio>
 	<scene />
 	<scene2 />
 	<map />
 	<player>
-		<position x="2598" y="235.441406" />
+		<position x="2957" y="196" />
 		<velocity x="0" y="0" />
-		<state value="CLING_STATE" />
+		<state value="IDLE_STATE" />
 		<coll x="0" y="0" />
 	</player>
 	<entity />
@@ -21,6 +21,6 @@
 	</fadetoblack>
 	<collision />
 	<renderer>
-		<camera x="-7538" y="-150" />
+		<camera x="-8615" y="-150" />
 	</renderer>
 </game_state>
