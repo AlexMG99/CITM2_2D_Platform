@@ -5,6 +5,7 @@
 #include "p2Animation.h"
 #include "j1Collision.h"
 #include "p2DynArray.h"
+#include "p2Point.h"
 #include "p2List.h"
 #include "SDL/include/SDL_render.h"
 
@@ -19,6 +20,16 @@ enum Entity_State {
 	ENTITY_LEFT,
 
 };
+
+
+
+enum Entity_Type {
+
+	CRAB,
+	BAT,
+
+};
+
 
 class j1Entity : public j1Module
 {
