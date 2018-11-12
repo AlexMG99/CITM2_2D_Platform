@@ -7,7 +7,6 @@
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Textures.h"
-#include "j1FadeToBlack.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
 #include "j1Collision.h"
@@ -71,9 +70,9 @@ bool j1Entity::Start()
 			bat1_position = { App->map->data.entity_properties.Get("Bat.x"), App->map->data.entity_properties.Get("Bat.y") };
 
 			crab_rect = { (int)App->map->data.entity_properties.Get("crabcoll.x"),(int)App->map->data.entity_properties.Get("crabcoll.y"),(int)App->map->data.entity_properties.Get("crabcoll.w"),(int)App->map->data.entity_properties.Get("crabcoll.h") };
-			crab_coll = App->collision->AddCollider(crab_rect, COLLIDER_CRAB, App->entity);
+			/*crab_coll = App->collision->AddCollider(crab_rect, COLLIDER_CRAB, App->entity_manager);*/
 			bat_rect = { (int)App->map->data.entity_properties.Get("crabcoll.x"),(int)App->map->data.entity_properties.Get("crabcoll.y"),(int)App->map->data.entity_properties.Get("crabcoll.w"),(int)App->map->data.entity_properties.Get("crabcoll.h") };
-			bat_coll = App->collision->AddCollider(bat_rect, COLLIDER_BAT, App->entity);
+			/*bat_coll = App->collision->AddCollider(bat_rect, COLLIDER_BAT, App->entity);*/
 
 			crab1_state = ENTITY_IDLE;
 			bat1_state = ENTITY_IDLE;

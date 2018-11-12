@@ -8,6 +8,35 @@
 #include "p2List.h"
 #include "SDL/include/SDL_render.h"
 
+struct SDL_Texture;
+struct SDL_Rect;
+
+
+class j1Entity_Bat : public j1Module {
+
+public:
+
+	j1Entity_Bat();
+
+	//Destructor
+	virtual ~j1Entity_Bat();
+
+	bool Awake(pugi::xml_node&);
+
+	bool Start();
+
+	bool Update(float dt);
+
+	bool PostUpdate();
+
+	bool CleanUp();
+
+	bool Save(pugi::xml_node&);
+
+	bool Load(pugi::xml_node&);
+
+
+};
 
 
 #endif

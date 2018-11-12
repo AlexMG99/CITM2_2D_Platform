@@ -18,19 +18,7 @@ enum Entity_State {
 	ENTITY_RIGHT,
 	ENTITY_LEFT,
 
-	/*RIGHT_STATE,
-	LEFT_STATE,
-	FALL_STATE,
-	DEATH_STATE,*/
-
 };
-
-//enum Entity_Type {
-//
-//	CRAB,
-//	BAT,
-//
-//};
 
 class j1Entity : public j1Module
 {
