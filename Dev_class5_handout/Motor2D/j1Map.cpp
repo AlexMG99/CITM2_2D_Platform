@@ -558,8 +558,6 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 {
 	bool ret = false;
 	p2List_item<MapLayer*>* item;
-	item = data.layers.start;
-	LOG("hey");
 	for (item = data.layers.start; item != NULL; item = item->next)
 	{
 		MapLayer* layer = item->data;
