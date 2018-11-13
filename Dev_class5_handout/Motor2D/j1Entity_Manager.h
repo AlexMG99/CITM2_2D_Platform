@@ -19,6 +19,8 @@ public:
 	// Called before the first frame
 	bool Start();
 
+	bool PreUpdate(float dt);
+
 	//Called every loop iteration
 	bool Update(float dt);
 
@@ -34,6 +36,8 @@ public:
 private:
 	p2SString				path;
 	p2List<j1Entity*>		entities;
+
+	SDL_Texture*			debug_tex = nullptr;
 };
 
 

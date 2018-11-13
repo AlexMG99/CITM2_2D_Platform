@@ -15,6 +15,7 @@
 #include "j1Pathfinding.h"
 #include "j1App.h"
 #include "j1Player.h"
+#include "j1Entity_Manager.h"
 #include "j1Entity.h"
 #include "j1Entity_Bat.h"
 #include "j1Entity_Crab.h"
@@ -38,7 +39,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	map = new j1Map();
 	pathfinding = new j1PathFinding();
 	player = new j1Player();
-	/*entity_manager = new j1Entity_Manager();*/
+	entity_manager = new j1Entity_Manager();
 	collision = new j1Collision();
 	fadeToBlack = new j1FadeToBlack();
 
@@ -53,7 +54,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(pathfinding);
 	AddModule(player);
-	/*AddModule(entity_manager);*/
+	AddModule(entity_manager);
 	AddModule(fadeToBlack);
 	AddModule(collision);
 
