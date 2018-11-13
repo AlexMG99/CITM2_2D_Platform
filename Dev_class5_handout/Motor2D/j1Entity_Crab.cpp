@@ -43,6 +43,7 @@ bool j1Entity_Crab::Update(float dt)
 
 bool j1Entity_Crab::PostUpdate()
 {
+	
 
 	return true;
 };

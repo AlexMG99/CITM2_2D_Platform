@@ -30,6 +30,7 @@ bool j1Entity_Bat::Awake(pugi::xml_node& config)
 
 bool j1Entity_Bat::Start()
 {
+	state = ENTITY_STATE_IDLE;
 	
 	return true;
 }

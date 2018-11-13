@@ -62,28 +62,31 @@ public:
 
 	//PerformActions
 	void SetAnimations(float dt);
+
 	//Pathfinding functions
+	
 
 
 private:
 
-	//Draw Entity on screen
-	void Draw(float dt) const;
+	////Draw Entity on screen
+	//void Draw(float dt) const;
 	//Load Entity Animations
 	/*p2Animation LoadCrabAnimations(p2SString name) const;
 	p2Animation LoadBatAnimations(p2SString name) const;*/
 	//Debug functionallity
 
 public:
-	/*fPoint crab1_position;
+	fPoint crab1_position;
 	fPoint bat1_position;
 	SDL_Rect crab_rect;
 	SDL_Rect bat_rect;
+
 	Collider* crab_coll = nullptr;
 	Collider* bat_coll = nullptr;
 
 
-	*/
+	
 	Entity_State state = ENTITY_STATE_NONE;
 	Entity_Type type = ENTITY_NONE;
 
@@ -91,21 +94,20 @@ public:
 
 private:
 
-	/*p2SString path;
+	p2SString path;
 	p2Animation* currentcrab_animation = nullptr;
 	p2Animation* currentbat_animation = nullptr;
-	p2Animation  crab1_idle;
-	p2Animation  crab1_right;
-	p2Animation  crab1_left;
+	p2Animation  crab_idle;
+	p2Animation crab_right;
+	p2Animation  crab_left;
 
-	p2Animation  bat1_idle;
-	p2Animation  bat1_right;
-	p2Animation  bat1_left;
-
+	p2Animation  bat_idle;
+	p2Animation  bat_right;
+	p2Animation  bat_left;
 	pugi::xml_document entities_file;
 
 	SDL_Texture* entitiesSpritesheet = nullptr;
-	SDL_RendererFlip   flipX = SDL_FLIP_NONE;*/
+	//SDL_RendererFlip   flipX = SDL_FLIP_NONE;
 };
 
 
