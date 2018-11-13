@@ -37,6 +37,13 @@ bool j1Entity_Manager::Start()
 
 	debug_tex = App->tex->Load("textures/pathfinding.png");
 
+	int w, h;
+	uchar* data = NULL;
+	if (App->map->CreateWalkabilityMap(w, h, &data))
+		App->pathfinding->SetMap(w, h, data);
+
+	RELEASE_ARRAY(data);
+
 	return ret;
 }
 

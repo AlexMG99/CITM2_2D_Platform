@@ -144,7 +144,7 @@ public:
 
 	iPoint WorldToMap(int x, int y) const;
 
-	bool CheckScreen(const iPoint position, const int width );
+	bool CreateWalkabilityMap(int & width, int & height, uchar ** buffer) const;
 
 private:
 
