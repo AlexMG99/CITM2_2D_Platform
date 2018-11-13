@@ -5,12 +5,12 @@
 #include "j1Entity_Bat.h"
 #include "j1Textures.h"
 #include "j1Map.h"
-#include "j1Collision.h"
 #include "j1Entity.h"
+#include "j1Collision.h"
 #include "j1Render.h"
 
 
-j1Entity_Bat::j1Entity_Bat():j1Module()
+j1Entity_Bat::j1Entity_Bat() :j1Entity()
 {
 	name.create("entity_bat");
 

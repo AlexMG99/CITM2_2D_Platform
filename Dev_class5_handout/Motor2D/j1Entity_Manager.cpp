@@ -65,10 +65,10 @@ bool j1Entity_Manager::AddEnemy(Entity_Type type, int x, int y)
 
 	switch (type)
 	{
-	case BAT:
+	case ENTITY_BAT:
 		//entity = new j1Entity_Bat();
 		break;
-	case CRAB:
+	case ENTITY_CRAB:
 		//entity = new j1Entity_Crab();
 		break;
 	default:

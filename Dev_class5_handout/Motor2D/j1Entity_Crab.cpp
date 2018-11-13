@@ -4,11 +4,12 @@
 #include "j1Entity_Crab.h"
 #include "j1Textures.h"
 #include "j1Map.h"
+#include "j1Entity.h"
 #include "j1Collision.h"
 #include "j1Render.h"
 
 
-j1Entity_Crab::j1Entity_Crab() :j1Module()
+j1Entity_Crab::j1Entity_Crab() :j1Entity()
 {
 	name.create("entity_crab");
 
@@ -22,7 +23,7 @@ j1Entity_Crab::~j1Entity_Crab()
 
 bool j1Entity_Crab::Awake(pugi::xml_node& config)
 {
-
+	
 	return true;
 };
 
