@@ -102,4 +102,7 @@ protected:
 	pugi::xml_node		entity_node;
 
 
+};
+
+
 #endif

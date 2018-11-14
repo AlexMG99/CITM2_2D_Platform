@@ -50,6 +50,8 @@ bool j1Entity_Manager::Start()
 
 	RELEASE_ARRAY(data);
 	/*player->Start();*/
+
+	CreateEntity(BAT, 100, 100);
 	
 	return ret;
 }
@@ -133,10 +135,10 @@ j1Entity* j1Entity_Manager::CreateEntity(Entity_Type type, int x, int y)
 
 	switch (type)
 	{
-	case ENTITY_BAT:
+	case BAT:
 		entity = new j1Entity_Bat();
 		break;
-	case ENTITY_CRAB:
+	case CRAB:
 		entity = new j1Entity_Crab();
 		break;
 
@@ -145,9 +147,9 @@ j1Entity* j1Entity_Manager::CreateEntity(Entity_Type type, int x, int y)
 		break;
 	}
 
-	/*entity.type = type;
-	entity.position.x = x;
-	entity.position.y = x;*/
+	entity->type = type;
+	entity->position.x = x;
+	entity->position.y = x;
 	
 	entities.add(entity);
 
@@ -175,12 +177,12 @@ bool j1Entity_Manager::Load(pugi::xml_node & entity_node)
 
 	for (pugi::xml_node crab = entity_node.child("crabs").child("crab"); crab; crab = crab.next_sibling("crab"))
 	{
-		CreateEntity(ENTITY_CRAB, entity_node.child("position").attribute("x").as_float(), entity_node.child("position").attribute("y").as_float());
+		CreateEntity(CRAB, entity_node.child("position").attribute("x").as_float(), entity_node.child("position").attribute("y").as_float());
 	}
 
 	for (pugi::xml_node bat = entity_node.child("bats").child("bat"); bat; bat = bat.next_sibling("bat"))
 	{
-		LOG("%f", CreateEntity(ENTITY_BAT, entity_node.child("position").attribute("x").as_float(), entity_node.child("position").attribute("y").as_float()));
+		LOG("%f", CreateEntity(BAT, entity_node.child("position").attribute("x").as_float(), entity_node.child("position").attribute("y").as_float()));
 		
 	}
 
