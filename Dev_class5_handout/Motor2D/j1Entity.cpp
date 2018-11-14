@@ -4,6 +4,7 @@
 #include "j1App.h"
 #include "j1Audio.h"
 #include "j1Entity.h"
+#include "j1Entity_Manager.h"
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Textures.h"
@@ -24,12 +25,6 @@ j1Entity::j1Entity(const char* entity_name)
 //Destructor
 j1Entity::~j1Entity()
 {
-	if(graphics!=nullptr)
-	{
-		App->tex->UnLoad(graphics);
-		graphics = nullptr;
-	}
-	
 	if (coll != nullptr)
 	{
 		coll->to_delete = true;
@@ -37,35 +32,12 @@ j1Entity::~j1Entity()
 	}
 }
 
-bool j1Entity::Awake(pugi::xml_node& config)
-{
-	LOG("Init SDL entity");
-	bool ret = true;
-
-	entity_node = config.child("entities");
-
-	return ret;
-};
-
-bool j1Entity::Start()
-{
-	LOG("Start entities:");
-	bool ret = true;
-
-	return ret;
-}
-
-bool j1Entity::PreUpdate(float dt)
-{
-	return true;
-};
-
 bool j1Entity::Entity_Update(float dt)
 {
 	//SetAnimations(dt);
 
 	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
-	App->render->Blit(graphics, position.x, position.y, &rect, flipX);
+	App->render->Blit(App->entity_manager->graphics, position.x, position.y, &rect, flipX);
 
 	return true;
 };

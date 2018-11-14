@@ -45,15 +45,6 @@ public:
 	//Destructor 
 	virtual ~j1Entity();
 
-	//Called before entities are aviable
-	bool Awake(pugi::xml_node&);
-
-	//Called before the first frame
-	bool Start();
-
-	//Called every loop iteration
-	bool PreUpdate(float dt);
-
 	//Called every loop iteration
 	bool Entity_Update(float dt);
 
@@ -92,7 +83,6 @@ public:
 	p2Animation			idle_anim;
 	p2Animation			run_anim;
 	p2Animation			fall_anim;
-	SDL_Texture*		graphics = nullptr;
 	Collider*			coll = nullptr;
 	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
 
