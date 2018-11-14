@@ -122,8 +122,8 @@ private:
 	uint32				prev_last_sec_frame_count = 0;
 
 	uint				frame_rate = 0;
-	float				dt = 0;
-	float				avg_fps = 1;
+	float				dt = 0.00f;
+	float				avg_fps = 1.00f;
 	bool				frame_capped = true;
 };
 

@@ -19142,7 +19142,7 @@
    <property name="crabcoll.w" type="float" value="28"/>
    <property name="crabcoll.x" type="float" value="0"/>
    <property name="crabcoll.y" type="float" value="0"/>
-   <property name="draw" type="int" value="1"/>
+   <property name="draw" type="int" value="0"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>

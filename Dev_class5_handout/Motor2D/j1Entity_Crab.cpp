@@ -9,7 +9,7 @@
 #include "j1Render.h"
 
 
-j1Entity_Crab::j1Entity_Crab() :j1Entity()
+j1Entity_Crab::j1Entity_Crab() : j1Entity("crab")
 {
 	name.create("entity_crab");
 
@@ -54,6 +54,13 @@ bool j1Entity_Crab::CleanUp()
 
 	return true;
 }
+
+void j1Entity_Crab::Draw(float dt)
+{
+	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
+	App->render->Blit(graphics, position.x, position.y, &rect, flipX);
+}
+
 bool j1Entity_Crab::Save(pugi::xml_node &)
 {
 	return true;
@@ -65,5 +72,10 @@ bool j1Entity_Crab::Load(pugi::xml_node& entity_node)
 
 	
 	return true;
+}
+
+void j1Entity_Crab::FollowPath()
+{
+
 }
 

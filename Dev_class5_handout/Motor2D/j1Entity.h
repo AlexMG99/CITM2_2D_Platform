@@ -13,20 +13,25 @@ struct SDL_Texture;
 struct SDL_Rect;
 
 enum Entity_State {
-	ENTITY_STATE_NONE = -1,
+	STATE_NONE = -1,
 
-	ENTITY_STATE_IDLE,
-	ENTITY_STATE_RIGHT,
-	ENTITY_STATE_LEFT,
+	STATE_IDLE,
+	STATE_RUN,
+	STATE_FALL,
+	STATE_DEATH,
+	STATE_JUMP,
+	STATE_CLING,
+	STATE_DUCK,
+	STATE_GOD
 
 };
 
 enum Entity_Type {
-	ENTITY_NONE = -1,
+	NONE = -1,
 
-	ENTITY_PLAYER,
-	ENTITY_CRAB,
-	ENTITY_BAT,
+	PLAYER,
+	CRAB,
+	BAT
 
 };
 
@@ -34,12 +39,11 @@ enum Entity_Type {
 class j1Entity : public j1Module
 {
 public:
-	j1Entity();
 
+	j1Entity(const char* entity_name);
 	
 	//Destructor 
 	virtual ~j1Entity();
-
 
 	//Called before entities are aviable
 	bool Awake(pugi::xml_node&);
@@ -56,60 +60,48 @@ public:
 	//Called every loop iteration
 	bool PostUpdate();
 
-	//Called before quitting
-	bool CleanUp();
-
 	//Load Game State
-	bool Load(pugi::xml_node&);
+	bool Load(pugi::xml_node& node);
+
+	//Save Game State
+	bool Save(pugi::xml_node& node) const;
 
 	//PerformActions
 	void SetAnimations(float dt);
 
-	//Pathfinding functions
-	
-
 
 private:
 
-	////Draw Entity on screen
-	//void Draw(float dt) const;
 	//Load Entity Animations
-	/*p2Animation LoadCrabAnimations(p2SString name) const;
-	p2Animation LoadBatAnimations(p2SString name) const;*/
-	//Debug functionallity
+	p2Animation LoadAnimation(p2SString name, p2SString entity_name) const;
+	//Create path from enemy to player
+	bool CalculatePath();
+	//Follow the path to the player
+	virtual void FollowPath() {};
 
 public:
-	fPoint crab1_position;
-	fPoint bat1_position;
-	SDL_Rect crab_rect;
-	SDL_Rect bat_rect;
+	fPoint position;
+	fPoint velocity;
 
-	Collider* crab_coll = nullptr;
-	Collider* bat_coll = nullptr;
-
-
-	
-	Entity_State state = ENTITY_STATE_NONE;
-	Entity_Type type = ENTITY_NONE;
+	Entity_State state = STATE_NONE;
+	Entity_Type type = NONE;
 
 
 
-private:
+protected:
 
-	p2SString path;
-	p2Animation* currentcrab_animation = nullptr;
-	p2Animation* currentbat_animation = nullptr;
-	p2Animation  crab_idle;
-	p2Animation crab_right;
-	p2Animation  crab_left;
+	p2SString			path;
+	p2Animation*		current_animation = nullptr;
+	p2Animation			idle_anim;
+	p2Animation			run_anim;
+	p2Animation			fall_anim;
+	SDL_Texture*		graphics = nullptr;
+	Collider*			coll = nullptr;
+	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
 
-	p2Animation  bat_idle;
-	p2Animation  bat_right;
-	p2Animation  bat_left;
-	pugi::xml_document entities_file;
+	pugi::xml_node		entity_node;
 
-	SDL_Texture* entitiesSpritesheet = nullptr;
-	//SDL_RendererFlip   flipX = SDL_FLIP_NONE;
+
 };
 
 

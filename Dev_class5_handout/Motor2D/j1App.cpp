@@ -196,7 +196,7 @@ void j1App::PrepareUpdate()
 	frame_count++;
 	last_sec_frame_count++;
 
-	if(frame_capped) dt = (1000.0F / frame_rate) / 1000.0F;
+	if (frame_capped) dt = (1000.0F / frame_rate) / 1000.0F;
 	else  dt = (1000.0F / avg_fps) / 1000.0F;
 
 	frame_time.Start();
@@ -225,10 +225,10 @@ void j1App::FinishUpdate()
 	uint32 last_frame_ms = frame_time.Read();
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
 
-	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu ",
-		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
-	App->win->SetTitle(title);
+	static char title_dyn[256];
+	sprintf_s(title_dyn, 256, "%s || Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu ",
+		title.GetString(), avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
+	App->win->SetTitle(title_dyn);
 
 	j1PerfTimer delay_timer;
 	// TODO 2: Use SDL_Delay to make sure you get your capped framerate
@@ -236,6 +236,12 @@ void j1App::FinishUpdate()
 	{
 		SDL_Delay((1000 / frame_rate) - last_frame_ms);
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		frame_rate = (frame_rate == 30) ? 60 : 30;
+	}
+
 	// TODO3: Measure accurately the amount of time it SDL_Delay actually waits compared to what was expected
 	LOG("We waited for %i milliseconds and got back in %.6f", (1000 / frame_rate) - last_frame_ms, delay_timer.ReadMs());
 }

@@ -32,6 +32,8 @@ public:
 
 	bool CleanUp();
 
+	void Draw(float dt);
+
 	bool Save(pugi::xml_node&);
 
 	bool Load(pugi::xml_node&);

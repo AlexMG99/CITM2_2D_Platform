@@ -14,7 +14,7 @@
 #include "j1Collision.h"
 #include "j1Render.h"
 
-j1Player::j1Player() : j1Entity()
+j1Player::j1Player() : j1Entity("player")
 {
 	name.create("player");
 

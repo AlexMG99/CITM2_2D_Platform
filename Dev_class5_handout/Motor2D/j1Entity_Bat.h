@@ -32,12 +32,13 @@ public:
 
 	bool CleanUp();
 
-
 	bool Save(pugi::xml_node&);
 
 	bool Load(pugi::xml_node&);
 
 	void FollowPath();
+
+	void Draw(float dt);
 
 };
 

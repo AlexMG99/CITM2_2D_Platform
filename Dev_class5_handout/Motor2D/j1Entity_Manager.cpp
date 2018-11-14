@@ -1,7 +1,9 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Entity_Manager.h"
-
+#include "j1Entity_Bat.h"
+#include "j1Entity_Crab.h"
+#include "j1Player.h"
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Render.h"
@@ -12,8 +14,8 @@ j1Entity_Manager::j1Entity_Manager()
 {
 	name.create("entityManager");
 
-	/*j1Entity* player = new j1Player();*/
-	/*entities.add(player);*/
+	/*player = new j1Player();
+	entities.add(player);*/
 
 }
 
@@ -47,7 +49,8 @@ bool j1Entity_Manager::Start()
 		App->pathfinding->SetMap(w, h, data);
 
 	RELEASE_ARRAY(data);
-
+	/*player->Start();*/
+	
 	return ret;
 }
 
@@ -108,7 +111,8 @@ bool j1Entity_Manager::Update(float dt)
 
 bool j1Entity_Manager::CleanUp()
 {
-	
+	 
+
 	p2List_item<j1Entity*>* entity;
 	entity = entities.start;
 
@@ -123,11 +127,11 @@ bool j1Entity_Manager::CleanUp()
 	return true;
 }
 
-j1Entity* j1Entity_Manager::AddEnemy(Entity_Type type, int x, int y)
+j1Entity* j1Entity_Manager::CreateEntity(Entity_Type type, int x, int y)
 {
 	j1Entity* entity=nullptr;
 
-	/*switch (type)
+	switch (type)
 	{
 	case ENTITY_BAT:
 		entity = new j1Entity_Bat();
@@ -141,26 +145,55 @@ j1Entity* j1Entity_Manager::AddEnemy(Entity_Type type, int x, int y)
 		break;
 	}
 
-	entity.type = type;
+	/*entity.type = type;
 	entity.position.x = x;
 	entity.position.y = x;*/
 	
 	entities.add(entity);
 
-	
+	return entity;
 }
 
-bool j1Entity_Manager::DeleteEnemy(j1Entity * entity)
+bool j1Entity_Manager::DeleteEntity(j1Entity * entity)
 {
 	p2List_item<j1Entity*>* entity_item = entities.start;
 	while (entity_item != NULL)
 	{
 		if (entity_item->data == entity)
 		{
+
 			RELEASE(entity);
 		}
 		entity_item = entity_item->next;
 	}
 	return true;
+}
+
+bool j1Entity_Manager::Load(pugi::xml_node & entity_node)
+{
+	CleanUp();
+
+	for (pugi::xml_node crab = entity_node.child("crabs").child("crab"); crab; crab = crab.next_sibling("crab"))
+	{
+		CreateEntity(ENTITY_CRAB, entity_node.child("position").attribute("x").as_float(), entity_node.child("position").attribute("y").as_float());
+	}
+
+	for (pugi::xml_node bat = entity_node.child("bats").child("bat"); bat; bat = bat.next_sibling("bat"))
+	{
+		LOG("%f", CreateEntity(ENTITY_BAT, entity_node.child("position").attribute("x").as_float(), entity_node.child("position").attribute("y").as_float()));
+		
+	}
+
+	return false;
+}
+
+bool j1Entity_Manager::Save(pugi::xml_node &entity_node) const
+{
+	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
+	{
+		pugi::xml_node save = entity_node.append_child(entity->data->name.GetString());
+		
+	}
+	return false;
 }
 
