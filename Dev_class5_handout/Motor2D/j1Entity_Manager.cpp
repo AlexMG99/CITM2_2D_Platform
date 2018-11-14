@@ -88,7 +88,7 @@ bool j1Entity_Manager::Update(float dt)
 
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
-		entity->data->Update(dt);
+		entity->data->Entity_Update(dt);
 	}
 
 	// Debug pathfinding ------------------------------
@@ -113,7 +113,6 @@ bool j1Entity_Manager::Update(float dt)
 
 bool j1Entity_Manager::CleanUp()
 {
-	 
 
 	p2List_item<j1Entity*>* entity;
 	entity = entities.start;

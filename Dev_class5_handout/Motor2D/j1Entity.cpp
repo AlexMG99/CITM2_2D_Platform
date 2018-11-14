@@ -55,22 +55,18 @@ bool j1Entity::Start()
 	return ret;
 }
 
-bool j1Entity::PreUpdate()
+bool j1Entity::PreUpdate(float dt)
 {
-	/*if (crab1_state == ENTITY_LEFT)
-	{
-		flipX = SDL_FLIP_HORIZONTAL;
-	}
-	if (bat1_state == ENTITY_LEFT)
-	{
-		flipX = SDL_FLIP_HORIZONTAL;
-	}*/
 	return true;
 };
 
-bool j1Entity::Update(float dt)
+bool j1Entity::Entity_Update(float dt)
 {
-	SetAnimations(dt);
+	//SetAnimations(dt);
+
+	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
+	App->render->Blit(graphics, position.x, position.y, &rect, flipX);
+
 	return true;
 };
 
@@ -82,47 +78,6 @@ bool j1Entity::PostUpdate()
 
 bool j1Entity::Load(pugi::xml_node& entity_node)
 {
-	/*crab1_position.x = entity_node.child("position").attribute("x").as_float();
-	crab1_position.y = entity_node.child("position").attribute("y").as_float();
-
-	bat1_position.x = entity_node.child("position").attribute("x").as_float();
-	bat1_position.y = entity_node.child("position").attribute("y").as_float();
-
-	crab_rect.x = entity_node.child("collider").attribute("x").as_int();
-	crab_rect.y = entity_node.child("collider").attribute("y").as_int();
-
-	bat_rect.x = entity_node.child("collider").attribute("x").as_int();
-	bat_rect.y = entity_node.child("collider").attribute("y").as_int();
-
-	p2SString crab_state = entity_node.child("entity_state").attribute("value").as_string();
-
-	if (crab_state == "ENTITY_STATE_IDLE")
-	{
-		crab1_state = ENTITY_STATE_IDLE;
-	}
-	else if (crab_state == "ENTITY_STATE_RIGHT")
-	{
-		crab1_state = ENTITY_STATE_RIGHT;
-	}
-	else if (crab_state == "ENTITY_STATE_LEFT")
-	{
-		crab1_state = ENTITY_STATE_LEFT;
-	}
-
-	p2SString bat_state = entity_node.child("entity_state").attribute("value").as_string();
-
-	if (bat_state == "ENTITY_STATE_IDLE")
-	{
-		bat1_state = ENTITY_STATE_IDLE;
-	}
-	else if (bat_state == "ENTITY_STATE_RIGHT")
-	{
-		bat1_state = ENTITY_STATE_RIGHT;
-	}
-	else if (bat_state == "ENTITY_STATE_LEFT")
-	{
-		bat1_state = ENTITY_STATE_LEFT;
-	}*/
 	return true;
 }
 
@@ -140,25 +95,6 @@ bool j1Entity::CalculatePath()
 void j1Entity::SetAnimations(float dt)
 {
 
-	/*switch (state) 
-		{
-	case ENTITY_STATE_IDLE:
-		
-		currentcrab_animation = &crab_idle;
-		currentbat_animation = &bat_idle;
-
-		break;
-	case ENTITY_STATE_RIGHT:
-
-		currentcrab_animation = &crab_right;
-		currentbat_animation = &bat_right;
-
-		break;
-
-	case ENTITY_STATE_LEFT:
-		currentcrab_animation = &crab_left;
-		currentbat_animation = &bat_left;
-	}*/
 }
 
 p2Animation j1Entity::LoadAnimation(p2SString name, p2SString entity_name) const
@@ -179,7 +115,4 @@ p2Animation j1Entity::LoadAnimation(p2SString name, p2SString entity_name) const
 	return anim;
 }
 
-//virtual j1Entity::FollowPath()
-//{
-//}
 

@@ -9,12 +9,16 @@
 #include "j1Render.h"
 
 
-j1Entity_Bat::j1Entity_Bat() :j1Entity("bat")
+j1Entity_Bat::j1Entity_Bat() : j1Entity("bat")
 {
 	name.create("entity_bat");
 
 	graphics = App->tex->Load("textures/bat.png");
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 30, 31 }, COLLIDER_ENEMY);
+	idle_anim.PushBack({ 33,9,27,22 });
+	idle_anim.speed = 10.0F;
+	state = STATE_IDLE;
+	current_animation = &idle_anim;
 
 }
 
@@ -56,8 +60,7 @@ bool j1Entity_Bat::CleanUp()
 
 void j1Entity_Bat::Draw(float dt)
 {
-	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
-	App->render->Blit(graphics, position.x, position.y, &rect, flipX);
+	
 }
 
 bool j1Entity_Bat::Save(pugi::xml_node & entity_node)

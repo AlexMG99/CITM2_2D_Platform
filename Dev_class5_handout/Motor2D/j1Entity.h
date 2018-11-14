@@ -52,10 +52,10 @@ public:
 	bool Start();
 
 	//Called every loop iteration
-	bool PreUpdate();
+	bool PreUpdate(float dt);
 
 	//Called every loop iteration
-	bool Update(float dt);
+	bool Entity_Update(float dt);
 
 	//Called every loop iteration
 	bool PostUpdate();
@@ -86,9 +86,6 @@ public:
 	Entity_State state = STATE_NONE;
 	Entity_Type type = NONE;
 
-
-
-protected:
 
 	p2SString			path;
 	p2Animation*		current_animation = nullptr;
