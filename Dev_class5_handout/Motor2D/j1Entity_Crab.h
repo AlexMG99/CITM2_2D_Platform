@@ -36,6 +36,7 @@ public:
 
 	bool Load(pugi::xml_node&);
 
+	void FollowPath();
 
 };
 

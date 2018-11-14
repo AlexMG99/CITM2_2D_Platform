@@ -8,9 +8,13 @@
 #include "j1Pathfinding.h"
 #include "j1Textures.h"
 
-j1Entity_Manager::j1Entity_Manager() : j1Module()
+j1Entity_Manager::j1Entity_Manager()
 {
 	name.create("entityManager");
+
+	/*j1Entity* player = new j1Player();*/
+	/*entities.add(player);*/
+
 }
 
 j1Entity_Manager::~j1Entity_Manager()
@@ -104,6 +108,7 @@ bool j1Entity_Manager::Update(float dt)
 
 bool j1Entity_Manager::CleanUp()
 {
+	
 	p2List_item<j1Entity*>* entity;
 	entity = entities.start;
 
@@ -118,28 +123,31 @@ bool j1Entity_Manager::CleanUp()
 	return true;
 }
 
-bool j1Entity_Manager::AddEnemy(Entity_Type type, int x, int y)
+j1Entity* j1Entity_Manager::AddEnemy(Entity_Type type, int x, int y)
 {
-	j1Entity* entity;
+	j1Entity* entity=nullptr;
 
-	switch (type)
+	/*switch (type)
 	{
 	case ENTITY_BAT:
-		//entity = new j1Entity_Bat();
+		entity = new j1Entity_Bat();
 		break;
 	case ENTITY_CRAB:
-		//entity = new j1Entity_Crab();
+		entity = new j1Entity_Crab();
 		break;
+
 	default:
 		LOG("Enemy Type Incorrect!");
 		break;
 	}
-	/*entity.type = type;
+
+	entity.type = type;
 	entity.position.x = x;
 	entity.position.y = x;*/
+	
 	entities.add(entity);
 
-	return true;
+	
 }
 
 bool j1Entity_Manager::DeleteEnemy(j1Entity * entity)

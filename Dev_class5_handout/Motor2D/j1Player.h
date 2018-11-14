@@ -3,6 +3,7 @@
 
 #include "j1Module.h"
 #include "p2Animation.h"
+#include "j1Entity.h"
 #include "j1Collision.h"
 #include "p2List.h"
 #include "SDL/include/SDL_render.h"
@@ -23,7 +24,7 @@ enum Player_State {
 	GOD_STATE,
 };
 
-class j1Player : public j1Module
+class j1Player : public j1Entity
 {
 public:
 	j1Player();

@@ -4,6 +4,7 @@
 #include "j1App.h"
 #include "j1Audio.h"
 #include "j1Player.h"
+#include "j1Entity_Manager.h"
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Textures.h"
@@ -13,7 +14,7 @@
 #include "j1Collision.h"
 #include "j1Render.h"
 
-j1Player::j1Player() : j1Module()
+j1Player::j1Player() : j1Entity()
 {
 	name.create("player");
 

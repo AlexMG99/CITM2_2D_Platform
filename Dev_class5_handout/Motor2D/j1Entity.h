@@ -24,6 +24,7 @@ enum Entity_State {
 enum Entity_Type {
 	ENTITY_NONE = -1,
 
+	ENTITY_PLAYER,
 	ENTITY_CRAB,
 	ENTITY_BAT,
 
@@ -35,6 +36,7 @@ class j1Entity : public j1Module
 public:
 	j1Entity();
 
+	
 	//Destructor 
 	virtual ~j1Entity();
 

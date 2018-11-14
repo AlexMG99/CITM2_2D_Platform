@@ -28,7 +28,7 @@ public:
 	bool CleanUp();
 
 	//Add Enemy in the Map
-	bool AddEnemy(Entity_Type type, int x, int y);
+	j1Entity* AddEnemy(Entity_Type type, int x, int y);
 
 	//Delete Enemy
 	bool DeleteEnemy(j1Entity* entity);
