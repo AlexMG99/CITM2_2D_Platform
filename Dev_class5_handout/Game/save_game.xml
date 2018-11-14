@@ -15,7 +15,23 @@
 		<state value="IDLE_STATE" />
 		<coll x="0" y="0" />
 	</player>
-	<entity />
+  <entity_manager>
+
+    <player>
+      <position x="2957" y="196" />
+      <velocity x="0" y="0" />
+      <state value="IDLE_STATE" />
+      <coll x="0" y="0" /> 
+    </player>
+    
+    <crab>
+      <position x="" y="" />
+    </crab>
+    <bat>
+      <position x="" y="" />
+    </bat>
+    
+    </entity_manager>
 	<fadetoblack>
 		<scene id="1" />
 	</fadetoblack>

@@ -106,8 +106,8 @@ private:
 	p2Animation  bat_idle;
 	p2Animation  bat_right;
 	p2Animation  bat_left;
+	
 	pugi::xml_document entities_file;
-
 	SDL_Texture* entitiesSpritesheet = nullptr;
 	//SDL_RendererFlip   flipX = SDL_FLIP_NONE;
 };
