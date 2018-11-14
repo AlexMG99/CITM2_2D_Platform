@@ -22,17 +22,11 @@ public:
 	//Destructor
 	virtual ~j1Entity_Crab();
 
-	bool Awake(pugi::xml_node&);
-
-	bool Start();
-
-	bool Update(float dt);
+	bool Entity_Update(float dt);
 
 	bool PostUpdate();
 
 	bool CleanUp();
-
-	void Draw(float dt);
 
 	bool Save(pugi::xml_node&);
 

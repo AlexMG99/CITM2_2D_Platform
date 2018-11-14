@@ -45,6 +45,7 @@ private:
 	p2SString map_path;
 	p2SString music_path;
 	p2List<j1Module*> current_level;
+
 };
 
 #endif // __j1SCENE_H__

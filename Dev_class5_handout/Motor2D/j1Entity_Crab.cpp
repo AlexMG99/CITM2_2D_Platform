@@ -13,6 +13,14 @@ j1Entity_Crab::j1Entity_Crab() : j1Entity("crab")
 {
 	name.create("entity_crab");
 
+	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 28, 28 }, COLLIDER_ENEMY);
+	idle_anim.PushBack({ 1, 1, 28, 28 });
+	idle_anim.PushBack({ 30, 1, 28, 28 });
+	idle_anim.PushBack({ 59, 1, 28, 28 });
+	idle_anim.PushBack({ 88, 1, 28, 28 });
+	idle_anim.speed = 10.0F;
+	current_animation = &idle_anim;
+
 }
 
 //Destructor
@@ -21,21 +29,8 @@ j1Entity_Crab::~j1Entity_Crab()
 
 }
 
-bool j1Entity_Crab::Awake(pugi::xml_node& config)
-{
-	
-	return true;
-};
 
-
-bool j1Entity_Crab::Start()
-{
-	
-
-	return true;
-}
-
-bool j1Entity_Crab::Update(float dt)
+bool j1Entity_Crab::Entity_Update(float dt)
 {
 
 	return true;
@@ -53,12 +48,6 @@ bool j1Entity_Crab::CleanUp()
 	
 
 	return true;
-}
-
-void j1Entity_Crab::Draw(float dt)
-{
-	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
-	App->render->Blit(graphics, position.x, position.y, &rect, flipX);
 }
 
 bool j1Entity_Crab::Save(pugi::xml_node &)

@@ -42,6 +42,7 @@ bool j1Entity_Manager::Start()
 	bool ret = true;
 
 	debug_tex = App->tex->Load("textures/pathfinding.png");
+	graphics = App->tex->Load("textures/entities.png");
 
 	int w, h;
 	uchar* data = NULL;
@@ -52,6 +53,7 @@ bool j1Entity_Manager::Start()
 	/*player->Start();*/
 
 	CreateEntity(BAT, 100, 100);
+	CreateEntity(BAT, 200, 130);
 	
 	return ret;
 }
