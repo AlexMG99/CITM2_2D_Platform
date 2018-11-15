@@ -30,6 +30,9 @@ public:
 	//Add Enemy in the Map
 	j1Entity* CreateEntity(Entity_Type type, int x, int y);
 
+	//Load all enemies from XML
+	void LoadEnemies(pugi::xml_document& entities_doc);
+
 	/*j1Entity* GetPlayer() const;*/
 	//To eliminate Player
 	j1Entity* DeletePlayer() const;
@@ -41,7 +44,6 @@ public:
 	bool Save(pugi::xml_node& )const;
 
 private:
-	p2SString				path;
 	p2List<j1Entity*>		entities;
 	j1Entity*               player;
 

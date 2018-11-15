@@ -9,6 +9,7 @@
 #include "j1Map.h"
 #include "j1Player.h"
 #include "j1Entity.h"
+#include "j1Entity_Manager.h"
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
@@ -27,6 +28,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
+	path.create(config.child("path").child_value());
 	map_path.create(config.child("map").attribute("path").as_string());
 	music_path.create(config.child("audio").attribute("path").as_string());
 	return ret;
@@ -35,10 +37,21 @@ bool j1Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene::Start()
 {
+	bool ret = true;
 	LoadLevel();
 
 	App->player->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
 	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };
+
+	pugi::xml_parse_result result = entities_files.load_file(path.GetString());
+
+	if (result == NULL)
+	{
+		LOG("Error loading player XML! Error: %s", result.description());
+		ret = false;
+	}
+
+	App->entity_manager->LoadEnemies(entities_files);
 
 	return true;
 }

@@ -28,8 +28,6 @@ bool j1Entity_Manager::Awake(pugi::xml_node& config)
 	LOG("Init Entity_Manager:");
 	bool ret = true;
 
-	path.create(config.child("path").child_value());
-
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
 		entity->data->Awake(config.child(entity->data->name.GetString()));
@@ -45,7 +43,7 @@ bool j1Entity_Manager::Start()
 
 	debug_tex = App->tex->Load("textures/pathfinding.png");
 	graphics = App->tex->Load("textures/entities.png");
-	
+
 	int w, h;
 	uchar* data = NULL;
 	if (App->map->CreateWalkabilityMap(w, h, &data))
@@ -54,8 +52,8 @@ bool j1Entity_Manager::Start()
 	RELEASE_ARRAY(data);
 	/*player->Start();*/
 
-	CreateEntity(BAT, 100, 100);
-	CreateEntity(CRAB, 200, 130);
+	//CreateEntity(BAT, 100, 100);
+	//CreateEntity(CRAB, 200, 130);
 	
 	return ret;
 }
@@ -159,6 +157,23 @@ j1Entity* j1Entity_Manager::CreateEntity(Entity_Type type, int x, int y)
 	return entity;
 }
 
+void j1Entity_Manager::LoadEnemies(pugi::xml_document& entities_doc)
+{
+	pugi::xml_node bats = entities_doc.child("entityManager").child("bats");
+
+	for (pugi::xml_node entity_bat = bats.child("bat"); entity_bat; entity_bat = entity_bat.next_sibling("bat"))
+	{
+		CreateEntity(BAT, entity_bat.child("position").attribute("x").as_int(), entity_bat.child("position").attribute("y").as_int());
+	}
+
+	pugi::xml_node crabs = entities_doc.child("entityManager").child("crabs");
+
+	for (pugi::xml_node entity_crabs = crabs.child("crab"); entity_crabs; entity_crabs = entity_crabs.next_sibling("crab"))
+	{
+		CreateEntity(CRAB, entity_crabs.child("position").attribute("x").as_int(), entity_crabs.child("position").attribute("y").as_int());
+	}
+
+}
 //j1Entity * j1Entity_Manager::GetPlayer() const
 //{
 //	j1Entity* ret = nullptr;
