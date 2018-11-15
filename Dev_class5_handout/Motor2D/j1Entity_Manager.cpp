@@ -47,8 +47,6 @@ bool j1Entity_Manager::Start()
 		App->pathfinding->SetMap(w, h, data);
 
 	RELEASE_ARRAY(data);
-	player = CreateEntity(PLAYER, App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y"));
-	player->Entity_Start("player");
 
 	//CreateEntity(BAT, 100, 100);
 	//CreateEntity(CRAB, 200, 130);
@@ -178,6 +176,13 @@ void j1Entity_Manager::LoadEnemies(pugi::xml_document& entities_doc)
 		CreateEntity(CRAB, entity_crabs.child("position").attribute("x").as_int(), entity_crabs.child("position").attribute("y").as_int());
 	}
 
+}
+void j1Entity_Manager::LoadPlayer()
+{
+	
+	player = CreateEntity(PLAYER, App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y"));
+	player->Entity_Start("player");
+	
 }
 //j1Entity * j1Entity_Manager::GetPlayer() const
 //{

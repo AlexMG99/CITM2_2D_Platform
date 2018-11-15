@@ -51,6 +51,7 @@ bool j1Scene::Start()
 		ret = false;
 	}
 
+	App->entity_manager->LoadPlayer();
 	App->entity_manager->LoadEnemies(entities_files);
 
 	return true;
@@ -73,12 +74,12 @@ bool j1Scene::PreUpdate(float dt)
 bool j1Scene::Update(float dt)
 {
 	
-	/*if (App->player->position.x > (App->win->GetWidth() / App->win->GetScale()) / 4 && App->player->position.x < (App->map->data.tile_width*App->map->data.width - App->win->GetWidth() / 4) )
+	if (App->entity_manager->GetPlayer()->position.x > (App->win->GetWidth() / App->win->GetScale()) / 4 && App->entity_manager->GetPlayer()->position.x < (App->map->data.tile_width*App->map->data.width - App->win->GetWidth() / 4) )
 	{
-		App->render->camera.x = -App->player->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
+		App->render->camera.x = -App->entity_manager->GetPlayer()->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
 	}
 
-	App->render->camera.y = (int)App->map->data.player_properties.Get("camera.y");*/
+	App->render->camera.y = (int)App->map->data.player_properties.Get("camera.y");
 
 	App->map->Draw();
 	

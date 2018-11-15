@@ -1,6 +1,9 @@
 #include "j1App.h"
 #include "j1Entity_Manager.h"
 #include "j1Entity_Player.h"
+#include "j1Scene.h"
+#include "j1Scene2.h"
+#include "j1FadeToBlack.h"
 #include "j1Map.h"
 #include "j1Render.h"
 #include "j1Textures.h"
@@ -60,7 +63,7 @@ bool j1Entity_Player::Entity_Update(float dt)
 
 	Entity_Draw(dt);
 
-	coll->SetPos(position.x, position.y);
+	coll->SetPos((int)(position.x - coll->rect.w / 2), (int)(position.y - coll->rect.h));
 
 	if (state != STATE_JUMP) velocity.y = -acceleration.y*dt;
 
@@ -70,7 +73,7 @@ bool j1Entity_Player::Entity_Update(float dt)
 bool j1Entity_Player::Entity_Draw(float dt)
 {
 	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
-	App->render->Blit(player_tex, position.x, position.y, &rect, flipX);
+	App->render->Blit(player_tex, (int)(position.x - coll->rect.w / 2), (int)(position.y - coll->rect.h), &rect, flipX);
 	return true;
 }
 
@@ -112,6 +115,7 @@ void j1Entity_Player::CheckState()
 		if (press_space)
 		{
 			state = STATE_JUMP;
+			
 		}
 
 		if (pressed_down)
@@ -153,10 +157,12 @@ void j1Entity_Player::CheckState()
 		{
 			state = STATE_IDLE;
 		}
+		break;
 
 	case STATE_GOD:
 		if (!godMode) state = STATE_FALL;
 		break;
+
 	default:
 		break;
 	}
@@ -199,8 +205,18 @@ void j1Entity_Player::PerformActions(float dt)
 
 	case STATE_DEATH:
 		velocity.x = 0;
-		velocity.y = 0;
 		current_animation = &death_anim;
+
+		if (App->scene->IsEnabled())
+		{
+			App->scene->Reset();
+			//App->audio->PlayFx(fx_death);
+		}
+		else if (App->scene2->IsEnabled())
+		{
+			App->scene2->Reset();
+			//App->audio->PlayFx(fx_death);
+		}
 		break;
 
 	case STATE_GOD:
@@ -223,11 +239,73 @@ void j1Entity_Player::Entity_Collision(Collider* other_coll)
 	switch (other_coll->type)
 	{
 	case COLLIDER_GROUND:
-		if (directionUp)
+		//Check collision from right
+		if (directionRight && directionCornerDown) {
+			if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
+				velocity.x = 0;
+		}
+		//Check collision from left
+		else if (directionLeft && directionCornerDown)
 		{
-			state = STATE_IDLE;
+			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
+				velocity.x = 0;
+		}
+		//Check collision from up
+		else if (directionUp)
+		{
+			position.y = (float)other_coll->rect.y + 1;
+			velocity.y = 0;
+			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE || state == STATE_FALL)
+				state = STATE_IDLE;
+		}
+		else
+		{
+			position.y = (float)(other_coll->rect.y + other_coll->rect.h + coll->rect.h);
 			velocity.y = 0;
 		}
+		break;
+
+	case COLLIDER_PLATFORM:
+		if (velocity.y > 0)
+		{
+			//Check collision from right
+			if (directionRight && directionCornerDown) {
+				if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
+					velocity.x = 0;
+			}
+			//Check collision from left
+			else if (directionLeft && directionCornerDown)
+			{
+				if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
+					velocity.x = 0;
+			}
+		}
+		if (directionUp)
+		{
+			position.y = (float)other_coll->rect.y + 1;
+			velocity.y = 0;
+			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE || state == STATE_FALL)
+				state = STATE_IDLE;
+		}
+		break;
+
+	case COLLIDER_DEATH:
+		state = STATE_DEATH;
+		break;
+
+	case COLLIDER_WIN:
+		if (App->scene->IsEnabled())
+		{
+			App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
+		}
+		else if (App->scene2->IsEnabled())
+		{
+			App->fadeToBlack->FadeToBlack(App->scene2, App->scene);
+		}
+		break;
+
+	default:
+		LOG("Collider Unknown!");
 		break;
 	}
 }
