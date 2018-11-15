@@ -47,7 +47,7 @@ bool j1Scene::Start()
 
 	if (result == NULL)
 	{
-		LOG("Error loading player XML! Error: %s", result.description());
+		LOG("Error loading enemies XML! Error: %s", result.description());
 		ret = false;
 	}
 
