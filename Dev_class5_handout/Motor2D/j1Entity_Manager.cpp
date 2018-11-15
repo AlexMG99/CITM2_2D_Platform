@@ -29,10 +29,12 @@ bool j1Entity_Manager::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	path.create(config.child("path").child_value());
+
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
 		entity->data->Awake(config.child(entity->data->name.GetString()));
 	}
+
 	return ret;
 }
 
@@ -53,8 +55,7 @@ bool j1Entity_Manager::Start()
 	/*player->Start();*/
 
 	CreateEntity(BAT, 100, 100);
-	CreateEntity(BAT, 200, 130);
-	/*CreateEntity(CRAB, 200, 130);*/
+	CreateEntity(CRAB, 200, 130);
 	
 	return ret;
 }

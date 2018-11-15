@@ -50,6 +50,7 @@ private:
 public:
 	SDL_Texture*			graphics = nullptr;
 	SDL_Texture*			player_graphics = nullptr;
+
 };
 
 

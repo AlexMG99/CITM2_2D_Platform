@@ -86,7 +86,8 @@ public:
 	Collider*			coll = nullptr;
 	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
 
-	pugi::xml_node		entity_node;
+	pugi::xml_document	entities_animations;
+
 
 
 };

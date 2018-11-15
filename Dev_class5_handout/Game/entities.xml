@@ -1,18 +1,6 @@
 <?xml version="1.0"?>
 
 <entityManager>
-  <crabs>
-    <crab>
-      <position x="290" y="156"/>
-      <velocity x="0" y="0"/>
-    </crab>
-  </crabs>
-  <bats>
-    <bat>
-      <position x="190" y="156"/>
-      <velocity x="0" y="0"/>
-    </bat>
-  </bats>
   <entities>
     <player>
       <image source="textures/player.png"/>

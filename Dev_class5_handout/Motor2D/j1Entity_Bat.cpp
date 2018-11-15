@@ -14,10 +14,6 @@ j1Entity_Bat::j1Entity_Bat() : j1Entity("bat")
 	name.create("entity_bat");
 
 	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 30, 31 }, COLLIDER_ENEMY);
-	idle_anim.PushBack({ 33, 69, 31, 30 });
-	idle_anim.PushBack({ 65, 69, 31, 30 });
-	idle_anim.PushBack({ 97, 69, 31, 30 });
-	idle_anim.speed = 7.0F;
 	state = STATE_IDLE;
 	current_animation = &idle_anim;
 

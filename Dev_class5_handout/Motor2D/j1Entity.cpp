@@ -17,6 +17,8 @@ j1Entity::j1Entity(const char* entity_name)
 {
 	name.create("entity");
 
+	entities_animations.load_file("entities.xml");
+
 	idle_anim = LoadAnimation("idle", entity_name);
 	run_anim = LoadAnimation("run", entity_name);
 	fall_anim = LoadAnimation("fall", entity_name);
@@ -79,6 +81,7 @@ p2Animation j1Entity::LoadAnimation(p2SString name, p2SString entity_name) const
 {
 	SDL_Rect frames;
 	p2Animation anim;
+	pugi::xml_node entity_node = entities_animations.child("entityManager").child("entities");
 	for (pugi::xml_node frames_node = entity_node.child(entity_name.GetString()).child("animation").child(name.GetString()).child("frame"); frames_node; frames_node = frames_node.next_sibling("frame"))
 	{
 		frames.x = frames_node.attribute("x").as_int();
