@@ -45,11 +45,17 @@ public:
 	//Destructor 
 	virtual ~j1Entity();
 
-	//Called every loop iteration
-	bool Entity_Update(float dt);
+	//Called before the first frame
+	virtual bool Entity_Start(const char* entity_name) { return true; }
 
 	//Called every loop iteration
-	bool PostUpdate();
+	virtual bool Entity_PreUpdate(float dt) { return true; }
+
+	//Called every loop iteration
+	virtual bool Entity_Update(float dt);
+
+	//Called every loop iteration
+	virtual bool Entity_PostUpdate();
 
 	//Load Game State
 	bool Load(pugi::xml_node& node);
@@ -60,11 +66,15 @@ public:
 	//PerformActions
 	void SetAnimations(float dt);
 
+	//Check Collision
+	virtual void Entity_Collision(Collider* c2) {};
 
 protected:
 
 	//Load Entity Animations
 	p2Animation LoadAnimation(p2SString name, p2SString entity_name) const;
+	//Draw Entity
+	virtual bool Entity_Draw(float dt);
 	//Create path from enemy to player
 	bool CalculatePath();
 	//Follow the path to the player
@@ -77,12 +87,12 @@ public:
 	Entity_State state = STATE_NONE;
 	Entity_Type type = NONE;
 
-
 	p2SString			path;
 	p2Animation*		current_animation = nullptr;
 	p2Animation			idle_anim;
 	p2Animation			run_anim;
 	p2Animation			fall_anim;
+	p2Animation			death_anim;
 	Collider*			coll = nullptr;
 	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
 

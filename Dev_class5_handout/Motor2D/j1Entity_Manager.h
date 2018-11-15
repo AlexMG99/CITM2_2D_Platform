@@ -42,6 +42,9 @@ public:
 	bool Load(pugi::xml_node& );
 	bool Save(pugi::xml_node& )const;
 
+	//Check Collisions
+	void OnCollision(Collider * c1, Collider * c2);
+
 private:
 	p2List<j1Entity*>		entities;
 	j1Entity*               player;

@@ -22,6 +22,7 @@ j1Entity::j1Entity(const char* entity_name)
 	idle_anim = LoadAnimation("idle", entity_name);
 	run_anim = LoadAnimation("run", entity_name);
 	fall_anim = LoadAnimation("fall", entity_name);
+	death_anim = LoadAnimation("death", entity_name);
 
 }
 
@@ -40,12 +41,11 @@ bool j1Entity::Entity_Update(float dt)
 {
 	//SetAnimations(dt);
 
-	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
-	App->render->Blit(App->entity_manager->graphics, position.x, position.y, &rect, flipX);
+	Entity_Draw(dt);
 	return true;
 };
 
-bool j1Entity::PostUpdate()
+bool j1Entity::Entity_PostUpdate()
 {
 	
 	return true;
@@ -93,6 +93,13 @@ p2Animation j1Entity::LoadAnimation(p2SString name, p2SString entity_name) const
 	anim.speed = entity_node.child(entity_name.GetString()).child("animation").child(name.GetString()).attribute("speed").as_float();
 
 	return anim;
+}
+
+bool j1Entity::Entity_Draw(float dt)
+{
+	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
+	App->render->Blit(App->entity_manager->graphics, position.x, position.y, &rect, flipX);
+	return true;
 }
 
 

@@ -35,11 +35,11 @@ bool j1Entity_Manager::Awake(pugi::xml_node& config)
 
 bool j1Entity_Manager::Start()
 {
-	LOG("Start player:");
+	LOG("Start Entity_Manager:");
 	bool ret = true;
 
 	debug_tex = App->tex->Load("textures/pathfinding.png");
-	graphics = App->tex->Load("textures/player.png");
+	graphics = App->tex->Load("textures/entities.png");
 
 	int w, h;
 	uchar* data = NULL;
@@ -48,7 +48,7 @@ bool j1Entity_Manager::Start()
 
 	RELEASE_ARRAY(data);
 	player = CreateEntity(PLAYER, App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y"));
-	player->Start();
+	player->Entity_Start("player");
 
 	//CreateEntity(BAT, 100, 100);
 	//CreateEntity(CRAB, 200, 130);
@@ -60,6 +60,12 @@ bool j1Entity_Manager::PreUpdate(float dt)
 {
 	static iPoint origin;
 	static bool origin_selected = false;
+
+	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
+	{
+		entity->data->Entity_PreUpdate(dt);
+	}
+
 
 	int x, y;
 	App->input->GetMousePosition(x, y);
@@ -232,5 +238,13 @@ bool j1Entity_Manager::Save(pugi::xml_node &entity_node) const
 		save.append_attribute("position_y") = entity->data->position.y;
 	}
 	return false;
+}
+
+void j1Entity_Manager::OnCollision(Collider* c1, Collider* c2)
+{
+	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
+	{
+		entity->data->Entity_Collision(c2);
+	}
 }
 

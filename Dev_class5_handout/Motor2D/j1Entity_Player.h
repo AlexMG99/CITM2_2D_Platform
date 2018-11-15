@@ -20,7 +20,22 @@ public:
 	virtual ~j1Entity_Player();
 
 	// Called before the first frame
-	bool Start(const char* entity_name = "player");
+	bool Entity_Start(const char* entity_name = "player");
+
+	//Called every loop iteration
+	bool Entity_PreUpdate(float dt);
+
+	//Called evry loop iteration
+	bool Entity_Update(float dt);
+
+	//Draw Player
+	bool Entity_Draw(float dt);
+
+	void Entity_Collision(Collider* other_coll);
+
+private:
+	void CheckState();
+	void PerformActions(float dt);
 
 
 public:
@@ -33,12 +48,9 @@ public:
 	SDL_Texture*	player_tex = nullptr;
 
 private:
-
-	
-	p2Animation		air_anim;
+	p2Animation		jump_anim;
 	p2Animation     duck_anim;
 	p2Animation     cling_anim;
-	
 
 };
 
