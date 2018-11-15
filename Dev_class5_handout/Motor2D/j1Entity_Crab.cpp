@@ -30,12 +30,6 @@ j1Entity_Crab::~j1Entity_Crab()
 }
 
 
-bool j1Entity_Crab::Entity_Update(float dt)
-{
-
-	return true;
-};
-
 bool j1Entity_Crab::PostUpdate()
 {
 	

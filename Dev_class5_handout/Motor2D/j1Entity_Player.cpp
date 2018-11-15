@@ -39,17 +39,20 @@ bool j1Entity_Player::Entity_Start(const char* entity_name)
 
 bool j1Entity_Player::Entity_PreUpdate(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && state != STATE_GOD)
 	{
 		velocity.x = acceleration.x*dt;
-		flipX = SDL_FLIP_NONE;
+		if (state != STATE_CLING) flipX = SDL_FLIP_NONE;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE && state != STATE_GOD)
 	{
 		velocity.x = -acceleration.x*dt;
-		flipX = SDL_FLIP_HORIZONTAL;
+		if (state != STATE_CLING) flipX = SDL_FLIP_HORIZONTAL;
 	}
+
+	DebugInputs();
+
 	return true;
 }
 
@@ -63,9 +66,12 @@ bool j1Entity_Player::Entity_Update(float dt)
 
 	Entity_Draw(dt);
 
-	coll->SetPos((int)(position.x - coll->rect.w / 2), (int)(position.y - coll->rect.h));
+	if(state != STATE_GOD) 
+		coll->SetPos((int)(position.x - coll->rect.w / 2), (int)(position.y - coll->rect.h));
 
-	if (state != STATE_JUMP) velocity.y = -acceleration.y*dt;
+	if (state != STATE_JUMP && state != STATE_GOD) velocity.y = -acceleration.y*dt;
+
+	if (godMode) state = STATE_GOD; 
 
 	return true;
 }
@@ -220,6 +226,26 @@ void j1Entity_Player::PerformActions(float dt)
 		break;
 
 	case STATE_GOD:
+		current_animation = &idle_anim;
+		coll->SetPos(0, 0);
+		velocity = { 0,0 };
+
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			position.x -= 200* dt;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			position.y -= 200 * dt;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			position.y += 200 * dt;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			position.x += 200 * dt;
+		}
 		break;
 
 	default:
@@ -227,6 +253,44 @@ void j1Entity_Player::PerformActions(float dt)
 		break;
 
 	}
+}
+
+void j1Entity_Player::DebugInputs()
+{
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		if (App->scene->IsEnabled())
+		{
+			App->scene->Reset();
+		}
+		else if (App->scene2->IsEnabled())
+		{
+			App->fadeToBlack->FadeToBlack(App->scene2, App->scene);
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		if (App->scene->IsEnabled())
+		{
+			App->scene->Reset();
+		}
+		else if (App->scene2->IsEnabled())
+		{
+			App->scene2->Reset();
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	{
+		App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		godMode = !godMode;
+	}
+
 }
 
 void j1Entity_Player::Entity_Collision(Collider* other_coll)
@@ -266,26 +330,51 @@ void j1Entity_Player::Entity_Collision(Collider* other_coll)
 		break;
 
 	case COLLIDER_PLATFORM:
-		if (velocity.y > 0)
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) 
 		{
-			//Check collision from right
-			if (directionRight && directionCornerDown) {
-				if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
-					velocity.x = 0;
-			}
-			//Check collision from left
-			else if (directionLeft && directionCornerDown)
+			state = STATE_FALL;
+			position.y--;
+		}
+		else
+		{
+			if (velocity.y > 0)
 			{
-				if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
-					velocity.x = 0;
+				//Check collision from right
+				if (directionRight && directionCornerDown) {
+					if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
+						velocity.x = 0;
+				}
+				//Check collision from left
+				else if (directionLeft && directionCornerDown)
+				{
+					if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE)
+						velocity.x = 0;
+				}
+			}
+			if (directionUp)
+			{
+				position.y = (float)other_coll->rect.y + 1;
+				velocity.y = 0;
+				if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE || state == STATE_FALL)
+					state = STATE_IDLE;
 			}
 		}
-		if (directionUp)
+		
+		break;
+
+	case COLLIDER_WALL:
+		//Check collision from right
+		if (directionRight) {
+			state = STATE_CLING;
+			flipX = SDL_FLIP_NONE;
+			position.x = (float)(other_coll->rect.x + other_coll->rect.w + coll->rect.w / 2);
+		}
+		//Check collision from left
+		else if (directionLeft)
 		{
-			position.y = (float)other_coll->rect.y + 1;
-			velocity.y = 0;
-			if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE || state == STATE_FALL)
-				state = STATE_IDLE;
+			state = STATE_CLING;
+			flipX = SDL_FLIP_HORIZONTAL;
+			position.x = (float)(other_coll->rect.x - coll->rect.w / 2);
 		}
 		break;
 
@@ -308,4 +397,94 @@ void j1Entity_Player::Entity_Collision(Collider* other_coll)
 		LOG("Collider Unknown!");
 		break;
 	}
+}
+
+bool j1Entity_Player::Load(pugi::xml_node & player_node)
+{
+	position.x = player_node.child("position").attribute("x").as_float();
+	position.y = player_node.child("position").attribute("y").as_float();
+	velocity.x = player_node.child("velocity").attribute("x").as_float();
+	velocity.y = player_node.child("velocity").attribute("y").as_float();
+	p2SString state_name = player_node.child("state").attribute("value").as_string();
+	if (state_name == "STATE_IDLE")
+	{
+		state = STATE_IDLE;
+	}
+	else if (state_name == "STATE_RUN")
+	{
+		state = STATE_RUN;
+	}
+	else if (state_name == "STATE_FALL")
+	{
+		state = STATE_FALL;
+	}
+	else if (state_name == "STATE_DEATH")
+	{
+		state = STATE_DEATH;
+	}
+	else if (state_name == "STATE_CLING")
+	{
+		state = STATE_CLING;
+	}
+	else if (state_name == "STATE_JUMP")
+	{
+		state = STATE_JUMP;
+	}
+	else if (state_name == "STATE_DUCK")
+	{
+		state = STATE_DUCK;
+	}
+	else if (state_name == "STATE_GOD")
+	{
+		state = STATE_GOD;
+	}
+	return true;
+}
+
+bool j1Entity_Player::Save(pugi::xml_node & player_node) const
+{
+	pugi::xml_node pos = player_node.append_child("position");
+	pugi::xml_node vel = player_node.append_child("velocity");
+	pugi::xml_node state_node = player_node.append_child("state");
+
+	pos.append_attribute("x") = position.x;
+	pos.append_attribute("y") = position.y;
+	vel.append_attribute("x") = velocity.x;
+	vel.append_attribute("y") = velocity.y;
+	p2SString state_name;
+	if (state == 0)
+	{
+		state_name = "STATE_IDLE";
+	}
+	else if (state == 1)
+	{
+		state_name = "STATE_RUN";
+	}
+	else if (state == 2)
+	{
+		state_name = "STATE_FALL";
+	}
+	else if (state == 3)
+	{
+		state_name = "STATE_DEATH";
+	}
+	else if (state == 4)
+	{
+		state_name = "STATE_CLING";
+	}
+	else if (state == 5)
+	{
+		state_name = "STATE_JUMP";
+	}
+	else if (state == 6)
+	{
+		state_name = "DUCK_STATE";
+	}
+	else if (state == 7)
+	{
+		state_name = "STATE_GOD";
+	}
+	state_node.append_attribute("value") = state_name.GetString();
+
+	return true;
 }

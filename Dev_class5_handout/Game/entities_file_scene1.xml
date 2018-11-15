@@ -16,6 +16,9 @@
   
   <crabs>
     <crab>
+      <position x="120" y="123"/>
+    </crab>
+    <crab>
       <position x="320" y="153"/>
     </crab>
     <crab>

@@ -184,20 +184,7 @@ void j1Entity_Manager::LoadPlayer()
 	player->Entity_Start("player");
 	
 }
-//j1Entity * j1Entity_Manager::GetPlayer() const
-//{
-//	j1Entity* ret = nullptr;
-//
-//	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity->next) 
-//	{
-//		if (entity->data->type == PLAYER)
-//		{
-//			ret = entity->data;
-//			break;
-//		}
-//	}
-//	return ret;
-//}
+
 
 bool j1Entity_Manager::DeleteEntity(j1Entity * entity)
 {
@@ -217,7 +204,8 @@ bool j1Entity_Manager::DeleteEntity(j1Entity * entity)
 bool j1Entity_Manager::Load(pugi::xml_node & entity_node)
 {
 	CleanUp();
-	/*GetPlayer()->Load(entity_node.child("player"));*/
+	LoadPlayer();
+	player->Load(entity_node.child("player"));
 
 	for (pugi::xml_node crab = entity_node.child("crabs").child("crab"); crab; crab = crab.next_sibling("crab"))
 	{
@@ -235,12 +223,12 @@ bool j1Entity_Manager::Load(pugi::xml_node & entity_node)
 
 bool j1Entity_Manager::Save(pugi::xml_node &entity_node) const
 {
-	/*GetPlayer()->Save(entity_node.append_child("player"));*/
+	player->Save(entity_node.append_child("player"));
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
 		pugi::xml_node save = entity_node.append_child(entity->data->name.GetString());
-		save.append_attribute("position_x") = entity->data->position.x;
-		save.append_attribute("position_y") = entity->data->position.y;
+		save.append_attribute("x") = entity->data->position.x;
+		save.append_attribute("y") = entity->data->position.y;
 	}
 	return false;
 }

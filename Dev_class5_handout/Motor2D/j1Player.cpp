@@ -548,36 +548,7 @@
 //
 //void j1Player::DebugInput()
 //{
-//	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-//	{
-//		if (App->scene->IsEnabled())
-//		{
-//			App->scene->Reset();
-//		}
-//		else if (App->scene2->IsEnabled())
-//		{
-//			App->fadeToBlack->FadeToBlack(App->scene2, App->scene);
-//		}
-//	}
-//	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-//	{
-//		if (App->scene->IsEnabled())
-//		{
-//			App->scene->Reset();
-//		}
-//		else if (App->scene2->IsEnabled())
-//		{
-//			App->scene2->Reset();
-//		}
-//	}
-//	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
-//	{
-//		App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
-//	}
-//	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
-//	{
-//		godMode = !godMode;
-//	}
+//	
 //
 //	if (godMode)
 //	{

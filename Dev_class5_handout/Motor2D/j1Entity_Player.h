@@ -31,23 +31,25 @@ public:
 	//Draw Player
 	bool Entity_Draw(float dt);
 
+	//Check Collision
 	void Entity_Collision(Collider* other_coll);
+
+	//Load Player
+	bool Load(pugi::xml_node& player_node);
+
+	//Save Player
+	bool Save(pugi::xml_node& player_node) const;
 
 private:
 	void CheckState();
 	void PerformActions(float dt);
+	void DebugInputs();
 
-
-public:
-	fPoint	acceleration;
-
-	SDL_Rect		coll_rect;
-	COLLIDER_TYPE	coll_type = COLLIDER_NONE;
+private:
+	fPoint			acceleration;
 	bool			godMode = false;
 	bool			falling = false;
 	SDL_Texture*	player_tex = nullptr;
-
-private:
 	p2Animation		jump_anim;
 	p2Animation     duck_anim;
 	p2Animation     cling_anim;

@@ -16,13 +16,6 @@
 		<coll x="0" y="0" />
 	</player>
   <entity_manager>
-
-    <player>
-      <position x="2957" y="196" />
-      <velocity x="0" y="0" />
-      <state value="IDLE_STATE" />
-      <coll x="0" y="0" /> 
-    </player>
     
     <crab>
       <position x="" y="" />

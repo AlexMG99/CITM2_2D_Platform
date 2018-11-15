@@ -22,8 +22,6 @@ public:
 	//Destructor
 	virtual ~j1Entity_Crab();
 
-	bool Entity_Update(float dt);
-
 	bool PostUpdate();
 
 	bool CleanUp();
