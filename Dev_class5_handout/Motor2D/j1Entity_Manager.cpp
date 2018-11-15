@@ -150,7 +150,7 @@ j1Entity* j1Entity_Manager::CreateEntity(Entity_Type type, int x, int y)
 
 	entity->type = type;
 	entity->position.x = x;
-	entity->position.y = x;
+	entity->position.y = y;
 	
 	entities.add(entity);
 

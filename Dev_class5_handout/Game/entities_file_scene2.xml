@@ -4,13 +4,13 @@
   
   <bats>
     <bat>
-      <position x="120" y="80"/>
+      <position x="50" y="80"/>
     </bat>
   </bats>
   
   <crabs>
     <crab>
-      <position x="50" y="140"/>
+      <position x="320" y="153"/>
     </crab>
   </crabs>
 
