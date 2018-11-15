@@ -42,8 +42,10 @@ public:
 	bool Load(pugi::xml_node& node);
 
 private:
+	p2SString            path;
 	p2SString            map_path;
 	p2SString            music_path;
+
 	pugi::xml_document   entities_files;
 };
 
