@@ -54,8 +54,6 @@ public:
 		return true;
 	}
 
-	virtual void Draw(float dt) const {}
-
 	// Called before quitting
 	virtual bool CleanUp()
 	{

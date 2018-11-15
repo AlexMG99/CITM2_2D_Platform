@@ -69,7 +69,7 @@ bool j1Player::Start()
 			cling_anim = LoadAnimations("cling");
 
 			coll_rect = { (int)App->map->data.player_properties.Get("coll.x"), (int)App->map->data.player_properties.Get("coll.y"), (int)App->map->data.player_properties.Get("coll.w") , (int)App->map->data.player_properties.Get("coll.h") };
-			player_coll = App->collision->AddCollider(coll_rect , COLLIDER_PLAYER, App->player);
+			//player_coll = App->collision->AddCollider(coll_rect , COLLIDER_PLAYER, App->player);
 			fx_death = App->audio->LoadFx(fx_death_name.GetString());
 			fx_jump = App->audio->LoadFx(fx_jump_name.GetString());
 

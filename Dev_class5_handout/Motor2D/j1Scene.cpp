@@ -40,7 +40,7 @@ bool j1Scene::Start()
 	bool ret = true;
 	LoadLevel();
 
-	App->player->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
+	//App->player->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
 	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };
 
 	pugi::xml_parse_result result = entities_files.load_file(path.GetString());
@@ -73,14 +73,14 @@ bool j1Scene::PreUpdate(float dt)
 bool j1Scene::Update(float dt)
 {
 	
-	if (App->player->position.x > (App->win->GetWidth() / App->win->GetScale()) / 4 && App->player->position.x < (App->map->data.tile_width*App->map->data.width - App->win->GetWidth() / 4) )
+	/*if (App->player->position.x > (App->win->GetWidth() / App->win->GetScale()) / 4 && App->player->position.x < (App->map->data.tile_width*App->map->data.width - App->win->GetWidth() / 4) )
 	{
 		App->render->camera.x = -App->player->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
 	}
 
-	App->render->camera.y = (int)App->map->data.player_properties.Get("camera.y");
-	App->map->Draw();
+	App->render->camera.y = (int)App->map->data.player_properties.Get("camera.y");*/
 
+	App->map->Draw();
 	
 	return true;
 }
@@ -128,7 +128,7 @@ void j1Scene::LoadLevel()
 {
 	App->map->Load(map_path.GetString());
 	App->audio->PlayMusic(music_path.GetString());
-	App->player->state = AIR_STATE;
+	//App->player->state = AIR_STATE;
 }
 
 

@@ -36,7 +36,7 @@ bool j1Scene2::Start()
 {
 	LoadLevel();
 
-	App->player->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
+	//App->player->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
 	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };
 
 	return true;
@@ -105,5 +105,5 @@ void j1Scene2::LoadLevel()
 {
 	App->map->Load(map_path.GetString());
 	App->audio->PlayMusic(music_path.GetString());
-	App->player->state = AIR_STATE;
+	//App->player->state = AIR_STATE;
 }
