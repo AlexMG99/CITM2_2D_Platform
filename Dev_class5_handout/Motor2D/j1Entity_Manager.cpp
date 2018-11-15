@@ -3,7 +3,7 @@
 #include "j1Entity_Manager.h"
 #include "j1Entity_Bat.h"
 #include "j1Entity_Crab.h"
-#include "j1Player.h"
+#include "j1Entity_Player.h"
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Render.h"
@@ -13,9 +13,6 @@
 j1Entity_Manager::j1Entity_Manager()
 {
 	name.create("entityManager");
-
-	/*player = new j1Player();
-	entities.add(player);*/
 
 }
 
@@ -42,7 +39,7 @@ bool j1Entity_Manager::Start()
 	bool ret = true;
 
 	debug_tex = App->tex->Load("textures/pathfinding.png");
-	graphics = App->tex->Load("textures/entities.png");
+	graphics = App->tex->Load("textures/player.png");
 
 	int w, h;
 	uchar* data = NULL;
@@ -50,7 +47,8 @@ bool j1Entity_Manager::Start()
 		App->pathfinding->SetMap(w, h, data);
 
 	RELEASE_ARRAY(data);
-	/*player->Start();*/
+	player = CreateEntity(PLAYER, App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y"));
+	player->Start();
 
 	//CreateEntity(BAT, 100, 100);
 	//CreateEntity(CRAB, 200, 130);
@@ -142,7 +140,8 @@ j1Entity* j1Entity_Manager::CreateEntity(Entity_Type type, int x, int y)
 	case CRAB:
 		entity = new j1Entity_Crab();
 		break;
-
+	case PLAYER:
+		entity = new j1Entity_Player();
 	default:
 		LOG("Enemy Type Incorrect!");
 		break;

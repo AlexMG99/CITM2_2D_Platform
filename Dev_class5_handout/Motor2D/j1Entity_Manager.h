@@ -33,7 +33,6 @@ public:
 	//Load all enemies from XML
 	void LoadEnemies(pugi::xml_document& entities_doc);
 
-	/*j1Entity* GetPlayer() const;*/
 	//To eliminate Player
 	j1Entity* DeletePlayer() const;
 

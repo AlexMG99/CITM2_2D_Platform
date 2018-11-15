@@ -39,7 +39,6 @@ public:
 	void FollowPath();
 	void StandardPath();
 
-	void Draw(float dt);
 
 
 };

@@ -55,11 +55,6 @@ bool j1Entity_Bat::CleanUp()
 	return true;
 }
 
-void j1Entity_Bat::Draw(float dt)
-{
-	
-}
-
 bool j1Entity_Bat::Save(pugi::xml_node & entity_node)
 {
 	return true;

@@ -42,7 +42,6 @@ bool j1Entity::Entity_Update(float dt)
 
 	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
 	App->render->Blit(App->entity_manager->graphics, position.x, position.y, &rect, flipX);
-
 	return true;
 };
 

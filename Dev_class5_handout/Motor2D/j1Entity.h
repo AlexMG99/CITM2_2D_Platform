@@ -61,7 +61,7 @@ public:
 	void SetAnimations(float dt);
 
 
-private:
+protected:
 
 	//Load Entity Animations
 	p2Animation LoadAnimation(p2SString name, p2SString entity_name) const;
