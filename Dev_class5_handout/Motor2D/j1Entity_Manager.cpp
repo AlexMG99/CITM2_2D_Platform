@@ -43,7 +43,7 @@ bool j1Entity_Manager::Start()
 
 	debug_tex = App->tex->Load("textures/pathfinding.png");
 	graphics = App->tex->Load("textures/entities.png");
-
+	
 	int w, h;
 	uchar* data = NULL;
 	if (App->map->CreateWalkabilityMap(w, h, &data))
@@ -54,6 +54,7 @@ bool j1Entity_Manager::Start()
 
 	CreateEntity(BAT, 100, 100);
 	CreateEntity(BAT, 200, 130);
+	/*CreateEntity(CRAB, 200, 130);*/
 	
 	return ret;
 }
@@ -87,7 +88,7 @@ bool j1Entity_Manager::PreUpdate(float dt)
 
 bool j1Entity_Manager::Update(float dt)
 {
-
+	
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
 		entity->data->Entity_Update(dt);
@@ -157,6 +158,21 @@ j1Entity* j1Entity_Manager::CreateEntity(Entity_Type type, int x, int y)
 	return entity;
 }
 
+//j1Entity * j1Entity_Manager::GetPlayer() const
+//{
+//	j1Entity* ret = nullptr;
+//
+//	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity->next) 
+//	{
+//		if (entity->data->type == PLAYER)
+//		{
+//			ret = entity->data;
+//			break;
+//		}
+//	}
+//	return ret;
+//}
+
 bool j1Entity_Manager::DeleteEntity(j1Entity * entity)
 {
 	p2List_item<j1Entity*>* entity_item = entities.start;
@@ -175,6 +191,7 @@ bool j1Entity_Manager::DeleteEntity(j1Entity * entity)
 bool j1Entity_Manager::Load(pugi::xml_node & entity_node)
 {
 	CleanUp();
+	/*GetPlayer()->Load(entity_node.child("player"));*/
 
 	for (pugi::xml_node crab = entity_node.child("crabs").child("crab"); crab; crab = crab.next_sibling("crab"))
 	{
@@ -183,19 +200,21 @@ bool j1Entity_Manager::Load(pugi::xml_node & entity_node)
 
 	for (pugi::xml_node bat = entity_node.child("bats").child("bat"); bat; bat = bat.next_sibling("bat"))
 	{
-		LOG("%f", CreateEntity(BAT, entity_node.child("position").attribute("x").as_float(), entity_node.child("position").attribute("y").as_float()));
+		(CreateEntity(BAT, entity_node.child("position").attribute("x").as_float(), entity_node.child("position").attribute("y").as_float()));
 		
 	}
 
-	return false;
+	return true;
 }
 
 bool j1Entity_Manager::Save(pugi::xml_node &entity_node) const
 {
+	/*GetPlayer()->Save(entity_node.append_child("player"));*/
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
 		pugi::xml_node save = entity_node.append_child(entity->data->name.GetString());
-		
+		save.append_attribute("position_x") = entity->data->position.x;
+		save.append_attribute("position_y") = entity->data->position.y;
 	}
 	return false;
 }

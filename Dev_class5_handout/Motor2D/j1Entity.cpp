@@ -5,6 +5,7 @@
 #include "j1Audio.h"
 #include "j1Entity.h"
 #include "j1Entity_Manager.h"
+#include "j1Player.h"
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Textures.h"
@@ -19,6 +20,7 @@ j1Entity::j1Entity(const char* entity_name)
 	idle_anim = LoadAnimation("idle", entity_name);
 	run_anim = LoadAnimation("run", entity_name);
 	fall_anim = LoadAnimation("fall", entity_name);
+
 }
 
 
@@ -60,6 +62,10 @@ bool j1Entity::Save(pugi::xml_node & node) const
 
 bool j1Entity::CalculatePath() 
 {
+	bool ret = false;
+
+	
+
 
 	return true;
 }
@@ -82,7 +88,7 @@ p2Animation j1Entity::LoadAnimation(p2SString name, p2SString entity_name) const
 
 		anim.PushBack({ frames.x, frames.y, frames.w, frames.h });
 	}
-	anim.speed = entity_node.child("player").child("animation").child(name.GetString()).attribute("speed").as_float();
+	anim.speed = entity_node.child(entity_name.GetString()).child("animation").child(name.GetString()).attribute("speed").as_float();
 
 	return anim;
 }

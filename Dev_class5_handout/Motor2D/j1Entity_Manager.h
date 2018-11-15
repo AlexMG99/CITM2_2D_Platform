@@ -29,6 +29,8 @@ public:
 
 	//Add Enemy in the Map
 	j1Entity* CreateEntity(Entity_Type type, int x, int y);
+
+	/*j1Entity* GetPlayer() const;*/
 	//To eliminate Player
 	j1Entity* DeletePlayer() const;
 
@@ -47,6 +49,7 @@ private:
 
 public:
 	SDL_Texture*			graphics = nullptr;
+	SDL_Texture*			player_graphics = nullptr;
 };
 
 

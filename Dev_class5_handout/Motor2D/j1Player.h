@@ -86,7 +86,8 @@ public:
 	Player_State	state = NONE_STATE;
 	bool			godMode = false;
 	bool			falling = false;
-	
+	SDL_Texture*		playerSpritesheet = nullptr;
+
 private:
 
 	p2SString		path;
@@ -105,7 +106,7 @@ private:
 
 	pugi::xml_document  player_file;
 
-	SDL_Texture*		playerSpritesheet = nullptr;
+	
 	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
 	
 };

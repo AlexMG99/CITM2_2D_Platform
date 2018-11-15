@@ -17,7 +17,7 @@
 j1Player::j1Player() : j1Entity("player")
 {
 	name.create("player");
-
+	type = PLAYER;
 }
 
 //Destructor

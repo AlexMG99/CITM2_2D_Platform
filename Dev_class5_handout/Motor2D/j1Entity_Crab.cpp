@@ -68,3 +68,15 @@ void j1Entity_Crab::FollowPath()
 
 }
 
+void j1Entity_Crab::StandardPath()
+{
+	//Posició actual del entity
+	iPoint current_position = App->map->WorldToMap(position.x, position.y);
+	//Posició cel·la de la dreta
+	iPoint right_cell(current_position.x - 1, current_position.y);
+	//Posició cel·la de l'esquerra
+	iPoint left_cell(current_position.x + 1, current_position.y);
+
+	
+}
+

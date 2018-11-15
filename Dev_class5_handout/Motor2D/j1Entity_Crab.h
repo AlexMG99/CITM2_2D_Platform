@@ -34,6 +34,8 @@ public:
 
 	void FollowPath();
 
+	void StandardPath();
+
 };
 
 

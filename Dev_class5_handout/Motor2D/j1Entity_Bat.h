@@ -37,8 +37,10 @@ public:
 	bool Load(pugi::xml_node&);
 
 	void FollowPath();
+	void StandardPath();
 
 	void Draw(float dt);
+
 
 };
 
