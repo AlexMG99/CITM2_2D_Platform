@@ -225,16 +225,18 @@ void j1App::FinishUpdate()
 	}
 
 	avg_fps = float(frame_count) / startup_time.ReadSec();
-	float seconds_since_startup = startup_time.ReadSec();
 	uint32 last_frame_ms = frame_time.Read();
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
 
+	if (frame_capped) framecap_string = "ON";
+	else framecap_string = "OFF";
+
 	static char title_dyn[256];
-	sprintf_s(title_dyn, 256, "%s || Av.FPS: %.2f Last Frame Ms: %u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %lu ",
-		title.GetString(), avg_fps, last_frame_ms, frames_on_last_update, dt, seconds_since_startup, frame_count);
+	sprintf_s(title_dyn, 256, "%s || Last sec frames: %u | Avg FPS: %.2f | Last frame ms: %.2u | Framerate Cap: %s" ,
+		title.GetString(), frames_on_last_update, avg_fps, last_frame_ms, framecap_string.GetString());
 	App->win->SetTitle(title_dyn);
 
-	if (capped_ms > 0 && last_frame_ms < capped_ms)
+	if (capped_ms > 0 && last_frame_ms < capped_ms && frame_capped)
 	{
 		j1PerfTimer t;
 		SDL_Delay(capped_ms - last_frame_ms);
@@ -243,12 +245,8 @@ void j1App::FinishUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{
-	 	frame_rate = (frame_rate == 30) ? 60 : 30;
-		capped_ms = 1000 / frame_rate;
+		frame_capped = !frame_capped;
 	}
-	LOG("%i", frame_rate);
-	// TODO3: Measure accurately the amount of time it SDL_Delay actually waits compared to what was expected
-	//LOG("We waited for %i milliseconds and got back in %.6f", (1000 / frame_rate) - last_frame_ms, delay_timer.ReadMs());
 }
 
 // Call modules before each loop iteration

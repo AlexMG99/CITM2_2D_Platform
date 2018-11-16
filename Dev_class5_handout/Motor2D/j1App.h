@@ -123,6 +123,8 @@ private:
 	float				dt = 0.00f;
 	float				avg_fps = 1.00f;
 	int					capped_ms = -1;
+	bool				frame_capped = true;
+	p2SString			framecap_string;
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S
