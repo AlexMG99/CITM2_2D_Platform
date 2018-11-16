@@ -122,7 +122,7 @@ private:
 	uint				frame_rate = 0;
 	float				dt = 0.00f;
 	float				avg_fps = 1.00f;
-	bool				frame_capped = true;
+	int					capped_ms = -1;
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S

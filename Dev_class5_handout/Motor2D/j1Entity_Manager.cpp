@@ -230,7 +230,7 @@ bool j1Entity_Manager::Save(pugi::xml_node &entity_node) const
 		save.append_attribute("x") = entity->data->position.x;
 		save.append_attribute("y") = entity->data->position.y;
 	}
-	return false;
+	return true;
 }
 
 void j1Entity_Manager::OnCollision(Collider* c1, Collider* c2)

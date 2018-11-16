@@ -4,32 +4,31 @@
 	<window />
 	<textures />
 	<audio>
-		<volume value="3" />
+		<volume value="26" />
 	</audio>
 	<scene />
 	<scene2 />
 	<map />
-	<player>
-		<position x="2957" y="196" />
-		<velocity x="0" y="0" />
-		<state value="IDLE_STATE" />
-		<coll x="0" y="0" />
-	</player>
-  <entity_manager>
-    
-    <crab>
-      <position x="" y="" />
-    </crab>
-    <bat>
-      <position x="" y="" />
-    </bat>
-    
-    </entity_manager>
+	<pathfinding />
+	<entityManager>
+		<player>
+			<position x="80" y="219" />
+			<velocity x="0" y="3.99999976" />
+			<state value="STATE_IDLE" />
+		</player>
+		<entity x="80" y="219" />
+		<entity_bat x="1204" y="115" />
+		<entity_bat x="130" y="100" />
+		<entity_bat x="2453" y="75" />
+		<entity_crab x="120" y="123" />
+		<entity_crab x="320" y="153" />
+		<entity_crab x="1034" y="182" />
+	</entityManager>
 	<fadetoblack>
 		<scene id="1" />
 	</fadetoblack>
 	<collision />
 	<renderer>
-		<camera x="-8615" y="-150" />
+		<camera x="0" y="-150" />
 	</renderer>
 </game_state>
