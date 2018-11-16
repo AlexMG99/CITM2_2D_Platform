@@ -1,6 +1,7 @@
 #include "p2Log.h"
 #include "p2Point.h"
 #include "j1App.h"
+#include "j1Entity_Manager.h"
 #include "j1Entity_Bat.h"
 #include "j1Textures.h"
 #include "j1Map.h"
@@ -13,9 +14,8 @@ j1Entity_Bat::j1Entity_Bat() : j1Entity("bat")
 {
 	name.create("entity_bat");
 
-	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 30, 31 }, COLLIDER_ENEMY);
-	state = STATE_IDLE;
-	current_animation = &idle_anim;
+	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 30, 26 }, COLLIDER_ENEMY, App->entity_manager);
+
 
 }
 

@@ -63,16 +63,19 @@ public:
 	//Save Game State
 	bool Save(pugi::xml_node& node) const;
 
-	//PerformActions
-	void SetAnimations(float dt);
+	
 
 	//Check Collision
-	virtual void Entity_Collision(Collider* c2) {};
+	virtual void Entity_Collision(Collider* c2);
 
 protected:
 
 	//Load Entity Animations
 	p2Animation LoadAnimation(p2SString name, p2SString entity_name) const;
+	
+	//PerformActions
+	void SetAnimations(float dt);
+
 	//Draw Entity
 	virtual bool Entity_Draw(float dt);
 	//Create path from enemy to player
@@ -98,6 +101,7 @@ public:
 
 	pugi::xml_document	entities_animations;
 
+	bool                to_delete = false;
 
 
 };

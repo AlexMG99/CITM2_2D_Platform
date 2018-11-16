@@ -1,6 +1,7 @@
 #include "p2Log.h"
 #include "p2Point.h"
 #include "j1App.h"
+#include "j1Entity_Manager.h"
 #include "j1Entity_Crab.h"
 #include "j1Textures.h"
 #include "j1Map.h"
@@ -13,13 +14,9 @@ j1Entity_Crab::j1Entity_Crab() : j1Entity("crab")
 {
 	name.create("entity_crab");
 
-	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 28, 28 }, COLLIDER_ENEMY);
-	idle_anim.PushBack({ 1, 1, 28, 28 });
-	idle_anim.PushBack({ 30, 1, 28, 28 });
-	idle_anim.PushBack({ 59, 1, 28, 28 });
-	idle_anim.PushBack({ 88, 1, 28, 28 });
-	idle_anim.speed = 10.0F;
-	current_animation = &idle_anim;
+	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 28, 28 }, COLLIDER_ENEMY, App->entity_manager);
+	
+	
 
 }
 

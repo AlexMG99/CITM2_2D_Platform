@@ -25,7 +25,8 @@ j1Entity::j1Entity(const char* entity_name)
 	run_anim = LoadAnimation("run", entity_name);
 	fall_anim = LoadAnimation("fall", entity_name);
 	death_anim = LoadAnimation("death", entity_name);
-
+    state = STATE_RUN;
+	
 }
 
 
@@ -37,12 +38,15 @@ j1Entity::~j1Entity()
 		coll->to_delete = true;
 		coll = nullptr;
 	}
+	
+	entities_animations.reset();
 }
+
 
 bool j1Entity::Entity_Update(float dt)
 {
-	//SetAnimations(dt);
-
+	SetAnimations(dt);
+	coll->SetPos(position.x, position.y);
 	Entity_Draw(dt);
 	return true;
 };
@@ -75,6 +79,46 @@ bool j1Entity::CalculatePath()
 
 void j1Entity::SetAnimations(float dt)
 {
+	
+        switch (state)
+		{
+		case STATE_IDLE:
+			velocity.x = 0;
+			current_animation = &idle_anim;
+			break;
+
+		case STATE_RUN:
+			current_animation = &run_anim;
+			break;
+		case STATE_FALL:
+			current_animation = &fall_anim;
+			break;
+
+		case STATE_DEATH:
+			current_animation = &death_anim;
+
+		break;
+		}
+}
+
+void j1Entity::Entity_Collision(Collider * c2)
+{
+	
+	if (coll->type != COLLIDER_PLAYER)
+	{
+		switch (c2->type)
+		{
+		case COLLIDER_GROUND:
+			
+			break;
+
+		case COLLIDER_PLAYER:
+		
+				to_delete = true;
+			
+			break;
+		}
+	}
 
 }
 
@@ -100,7 +144,7 @@ p2Animation j1Entity::LoadAnimation(p2SString name, p2SString entity_name) const
 bool j1Entity::Entity_Draw(float dt)
 {
 	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
-	App->render->Blit(App->entity_manager->graphics, position.x, position.y, &rect, flipX);
+	App->render->Blit(App->entity_manager->graphics, (int)(position.x - coll->rect.w/2),(int)(position.y - coll->rect.h/2), &rect, flipX);
 	return true;
 }
 
