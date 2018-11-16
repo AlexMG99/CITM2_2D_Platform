@@ -71,12 +71,3 @@ void j1Entity_Crab::StandardPath()
 	
 }
 
-void j1Entity_Crab::Entity_Collision(Collider* c2)
-{
-	switch (c2->type)
-	{
-	case COLLIDER_PLAYER:
-		to_delete = true;
-		break;
-	}
-}

@@ -55,13 +55,18 @@ bool j1Entity_Manager::PreUpdate(float dt)
 {
 	static iPoint origin;
 	static bool origin_selected = false;
-
+	LOG("%i", entities.count());
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
 		entity->data->Entity_PreUpdate(dt);
 		if (entity->data->to_delete == true)
 		{
-			//DeleteEntity(entity->data);
+			p2List_item<j1Entity*>* aux = entity->next;
+			RELEASE(entity->data);
+			entities.del(entity);
+			entity = aux;
+			if (aux == nullptr)
+				break;
 		}
 	}
 
@@ -184,24 +189,6 @@ void j1Entity_Manager::LoadPlayer()
 	player = CreateEntity(PLAYER, App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y"));
 	player->Entity_Start("player");
 	
-}
-
-
-bool j1Entity_Manager::DeleteEntity(j1Entity * entity)
-{
-	p2List_item<j1Entity*>* entity_item = entities.start;
-	while (entity_item != NULL)
-	{
-		if (entity_item->data == entity)
-		{
-			RELEASE(entity_item->data);
-			entities.del(entity_item);
-			
-			break;
-		}
-		if(entity_item != NULL) entity_item = entity_item->next;
-	}
-	return true;
 }
 
 bool j1Entity_Manager::Load(pugi::xml_node & entity_node)

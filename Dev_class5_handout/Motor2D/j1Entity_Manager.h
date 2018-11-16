@@ -30,9 +30,6 @@ public:
 	//Add Enemy in the Map
 	j1Entity* CreateEntity(Entity_Type type, int x, int y);
 
-	//Delete Enemy
-	bool DeleteEntity(j1Entity* entity);
-
 	//Load all enemies from XML
 	void LoadEnemies(pugi::xml_document& entities_doc);
 	void LoadPlayer();

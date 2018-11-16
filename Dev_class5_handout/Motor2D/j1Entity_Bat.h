@@ -39,7 +39,6 @@ public:
 	void FollowPath();
 	void StandardPath();
 
-	void Entity_Collision(Collider * c2);
 
 
 

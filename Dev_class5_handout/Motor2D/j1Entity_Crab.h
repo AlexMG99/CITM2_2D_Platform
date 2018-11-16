@@ -34,7 +34,6 @@ public:
 
 	void StandardPath();
 
-	void Entity_Collision(Collider * c2);
 
 };
 

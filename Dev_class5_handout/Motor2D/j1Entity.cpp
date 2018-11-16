@@ -25,7 +25,7 @@ j1Entity::j1Entity(const char* entity_name)
 	run_anim = LoadAnimation("run", entity_name);
 	fall_anim = LoadAnimation("fall", entity_name);
 	death_anim = LoadAnimation("death", entity_name);
-    state = STATE_DEATH;
+    state = STATE_IDLE;
 	
 }
 
@@ -126,6 +126,16 @@ bool j1Entity::Entity_Draw(float dt)
 	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
 	App->render->Blit(App->entity_manager->graphics, (int)(position.x),(int)(position.y), &rect, flipX);
 	return true;
+}
+
+void j1Entity::Entity_Collision(Collider* c2)
+{
+	switch (c2->type)
+	{
+	case COLLIDER_PLAYER:
+		to_delete = true;
+		break;
+	}
 }
 
 
