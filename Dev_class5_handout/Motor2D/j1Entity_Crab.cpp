@@ -26,31 +26,8 @@ j1Entity_Crab::~j1Entity_Crab()
 
 }
 
-
-bool j1Entity_Crab::PostUpdate()
+bool j1Entity_Crab::Entity_PreUpdate(float dt)
 {
-	
-
-	return true;
-};
-
-bool j1Entity_Crab::CleanUp()
-{
-	
-
-	return true;
-}
-
-bool j1Entity_Crab::Save(pugi::xml_node &)
-{
-	return true;
-}
-;
-
-bool j1Entity_Crab::Load(pugi::xml_node& entity_node)
-{
-
-	
 	return true;
 }
 

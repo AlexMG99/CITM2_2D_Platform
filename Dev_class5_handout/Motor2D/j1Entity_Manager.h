@@ -36,8 +36,6 @@ public:
 
 	//Get Player
 	j1Entity* GetPlayer() { return player; }
-	void SetPlayer(j1Entity* entity) { player = entity; }
-	
 
 	bool Load(pugi::xml_node& );
 	bool Save(pugi::xml_node& )const;

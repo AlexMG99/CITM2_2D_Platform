@@ -26,46 +26,8 @@ j1Entity_Bat::~j1Entity_Bat()
 
 }
 
-bool j1Entity_Bat::Awake(pugi::xml_node& config)
+bool j1Entity_Bat::Entity_PreUpdate(float dt)
 {
-	
-	return true;
-};
-
-bool j1Entity_Bat::Start()
-{
-	state = STATE_IDLE;
-	
-	return true;
-}
-bool j1Entity_Bat::Update(float dt)
-{
-	
-	return true;
-};
-
-bool j1Entity_Bat::PostUpdate()
-{
-
-	return true;
-};
-
-bool j1Entity_Bat::CleanUp()
-{
-	
-	return true;
-}
-
-bool j1Entity_Bat::Save(pugi::xml_node & entity_node)
-{
-	return true;
-}
-;
-
-bool j1Entity_Bat::Load(pugi::xml_node& entity_node)
-{
-
-	
 	return true;
 }
 

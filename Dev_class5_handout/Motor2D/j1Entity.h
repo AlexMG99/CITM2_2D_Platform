@@ -54,8 +54,6 @@ public:
 	//Called every loop iteration
 	virtual bool Entity_Update(float dt);
 
-	//Called every loop iteration
-	virtual bool Entity_PostUpdate();
 
 	//Load Game State
 	bool Load(pugi::xml_node& node);
@@ -90,7 +88,6 @@ public:
 	Entity_State		state = STATE_NONE;
 	Entity_Type			type = NONE;
 
-	p2SString			path;
 	p2Animation*		current_animation = nullptr;
 	p2Animation			idle_anim;
 	p2Animation			run_anim;
@@ -99,6 +96,7 @@ public:
 	Collider*			coll = nullptr;
 	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
 
+	p2DynArray<iPoint>	pathfinding_path;
 	pugi::xml_document	entities_animations;
 
 	bool                to_delete = false;

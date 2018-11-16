@@ -61,12 +61,6 @@ bool j1Entity::Entity_Update(float dt)
 	return true;
 };
 
-bool j1Entity::Entity_PostUpdate()
-{
-	
-	return true;
-};
-
 bool j1Entity::Load(pugi::xml_node& entity_node)
 {
 	return true;
@@ -80,9 +74,6 @@ bool j1Entity::Save(pugi::xml_node & node) const
 bool j1Entity::CalculatePath() 
 {
 	bool ret = false;
-
-	
-
 
 	return true;
 }
