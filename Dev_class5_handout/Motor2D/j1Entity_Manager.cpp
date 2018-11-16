@@ -146,6 +146,7 @@ j1Entity* j1Entity_Manager::CreateEntity(Entity_Type type, int x, int y)
 		break;
 	case PLAYER:
 		entity = new j1Entity_Player();
+		break;
 	default:
 		LOG("Enemy Type Incorrect!");
 		break;
@@ -179,7 +180,6 @@ void j1Entity_Manager::LoadEnemies(pugi::xml_document& entities_doc)
 }
 void j1Entity_Manager::LoadPlayer()
 {
-	
 	player = CreateEntity(PLAYER, App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y"));
 	player->Entity_Start("player");
 	
@@ -205,7 +205,7 @@ bool j1Entity_Manager::Load(pugi::xml_node & entity_node)
 {
 	CleanUp();
 	LoadPlayer();
-	/*player->Load(entity_node.child("player"));*/
+	player->Load(entity_node.child("player"));
 
 	for (pugi::xml_node crab = entity_node.child("enemies").child("entity_crab"); crab; crab = crab.next_sibling("entity_crab"))
 	{

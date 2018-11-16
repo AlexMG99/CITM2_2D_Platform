@@ -4,11 +4,10 @@
   <property name="acceleration.x" type="float" value="150"/>
   <property name="acceleration.y" type="int" value="120"/>
   <property name="camera.x" type="int" value="0"/>
-  <property name="camera.y" type="int" value="0"/>
+  <property name="camera.y" type="int" value="200"/>
+  <property name="camera_limit.y" type="float" value="370"/>
   <property name="playerPosition.x" type="float" value="10"/>
   <property name="playerPosition.y" type="float" value="328"/>
-  <property name="velocity.x" type="float" value="0"/>
-  <property name="velocity.y" type="float" value="0"/>
  </properties>
  <tileset firstgid="1" name="warped_caves_spritesheet.png" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="368" columns="23">
   <image source="warped_caves_spritesheet.png.png" width="400" height="281"/>
@@ -12755,7 +12754,7 @@
  <objectgroup name="Logic Collisions">
   <object id="13" name="DEATH" type="DEATH_COLLIDER" x="179" y="264" width="430.667" height="23"/>
   <object id="30" name="DEATH" type="DEATH_COLLIDER" x="827.5" y="97.5" width="56.5" height="12.25"/>
-  <object id="42" name="DEATH" type="DEATH_COLLIDER" x="772.333" y="327.5" width="207.667" height="7.1667"/>
+  <object id="42" name="DEATH" type="DEATH_COLLIDER" x="772.333" y="327.5" width="207.667" height="25.8334"/>
   <object id="46" name="WIN" type="WIN_COLLIDER" x="1391" y="311.167" width="51.25" height="14.6667"/>
   <object id="48" name="GROUND" type="GROUND_COLLIDER" x="879.833" y="215.583" width="206.833" height="12.8333"/>
   <object id="50" name="GROUND" type="GROUND_COLLIDER" x="666.167" y="324.917" width="104" height="24.8333"/>
@@ -12776,8 +12775,8 @@
   <object id="74" name="PLATFORM" type="PLATFORM_COLLIDER" x="1615.2" y="320.794" width="46.015" height="13.0795"/>
   <object id="85" name="DEATH" type="DEATH_COLLIDER" x="1571.38" y="134.47" width="56.4545" height="8.69704"/>
   <object id="86" name="GROUND" type="GROUND_COLLIDER" x="1444.63" y="132.14" width="125.75" height="12.7194"/>
-  <object id="87" name="DEATH" type="DEATH_COLLIDER" x="1108.03" y="326.917" width="70.3034" height="7.1667"/>
-  <object id="88" name="GROUND" type="GROUND_COLLIDER" x="981.417" y="324.167" width="125.166" height="4.6666"/>
+  <object id="87" name="DEATH" type="DEATH_COLLIDER" x="1108.03" y="326.917" width="70.3034" height="24.5"/>
+  <object id="88" name="GROUND" type="GROUND_COLLIDER" x="981.417" y="324.167" width="125.166" height="26.9999"/>
   <object id="89" name="GROUND" type="GROUND_COLLIDER" x="827.667" y="225.583" width="49.6663" height="12.8333"/>
   <object id="91" name="PLATFORM" type="PLATFORM_COLLIDER" x="1217.08" y="256.689" width="30.5151" height="35.2878"/>
   <object id="92" name="PLATFORM" type="PLATFORM_COLLIDER" x="1281.08" y="256.356" width="30.5151" height="35.2878"/>
@@ -15321,7 +15320,7 @@
    <tile gid="744"/>
   </data>
  </layer>
- <layer name="Pathfinding Crab" width="115" height="22">
+ <layer name="Pathfinding Crab" width="115" height="22" visible="0">
   <properties>
    <property name="Navigation" type="int" value="1"/>
    <property name="draw" type="int" value="0"/>

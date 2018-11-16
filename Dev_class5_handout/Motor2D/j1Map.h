@@ -114,7 +114,6 @@ struct MapData
 	p2List<CollisionLayer*>	collision_layer;
 	p2List<Collider*>		collider_list;
 	Properties				player_properties;
-	Properties              entity_properties;
 
 };
 

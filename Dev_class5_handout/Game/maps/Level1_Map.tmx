@@ -5,14 +5,8 @@
   <property name="acceleration.y" type="float" value="-120"/>
   <property name="camera.x" type="int" value="0"/>
   <property name="camera.y" type="int" value="-150"/>
-  <property name="coll.h" type="int" value="40"/>
-  <property name="coll.w" type="int" value="20"/>
-  <property name="coll.x" type="int" value="0"/>
-  <property name="coll.y" type="int" value="0"/>
   <property name="playerPosition.x" type="float" value="80"/>
   <property name="playerPosition.y" type="float" value="146"/>
-  <property name="velocity.x" type="float" value="0"/>
-  <property name="velocity.y" type="float" value="0"/>
  </properties>
  <tileset firstgid="1" name="pathfinding" tilewidth="16" tileheight="16" tilecount="2" columns="2">
   <image source="pathfinding.png" width="32" height="16"/>

@@ -39,7 +39,7 @@ bool j1Scene2::Start()
 	bool ret = true;
 	LoadLevel();
 
-	//App->player->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
+	App->entity_manager->GetPlayer()->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
 	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };
 
 	pugi::xml_parse_result result = entities_files.load_file(path.GetString());
@@ -49,8 +49,9 @@ bool j1Scene2::Start()
 		ret = false;
 	}
 
+	App->entity_manager->LoadPlayer();
 	App->entity_manager->LoadEnemies(entities_files);
-	return true;
+	return ret;
 }
 
 // Called each loop iteration
@@ -68,6 +69,16 @@ bool j1Scene2::PreUpdate(float dt)
 // Called each loop iteration
 bool j1Scene2::Update(float dt)
 {
+	if (App->entity_manager->GetPlayer()->position.x > (App->win->GetWidth() / App->win->GetScale()) / 4 && App->entity_manager->GetPlayer()->position.x < (App->map->data.tile_width*App->map->data.width - App->win->GetWidth() / 4))
+	{
+		App->render->camera.x = -App->entity_manager->GetPlayer()->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
+	}
+
+	if (App->entity_manager->GetPlayer()->position.y > (App->win->GetWidth() / App->win->GetScale()) / 4 && App->entity_manager->GetPlayer()->position.y < (App->map->data.player_properties.Get("camera_limit.y") - App->win->GetHeight() / 4))
+	{
+		LOG("%f", App->map->data.player_properties.Get("camera_limit.y"));
+		App->render->camera.y = -App->entity_manager->GetPlayer()->position.y*App->win->GetScale() + App->win->GetWidth() / 4;
+	}
 
 	App->map->Draw();
 
@@ -90,6 +101,9 @@ bool j1Scene2::CleanUp()
 {
 	LOG("Freeing scene");
 	App->map->CleanUp();
+	App->entity_manager->CleanUp();
+
+	entities_files.reset();
 	return true;
 }
 

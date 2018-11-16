@@ -473,11 +473,6 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->width = node.attribute("width").as_uint();
 	layer->height = node.attribute("height").as_uint();
 	LoadProperties(node, layer->properties);
-	if (layer->name == "Pathfinding Bat")
-	{
-		LoadProperties(node, data.entity_properties);
-	}
-
 	layer->data = new uint[layer->width*layer->height];
 	memset(layer->data, 0, sizeof(uint)*layer->width*layer->height);
 
