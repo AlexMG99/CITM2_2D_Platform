@@ -13,6 +13,8 @@
 #include "j1Collision.h"
 #include "j1Render.h"
 
+
+
 j1Entity::j1Entity(const char* entity_name) 
 {
 	name.create("entity");

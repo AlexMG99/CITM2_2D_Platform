@@ -205,16 +205,16 @@ bool j1Entity_Manager::Load(pugi::xml_node & entity_node)
 {
 	CleanUp();
 	LoadPlayer();
-	player->Load(entity_node.child("player"));
+	/*player->Load(entity_node.child("player"));*/
 
-	for (pugi::xml_node crab = entity_node.child("crabs").child("crab"); crab; crab = crab.next_sibling("crab"))
+	for (pugi::xml_node crab = entity_node.child("enemies").child("entity_crab"); crab; crab = crab.next_sibling("entity_crab"))
 	{
-		CreateEntity(CRAB, entity_node.child("position").attribute("x").as_float(), entity_node.child("position").attribute("y").as_float());
+		CreateEntity(CRAB, crab.attribute("x").as_float(), crab.attribute("y").as_float());
 	}
 
-	for (pugi::xml_node bat = entity_node.child("bats").child("bat"); bat; bat = bat.next_sibling("bat"))
+	for (pugi::xml_node bat = entity_node.child("enemies").child("entity_bat"); bat; bat = bat.next_sibling("entity_bat"))
 	{
-		(CreateEntity(BAT, entity_node.child("position").attribute("x").as_float(), entity_node.child("position").attribute("y").as_float()));
+		(CreateEntity(BAT, bat.attribute("x").as_float(), bat.attribute("y").as_float()));
 		
 	}
 
@@ -224,9 +224,10 @@ bool j1Entity_Manager::Load(pugi::xml_node & entity_node)
 bool j1Entity_Manager::Save(pugi::xml_node &entity_node) const
 {
 	player->Save(entity_node.append_child("player"));
-	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
+	pugi::xml_node enemy_group = entity_node.append_child("enemies");
+	for (p2List_item<j1Entity*>* entity = entities.start->next; entity; entity = entity->next)
 	{
-		pugi::xml_node save = entity_node.append_child(entity->data->name.GetString());
+		pugi::xml_node save = enemy_group.append_child(entity->data->name.GetString());
 		save.append_attribute("x") = entity->data->position.x;
 		save.append_attribute("y") = entity->data->position.y;
 	}

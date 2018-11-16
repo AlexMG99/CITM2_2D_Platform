@@ -12,17 +12,18 @@
 	<pathfinding />
 	<entityManager>
 		<player>
-			<position x="80" y="219" />
-			<velocity x="0" y="3.99999976" />
+			<position x="80" y="387.039703" />
+			<velocity x="0" y="3.96000004" />
 			<state value="STATE_IDLE" />
 		</player>
-		<entity x="80" y="219" />
-		<entity_bat x="1204" y="115" />
-		<entity_bat x="130" y="100" />
-		<entity_bat x="2453" y="75" />
-		<entity_crab x="120" y="123" />
-		<entity_crab x="320" y="153" />
-		<entity_crab x="1034" y="182" />
+		<enemies>
+			<entity_bat x="1204" y="115" />
+			<entity_bat x="130" y="100" />
+			<entity_bat x="2453" y="75" />
+			<entity_crab x="120" y="123" />
+			<entity_crab x="320" y="153" />
+			<entity_crab x="1034" y="182" />
+		</enemies>
 	</entityManager>
 	<fadetoblack>
 		<scene id="1" />

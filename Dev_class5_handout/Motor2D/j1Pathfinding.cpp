@@ -3,6 +3,8 @@
 #include "j1App.h"
 #include "j1Pathfinding.h"
 
+#include "Brofiler/Brofiler.h"
+
 j1PathFinding::j1PathFinding() : j1Module(), map(NULL), last_path(DEFAULT_PATH_LENGTH),width(0), height(0)
 {
 	name.create("pathfinding");
