@@ -14,7 +14,6 @@
 j1Entity_Player::j1Entity_Player() :j1Entity("player")
 {
 	state = STATE_IDLE;
-	current_animation = &idle_anim;
 }
 
 j1Entity_Player::~j1Entity_Player()
@@ -391,10 +390,6 @@ void j1Entity_Player::Entity_Collision(Collider* other_coll)
 		{
 			App->fadeToBlack->FadeToBlack(App->scene2, App->scene);
 		}
-		break;
-
-	default:
-		LOG("Collider Unknown!");
 		break;
 	}
 }

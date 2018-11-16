@@ -14,7 +14,7 @@ j1Entity_Crab::j1Entity_Crab() : j1Entity("crab")
 {
 	name.create("entity_crab");
 
-	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 28, 28 }, COLLIDER_ENEMY, App->entity_manager);
+	coll = App->collision->AddCollider({ -100, -100, 28, 28 }, COLLIDER_ENEMY, App->entity_manager);
 	
 	
 
@@ -71,3 +71,12 @@ void j1Entity_Crab::StandardPath()
 	
 }
 
+void j1Entity_Crab::Entity_Collision(Collider* c2)
+{
+	switch (c2->type)
+	{
+	case COLLIDER_PLAYER:
+		to_delete = true;
+		break;
+	}
+}

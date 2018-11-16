@@ -14,8 +14,7 @@ j1Entity_Bat::j1Entity_Bat() : j1Entity("bat")
 {
 	name.create("entity_bat");
 
-	coll = App->collision->AddCollider({ (int)position.x, (int)position.y, 30, 26 }, COLLIDER_ENEMY, App->entity_manager);
-
+	coll = App->collision->AddCollider({ -200,-100, 30, 26 }, COLLIDER_ENEMY, App->entity_manager);
 
 }
 
@@ -81,5 +80,15 @@ void j1Entity_Bat::StandardPath()
 	iPoint right_cell(current_position.x - 1, current_position.y);
 	//Posició cel·la de l'esquerra
 	iPoint left_cell(current_position.x + 1, current_position.y);
+}
+
+void j1Entity_Bat::Entity_Collision(Collider* c2)
+{
+	switch (c2->type)
+	{
+	case COLLIDER_PLAYER:
+		to_delete = true;
+		break;
+	}
 }
 

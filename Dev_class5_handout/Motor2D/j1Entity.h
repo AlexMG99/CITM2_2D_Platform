@@ -63,10 +63,8 @@ public:
 	//Save Game State
 	bool Save(pugi::xml_node& node) const;
 
-	
-
 	//Check Collision
-	virtual void Entity_Collision(Collider* c2);
+	virtual void Entity_Collision(Collider* c2) {};
 
 protected:
 

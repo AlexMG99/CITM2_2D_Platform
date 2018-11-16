@@ -47,9 +47,6 @@ bool j1Entity_Manager::Start()
 		App->pathfinding->SetMap(w, h, data);
 
 	RELEASE_ARRAY(data);
-
-	//CreateEntity(BAT, 100, 100);
-	//CreateEntity(CRAB, 200, 130);
 	
 	return ret;
 }
@@ -62,6 +59,10 @@ bool j1Entity_Manager::PreUpdate(float dt)
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
 		entity->data->Entity_PreUpdate(dt);
+		if (entity->data->to_delete == true)
+		{
+			//DeleteEntity(entity->data);
+		}
 	}
 
 
@@ -193,10 +194,12 @@ bool j1Entity_Manager::DeleteEntity(j1Entity * entity)
 	{
 		if (entity_item->data == entity)
 		{
-
-			RELEASE(entity);
+			RELEASE(entity_item->data);
+			entities.del(entity_item);
+			
+			break;
 		}
-		entity_item = entity_item->next;
+		if(entity_item != NULL) entity_item = entity_item->next;
 	}
 	return true;
 }
@@ -238,7 +241,8 @@ void j1Entity_Manager::OnCollision(Collider* c1, Collider* c2)
 {
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
-		entity->data->Entity_Collision(c2);
+		if (entity->data->coll == c1)
+			entity->data->Entity_Collision(c2);
 	}
 }
 
