@@ -10,6 +10,7 @@
 #include "j1Map.h"
 #include "j1Textures.h"
 #include "j1Scene.h"
+#include "j1Pathfinding.h"
 #include "j1Collision.h"
 #include "j1Render.h"
 
@@ -77,11 +78,16 @@ bool j1Entity::Save(pugi::xml_node & node) const
 	return true;
 }
 
-bool j1Entity::CalculatePath() 
+bool j1Entity::CalculatePath()
 {
 	bool ret = false;
+	iPoint origin = App->map->MapToWorld(position.x, position.y);
+	iPoint player_position = App->map->MapToWorld(App->entity_manager->GetPlayer()->position.x, App->entity_manager->GetPlayer()->position.y - 16);
 
-	
+	if (App->entity_manager->GetPlayer()->state != STATE_DEATH && position.DistanceTo(App->entity_manager->GetPlayer()->position) < RANG)
+	{
+		App->pathfinding->CreatePath(origin, player_position);
+	}
 
 
 	return true;
