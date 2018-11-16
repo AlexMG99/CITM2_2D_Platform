@@ -21,6 +21,9 @@ j1Entity::j1Entity(const char* entity_name)
 
 	entities_animations.load_file("entities.xml");
 
+	velocity = { 0,0 };
+	acceleration = { App->map->data.player_properties.Get("acceleration.x"), App->map->data.player_properties.Get("acceleration.y") };
+
 	idle_anim = LoadAnimation("idle", entity_name);
 	run_anim = LoadAnimation("run", entity_name);
 	fall_anim = LoadAnimation("fall", entity_name);
@@ -46,6 +49,13 @@ j1Entity::~j1Entity()
 bool j1Entity::Entity_Update(float dt)
 {
 	SetAnimations(dt);
+
+	position.y += velocity.y;
+	position.x += velocity.x;
+
+	if(!fly) 
+		velocity.y = -acceleration.y * dt;
+
 	coll->SetPos(position.x, position.y);
 	Entity_Draw(dt);
 	return true;
@@ -79,23 +89,26 @@ bool j1Entity::CalculatePath()
 
 void j1Entity::SetAnimations(float dt)
 {
-	
         switch (state)
 		{
 		case STATE_IDLE:
-			velocity.x = 0;
 			current_animation = &idle_anim;
 			break;
 
 		case STATE_RUN:
 			current_animation = &run_anim;
 			break;
+
 		case STATE_FALL:
 			current_animation = &fall_anim;
 			break;
 
 		case STATE_DEATH:
 			current_animation = &death_anim;
+			if (death_anim.Finished())
+			{
+				to_delete = true;
+			}
 			break;
 		default:
 			break;
@@ -128,12 +141,27 @@ bool j1Entity::Entity_Draw(float dt)
 	return true;
 }
 
-void j1Entity::Entity_Collision(Collider* c2)
+void j1Entity::Entity_Collision(Collider* other_coll)
 {
-	switch (c2->type)
+	switch (other_coll->type)
 	{
 	case COLLIDER_PLAYER:
-		to_delete = true;
+		if (App->entity_manager->GetPlayer()->position.y - other_coll->rect.h / 2 < coll->rect.y)
+		{
+			state = STATE_DEATH;
+			App->entity_manager->GetPlayer()->state = STATE_JUMP;
+		}
+		else 
+		{
+			App->entity_manager->GetPlayer()->state = STATE_DEATH;
+		}
+		break;
+	case COLLIDER_GROUND:
+		if (coll->rect.y < other_coll->rect.y)
+		{
+			position.y = (float)(other_coll->rect.y - coll->rect.h + 1);
+			velocity.y = 0;
+		}
 		break;
 	}
 }

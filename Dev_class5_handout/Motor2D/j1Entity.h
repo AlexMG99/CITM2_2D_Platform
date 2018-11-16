@@ -82,11 +82,13 @@ protected:
 	virtual void FollowPath() {};
 
 public:
-	fPoint position;
-	fPoint velocity;
+	fPoint				position;
+	fPoint				velocity;
+	fPoint				acceleration;
+	bool				fly = false;
 
-	Entity_State state = STATE_NONE;
-	Entity_Type type = NONE;
+	Entity_State		state = STATE_NONE;
+	Entity_Type			type = NONE;
 
 	p2SString			path;
 	p2Animation*		current_animation = nullptr;

@@ -16,6 +16,8 @@ j1Entity_Bat::j1Entity_Bat() : j1Entity("bat")
 
 	coll = App->collision->AddCollider({ -200,-100, 30, 26 }, COLLIDER_ENEMY, App->entity_manager);
 
+	fly = true;
+
 }
 
 //Destructor

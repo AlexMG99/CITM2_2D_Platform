@@ -171,10 +171,10 @@ int PathNode::CalculateF(const iPoint& destination)
 int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
 	// TODO 1: if origin or destination are not walkable, return -1
-	/*if (!IsWalkable(origin) || !IsWalkable(destination))
+	if (!IsWalkable(origin) || !IsWalkable(destination))
 	{
 		return -1;
-	}*/
+	}
 
 	PathList open;
 	PathList close;
@@ -244,6 +244,7 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				pathNode = NULL;
 		}
 		last_path.Flip();
+		return 1;
 	}
 
 	return -1;

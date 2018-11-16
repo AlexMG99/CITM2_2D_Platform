@@ -46,7 +46,6 @@ private:
 	void DebugInputs();
 
 private:
-	fPoint			acceleration;
 	bool			godMode = false;
 	bool			falling = false;
 	SDL_Texture*	player_tex = nullptr;

@@ -67,6 +67,11 @@
           <frame x="55" y="29" w="27" h="32"/>
           <frame x="82" y="29" w="27" h="32"/>
         </run>
+        
+        <death title="death" speed="5.00">
+          <frame x="1" y="88" w="25" h="11"/>
+        </death>
+        
       </animation>
     </crab>
 

@@ -12,17 +12,17 @@
 	<pathfinding />
 	<entityManager>
 		<player>
-			<position x="261.350037" y="184" />
+			<position x="90.1999969" y="219" />
 			<velocity x="0" y="4.0800004" />
 			<state value="STATE_IDLE" />
 		</player>
 		<enemies>
 			<entity_bat x="1204" y="115" />
-			<entity_bat x="130" y="100" />
+			<entity_bat x="130" y="89" />
 			<entity_bat x="2453" y="75" />
-			<entity_crab x="120" y="123" />
-			<entity_crab x="320" y="153" />
-			<entity_crab x="1034" y="182" />
+			<entity_crab x="120" y="191" />
+			<entity_crab x="320" y="606.439819" />
+			<entity_crab x="1034" y="675.440002" />
 		</enemies>
 	</entityManager>
 	<fadetoblack>
@@ -30,6 +30,6 @@
 	</fadetoblack>
 	<collision />
 	<renderer>
-		<camera x="-528" y="-150" />
+		<camera x="-14" y="-150" />
 	</renderer>
 </game_state>
