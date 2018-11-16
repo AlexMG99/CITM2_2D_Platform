@@ -7,6 +7,7 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Map.h"
+#include "j1Pathfinding.h"
 #include "j1Player.h"
 #include "j1Entity.h"
 #include "j1Entity_Manager.h"
@@ -39,6 +40,15 @@ bool j1Scene::Start()
 {
 	bool ret = true;
 	LoadLevel();
+
+	//Create WalkabilityMap
+	int w, h;
+
+	uchar* data = NULL;
+	if (App->map->CreateWalkabilityMap(w, h, &data))
+		App->pathfinding->SetMap(w, h, data);
+
+	RELEASE_ARRAY(data);
 
 	//App->player->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
 	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };

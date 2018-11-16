@@ -28,6 +28,7 @@ j1Entity_Crab::~j1Entity_Crab()
 
 bool j1Entity_Crab::Entity_PreUpdate(float dt)
 {
+	CalculatePath();
 	return true;
 }
 

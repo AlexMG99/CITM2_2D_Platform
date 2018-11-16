@@ -41,13 +41,6 @@ bool j1Entity_Manager::Start()
 	debug_tex = App->tex->Load("textures/pathfinding.png");
 	graphics = App->tex->Load("textures/entities.png");
 
-	int w, h;
-	uchar* data = NULL;
-	if (App->map->CreateWalkabilityMap(w, h, &data))
-		App->pathfinding->SetMap(w, h, data);
-
-	RELEASE_ARRAY(data);
-	
 	return ret;
 }
 
@@ -55,7 +48,7 @@ bool j1Entity_Manager::PreUpdate(float dt)
 {
 	static iPoint origin;
 	static bool origin_selected = false;
-	LOG("%i", entities.count());
+	
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
 		entity->data->Entity_PreUpdate(dt);

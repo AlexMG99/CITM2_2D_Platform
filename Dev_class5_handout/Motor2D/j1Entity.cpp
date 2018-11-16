@@ -77,12 +77,16 @@ bool j1Entity::CalculatePath()
 	bool ret = false;
 	iPoint origin = App->map->MapToWorld(position.x, position.y);
 	iPoint player_position = App->map->MapToWorld(App->entity_manager->GetPlayer()->position.x, App->entity_manager->GetPlayer()->position.y - 16);
+	
+	int d_manhattan = App->pathfinding->ManhattanDistance(origin, player_position);
 
-	if (App->entity_manager->GetPlayer()->state != STATE_DEATH && position.DistanceTo(App->entity_manager->GetPlayer()->position) < RANG)
-	{
-		App->pathfinding->CreatePath(origin, player_position);
+	if (d_manhattan < 10) {
+
+		if (App->entity_manager->GetPlayer()->state != STATE_DEATH && position.DistanceTo(App->entity_manager->GetPlayer()->position) < RANG)
+		{
+			App->pathfinding->CreatePath(origin, player_position);
+		}
 	}
-
 	return true;
 }
 

@@ -23,7 +23,7 @@ j1Entity_Bat::j1Entity_Bat() : j1Entity("bat")
 //Destructor
 j1Entity_Bat::~j1Entity_Bat()
 {
-
+	CalculatePath();
 }
 
 bool j1Entity_Bat::Entity_PreUpdate(float dt)
@@ -33,6 +33,7 @@ bool j1Entity_Bat::Entity_PreUpdate(float dt)
 
 void j1Entity_Bat::FollowPath()
 {
+	/*bat_pos = App->map->MapToWorld(position.x, position.y);*/
 
 }
 
