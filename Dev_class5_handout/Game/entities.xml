@@ -61,12 +61,12 @@
           <frame x="87" y="1" w="28" h="28"/>
         </idle>
 
-        <left title="run" speed="2.0">
+        <run title="run" speed="2.0">
           <frame x="1" y="29" w="27" h="32"/>
           <frame x="28" y="29" w="27" h="32"/>
           <frame x="55" y="29" w="27" h="32"/>
           <frame x="82" y="29" w="27" h="32"/>
-        </left>
+        </run>
       </animation>
     </crab>
 
@@ -78,11 +78,11 @@
           <frame x="64" y="69" w="31" h="26"/>
           <frame x="97" y="69" w="31" h="26"/>
         </idle>
-        <right title="run" speed="0.2">
+        <run title="run" speed="0.2">
           <frame x="22" y="106" w="17" h="26"/>
           <frame x="41" y="106" w="17" h="26"/>
           <frame x="61" y="106" w="17" h="26"/>
-        </right>
+        </run>
       </animation>
     </bat>
   </entities>
