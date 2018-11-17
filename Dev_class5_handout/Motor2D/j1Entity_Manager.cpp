@@ -64,7 +64,7 @@ bool j1Entity_Manager::PreUpdate(float dt)
 	}
 
 
-	int x, y;
+	/*int x, y;
 	App->input->GetMousePosition(x, y);
 	iPoint p = App->render->ScreenToWorld(x, y);
 	p = App->map->WorldToMap(p.x, p.y);
@@ -81,7 +81,7 @@ bool j1Entity_Manager::PreUpdate(float dt)
 			origin = p;
 			origin_selected = true;
 		}
-	}
+	}*/
 
 	return true;
 }

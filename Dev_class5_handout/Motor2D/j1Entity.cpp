@@ -74,25 +74,23 @@ bool j1Entity::Save(pugi::xml_node & node) const
 
 bool j1Entity::CalculatePath()
 {
-	/*bool ret = false;
-	iPoint origin = App->map->MapToWorld(position.x, position.y);
-	iPoint player_position = App->map->MapToWorld(App->entity_manager->GetPlayer()->position.x, App->entity_manager->GetPlayer()->position.y - 16);
-	
-	int d_manhattan = App->pathfinding->ManhattanDistance(origin, player_position);
+	bool ret = false;
+	iPoint origin = App->map->WorldToMap(position.x, position.y);
+	iPoint player_position = App->map->WorldToMap(App->entity_manager->GetPlayer()->position.x, App->entity_manager->GetPlayer()->position.y - App->entity_manager->GetPlayer()->coll->rect.h);
 
-	if (d_manhattan < 10) {
-
-		if (App->entity_manager->GetPlayer()->state != STATE_DEATH && position.DistanceTo(App->entity_manager->GetPlayer()->position) < RANG)
+	if (App->entity_manager->GetPlayer()->state != STATE_DEATH && position.DistanceTo(App->entity_manager->GetPlayer()->position) < RANG)
+	{
+		App->pathfinding->CreatePath(origin, player_position, type);
+		const p2DynArray<iPoint>* entity_path = App->pathfinding->GetLastPath();
+		for (int i = 0; i < entity_path->Count(); i++)
 		{
-			App->pathfinding->CreatePath(origin, player_position);
-			const p2DynArray<iPoint>* pathfinding_path = App->pathfinding->GetLastPath();
-			for (int i = 0; i < pathfinding_path->Count(); i++)
-			{
-				bat_path.PushBack(*pathfinding_path->At(i));
-			}
+			pathfinding_path.PushBack(*entity_path->At(i));
 		}
-	}*/
-	return true;
+
+		ret = true;
+	}
+
+	return ret;
 }
 
 void j1Entity::SetAnimations(float dt)

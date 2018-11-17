@@ -328,6 +328,22 @@ void j1Entity_Player::Entity_Collision(Collider* other_coll)
 		}
 		break;
 
+	case COLLIDER_WALL:
+		//Check collision from right
+		if (directionRight) {
+			state = STATE_CLING;
+			flipX = SDL_FLIP_NONE;
+			position.x = (float)(other_coll->rect.x + other_coll->rect.w + coll->rect.w / 2);
+		}
+		//Check collision from left
+		else if (directionLeft)
+		{
+			state = STATE_CLING;
+			flipX = SDL_FLIP_HORIZONTAL;
+			position.x = (float)(other_coll->rect.x - coll->rect.w / 2);
+		}
+		break;
+
 	case COLLIDER_PLATFORM:
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) 
 		{
@@ -354,27 +370,13 @@ void j1Entity_Player::Entity_Collision(Collider* other_coll)
 			{
 				position.y = (float)other_coll->rect.y + 1;
 				velocity.y = 0;
+				jump_anim.Reset();
 				if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE || state == STATE_FALL)
 					state = STATE_IDLE;
 			}
+
 		}
 		
-		break;
-
-	case COLLIDER_WALL:
-		//Check collision from right
-		if (directionRight) {
-			state = STATE_CLING;
-			flipX = SDL_FLIP_NONE;
-			position.x = (float)(other_coll->rect.x + other_coll->rect.w + coll->rect.w / 2);
-		}
-		//Check collision from left
-		else if (directionLeft)
-		{
-			state = STATE_CLING;
-			flipX = SDL_FLIP_HORIZONTAL;
-			position.x = (float)(other_coll->rect.x - coll->rect.w / 2);
-		}
 		break;
 
 	case COLLIDER_DEATH:

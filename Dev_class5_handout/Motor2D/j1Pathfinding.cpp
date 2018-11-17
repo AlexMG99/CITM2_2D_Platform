@@ -117,7 +117,7 @@ PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), 
 // PathNode -------------------------------------------------------------------------
 // Fills a list (PathList) of all valid adjacent pathnodes
 // ----------------------------------------------------------------------------------
-uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
+uint PathNode::FindFlyableAdjacents(PathList& list_to_fill) const
 {
 	iPoint cell;
 	uint before = list_to_fill.list.count();
@@ -146,6 +146,29 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
 	return list_to_fill.list.count();
 }
 
+uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
+{
+	iPoint cell;
+	uint before = list_to_fill.list.count();
+
+	// east
+	cell.create(pos.x + 1, pos.y);
+	if (App->pathfinding->IsWalkable(cell))
+		list_to_fill.list.add(PathNode(-1, -1, cell, this));
+
+	// west
+	cell.create(pos.x - 1, pos.y);
+	if (App->pathfinding->IsWalkable(cell))
+		list_to_fill.list.add(PathNode(-1, -1, cell, this));
+
+	// south
+	cell.create(pos.x, pos.y + 1);
+	if (App->pathfinding->IsWalkable(cell))
+		list_to_fill.list.add(PathNode(-1, -1, cell, this));
+
+	return list_to_fill.list.count();
+}
+
 // PathNode -------------------------------------------------------------------------
 // Calculates this tile score
 // ----------------------------------------------------------------------------------
@@ -168,7 +191,7 @@ int PathNode::CalculateF(const iPoint& destination)
 // ----------------------------------------------------------------------------------
 // Actual A* algorithm: return number of steps in the creation of the path or -1 ----
 // ----------------------------------------------------------------------------------
-int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
+int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination, Entity_Type type)
 {
 	// TODO 1: if origin or destination are not walkable, return -1
 	if (!IsWalkable(origin) || !IsWalkable(destination))
@@ -197,7 +220,10 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 
 		// TODO 5: Fill a list of all adjancent nodes
 		PathList neighbours;
-		currNode->data.FindWalkableAdjacents(neighbours);
+		if(type == BAT)
+			currNode->data.FindFlyableAdjacents(neighbours);
+		else if (type == CRAB)
+			currNode->data.FindWalkableAdjacents(neighbours);
 
 		// TODO 6: Iterate adjancent nodes:
 		// ignore nodes in the closed list

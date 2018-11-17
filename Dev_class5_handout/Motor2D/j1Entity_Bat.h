@@ -29,8 +29,6 @@ public:
 	void StandardPath();
 
 public:
-	iPoint bat_pos = { position.x, position.y };
-	fPoint bat_speed;
 };
 
 

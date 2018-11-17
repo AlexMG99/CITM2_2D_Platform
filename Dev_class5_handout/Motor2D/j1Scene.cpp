@@ -50,7 +50,6 @@ bool j1Scene::Start()
 
 	RELEASE_ARRAY(data);
 
-	//App->player->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
 	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };
 
 	pugi::xml_parse_result result = entities_files.load_file(path.GetString());
@@ -64,7 +63,7 @@ bool j1Scene::Start()
 	App->entity_manager->LoadPlayer();
 	App->entity_manager->LoadEnemies(entities_files);
 
-	return true;
+	return ret;
 }
 
 // Called each loop iteration

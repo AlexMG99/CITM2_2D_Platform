@@ -28,8 +28,10 @@ public:
 
 	void StandardPath();
 
-
-};
+private:
+	bool moving_right = true; //uml
+	bool moving_left = false; //uml
+}; 
 
 
 #endif

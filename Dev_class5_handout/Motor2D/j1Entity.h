@@ -6,6 +6,7 @@
 #include "j1Collision.h"
 #include "p2DynArray.h"
 #include "p2Point.h"
+#include "j1PerfTimer.h"
 #include "p2List.h"
 #include "SDL/include/SDL_render.h"
 
@@ -86,6 +87,7 @@ public:
 	fPoint				velocity;
 	fPoint				acceleration;
 	bool				fly = false;
+	bool				counting = true; // uml
 
 	Entity_State		state = STATE_NONE;
 	Entity_Type			type = NONE;
@@ -101,6 +103,8 @@ public:
 	p2DynArray<iPoint>	pathfinding_path;
 	p2DynArray<iPoint>	bat_path;
 	pugi::xml_document	entities_animations;
+
+	j1PerfTimer do_standard_path; //uml
 
 	bool                to_delete = false;
 
