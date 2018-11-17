@@ -74,7 +74,7 @@ bool j1Entity::Save(pugi::xml_node & node) const
 
 bool j1Entity::CalculatePath()
 {
-	bool ret = false;
+	/*bool ret = false;
 	iPoint origin = App->map->MapToWorld(position.x, position.y);
 	iPoint player_position = App->map->MapToWorld(App->entity_manager->GetPlayer()->position.x, App->entity_manager->GetPlayer()->position.y - 16);
 	
@@ -91,7 +91,7 @@ bool j1Entity::CalculatePath()
 				bat_path.PushBack(*pathfinding_path->At(i));
 			}
 		}
-	}
+	}*/
 	return true;
 }
 
