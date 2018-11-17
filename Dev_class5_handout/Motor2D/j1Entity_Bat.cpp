@@ -55,22 +55,12 @@ void j1Entity_Bat::FollowPath()
 	int i = 0;
 	iPoint bat_pos = App->map->WorldToMap(position.x, position.y);
 
-	if (bat_pos == bat_path[i + 1] && i<=bat_path.Count())
-	{
-		
-		velocity.x = bat_path[i + 1].x - bat_path[i].x;
-		velocity.y = bat_path[i + 1].y + bat_path[i].y;
-		position.x += velocity.x;
-		position.y += velocity.y;
-		
-	}
+	velocity.x = pathfinding_path[i + 1].x - pathfinding_path[i].x;
+	velocity.y = pathfinding_path[i + 1].y + pathfinding_path[i].y;
+	position.x += velocity.x;
+	position.y -= velocity.y;
 
-	const p2DynArray<iPoint>* bat_path = App->pathfinding->GetLastPath();
 
-	for (uint i = 0; i < bat_path->Count(); ++i)
-	{
-		bat_pos = App->map->MapToWorld(bat_path->At(i)->x, bat_path->At(i)->y);
-	}
 }
 
 void j1Entity_Bat::StandardPath()

@@ -47,11 +47,12 @@ private:
 	p2List<j1Entity*>		entities;
 	j1Entity*               player;
 
-	SDL_Texture*			debug_tex = nullptr;
-
 public:
 	SDL_Texture*			graphics = nullptr;
 	SDL_Texture*			player_graphics = nullptr;
+	SDL_Texture*			debug_tex = nullptr;
+
+	bool					debug_draw = false; // uml
 
 };
 

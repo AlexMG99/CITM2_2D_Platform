@@ -14,9 +14,9 @@ class p2DynArray
 {
 private:
 
-	VALUE*			data;
+	VALUE*			data = nullptr;
 	unsigned int	mem_capacity;
-	unsigned int	num_elements;
+	unsigned int	num_elements = 0;
 
 public:
 

@@ -43,6 +43,7 @@ j1Entity::~j1Entity()
 		coll = nullptr;
 	}
 	
+	pathfinding_path.Clear();
 	entities_animations.reset();
 }
 
@@ -52,13 +53,27 @@ bool j1Entity::Entity_Update(float dt)
 	SetAnimations(dt);
 
 	position.y += velocity.y;
-	position.x += velocity.x;
+	/*position.x += velocity.x;*/
 
 	if(!fly) 
-		velocity.y = -acceleration.y * dt;
+		velocity.y = 100 * dt;
 
 	coll->SetPos(position.x, position.y);
 	Entity_Draw(dt);
+
+	if (pathfinding_path.Count() > 0) 
+	{
+		if (App->entity_manager->debug_draw)
+		{
+			for (uint i = 0; i < pathfinding_path.Count(); ++i)
+			{
+				iPoint pos = App->map->MapToWorld(pathfinding_path.At(i)->x, pathfinding_path.At(i)->y);
+				App->render->Blit(App->entity_manager->debug_tex, pos.x, pos.y);
+			}
+		}
+		pathfinding_path.Clear();
+	}
+
 	return true;
 };
 
@@ -86,7 +101,6 @@ bool j1Entity::CalculatePath()
 		{
 			pathfinding_path.PushBack(*entity_path->At(i));
 		}
-
 		ret = true;
 	}
 
@@ -149,6 +163,11 @@ bool j1Entity::Entity_Draw(float dt)
 
 void j1Entity::Entity_Collision(Collider* other_coll)
 {
+	uint directionLeft = (position.x < other_coll->rect.x);
+	uint directionRight = (other_coll->rect.x + other_coll->rect.w < position.x);
+	uint directionUp = (position.y < other_coll->rect.y + other_coll->rect.h);
+	uint directionCornerDown = (other_coll->rect.y + 5 < position.y);
+
 	switch (other_coll->type)
 	{
 	case COLLIDER_PLAYER:
@@ -163,7 +182,17 @@ void j1Entity::Entity_Collision(Collider* other_coll)
 		}
 		break;
 	case COLLIDER_GROUND:
-		if (coll->rect.y < other_coll->rect.y)
+		//Check collision from right
+		if (directionRight && directionCornerDown) {
+			velocity.x = 0;
+		}
+		//Check collision from left
+		else if (directionLeft && directionCornerDown)
+		{
+			velocity.x = 0;
+		}
+		//Check collision from up
+		else if (directionUp)
 		{
 			position.y = (float)(other_coll->rect.y - coll->rect.h + 1);
 			velocity.y = 0;

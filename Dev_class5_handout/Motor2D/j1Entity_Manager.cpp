@@ -94,23 +94,6 @@ bool j1Entity_Manager::Update(float dt)
 		entity->data->Entity_Update(dt);
 	}
 
-	// Debug pathfinding ------------------------------
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	iPoint p = App->render->ScreenToWorld(x, y);
-	p = App->map->WorldToMap(p.x, p.y);
-	p = App->map->MapToWorld(p.x, p.y);
-
-	App->render->Blit(debug_tex, p.x, p.y);
-
-	const p2DynArray<iPoint>* dyn_path = App->pathfinding->GetLastPath();
-
-	for (uint i = 0; i < dyn_path->Count(); ++i)
-	{
-		iPoint pos = App->map->MapToWorld(dyn_path->At(i)->x, dyn_path->At(i)->y);
-		App->render->Blit(debug_tex, pos.x, pos.y);
-	}
-
 	return true;
 }
 

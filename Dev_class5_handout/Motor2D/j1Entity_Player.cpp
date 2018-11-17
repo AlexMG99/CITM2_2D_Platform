@@ -285,6 +285,11 @@ void j1Entity_Player::DebugInputs()
 		App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
+	{
+		App->entity_manager->debug_draw = !App->entity_manager->debug_draw;
+	}
+
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
 		godMode = !godMode;

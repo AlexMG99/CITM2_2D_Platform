@@ -89,6 +89,7 @@ public:
 	bool				fly = false;
 	bool				counting = true; // uml
 
+
 	Entity_State		state = STATE_NONE;
 	Entity_Type			type = NONE;
 
@@ -101,7 +102,6 @@ public:
 	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
 
 	p2DynArray<iPoint>	pathfinding_path;
-	p2DynArray<iPoint>	bat_path;
 	pugi::xml_document	entities_animations;
 
 	j1PerfTimer do_standard_path; //uml

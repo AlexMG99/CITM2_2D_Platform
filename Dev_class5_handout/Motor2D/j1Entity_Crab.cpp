@@ -40,19 +40,29 @@ bool j1Entity_Crab::Entity_PreUpdate(float dt)
 		{
 			StandardPath();
 		}
+		velocity.x = 0;
 	}
 	else
 	{
-		counting = false;
+		/*counting = false;*/
 		FollowPath();
 	}
+
+	if (App->entity_manager->GetPlayer()->position.x < position.x)
+		flipX = SDL_FLIP_NONE;
+	else
+		flipX = SDL_FLIP_HORIZONTAL;
+
 
 	return true;
 }
 
 void j1Entity_Crab::FollowPath()
 {
-
+	int i = 0;
+	iPoint crab_pos = App->map->WorldToMap(position.x, position.y);
+	velocity.x = pathfinding_path[i + 1].x - pathfinding_path[i].x;
+	position.x += velocity.x;
 }
 
 void j1Entity_Crab::StandardPath()
