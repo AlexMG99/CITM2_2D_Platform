@@ -353,7 +353,6 @@ void j1Entity_Player::Entity_Collision(Collider* other_coll)
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) 
 		{
 			state = STATE_FALL;
-			position.y--;
 		}
 		else
 		{

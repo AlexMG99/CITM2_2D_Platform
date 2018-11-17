@@ -3,16 +3,12 @@
 <entityManager>
   
   <bats>
-   
+    <bat>
+      <position x="130" y="150"/>
+    </bat>
   </bats>
   
   <crabs>
-    <crab>
-      <position x="260" y="105"/>
-    </crab>
-    <crab>
-      <position x="130" y="140"/>
-    </crab>
   
   </crabs>
 

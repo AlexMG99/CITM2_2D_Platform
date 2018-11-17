@@ -186,19 +186,22 @@ void j1Entity::Entity_Collision(Collider* other_coll)
 		break;
 	case COLLIDER_GROUND:
 		//Check collision from right
-		if (directionRight && directionCornerDown) {
-			velocity.x = 0;
-		}
-		//Check collision from left
-		else if (directionLeft && directionCornerDown)
+		if (type != BAT) 
 		{
-			velocity.x = 0;
-		}
-		//Check collision from up
-		else if (directionUp)
-		{
-			position.y = (float)(other_coll->rect.y - coll->rect.h + 1);
-			velocity.y = 0;
+			if (directionRight && directionCornerDown) {
+				velocity.x = 0;
+			}
+			//Check collision from left
+			else if (directionLeft && directionCornerDown)
+			{
+				velocity.x = 0;
+			}
+			//Check collision from up
+			else if (directionUp)
+			{
+				position.y = (float)(other_coll->rect.y - coll->rect.h + 1);
+				velocity.y = 0;
+			}
 		}
 		break;
 	}

@@ -49,18 +49,6 @@ bool j1Entity_Crab::Entity_PreUpdate(float dt)
 		FollowPath(dt);
 	}
 
-	if (App->entity_manager->GetPlayer()->position.x < position.x)
-	{
-		flipX = SDL_FLIP_NONE;
-		position.x += velocity.x * dt;
-	}
-	else
-	{
-		flipX = SDL_FLIP_HORIZONTAL;
-		position.x += -velocity.x * dt;
-	}
-
-
 	return true;
 }
 
@@ -74,6 +62,18 @@ void j1Entity_Crab::FollowPath(float dt)
 	{
 		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * 60;
 	}
+
+	if (App->entity_manager->GetPlayer()->position.x < position.x)
+	{
+		flipX = SDL_FLIP_NONE;
+		position.x += velocity.x * dt;
+	}
+	else
+	{
+		flipX = SDL_FLIP_HORIZONTAL;
+		position.x += -velocity.x * dt;
+	}
+
 }
 
 

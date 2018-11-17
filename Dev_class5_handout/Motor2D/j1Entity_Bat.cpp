@@ -56,15 +56,12 @@ void j1Entity_Bat::FollowPath(float dt)
 
 	if (pathfinding_path.Count() > 1)
 	{
-		velocity.x = (pathfinding_path[1].x - bat_pos.x) * 50;
-		velocity.y = (pathfinding_path[1].y - bat_pos.x) * 10;
+		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * 70;
+		velocity.y = (pathfinding_path[1].y - pathfinding_path[0].y) * 70;
 	}
-	position.x += velocity.x * dt;
-	if(App->entity_manager->GetPlayer()->position.y < position.y)
-		position.y += velocity.y * dt;
-	else
-		position.y += -velocity.y * dt;
 
+	position.x += velocity.x * dt;
+	position.y += velocity.y * dt;
 }
 
 void j1Entity_Bat::StandardPath()
