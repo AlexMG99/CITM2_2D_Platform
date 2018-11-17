@@ -40,26 +40,30 @@ bool j1Entity_Bat::Entity_PreUpdate(float dt)
 		{
 			StandardPath();
 		}
+		velocity.x = 0;
 	}
 	else
 	{
-		FollowPath();
+		FollowPath(dt);
 	}
 
 	return true;
 }
 
-void j1Entity_Bat::FollowPath()
+void j1Entity_Bat::FollowPath(float dt)
 {
-	
-	int i = 0;
 	iPoint bat_pos = App->map->WorldToMap(position.x, position.y);
 
-	velocity.x = pathfinding_path[i + 1].x - pathfinding_path[i].x;
-	velocity.y = pathfinding_path[i + 1].y + pathfinding_path[i].y;
-	position.x += velocity.x;
-	position.y -= velocity.y;
-
+	if (pathfinding_path.Count() > 1)
+	{
+		velocity.x = (pathfinding_path[1].x - bat_pos.x) * 50;
+		velocity.y = (pathfinding_path[1].y - bat_pos.x) * 10;
+	}
+	position.x += velocity.x * dt;
+	if(App->entity_manager->GetPlayer()->position.y < position.y)
+		position.y += velocity.y * dt;
+	else
+		position.y += -velocity.y * dt;
 
 }
 

@@ -52,11 +52,11 @@ bool j1Entity::Entity_Update(float dt)
 {
 	SetAnimations(dt);
 
-	position.y += velocity.y;
-	/*position.x += velocity.x;*/
-
-	if(!fly) 
-		velocity.y = 100 * dt;
+	if (!fly)
+	{
+		velocity.y = -acceleration.y * dt;
+		position.y += velocity.y;
+	}
 
 	coll->SetPos(position.x, position.y);
 	Entity_Draw(dt);
@@ -92,6 +92,9 @@ bool j1Entity::CalculatePath()
 	bool ret = false;
 	iPoint origin = App->map->WorldToMap(position.x, position.y);
 	iPoint player_position = App->map->WorldToMap(App->entity_manager->GetPlayer()->position.x, App->entity_manager->GetPlayer()->position.y - App->entity_manager->GetPlayer()->coll->rect.h);
+
+	if (type == CRAB && position.y > App->entity_manager->GetPlayer()->position.y) 
+		return false;
 
 	if (App->entity_manager->GetPlayer()->state != STATE_DEATH && position.DistanceTo(App->entity_manager->GetPlayer()->position) < RANG)
 	{

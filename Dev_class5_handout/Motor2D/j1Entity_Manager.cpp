@@ -46,8 +46,6 @@ bool j1Entity_Manager::Start()
 
 bool j1Entity_Manager::PreUpdate(float dt)
 {
-	static iPoint origin;
-	static bool origin_selected = false;
 	
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
@@ -62,26 +60,6 @@ bool j1Entity_Manager::PreUpdate(float dt)
 				break;
 		}
 	}
-
-
-	/*int x, y;
-	App->input->GetMousePosition(x, y);
-	iPoint p = App->render->ScreenToWorld(x, y);
-	p = App->map->WorldToMap(p.x, p.y);
-
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-	{
-		if (origin_selected == true)
-		{
-			App->pathfinding->CreatePath(origin, p);
-			origin_selected = false;
-		}
-		else
-		{
-			origin = p;
-			origin_selected = true;
-		}
-	}*/
 
 	return true;
 }

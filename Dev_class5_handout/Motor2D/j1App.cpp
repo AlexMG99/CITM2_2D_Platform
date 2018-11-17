@@ -202,7 +202,7 @@ void j1App::PrepareUpdate()
 	frame_count++;
 	last_sec_frame_count++;
 
-	dt = frame_time.ReadSec();
+	if (!fadeToBlack->IsFading()) dt = frame_time.ReadSec();
 	frame_time.Start();
 }
 

@@ -24,7 +24,7 @@ public:
 
 	bool Entity_PreUpdate(float dt);
 
-	void FollowPath();
+	void FollowPath(float dt);
 
 	void StandardPath();
 

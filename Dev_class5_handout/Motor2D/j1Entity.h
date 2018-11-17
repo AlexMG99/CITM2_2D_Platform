@@ -104,7 +104,7 @@ public:
 	p2DynArray<iPoint>	pathfinding_path;
 	pugi::xml_document	entities_animations;
 
-	j1PerfTimer do_standard_path; //uml
+	j1PerfTimer			do_standard_path; //uml
 
 	bool                to_delete = false;
 

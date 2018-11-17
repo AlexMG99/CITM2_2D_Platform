@@ -41,40 +41,52 @@ bool j1Entity_Crab::Entity_PreUpdate(float dt)
 			StandardPath();
 		}
 		velocity.x = 0;
+		
 	}
 	else
 	{
 		/*counting = false;*/
-		FollowPath();
+		FollowPath(dt);
 	}
 
 	if (App->entity_manager->GetPlayer()->position.x < position.x)
+	{
 		flipX = SDL_FLIP_NONE;
+		position.x += velocity.x * dt;
+	}
 	else
+	{
 		flipX = SDL_FLIP_HORIZONTAL;
+		position.x += -velocity.x * dt;
+	}
 
 
 	return true;
 }
 
-void j1Entity_Crab::FollowPath()
+void j1Entity_Crab::FollowPath(float dt)
 {
-	int i = 0;
-	iPoint crab_pos = App->map->WorldToMap(position.x, position.y);
-	velocity.x = pathfinding_path[i + 1].x - pathfinding_path[i].x;
-	position.x += velocity.x;
+	/*iPoint crab_pos = App->map->WorldToMap(position.x, position.y);
+	iPoint next_node = { crab_pos.x + 1, crab_pos.y };
+	iPoint prev_node = { crab_pos.x - 1, crab_pos.y };*/
+
+	if (pathfinding_path.Count() > 1)
+	{
+		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * 60;
+	}
 }
+
 
 void j1Entity_Crab::StandardPath()
 {
-	iPoint current_pos = App->map->WorldToMap(position.x, position.y);
+	/*iPoint current_pos = App->map->WorldToMap(position.x, position.y);
 	iPoint right_cell(current_pos.x - 1, current_pos.y);
 	iPoint left_cell(current_pos.x + 1, current_pos.y);
 
 	pathfinding_path.PushBack(current_pos);
 
 	if (moving_right && App->pathfinding->IsWalkable(right_cell))
-		pathfinding_path.PushBack(right_cell);
+		pathfinding_path.PushBack(right_cell);*/
 	
 }
 
