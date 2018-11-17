@@ -99,6 +99,7 @@ public:
 	SDL_RendererFlip	flipX = SDL_FLIP_NONE;
 
 	p2DynArray<iPoint>	pathfinding_path;
+	p2DynArray<iPoint>	bat_path;
 	pugi::xml_document	entities_animations;
 
 	bool                to_delete = false;

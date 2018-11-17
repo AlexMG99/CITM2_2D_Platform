@@ -7,6 +7,7 @@
 #include "p2DynArray.h"
 #include "j1Entity.h"
 #include "p2List.h"
+#include "p2Point.h"
 #include "SDL/include/SDL_render.h"
 
 struct SDL_Texture;
@@ -26,6 +27,10 @@ public:
 
 	void FollowPath();
 	void StandardPath();
+
+public:
+	iPoint bat_pos = { position.x, position.y };
+	fPoint bat_speed;
 };
 
 

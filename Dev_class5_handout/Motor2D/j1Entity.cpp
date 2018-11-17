@@ -85,6 +85,11 @@ bool j1Entity::CalculatePath()
 		if (App->entity_manager->GetPlayer()->state != STATE_DEATH && position.DistanceTo(App->entity_manager->GetPlayer()->position) < RANG)
 		{
 			App->pathfinding->CreatePath(origin, player_position);
+			const p2DynArray<iPoint>* pathfinding_path = App->pathfinding->GetLastPath();
+			for (int i = 0; i < pathfinding_path->Count(); i++)
+			{
+				bat_path.PushBack(*pathfinding_path->At(i));
+			}
 		}
 	}
 	return true;
