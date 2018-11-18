@@ -28,12 +28,38 @@ This Project is a 2D Platform named 'Trinity's Journey' made by Laia Martinez an
   - The player have no collider and can go throw walls.
   - You can move it with the arrow pads.
 
+##God Mode Controls
+* __[Right]:__ Right arrow
+* __[Left]:__ Left arrow
+* __[Up]:__ Up arrow
+* __[Down]:__ Down arrow
+
 ## Inovation
 * __Cling:__ When the player jumps towards the vines, it can hang from the wall. If the player press space it will jump.
 * __Go down through platforms:__ When the player is standing on a platform, it can go down if it presses the letter D.
 
 * __Volume up & down:__ The player can decide the volume of the music that is playing, using the + and - keys on the numeric keypad.
 
+
+## What have done each member of the team:
+
+Alex Morales:
+- Entities Collisions
+- Follow path enemies
+- Player as an entity
+- Dt implementation 
+- Limit the frame rate
+- Enemies Fx
+- UML
+
+Laia Martinez:
+- Load & Save enemies 
+- Created Structure enemies
+- Calculate Pathfinding
+- Enemies positions
+- Brofiler
+- Enemies Spritesheet 
+- UML
 
 ## Credits
 * **[GitHub Project Page](https://github.com/AlexMG99/CITM2_2D_Platform)**
