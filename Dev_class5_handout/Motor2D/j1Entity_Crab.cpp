@@ -73,9 +73,6 @@ bool j1Entity_Crab::Entity_PreUpdate(float dt)
 void j1Entity_Crab::FollowPath(float dt)
 {
 	BROFILER_CATEGORY("Bat_FollowPath", Profiler::Color::Turquoise);
-	/*iPoint crab_pos = App->map->WorldToMap(position.x, position.y);
-	iPoint next_node = { crab_pos.x + 1, crab_pos.y };
-	iPoint prev_node = { crab_pos.x - 1, crab_pos.y };*/
 
 	if (pathfinding_path.Count() > 1)
 	{

@@ -54,6 +54,15 @@ bool j1Entity_Bat::Entity_PreUpdate(float dt)
 		FollowPath(dt);
 	}
 
+	if (App->entity_manager->GetPlayer()->position.x < position.x)
+	{
+		flipX = SDL_FLIP_NONE;
+	}
+	else
+	{
+		flipX = SDL_FLIP_HORIZONTAL;
+	}
+
 	return true;
 }
 

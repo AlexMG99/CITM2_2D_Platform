@@ -113,14 +113,18 @@ void j1Entity::SetAnimations(float dt)
 		{
 		case STATE_IDLE:
 			current_animation = &idle_anim;
+			if (CalculatePath())
+			{
+				state = STATE_RUN;
+			}
 			break;
 
 		case STATE_RUN:
 			current_animation = &run_anim;
-			break;
-
-		case STATE_FALL:
-			current_animation = &fall_anim;
+			if (!CalculatePath())
+			{
+				state = STATE_IDLE;
+			}
 			break;
 
 		case STATE_DEATH:
