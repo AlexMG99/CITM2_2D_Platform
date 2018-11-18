@@ -10,6 +10,9 @@
 #include "j1Collision.h"
 #include "j1Render.h"
 
+#include "Brofiler/Brofiler.h"
+
+
 
 j1Entity_Crab::j1Entity_Crab() : j1Entity("crab")
 {
@@ -30,6 +33,8 @@ j1Entity_Crab::~j1Entity_Crab()
 
 bool j1Entity_Crab::Entity_PreUpdate(float dt)
 {
+	BROFILER_CATEGORY("PreUpdate_EntityCrab", Profiler::Color::CornflowerBlue);
+
 	if (!CalculatePath())
 	{
 		if (!counting)
@@ -67,6 +72,7 @@ bool j1Entity_Crab::Entity_PreUpdate(float dt)
 
 void j1Entity_Crab::FollowPath(float dt)
 {
+	BROFILER_CATEGORY("Bat_FollowPath", Profiler::Color::Turquoise);
 	/*iPoint crab_pos = App->map->WorldToMap(position.x, position.y);
 	iPoint next_node = { crab_pos.x + 1, crab_pos.y };
 	iPoint prev_node = { crab_pos.x - 1, crab_pos.y };*/
@@ -81,6 +87,8 @@ void j1Entity_Crab::FollowPath(float dt)
 
 void j1Entity_Crab::StandardPath()
 {
+
+	/*BROFILER_CATEGORY("Bat_StandardPath", Profiler::Color::LightSalmon);*/
 	/*iPoint current_pos = App->map->WorldToMap(position.x, position.y);
 	iPoint right_cell(current_pos.x - 1, current_pos.y);
 	iPoint left_cell(current_pos.x + 1, current_pos.y);

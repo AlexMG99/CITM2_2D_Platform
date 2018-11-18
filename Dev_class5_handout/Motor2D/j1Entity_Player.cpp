@@ -11,6 +11,8 @@
 #include "j1Input.h"
 #include "p2Log.h"
 
+#include "Brofiler/Brofiler.h"
+
 
 j1Entity_Player::j1Entity_Player() :j1Entity("player")
 {
@@ -44,6 +46,8 @@ bool j1Entity_Player::Entity_Start(const char* entity_name)
 
 bool j1Entity_Player::Entity_PreUpdate(float dt)
 {
+	BROFILER_CATEGORY("PreUpdate_EntityPlayer", Profiler::Color::CornflowerBlue);
+
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && state != STATE_GOD)
 	{
 		velocity.x = acceleration.x*dt;
@@ -63,6 +67,8 @@ bool j1Entity_Player::Entity_PreUpdate(float dt)
 
 bool j1Entity_Player::Entity_Update(float dt)
 {
+	BROFILER_CATEGORY("Update_EntityPlayer", Profiler::Color::DarkKhaki);
+
 	CheckState();
 	PerformActions(dt);
 

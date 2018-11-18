@@ -14,6 +14,8 @@
 #include "j1Collision.h"
 #include "j1Render.h"
 
+#include "Brofiler/Brofiler.h"
+
 
 
 j1Entity::j1Entity(const char* entity_name) 
@@ -51,6 +53,8 @@ j1Entity::~j1Entity()
 
 bool j1Entity::Entity_Update(float dt)
 {
+	BROFILER_CATEGORY("Update_Entity", Profiler::Color::DarkKhaki);
+
 	SetAnimations(dt);
 
 	if (!fly)
@@ -80,6 +84,8 @@ bool j1Entity::Entity_Update(float dt)
 
 bool j1Entity::CalculatePath()
 {
+	BROFILER_CATEGORY("CalculatePath_Entity", Profiler::Color::LawnGreen);
+
 	bool ret = false;
 	iPoint origin = App->map->WorldToMap(position.x + coll->rect.w, position.y + coll->rect.h);
 	iPoint player_position = App->map->WorldToMap(App->entity_manager->GetPlayer()->position.x, App->entity_manager->GetPlayer()->position.y);

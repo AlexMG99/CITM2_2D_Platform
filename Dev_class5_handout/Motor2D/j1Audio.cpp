@@ -7,6 +7,9 @@
 
 #include "SDL/include/SDL.h"
 #include "SDL_mixer\include\SDL_mixer.h"
+
+#include "Brofiler/Brofiler.h"
+
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
 j1Audio::j1Audio() : j1Module()
@@ -59,6 +62,8 @@ bool j1Audio::Awake(pugi::xml_node& config)
 }
 bool j1Audio::PreUpdate(float dt) {
 	
+	BROFILER_CATEGORY("PreUpdate_Audio", Profiler::Color::CornflowerBlue);
+
 	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_REPEAT)
 	{
 		volume++;
@@ -72,6 +77,8 @@ bool j1Audio::PreUpdate(float dt) {
 
 bool j1Audio::Update(float dt)
 {
+	BROFILER_CATEGORY("Update_Audio", Profiler::Color::DarkKhaki);
+
 	Mix_VolumeMusic(volume);
 	
 	return true;

@@ -11,6 +11,8 @@
 #include "j1Pathfinding.h"
 #include "j1Textures.h"
 
+#include "Brofiler/Brofiler.h"
+
 j1Entity_Manager::j1Entity_Manager()
 {
 	name.create("entityManager");
@@ -48,7 +50,7 @@ bool j1Entity_Manager::Start()
 
 bool j1Entity_Manager::PreUpdate(float dt)
 {
-	
+	BROFILER_CATEGORY("PreUpdate_EntityManager", Profiler::Color::CornflowerBlue);
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{
 		entity->data->Entity_PreUpdate(dt);
@@ -68,6 +70,8 @@ bool j1Entity_Manager::PreUpdate(float dt)
 
 bool j1Entity_Manager::Update(float dt)
 {
+	BROFILER_CATEGORY("Update_EntityManager", Profiler::Color::DarkKhaki);
+
 	
 	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
 	{

@@ -15,6 +15,8 @@
 #include "j1Scene.h"
 #include "j1Scene2.h"
 
+#include "Brofiler/Brofiler.h"
+
 j1Scene::j1Scene() : j1Module()
 {
 	name.create("scene");
@@ -69,6 +71,8 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate(float dt)
 {
+	BROFILER_CATEGORY("PreUpdate_Scene1", Profiler::Color::CornflowerBlue);
+
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame();
 
@@ -82,7 +86,8 @@ bool j1Scene::PreUpdate(float dt)
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	
+	BROFILER_CATEGORY("Update_Scene1", Profiler::Color::DarkKhaki);
+
 	if (App->entity_manager->GetPlayer()->position.x > (App->win->GetWidth() / App->win->GetScale()) / 4 && App->entity_manager->GetPlayer()->position.x < (App->map->data.tile_width*App->map->data.width - App->win->GetWidth() / 4) )
 	{
 		App->render->camera.x = -App->entity_manager->GetPlayer()->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
@@ -98,6 +103,8 @@ bool j1Scene::Update(float dt)
 // Called each loop iteration
 bool j1Scene::PostUpdate()
 {
+	BROFILER_CATEGORY("PostUpdate_Scene", Profiler::Color::MediumVioletRed);
+
 	bool ret = true;
 
 	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)

@@ -4,6 +4,8 @@
 #include "j1Render.h"
 #include "j1Collision.h"
 
+#include "Brofiler/Brofiler.h"
+
 j1Collision::j1Collision()
 {
 	name.create("collision");
@@ -87,6 +89,8 @@ bool j1Collision::Awake(pugi::xml_node& config)
 //Called every loop iteration
 bool j1Collision::PreUpdate(float dt)
 {
+	BROFILER_CATEGORY("PreUpdate_Collision", Profiler::Color::CornflowerBlue);
+
 	// Remove all colliders scheduled for deletion
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
@@ -135,7 +139,7 @@ bool j1Collision::PreUpdate(float dt)
 // Called before render is available
 bool j1Collision::PostUpdate()
 {
-
+	BROFILER_CATEGORY("PostUpdate_Collision", Profiler::Color::MediumVioletRed);
 	DebugDraw();
 
 	return true;

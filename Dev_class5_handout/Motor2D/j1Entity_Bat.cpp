@@ -10,6 +10,8 @@
 #include "j1Collision.h"
 #include "j1Render.h"
 
+#include "Brofiler/Brofiler.h"
+
 
 j1Entity_Bat::j1Entity_Bat() : j1Entity("bat")
 {
@@ -31,6 +33,8 @@ j1Entity_Bat::~j1Entity_Bat()
 
 bool j1Entity_Bat::Entity_PreUpdate(float dt)
 {
+	BROFILER_CATEGORY("PreUpdate_EntityBat", Profiler::Color::CornflowerBlue);
+
 	if (!CalculatePath())
 	{
 		if (!counting)
@@ -56,6 +60,8 @@ bool j1Entity_Bat::Entity_PreUpdate(float dt)
 void j1Entity_Bat::FollowPath(float dt)
 {
 
+  BROFILER_CATEGORY("Crab_FollowPath", Profiler::Color::Turquoise);
+
 	if (pathfinding_path.Count() > 1)
 	{
 		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * acceleration.x;
@@ -74,10 +80,11 @@ void j1Entity_Bat::FollowPath(float dt)
 
 void j1Entity_Bat::StandardPath()
 {
-    //Posició actual del entity
-	iPoint current_position = App->map->WorldToMap(position.x, position.y);
-	//Posició cel·la de la dreta
-	iPoint right_cell(current_position.x - 1, current_position.y);
-	//Posició cel·la de l'esquerra
-	iPoint left_cell(current_position.x + 1, current_position.y);
+	//BROFILER_CATEGORY("Crab_FStandardPath", Profiler::Color::LightSalmon);
+ //   //Posició actual del entity
+	//iPoint current_position = App->map->WorldToMap(position.x, position.y);
+	////Posició cel·la de la dreta
+	//iPoint right_cell(current_position.x - 1, current_position.y);
+	////Posició cel·la de l'esquerra
+	//iPoint left_cell(current_position.x + 1, current_position.y);
 }
