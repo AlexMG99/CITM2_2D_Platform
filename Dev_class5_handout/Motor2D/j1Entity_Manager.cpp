@@ -58,13 +58,15 @@ bool j1Entity_Manager::PreUpdate(float dt)
 		entity->data->Entity_PreUpdate(dt);
 		if (entity->data->to_delete == true)
 		{
+			
 			p2List_item<j1Entity*>* aux = entity->next;
 			RELEASE(entity->data);
 			entities.del(entity);
 			entity = aux;
 			if (aux == nullptr)
 				break;
-			App->audio->PlayFx(fx_enemy_death);
+			App->audio->PlayFx(App->entity_manager->fx_enemy_death);
+			
 		}
 	}
 

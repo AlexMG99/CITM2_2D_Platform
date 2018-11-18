@@ -62,10 +62,10 @@
         </idle>
 
         <run title="run" speed="7.0">
-          <frame x="1" y="29" w="27" h="32"/>
-          <frame x="28" y="29" w="27" h="32"/>
-          <frame x="55" y="29" w="27" h="32"/>
-          <frame x="82" y="29" w="27" h="32"/>
+          <frame x="2" y="29" w="27" h="32"/>
+          <frame x="29" y="29" w="27" h="32"/>
+          <frame x="56" y="29" w="27" h="32"/>
+          <frame x="83" y="29" w="27" h="32"/>
         </run>
         <death title="death" speed="7.00">
           <frame x="118" y="4" w="65" h="40"/>

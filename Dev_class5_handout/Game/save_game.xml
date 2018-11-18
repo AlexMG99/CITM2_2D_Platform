@@ -4,7 +4,7 @@
 	<window />
 	<textures />
 	<audio>
-		<volume value="1" />
+		<volume value="26" />
 	</audio>
 	<scene />
 	<scene2 />
@@ -12,19 +12,23 @@
 	<pathfinding />
 	<entityManager>
 		<player>
-			<position x="1677.34802" y="317" />
+			<position x="80" y="219" />
 			<velocity x="0" y="4.0800004" />
 			<state value="STATE_IDLE" />
 		</player>
 		<enemies>
-			<entity_crab x="1020" y="299.040009" />
+			<entity_bat x="0" y="0" />
+			<entity_bat x="1204" y="115" />
+			<entity_bat x="2453" y="75" />
+			<entity_crab x="320" y="158.039993" />
+			<entity_crab x="1034" y="179.039993" />
 		</enemies>
 	</entityManager>
 	<fadetoblack>
-		<scene id="2" />
+		<scene id="1" />
 	</fadetoblack>
 	<collision />
 	<renderer>
-		<camera x="-4488" y="-275" />
+		<camera x="0" y="-150" />
 	</renderer>
 </game_state>

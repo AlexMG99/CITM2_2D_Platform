@@ -26,9 +26,20 @@ public:
 	bool Entity_PreUpdate(float dt);
 
 	void FollowPath(float dt);
-	void StandardPath();
+	void StandardPath(float dt);
 
 public:
+
+	bool moving_right = false;
+	bool moving_left = false;
+
+	bool moving_down = false;
+	bool moving_left_down = false;
+	bool moving_down_right = false;
+
+	bool moving_up = false;
+	bool moving_up_left = false;
+	bool moving_up_right = false;
 };
 
 
