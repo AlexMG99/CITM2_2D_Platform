@@ -67,15 +67,12 @@
           <frame x="55" y="29" w="27" h="32"/>
           <frame x="82" y="29" w="27" h="32"/>
         </run>
-        <death title="death" speed="5.00">
+        <death title="death" speed="7.00">
           <frame x="118" y="4" w="65" h="40"/>
           <frame x="188" y="4" w="65" h="40"/>
           <frame x="261" y="4" w="65" h="40"/>
           <frame x="329" y="4" w="65" h="40"/>
           <frame x="402" y="4" w="65" h="40"/>
-        </death>
-        <death title="death" speed="5.00">
-          <frame x="1" y="88" w="25" h="11"/>
         </death>
         
       </animation>

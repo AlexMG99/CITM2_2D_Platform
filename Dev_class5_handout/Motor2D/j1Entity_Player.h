@@ -53,6 +53,8 @@ private:
 	p2Animation     duck_anim;
 	p2Animation     cling_anim;
 
+
+
 };
 
 #endif

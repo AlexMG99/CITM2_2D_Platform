@@ -5,6 +5,7 @@
 #include "j1Scene2.h"
 #include "j1FadeToBlack.h"
 #include "j1Map.h"
+#include "j1Audio.h"
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Input.h"
@@ -103,6 +104,7 @@ void j1Entity_Player::CheckState()
 		if (press_space)
 		{
 			state = STATE_JUMP;
+			App->audio->PlayFx(App->entity_manager->fx_jump);
 		}
 
 		if (pressed_left || pressed_right)
@@ -125,6 +127,7 @@ void j1Entity_Player::CheckState()
 		if (press_space)
 		{
 			state = STATE_JUMP;
+			App->audio->PlayFx(App->entity_manager->fx_jump);
 			
 		}
 
@@ -149,7 +152,6 @@ void j1Entity_Player::CheckState()
 		{
 			state = STATE_JUMP;
 			falling = false;
-			//App->audio->PlayFx(fx_jump);
 		}
 		break;
 
@@ -158,7 +160,7 @@ void j1Entity_Player::CheckState()
 		{
 			jump_anim.Reset();
 			state = STATE_JUMP;
-			//App->audio->PlayFx(fx_jump);
+			App->audio->PlayFx(App->entity_manager->fx_jump);
 		}
 		break;
 
@@ -220,12 +222,12 @@ void j1Entity_Player::PerformActions(float dt)
 		if (App->scene->IsEnabled())
 		{
 			App->scene->Reset();
-			//App->audio->PlayFx(fx_death);
+			App->audio->PlayFx(App->entity_manager->fx_death);
 		}
 		else if (App->scene2->IsEnabled())
 		{
 			App->scene2->Reset();
-			//App->audio->PlayFx(fx_death);
+			App->audio->PlayFx(App->entity_manager->fx_death);
 		}
 		break;
 

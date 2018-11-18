@@ -44,15 +44,20 @@ public:
 	void OnCollision(Collider * c1, Collider * c2);
 
 private:
-	p2List<j1Entity*>		entities;
-	j1Entity*               player;
+	p2List<j1Entity*>	entities;
+	j1Entity*           player;
 
 public:
-	SDL_Texture*			graphics = nullptr;
-	SDL_Texture*			player_graphics = nullptr;
-	SDL_Texture*			debug_tex = nullptr;
+	SDL_Texture*		graphics = nullptr;
+	SDL_Texture*		player_graphics = nullptr;
+	SDL_Texture*		debug_tex = nullptr;
 
-	bool					debug_draw = false; // uml
+	p2SString			fx_death_name;
+	p2SString			fx_jump_name;
+	uint				fx_death;
+	uint				fx_jump;
+
+	bool				debug_draw = false; // uml
 
 };
 

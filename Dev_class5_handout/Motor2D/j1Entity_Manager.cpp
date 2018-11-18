@@ -6,6 +6,7 @@
 #include "j1Entity_Player.h"
 #include "j1Input.h"
 #include "j1Map.h"
+#include "j1Audio.h"
 #include "j1Render.h"
 #include "j1Pathfinding.h"
 #include "j1Textures.h"
@@ -25,10 +26,8 @@ bool j1Entity_Manager::Awake(pugi::xml_node& config)
 	LOG("Init Entity_Manager:");
 	bool ret = true;
 
-	for (p2List_item<j1Entity*>* entity = entities.start; entity; entity = entity->next)
-	{
-		entity->data->Awake(config.child(entity->data->name.GetString()));
-	}
+	fx_death_name.create(config.child("fx_death").child_value());
+	fx_jump_name.create(config.child("fx_jump").child_value());
 
 	return ret;
 }
@@ -40,6 +39,9 @@ bool j1Entity_Manager::Start()
 
 	debug_tex = App->tex->Load("textures/pathfinding.png");
 	graphics = App->tex->Load("textures/entities.png");
+
+	fx_death = App->audio->LoadFx(fx_death_name.GetString());
+	fx_jump = App->audio->LoadFx(fx_jump_name.GetString());
 
 	return ret;
 }
