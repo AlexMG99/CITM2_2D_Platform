@@ -10,7 +10,7 @@
 #include "p2List.h"
 #include "SDL/include/SDL_render.h"
 
-#define RANG 350
+#define RANG 150
 
 struct SDL_Texture;
 struct SDL_Rect;

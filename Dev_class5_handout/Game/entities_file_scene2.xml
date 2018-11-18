@@ -4,13 +4,22 @@
   
   <bats>
     <bat>
-      <position x="50" y="80"/>
+      <position x="170" y="50"/>
     </bat>
   </bats>
   
   <crabs>
     <crab>
       <position x="320" y="153"/>
+    </crab>
+    <crab>
+      <position x="1000" y="50"/>
+    </crab>
+    <crab>
+      <position x="1020" y="253"/>
+    </crab>
+    <crab>
+      <position x="1500" y="150"/>
     </crab>
   </crabs>
 
