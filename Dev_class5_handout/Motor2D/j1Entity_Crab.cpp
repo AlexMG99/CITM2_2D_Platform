@@ -44,10 +44,12 @@ bool j1Entity_Crab::Entity_PreUpdate(float dt)
 		}
 		if (do_standard_path.ReadMs() > 1000)
 		{
-			StandardPath();
+			StandardPath(dt);
 		}
-
-		velocity.x = 0;
+		else
+		{
+			velocity.x = 0;
+		}
 		
 	}
 	else
@@ -65,8 +67,6 @@ bool j1Entity_Crab::Entity_PreUpdate(float dt)
 		flipX = SDL_FLIP_HORIZONTAL;
 	}
 
-	position.x += velocity.x * dt;
-
 	return true;
 }
 
@@ -79,21 +79,47 @@ void j1Entity_Crab::FollowPath(float dt)
 		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * acceleration.x;
 	}
 
+	position.x += velocity.x * dt;
+
 }
 
 
-void j1Entity_Crab::StandardPath()
+void j1Entity_Crab::StandardPath(float dt)
 {
 
-	/*BROFILER_CATEGORY("Bat_StandardPath", Profiler::Color::LightSalmon);*/
-	/*iPoint current_pos = App->map->WorldToMap(position.x, position.y);
-	iPoint right_cell(current_pos.x - 1, current_pos.y);
-	iPoint left_cell(current_pos.x + 1, current_pos.y);
+	///*BROFILER_CATEGORY("Bat_StandardPath", Profiler::Color::LightSalmon);*/
+	//iPoint current_pos = App->map->WorldToMap(position.x + coll->rect.w, position.y + coll->rect.h);
+	//iPoint right_cell(current_pos.x - 1, current_pos.y);
+	//iPoint left_cell(current_pos.x + 1, current_pos.y);
 
-	pathfinding_path.PushBack(current_pos);
+	//pathfinding_path.PushBack(current_pos);
 
-	if (moving_right && App->pathfinding->IsWalkable(right_cell))
-		pathfinding_path.PushBack(right_cell);*/
+	//if (moving_right && App->pathfinding->IsWalkable(right_cell) && App->pathfinding->CheckGround(right_cell))
+	//	pathfinding_path.PushBack(right_cell);
+
+	//else if (!moving_right)
+	//{
+	//	pathfinding_path.PushBack(current_pos);
+	//	moving_left = true;
+	//	moving_right = false;
+	//}
+
+	//if (moving_left && App->pathfinding->IsWalkable(left_cell) && App->pathfinding->CheckGround(left_cell))
+	//	pathfinding_path.PushBack(left_cell);
+
+	//else if (!moving_right)
+	//{
+	//	pathfinding_path.PushBack(current_pos);
+	//	moving_left = false;
+	//	moving_right = true;
+	//}
+
+	//iPoint path_pos(App->map->WorldToMap(pathfinding_path[1].x, pathfinding_path[1].y));
+
+	//velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * acceleration.x;
+	//
+	//position.x += velocity.x * dt;
 	
+		
 }
 

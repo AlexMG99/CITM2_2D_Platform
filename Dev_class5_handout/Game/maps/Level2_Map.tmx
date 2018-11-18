@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="115" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="93">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="115" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="94">
  <properties>
   <property name="acceleration.x" type="float" value="150"/>
   <property name="acceleration.y" type="int" value="120"/>
   <property name="camera.x" type="int" value="0"/>
   <property name="camera.y" type="int" value="200"/>
   <property name="camera_limit.y" type="float" value="370"/>
-  <property name="playerPosition.x" type="float" value="10"/>
-  <property name="playerPosition.y" type="float" value="328"/>
+  <property name="playerPosition.x" type="float" value="105"/>
+  <property name="playerPosition.y" type="float" value="330"/>
  </properties>
  <tileset firstgid="1" name="warped_caves_spritesheet.png" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="368" columns="23">
   <image source="warped_caves_spritesheet.png.png" width="400" height="281"/>
@@ -12781,7 +12781,7 @@
   <object id="91" name="PLATFORM" type="PLATFORM_COLLIDER" x="1217.08" y="256.689" width="30.5151" height="9.6628"/>
   <object id="92" name="PLATFORM" type="PLATFORM_COLLIDER" x="1281.08" y="256.356" width="30.5151" height="9.0378"/>
  </objectgroup>
- <layer id="8" name="Pathfinding Bat" width="115" height="22">
+ <layer id="8" name="Pathfinding Bat" width="115" height="22" visible="0">
   <properties>
    <property name="Navigation" type="int" value="1"/>
    <property name="draw" type="int" value="0"/>

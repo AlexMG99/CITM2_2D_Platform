@@ -46,15 +46,7 @@ bool j1PathFinding::CheckBoundaries(const iPoint& pos) const
 
 bool j1PathFinding::CheckGround(const iPoint& pos) const
 {
-	for (uint i = 1; i < 3; i++)
-	{
-		iPoint down = pos;
-		down.y += i;
-		if (!IsWalkable(down))
-			return true;
-	}
-
-	return false;
+	return !IsWalkable({ pos.x, pos.y + 1 });
 }
 
 // Utility: returns true is the tile is walkable

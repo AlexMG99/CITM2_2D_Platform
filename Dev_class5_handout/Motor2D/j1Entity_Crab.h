@@ -26,11 +26,11 @@ public:
 
 	void FollowPath(float dt);
 
-	void StandardPath();
+	void StandardPath(float dt);
 
 private:
-	bool moving_right = true; //uml
-	bool moving_left = false; //uml
+	bool moving_right = false; //uml
+	bool moving_left = true; //uml
 }; 
 
 

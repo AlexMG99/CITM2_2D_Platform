@@ -239,7 +239,7 @@ void j1Entity_Player::PerformActions(float dt)
 
 	case STATE_GOD:
 		current_animation = &idle_anim;
-		coll->SetPos(0, 0);
+		coll->SetPos(-100, -100);
 		velocity = { 0,0 };
 
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)

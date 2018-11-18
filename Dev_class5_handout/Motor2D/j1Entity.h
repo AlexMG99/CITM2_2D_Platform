@@ -73,7 +73,7 @@ protected:
 	//Create path from enemy to player
 	bool CalculatePath();
 	//Follow the path to the player
-	virtual void FollowPath() {};
+	virtual void FollowPath(float dt) {};
 
 public:
 	fPoint				position;

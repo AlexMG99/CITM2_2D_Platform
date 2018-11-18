@@ -47,6 +47,7 @@ bool j1Entity_Bat::Entity_PreUpdate(float dt)
 			StandardPath();
 		}
 		velocity.x = 0;
+		velocity.y = 0;
 	}
 	else
 	{
@@ -71,16 +72,10 @@ void j1Entity_Bat::FollowPath(float dt)
 
   BROFILER_CATEGORY("Crab_FollowPath", Profiler::Color::Turquoise);
 
-	if (pathfinding_path.Count() > 1)
-	{
-		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * acceleration.x;
-		velocity.y = (pathfinding_path[1].y - pathfinding_path[0].y) * acceleration.y;
-	}
-	else
-	{
-		velocity.x = 0;
-		velocity.y = 0;
-	}
+	velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * acceleration.x;
+	velocity.y = (pathfinding_path[1].y - pathfinding_path[0].y) * acceleration.y;
+	
+	
 
 	position.x += velocity.x * dt;
 	position.y += velocity.y * dt;
