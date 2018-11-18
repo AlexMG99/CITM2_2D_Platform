@@ -161,7 +161,6 @@ bool j1App::Start()
 // Called each loop iteration
 bool j1App::Update()
 {
-	BROFILER_CATEGORY("Update", Profiler::Color::DarkKhaki);
 
 	bool ret = true;
 	PrepareUpdate();
@@ -210,6 +209,7 @@ void j1App::PrepareUpdate()
 // ---------------------------------------------
 void j1App::FinishUpdate()
 {
+	BROFILER_CATEGORY("FinishUpdate", Profiler::Color::FireBrick);
 	if(want_to_save == true)
 		SavegameNow();
 
@@ -278,6 +278,7 @@ bool j1App::PreUpdate()
 // Call modules on each loop iteration
 bool j1App::DoUpdate()
 {
+	BROFILER_CATEGORY("Update", Profiler::Color::DarkKhaki);
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.start;

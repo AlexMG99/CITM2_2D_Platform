@@ -19128,7 +19128,7 @@
  <layer id="8" name="Pathfinding" width="190" height="20">
   <properties>
    <property name="Navigation" type="int" value="1"/>
-   <property name="draw" type="int" value="1"/>
+   <property name="draw" type="int" value="0"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>
   <data>

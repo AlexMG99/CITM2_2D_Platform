@@ -54,8 +54,10 @@ public:
 
 	p2SString			fx_death_name;
 	p2SString			fx_jump_name;
+	p2SString			fx_enemy_death_name;
 	uint				fx_death;
 	uint				fx_jump;
+	uint				fx_enemy_death;
 
 	bool				debug_draw = false; // uml
 

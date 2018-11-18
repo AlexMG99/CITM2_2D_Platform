@@ -30,6 +30,7 @@ bool j1Entity_Manager::Awake(pugi::xml_node& config)
 
 	fx_death_name.create(config.child("fx_death").child_value());
 	fx_jump_name.create(config.child("fx_jump").child_value());
+	fx_enemy_death_name.create(config.child("fx_enemy_death").child_value());
 
 	return ret;
 }
@@ -44,6 +45,7 @@ bool j1Entity_Manager::Start()
 
 	fx_death = App->audio->LoadFx(fx_death_name.GetString());
 	fx_jump = App->audio->LoadFx(fx_jump_name.GetString());
+	fx_enemy_death = App->audio->LoadFx(fx_enemy_death_name.GetString());
 
 	return ret;
 }
@@ -62,6 +64,7 @@ bool j1Entity_Manager::PreUpdate(float dt)
 			entity = aux;
 			if (aux == nullptr)
 				break;
+			App->audio->PlayFx(fx_enemy_death);
 		}
 	}
 

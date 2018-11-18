@@ -174,6 +174,7 @@ void j1Entity::Entity_Collision(Collider* other_coll)
 		if (App->entity_manager->GetPlayer()->position.y - other_coll->rect.h / 2 < coll->rect.y)
 		{
 			state = STATE_DEATH;
+			App->audio->PlayFx(App->entity_manager->fx_jump);
 			App->entity_manager->GetPlayer()->state = STATE_JUMP;
 		}
 		else 
