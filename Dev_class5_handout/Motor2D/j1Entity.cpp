@@ -81,10 +81,8 @@ bool j1Entity::Entity_Update(float dt)
 bool j1Entity::CalculatePath()
 {
 	bool ret = false;
-	iPoint origin = { 0,0 };
-	if(type == BAT) origin = App->map->WorldToMap(position.x + coll->rect.w, position.y + coll->rect.h);
-	else if (type == CRAB) origin = App->map->WorldToMap(position.x, position.y );
-	iPoint player_position = App->map->WorldToMap(App->entity_manager->GetPlayer()->position.x, App->entity_manager->GetPlayer()->position.y - App->entity_manager->GetPlayer()->coll->rect.h);
+	iPoint origin = App->map->WorldToMap(position.x + coll->rect.w, position.y + coll->rect.h);
+	iPoint player_position = App->map->WorldToMap(App->entity_manager->GetPlayer()->position.x, App->entity_manager->GetPlayer()->position.y);
 
 	if (type == CRAB && position.y - coll->rect.h > App->entity_manager->GetPlayer()->position.y - coll->rect.h)
 		return false;

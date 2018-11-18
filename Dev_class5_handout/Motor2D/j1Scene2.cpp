@@ -49,7 +49,6 @@ bool j1Scene2::Start()
 
 	RELEASE_ARRAY(data);
 
-	App->entity_manager->GetPlayer()->position = { App->map->data.player_properties.Get("playerPosition.x"), App->map->data.player_properties.Get("playerPosition.y") };
 	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };
 
 	pugi::xml_parse_result result = entities_files.load_file(path.GetString());
@@ -61,6 +60,7 @@ bool j1Scene2::Start()
 
 	App->entity_manager->LoadPlayer();
 	App->entity_manager->LoadEnemies(entities_files);
+
 	return ret;
 }
 
@@ -139,5 +139,6 @@ void j1Scene2::LoadLevel()
 {
 	App->map->Load(map_path.GetString());
 	App->audio->PlayMusic(music_path.GetString());
-	//App->player->state = AIR_STATE;
+
+	App->entity_manager->Start();
 }

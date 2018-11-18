@@ -12,19 +12,17 @@
 	<pathfinding />
 	<entityManager>
 		<player>
-			<position x="211.550064" y="219" />
-			<velocity x="0" y="3.96000004" />
+			<position x="371.10022" y="209" />
+			<velocity x="0" y="4.0800004" />
 			<state value="STATE_IDLE" />
 		</player>
-		<enemies>
-			<entity_crab x="130" y="194.960007" />
-		</enemies>
+		<enemies />
 	</entityManager>
 	<fadetoblack>
-		<scene id="1" />
+		<scene id="2" />
 	</fadetoblack>
 	<collision />
 	<renderer>
-		<camera x="-378" y="-150" />
+		<camera x="-857" y="-265" />
 	</renderer>
 </game_state>

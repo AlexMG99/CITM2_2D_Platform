@@ -55,7 +55,6 @@ bool j1Entity_Bat::Entity_PreUpdate(float dt)
 
 void j1Entity_Bat::FollowPath(float dt)
 {
-	iPoint bat_pos = App->map->WorldToMap(position.x, position.y);
 
 	if (pathfinding_path.Count() > 1)
 	{

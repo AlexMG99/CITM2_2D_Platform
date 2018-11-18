@@ -75,10 +75,6 @@ void j1Entity_Crab::FollowPath(float dt)
 	{
 		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * acceleration.x;
 	}
-	else
-	{
-		velocity.x = 0;
-	}
 
 }
 
