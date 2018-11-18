@@ -1,15 +1,23 @@
 <?xml version="1.0"?>
 
 <entityManager>
-  
+
   <bats>
-   
+    <bat>
+      <position x="1204" y="115"/>
+    </bat>
+    <bat>
+      <position x="2453" y="75"/>
+    </bat>
   </bats>
-  
+
   <crabs>
-    <crab>
-      <position x="130" y="150"/>
-    </crab>
+  <crab>
+    <position x="320" y="153"/>
+  </crab>
+  <crab>
+    <position x="1034" y="182"/>
+  </crab>
   </crabs>
 
 </entityManager>

@@ -3,7 +3,7 @@
 #include "j1App.h"
 #include "j1Pathfinding.h"
 
-//#include "Brofiler/Brofiler.h"
+#include "Brofiler/Brofiler.h"
 
 j1PathFinding::j1PathFinding() : j1Module(), map(NULL), last_path(DEFAULT_PATH_LENGTH),width(0), height(0)
 {
@@ -206,6 +206,7 @@ int PathNode::CalculateF(const iPoint& destination)
 // ----------------------------------------------------------------------------------
 int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination, Entity_Type type)
 {
+	BROFILER_CATEGORY("CreatePath", Profiler::Color::LawnGreen);
 	// TODO 1: if origin or destination are not walkable, return -1
 	if (!IsWalkable(origin) || !IsWalkable(destination))
 	{
@@ -220,7 +221,8 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination, E
 	bool findDestination = false;
 	while (open.list.count() > 0 && !findDestination)
 	{
-		// TODO 3: Move the lowest score cell from open list to the closed list --DONE
+		//Move the lowest score cell from open list to the closed list --DONE
+
 		p2List_item<PathNode>* lowerNode = open.GetNodeLowestScore();
 		p2List_item<PathNode>* currNode = close.list.add(lowerNode->data);
 		open.list.del(lowerNode);
@@ -231,14 +233,16 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination, E
 			break;
 		}
 
-		// TODO 5: Fill a list of all adjancent nodes
+		//Fill a list of all adjancent nodes
+
 		PathList neighbours;
 		if(type == BAT)
 			currNode->data.FindFlyableAdjacents(neighbours);
 		else if (type == CRAB)
 			currNode->data.FindWalkableAdjacents(neighbours);
 
-		// TODO 6: Iterate adjancent nodes:
+		//Iterate adjancent nodes:
+
 		// ignore nodes in the closed list
 		// If it is NOT found, calculate its F and add it to the open list
 		// If it is already in the open list, check if it is a better path (compare G)
@@ -261,13 +265,14 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination, E
 			{
 				openItem->data.parent = &currNode->data;
 			}
+
 			// If it is already in the open list, check if it is a better path (compare G)
 			// If it is a better path, Update the parent
 		}
 
 	}
 
-	// TODO 4: If we just added the destination, we are done!
+	//If we just added the destination, we are done!
 	// Backtrack to create the final path
 	// Use the Pathnode::parent and Flip() the path when you are finish
 	if (findDestination)
