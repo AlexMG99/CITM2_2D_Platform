@@ -86,7 +86,6 @@ bool j1Scene2::Update(float dt)
 
 	if (App->entity_manager->GetPlayer()->position.y > (App->win->GetWidth() / App->win->GetScale()) / 4 && App->entity_manager->GetPlayer()->position.y < (App->map->data.player_properties.Get("camera_limit.y") - App->win->GetHeight() / 4))
 	{
-		LOG("%f", App->map->data.player_properties.Get("camera_limit.y"));
 		App->render->camera.y = -App->entity_manager->GetPlayer()->position.y*App->win->GetScale() + App->win->GetWidth() / 4;
 	}
 

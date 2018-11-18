@@ -141,7 +141,6 @@ void j1Scene::LoadLevel()
 {
 	App->map->Load(map_path.GetString());
 	App->audio->PlayMusic(music_path.GetString());
-	//App->player->state = AIR_STATE;
 }
 
 

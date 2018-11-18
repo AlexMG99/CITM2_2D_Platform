@@ -77,23 +77,15 @@ bool j1Entity::Entity_Update(float dt)
 	return true;
 };
 
-bool j1Entity::Load(pugi::xml_node& entity_node)
-{
-	return true;
-}
-
-bool j1Entity::Save(pugi::xml_node & node) const
-{
-	return true;
-}
-
 bool j1Entity::CalculatePath()
 {
 	bool ret = false;
-	iPoint origin = App->map->WorldToMap(position.x, position.y);
+	iPoint origin = { 0,0 };
+	if(type == BAT) origin = App->map->WorldToMap(position.x + coll->rect.w, position.y + coll->rect.h);
+	else if (type == CRAB) origin = App->map->WorldToMap(position.x, position.y );
 	iPoint player_position = App->map->WorldToMap(App->entity_manager->GetPlayer()->position.x, App->entity_manager->GetPlayer()->position.y - App->entity_manager->GetPlayer()->coll->rect.h);
 
-	if (type == CRAB && position.y > App->entity_manager->GetPlayer()->position.y) 
+	if (type == CRAB && position.y - coll->rect.h > App->entity_manager->GetPlayer()->position.y - coll->rect.h)
 		return false;
 
 	if (App->entity_manager->GetPlayer()->state != STATE_DEATH && position.DistanceTo(App->entity_manager->GetPlayer()->position) < RANG)

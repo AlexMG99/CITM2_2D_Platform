@@ -18,6 +18,11 @@ j1Entity_Player::j1Entity_Player() :j1Entity("player")
 
 j1Entity_Player::~j1Entity_Player()
 {
+	if (player_tex != nullptr)
+	{
+		App->tex->UnLoad(player_tex);
+		player_tex = nullptr;
+	}
 }
 
 bool j1Entity_Player::Entity_Start(const char* entity_name)

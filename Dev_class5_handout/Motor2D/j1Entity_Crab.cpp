@@ -17,8 +17,6 @@ j1Entity_Crab::j1Entity_Crab() : j1Entity("crab")
 
 	coll = App->collision->AddCollider({ -100, -100, 28, 28 }, COLLIDER_ENEMY, App->entity_manager);
 	
-	
-
 }
 
 //Destructor
@@ -40,6 +38,7 @@ bool j1Entity_Crab::Entity_PreUpdate(float dt)
 		{
 			StandardPath();
 		}
+
 		velocity.x = 0;
 		
 	}
@@ -48,6 +47,17 @@ bool j1Entity_Crab::Entity_PreUpdate(float dt)
 		/*counting = false;*/
 		FollowPath(dt);
 	}
+
+	if (App->entity_manager->GetPlayer()->position.x < position.x)
+	{
+		flipX = SDL_FLIP_NONE;
+	}
+	else
+	{
+		flipX = SDL_FLIP_HORIZONTAL;
+	}
+
+	position.x += velocity.x * dt;
 
 	return true;
 }
@@ -62,16 +72,9 @@ void j1Entity_Crab::FollowPath(float dt)
 	{
 		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * 60;
 	}
-
-	if (App->entity_manager->GetPlayer()->position.x < position.x)
-	{
-		flipX = SDL_FLIP_NONE;
-		position.x += velocity.x * dt;
-	}
 	else
 	{
-		flipX = SDL_FLIP_HORIZONTAL;
-		position.x += -velocity.x * dt;
+		velocity.x = 0;
 	}
 
 }

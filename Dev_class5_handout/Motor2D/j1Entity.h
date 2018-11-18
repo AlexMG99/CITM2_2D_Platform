@@ -57,13 +57,6 @@ public:
 	//Called every loop iteration
 	virtual bool Entity_Update(float dt);
 
-
-	//Load Game State
-	bool Load(pugi::xml_node& node);
-
-	//Save Game State
-	bool Save(pugi::xml_node& node) const;
-
 	//Check Collision
 	virtual void Entity_Collision(Collider* c2) ;
 

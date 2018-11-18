@@ -149,6 +149,7 @@ bool j1Map::CleanUp()
 	while(item != NULL)
 	{
 		App->tex->UnLoad(item->data->texture);
+		item->data->texture = nullptr;
 		RELEASE(item->data);
 		item = item->next;
 	}

@@ -87,6 +87,18 @@ bool j1Entity_Manager::CleanUp()
 		entity = entity->next;
 	}
 
+	if (graphics != nullptr)
+	{
+		App->tex->UnLoad(graphics);
+		graphics = nullptr;
+	}
+
+	if (debug_tex != nullptr)
+	{
+		App->tex->UnLoad(debug_tex);
+		debug_tex = nullptr;
+	}
+
 	entities.clear();
 
 	return true;
@@ -147,10 +159,20 @@ void j1Entity_Manager::LoadPlayer()
 
 bool j1Entity_Manager::Load(pugi::xml_node & entity_node)
 {
-	CleanUp();
+	p2List_item<j1Entity*>* entity;
+	entity = entities.start;
+
+	while (entity != NULL)
+	{
+		RELEASE(entity->data);
+		entity = entity->next;
+	}
+
+	entities.clear();
+
 	LoadPlayer();
 	player->Load(entity_node.child("player"));
-
+	
 	for (pugi::xml_node crab = entity_node.child("enemies").child("entity_crab"); crab; crab = crab.next_sibling("entity_crab"))
 	{
 		CreateEntity(CRAB, crab.attribute("x").as_float(), crab.attribute("y").as_float());

@@ -59,6 +59,11 @@ void j1Entity_Bat::FollowPath(float dt)
 		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * 70;
 		velocity.y = (pathfinding_path[1].y - pathfinding_path[0].y) * 70;
 	}
+	else
+	{
+		velocity.x = 0;
+		velocity.y = 0;
+	}
 
 	position.x += velocity.x * dt;
 	position.y += velocity.y * dt;
