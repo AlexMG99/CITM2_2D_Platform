@@ -17,6 +17,9 @@ j1Entity_Crab::j1Entity_Crab() : j1Entity("crab")
 
 	coll = App->collision->AddCollider({ -100, -100, 28, 28 }, COLLIDER_ENEMY, App->entity_manager);
 	
+	acceleration = { App->map->data.player_properties.Get("enemyAcceleration"), App->map->data.player_properties.Get("enemyAcceleration") };
+
+	fly = false;
 }
 
 //Destructor
@@ -44,7 +47,7 @@ bool j1Entity_Crab::Entity_PreUpdate(float dt)
 	}
 	else
 	{
-		/*counting = false;*/
+		counting = false;
 		FollowPath(dt);
 	}
 
@@ -70,7 +73,7 @@ void j1Entity_Crab::FollowPath(float dt)
 
 	if (pathfinding_path.Count() > 1)
 	{
-		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * 60;
+		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * acceleration.x;
 	}
 	else
 	{

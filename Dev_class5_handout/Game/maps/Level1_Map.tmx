@@ -5,6 +5,7 @@
   <property name="acceleration.y" type="float" value="-120"/>
   <property name="camera.x" type="int" value="0"/>
   <property name="camera.y" type="int" value="-150"/>
+  <property name="enemyAcceleration" type="float" value="60"/>
   <property name="playerPosition.x" type="float" value="80"/>
   <property name="playerPosition.y" type="float" value="146"/>
  </properties>
@@ -19126,19 +19127,7 @@
  </objectgroup>
  <layer id="8" name="Pathfinding" width="190" height="20">
   <properties>
-   <property name="Bat1Position.x" type="float" value="190"/>
-   <property name="Bat1Position.y" type="float" value="156"/>
-   <property name="Crab1Position.x" type="float" value="290"/>
-   <property name="Crab1Position.y" type="float" value="156"/>
    <property name="Navigation" type="int" value="1"/>
-   <property name="batcoll.h" type="float" value="30"/>
-   <property name="batcoll.w" type="float" value="31"/>
-   <property name="batcoll.x" type="float" value="0"/>
-   <property name="batcoll.y" type="float" value="0"/>
-   <property name="crabcoll.h" type="float" value="28"/>
-   <property name="crabcoll.w" type="float" value="28"/>
-   <property name="crabcoll.x" type="float" value="0"/>
-   <property name="crabcoll.y" type="float" value="0"/>
    <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
   </properties>

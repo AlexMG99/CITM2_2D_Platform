@@ -141,6 +141,8 @@ void j1Scene::LoadLevel()
 {
 	App->map->Load(map_path.GetString());
 	App->audio->PlayMusic(music_path.GetString());
+
+	App->entity_manager->Start();
 }
 
 

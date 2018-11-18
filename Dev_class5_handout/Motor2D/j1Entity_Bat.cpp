@@ -17,6 +17,8 @@ j1Entity_Bat::j1Entity_Bat() : j1Entity("bat")
 
 	coll = App->collision->AddCollider({ -200,-100, 30, 26 }, COLLIDER_ENEMY, App->entity_manager);
 
+	acceleration = { App->map->data.player_properties.Get("enemyAcceleration"), App->map->data.player_properties.Get("enemyAcceleration") };
+	
 	fly = true;
 
 }
@@ -44,6 +46,7 @@ bool j1Entity_Bat::Entity_PreUpdate(float dt)
 	}
 	else
 	{
+		counting = false;
 		FollowPath(dt);
 	}
 
@@ -56,8 +59,8 @@ void j1Entity_Bat::FollowPath(float dt)
 
 	if (pathfinding_path.Count() > 1)
 	{
-		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * 70;
-		velocity.y = (pathfinding_path[1].y - pathfinding_path[0].y) * 70;
+		velocity.x = (pathfinding_path[1].x - pathfinding_path[0].x) * acceleration.x;
+		velocity.y = (pathfinding_path[1].y - pathfinding_path[0].y) * acceleration.y;
 	}
 	else
 	{
@@ -67,6 +70,7 @@ void j1Entity_Bat::FollowPath(float dt)
 
 	position.x += velocity.x * dt;
 	position.y += velocity.y * dt;
+
 }
 
 void j1Entity_Bat::StandardPath()

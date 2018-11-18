@@ -29,6 +29,7 @@ j1Entity::j1Entity(const char* entity_name)
 	run_anim = LoadAnimation("run", entity_name);
 	fall_anim = LoadAnimation("fall", entity_name);
 	death_anim = LoadAnimation("death", entity_name);
+
     state = STATE_IDLE;
 	
 }
@@ -54,7 +55,7 @@ bool j1Entity::Entity_Update(float dt)
 
 	if (!fly)
 	{
-		velocity.y = -acceleration.y * dt;
+		velocity.y = acceleration.y * dt;
 		position.y += velocity.y;
 	}
 
