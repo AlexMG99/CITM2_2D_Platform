@@ -1045,10 +1045,10 @@
    <tile gid="26"/>
    <tile gid="27"/>
    <tile gid="28"/>
-   <tile gid="29"/>
-   <tile gid="30"/>
-   <tile gid="31"/>
-   <tile gid="32"/>
+   <tile gid="200"/>
+   <tile gid="201"/>
+   <tile gid="202"/>
+   <tile gid="217"/>
    <tile gid="33"/>
    <tile gid="34"/>
    <tile gid="35"/>
@@ -2514,9 +2514,9 @@
    <tile gid="350"/>
    <tile gid="351"/>
    <tile gid="352"/>
-   <tile gid="353"/>
-   <tile gid="354"/>
-   <tile gid="355"/>
+   <tile gid="201"/>
+   <tile gid="202"/>
+   <tile gid="217"/>
    <tile gid="356"/>
    <tile gid="357"/>
    <tile gid="358"/>
@@ -2704,9 +2704,9 @@
    <tile gid="367"/>
    <tile gid="368"/>
    <tile gid="369"/>
-   <tile gid="370"/>
-   <tile gid="371"/>
-   <tile gid="372"/>
+   <tile gid="217"/>
+   <tile gid="217"/>
+   <tile gid="217"/>
    <tile gid="373"/>
    <tile gid="374"/>
    <tile gid="375"/>
@@ -2755,10 +2755,10 @@
    <tile gid="179"/>
    <tile gid="180"/>
    <tile gid="181"/>
-   <tile gid="182"/>
+   <tile gid="217"/>
    <tile gid="183"/>
    <tile gid="184"/>
-   <tile gid="185"/>
+   <tile gid="217"/>
    <tile gid="186"/>
    <tile gid="187"/>
    <tile gid="188"/>
@@ -2894,10 +2894,10 @@
    <tile gid="10"/>
    <tile gid="11"/>
    <tile gid="12"/>
-   <tile gid="13"/>
-   <tile gid="14"/>
-   <tile gid="15"/>
-   <tile gid="16"/>
+   <tile gid="31"/>
+   <tile gid="217"/>
+   <tile gid="31"/>
+   <tile gid="29"/>
    <tile gid="17"/>
    <tile gid="18"/>
    <tile gid="19"/>
@@ -2945,8 +2945,8 @@
    <tile gid="10"/>
    <tile gid="11"/>
    <tile gid="12"/>
-   <tile gid="13"/>
-   <tile gid="14"/>
+   <tile gid="217"/>
+   <tile gid="217"/>
    <tile gid="15"/>
    <tile gid="16"/>
    <tile gid="17"/>
@@ -3086,7 +3086,7 @@
    <tile gid="29"/>
    <tile gid="30"/>
    <tile gid="31"/>
-   <tile gid="32"/>
+   <tile gid="29"/>
    <tile gid="33"/>
    <tile gid="34"/>
    <tile gid="35"/>
@@ -3135,8 +3135,8 @@
    <tile gid="27"/>
    <tile gid="28"/>
    <tile gid="29"/>
-   <tile gid="30"/>
-   <tile gid="31"/>
+   <tile gid="217"/>
+   <tile gid="217"/>
    <tile gid="32"/>
    <tile gid="33"/>
    <tile gid="34"/>
@@ -3325,9 +3325,9 @@
    <tile gid="44"/>
    <tile gid="45"/>
    <tile gid="46"/>
-   <tile gid="47"/>
-   <tile gid="48"/>
-   <tile gid="49"/>
+   <tile gid="217"/>
+   <tile gid="217"/>
+   <tile gid="217"/>
    <tile gid="50"/>
    <tile gid="51"/>
    <tile gid="52"/>
@@ -3826,7 +3826,7 @@
    <tile gid="185"/>
   </data>
  </layer>
- <layer name="Background_Wall" width="190" height="20">
+ <layer name="Background_Wall" width="190" height="20" visible="0">
   <properties>
    <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
@@ -7634,7 +7634,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="Lava_Platforms" width="190" height="20">
+ <layer name="Lava_Platforms" width="190" height="20" visible="0">
   <properties>
    <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
@@ -11442,7 +11442,7 @@
    <tile gid="413"/>
   </data>
  </layer>
- <layer name="Tiles" width="190" height="20">
+ <layer name="Tiles" width="190" height="20" visible="0">
   <properties>
    <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
@@ -15250,7 +15250,7 @@
    <tile gid="429"/>
   </data>
  </layer>
- <layer name="Front_Objects" width="190" height="20">
+ <layer name="Front_Objects" width="190" height="20" visible="0">
   <properties>
    <property name="draw" type="int" value="1"/>
    <property name="parallax_speed" type="float" value="1"/>
@@ -19058,7 +19058,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Colliders">
+ <objectgroup name="Colliders" visible="0">
   <object id="3" name="GROUND" type="GROUND_COLLIDER" x="160" y="82" width="1002.67" height="15"/>
   <object id="4" name="GROUND" type="GROUND_COLLIDER" x="243.939" y="183" width="157.228" height="117.667"/>
   <object id="5" name="GROUND" type="GROUND_COLLIDER" x="584" y="164.5" width="88.5" height="38.5"/>
@@ -19114,7 +19114,7 @@
    <polyline points="0,0 6,-4.33333"/>
   </object>
  </objectgroup>
- <objectgroup name="Logic Collisions">
+ <objectgroup name="Logic Collisions" visible="0">
   <object id="47" name="DEATH" type="DEATH_COLLIDER" x="404" y="208.667" width="187.667" height="44.0833"/>
   <object id="120" name="DEATH" type="DEATH_COLLIDER" x="684.5" y="271" width="402" height="47"/>
   <object id="134" name="DEATH" type="DEATH_COLLIDER" x="1474" y="288.5" width="226" height="31.5"/>
@@ -19125,7 +19125,7 @@
   <object id="186" name="DEATH" type="DEATH_COLLIDER" x="2850.33" y="288.667" width="114.167" height="13.3333"/>
   <object id="194" name="WIN" type="WIN_COLLIDER" x="3013" y="48.75" width="26.25" height="51"/>
  </objectgroup>
- <layer name="Pathfinding" width="190" height="20">
+ <layer name="Pathfinding" width="190" height="20" visible="0">
   <properties>
    <property name="Navigation" type="int" value="1"/>
    <property name="draw" type="int" value="0"/>

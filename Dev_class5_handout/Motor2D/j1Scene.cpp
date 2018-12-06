@@ -12,6 +12,11 @@
 #include "j1Entity.h"
 #include "j1Entity_Manager.h"
 #include "j1FadeToBlack.h"
+#include "j1Gui.h"
+#include "UI_GUI.h"
+#include "UI_Button.h"
+#include "UI_Label.h"
+#include "UI_Sprite.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
 
@@ -42,6 +47,12 @@ bool j1Scene::Start()
 {
 	bool ret = true;
 	LoadLevel();
+
+	//App->gui->gui_list.add(App->gui->CreateSprite((App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2, App->render->camera.y + 50, SDL_Rect({ 485, 829, 328, 103 })));
+	// Normal Button App->gui->gui_list.add(App->gui->CreateButton((App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2, App->render->camera.y + 50, SDL_Rect({ 0,113,229,69 })));
+	// Bright Button: App->gui->gui_list.add(App->gui->CreateButton((App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2, App->render->camera.y + 50, SDL_Rect({ 411,169,229,69 })));
+	//App->gui->gui_list.add(App->gui->CreateButton((App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2, App->render->camera.y + 50, SDL_Rect({ 642,169,229,69 })));
+	//App->gui->gui_list.add(App->gui->CreateLabel(30, 30, "BONDIA", { 0,255,0,0 }));
 
 	//Create WalkabilityMap
 	int w, h;
