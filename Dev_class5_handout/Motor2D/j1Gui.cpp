@@ -13,7 +13,7 @@
 #include "UI_Button.h"
 
 #include "SDL/include/SDL.h"
-#include "SDL_ttf/include/SDL_ttf.h"
+
 
 
 j1Gui::j1Gui() : j1Module()
@@ -97,6 +97,7 @@ UI_GUI* j1Gui::CreateSprite(int x, int y, SDL_Rect rect)
 
 	return sprite;
 }
+
 UI_GUI*j1Gui::CreateButton(int x, int y, SDL_Rect rect)
 {
 	UI_GUI* button = nullptr;

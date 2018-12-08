@@ -21,7 +21,7 @@
   </window>
 
   <gui>
-    <atlas file="gui/atlas.png"/>
+    <atlas file="gui/UI_spritesheet.png"/>
   </gui>
 
   <entityManager>
@@ -33,6 +33,10 @@
   <map>
     <folder>maps/</folder>
   </map>
+
+  <scene_menu>
+    <map path="Intro_Map.tmx"/>
+  </scene_menu>
 
   <scene>
     <path>entities_file_scene1.xml</path>

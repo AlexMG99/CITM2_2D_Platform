@@ -4,6 +4,8 @@
 #include "j1Module.h"
 #include "p2List.h"
 
+#include "SDL/include/SDL.h"
+
 #define CURSOR_WIDTH 2
 
 struct UI_GUI;
