@@ -20,6 +20,10 @@
     <fullscreen_window value="false"/>
   </window>
 
+  <gui>
+    <atlas file="gui/atlas.png"/>
+  </gui>
+
   <entityManager>
     <fx_death>fx/player_death_fx.wav</fx_death>
     <fx_jump>fx/player_jump.wav</fx_jump>

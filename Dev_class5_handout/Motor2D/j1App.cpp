@@ -9,6 +9,7 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Audio.h"
+#include "j1SceneMenu.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
 #include "j1Map.h"
@@ -38,6 +39,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	render = new j1Render();
 	tex = new j1Textures();
 	audio = new j1Audio();
+	scene_menu = new j1SceneMenu();
 	scene = new j1Scene();
 	scene2 = new j1Scene2();
 	map = new j1Map();
@@ -54,10 +56,13 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(scene);
-	AddModule(scene2);
 	AddModule(map);
 	AddModule(pathfinding);
+	AddModule(font);
+	AddModule(gui);
+	AddModule(scene_menu);
+	AddModule(scene);
+	AddModule(scene2);
 	AddModule(entity_manager);
 	AddModule(fadeToBlack);
 	AddModule(collision);

@@ -13,6 +13,7 @@ class j1Input;
 class j1Render;
 class j1Textures;
 class j1Audio;
+class j1SceneMenu;
 class j1Scene;
 class j1Scene2;
 class j1Map;
@@ -91,6 +92,7 @@ public:
 	j1Render*			render;
 	j1Textures*			tex;
 	j1Audio*			audio;
+	j1SceneMenu*		scene_menu;
 	j1Scene*			scene;
 	j1Scene2*			scene2;
 	j1Entity_Manager*   entity_manager;

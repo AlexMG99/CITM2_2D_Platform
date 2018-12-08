@@ -100,6 +100,7 @@
     <ClCompile Include="j1Textures.cpp" />
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="j1SceneMenu.cpp" />
     <ClCompile Include="UI_Button.cpp" />
     <ClCompile Include="UI_GUI.cpp" />
     <ClCompile Include="UI_Label.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="p2SString.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="j1SceneMenu.h" />
     <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_GUI.h" />
     <ClInclude Include="UI_Label.h" />

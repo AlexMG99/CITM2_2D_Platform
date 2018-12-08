@@ -40,8 +40,6 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
-
-	//CreateLabel(50, 50, "Hola, que tal la vida", { 150,30,90,255 });
 	return true;
 }
 
@@ -86,8 +84,6 @@ UI_GUI* j1Gui::CreateLabel(int x, int y, const char * text, SDL_Color color)
 	label->pos_y = y;
 	label->type = LABEL;
 
-	/*gui_list.add(label);*/
-
 	return label;
 }
 
@@ -98,8 +94,6 @@ UI_GUI* j1Gui::CreateSprite(int x, int y, SDL_Rect rect)
 	sprite->pos_x = x;
 	sprite->pos_y = y;
 	sprite->type = SPRITE;
-
-	/*gui_list.add(sprite);*/
 
 	return sprite;
 }
