@@ -21,15 +21,10 @@ bool UI_Label::Start()
 
 bool UI_Label::PostUpdate()
 {
-	Draw();
+	App->render->Blit(tex, pos_x, pos_y);
 	return true;
 }
 
 void UI_Label::OnHover()
 {
-}
-
-void UI_Label::Draw()const
-{
-	App->render->Blit(tex, pos_x, pos_y);
 }

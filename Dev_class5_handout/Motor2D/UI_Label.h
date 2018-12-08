@@ -14,7 +14,6 @@ public:
 	bool Start();
 	bool PostUpdate();
 	void OnHover();
-	void Draw() const;
 
 private:
 	p2SString label_text;

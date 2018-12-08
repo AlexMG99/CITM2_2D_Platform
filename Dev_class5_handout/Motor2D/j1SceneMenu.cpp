@@ -38,7 +38,10 @@ bool j1SceneMenu::Start()
 	App->render->camera = { -1100,0 };
 	LoadLevel();
 
-	App->gui->gui_list.add(App->gui->CreateButton(0, 0, SDL_Rect({ 24,5,174,38 })));
+	App->gui->gui_list.add(App->gui->CreateButton(410, 95, SDL_Rect({ 4,5,176,40 })));
+	App->gui->gui_list.add(App->gui->CreateButton(420, 145, SDL_Rect({ 182,5,176,40 })));
+	App->gui->gui_list.add(App->gui->CreateButton(430, 195, SDL_Rect({ 182,49,176,40 })));
+	App->gui->gui_list.add(App->gui->CreateSprite(385, 13, { 2,93,243,75 }));
 	App->gui->gui_list.add(App->gui->CreateLabel(400, 17, "Trinity's", { 0,0,0,0 }));
 	App->gui->gui_list.add(App->gui->CreateLabel(410, 50, "Journey", { 0,0,0,0 }));
 

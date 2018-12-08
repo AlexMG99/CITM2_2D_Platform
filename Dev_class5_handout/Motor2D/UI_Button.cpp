@@ -13,7 +13,7 @@ UI_Button::UI_Button(SDL_Rect rect)
 
 bool UI_Button::PostUpdate()
 {
-	Draw();
+	App->render->Blit(App->gui->GetAtlas(), pos_x, pos_y, &button_rect);
 	return true;
 }
 void UI_Button::OnHover()
@@ -23,10 +23,6 @@ void UI_Button::OnClick()
 {
 }
 
-void UI_Button::Draw() const
-{
-	App->render->Blit(App->gui->GetAtlas(), pos_x, pos_y, &button_rect);
-};
 
 
 

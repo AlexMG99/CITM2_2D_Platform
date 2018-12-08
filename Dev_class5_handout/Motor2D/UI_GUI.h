@@ -23,7 +23,6 @@ public:
 
 	virtual void OnClick() {};
 	virtual void OnHover() {};
-	virtual void Draw() {};
 
 
 

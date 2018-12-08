@@ -11,7 +11,6 @@ public:
 	bool PostUpdate();
 	void OnHover();
 	void OnClick();
-	void Draw()const;
 
 private:
 	SDL_Rect button_rect;

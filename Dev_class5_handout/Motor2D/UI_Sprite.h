@@ -12,7 +12,6 @@ public:
 	~UI_Sprite() {};
 
 	bool PostUpdate();
-	void Draw() const;
 
 private:
 	SDL_Rect sprite_rect;
