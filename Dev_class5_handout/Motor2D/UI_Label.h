@@ -11,6 +11,7 @@ public:
 	UI_Label(const char* text, SDL_Color color);
 	~UI_Label() {};
 
+	bool Start();
 	bool PostUpdate();
 	void OnHover();
 	void Draw() const;

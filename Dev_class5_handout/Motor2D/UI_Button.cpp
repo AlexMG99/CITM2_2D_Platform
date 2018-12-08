@@ -22,7 +22,6 @@ void UI_Button::OnHover()
 void UI_Button::OnClick()
 {
 }
-;
 
 void UI_Button::Draw() const
 {

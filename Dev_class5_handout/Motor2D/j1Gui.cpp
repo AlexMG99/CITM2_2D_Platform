@@ -40,6 +40,14 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
+
+	p2List_item<UI_GUI*>* item_gui = gui_list.start;
+	while (item_gui != nullptr)
+	{
+		item_gui->data->Start();
+		item_gui = item_gui->next;
+	}
+
 	return true;
 }
 

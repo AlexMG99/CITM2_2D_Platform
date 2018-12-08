@@ -17,7 +17,7 @@ public:
 	UI_GUI() {};
 	~UI_GUI() {};
 
-	bool Start();
+	virtual bool Start() { return true; };
 	bool PreUpdate();
 	virtual bool PostUpdate() { return true; };
 

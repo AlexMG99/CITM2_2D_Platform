@@ -7,6 +7,7 @@
 #include "UI_GUI.h"
 #include "j1Render.h"
 #include "j1Map.h"
+#include "j1Fonts.h"
 
 #include "Brofiler/Brofiler.h"
 #include "SDL/include/SDL.h"
@@ -34,14 +35,14 @@ bool j1SceneMenu::Awake(pugi::xml_node& config)
 bool j1SceneMenu::Start()
 {
 	bool ret = true;
-	App->render->camera = { -336*2,0 };
+	App->render->camera = { -1100,0 };
 	LoadLevel();
 
-	//App->gui->gui_list.add(App->gui->CreateSprite((App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2, App->render->camera.y + 50, SDL_Rect({ 485, 829, 328, 103 })));
 	App->gui->gui_list.add(App->gui->CreateButton(0, 0, SDL_Rect({ 24,5,174,38 })));
-	// Bright Button: App->gui->gui_list.add(App->gui->CreateButton((App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2, App->render->camera.y + 50, SDL_Rect({ 411,169,229,69 })));
-	//App->gui->gui_list.add(App->gui->CreateButton((App->render->camera.x) + (App->render->camera.w / 2) - 328 / 2, App->render->camera.y + 50, SDL_Rect({ 642,169,229,69 })));
-	App->gui->gui_list.add(App->gui->CreateLabel(30, 30, "BONDIA", { 0,255,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel(400, 17, "Trinity's", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel(410, 50, "Journey", { 0,0,0,0 }));
+
+	App->font->title = App->font->Load("fonts/04B_30__.ttf", 34);
 	return ret;
 }
 
