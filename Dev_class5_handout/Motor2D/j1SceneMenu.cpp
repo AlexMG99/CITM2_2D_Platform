@@ -40,12 +40,23 @@ bool j1SceneMenu::Start()
 
 	App->gui->gui_list.add(App->gui->CreateButton(410, 95, SDL_Rect({ 4,5,176,40 })));
 	App->gui->gui_list.add(App->gui->CreateButton(420, 145, SDL_Rect({ 182,5,176,40 })));
-	App->gui->gui_list.add(App->gui->CreateButton(430, 195, SDL_Rect({ 182,49,176,40 })));
+	/*App->gui->gui_list.add(App->gui->CreateButton(430, 195, SDL_Rect({ 182,49,176,40 })));*/
+	App->gui->gui_list.add(App->gui->CreateButton(370, 224, SDL_Rect({ 5,173,120,28 })));
+	App->gui->gui_list.add(App->gui->CreateButton(660, 215, SDL_Rect({ 259,97,39,39 })));
+
 	App->gui->gui_list.add(App->gui->CreateSprite(385, 13, { 2,93,243,75 }));
+
 	App->gui->gui_list.add(App->gui->CreateLabel(400, 17, "Trinity's", { 0,0,0,0 }));
 	App->gui->gui_list.add(App->gui->CreateLabel(410, 50, "Journey", { 0,0,0,0 }));
+	
 
-	App->font->title = App->font->Load("fonts/04B_30__.ttf", 34);
+	App->gui->gui_list.add(App->gui->CreateLabel(420, 105, "Start Game", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel(429, 147, "Select ", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel(509, 164, "Level", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel(400, 229, "Exit", { 0,0,0,0 }));
+
+	App->font->title = App->font->Load("fonts/04B_30__.ttf", 18);
+	//App->font->title_buttons = App->font->Load("fonts/04B_30__.ttf", 20);
 	return ret;
 }
 
