@@ -1,6 +1,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "p2List.h"
+#include "p2Point.h"
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Textures.h"
@@ -84,34 +85,34 @@ bool j1Gui::CleanUp()
 }
 
 
-UI_GUI* j1Gui::CreateLabel(int x, int y, const char * text, SDL_Color color)
+UI_GUI* j1Gui::CreateLabel(iPoint pos, const char * text, SDL_Color color)
 {
 	UI_GUI* label = nullptr;
 	label = new UI_Label(text, color);
-	label->pos_x = x;
-	label->pos_y = y;
+	label->pos_x = pos.x;
+	label->pos_y = pos.y;
 	label->type = LABEL;
 
 	return label;
 }
 
-UI_GUI* j1Gui::CreateSprite(int x, int y, SDL_Rect rect)
+UI_GUI* j1Gui::CreateSprite(iPoint pos, SDL_Rect rect)
 {
 	UI_GUI* sprite = nullptr;
 	sprite = new UI_Sprite(rect);
-	sprite->pos_x = x;
-	sprite->pos_y = y;
+	sprite->pos_x = pos.x;
+	sprite->pos_y = pos.y;
 	sprite->type = SPRITE;
 
 	return sprite;
 }
 
-UI_GUI*j1Gui::CreateButton(int x, int y, SDL_Rect rect)
+UI_GUI*j1Gui::CreateButton(iPoint pos, SDL_Rect rect, const char* text)
 {
 	UI_GUI* button = nullptr;
-	button = new UI_Button(rect);
-	button->pos_x = x;
-	button->pos_y = y;
+	button = new UI_Button(rect, text);
+	button->pos_x = pos.x;
+	button->pos_y = pos.y;
 	button->type = BUTTON;
 
 	return button;

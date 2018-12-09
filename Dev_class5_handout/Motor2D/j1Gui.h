@@ -3,12 +3,14 @@
 
 #include "j1Module.h"
 #include "p2List.h"
+#include "p2Point.h"
 
 #include "SDL/include/SDL.h"
 
 #define CURSOR_WIDTH 2
 
 struct UI_GUI;
+
 
 // TODO 1: Create your structure of classes
 
@@ -40,9 +42,9 @@ public:
 	// TODO 2: Create the factory methods
 	// Gui creation functions
 
-	UI_GUI* CreateLabel(int x, int y, const char* text, SDL_Color color);
-	UI_GUI* CreateSprite(int x, int y, SDL_Rect rect);
-	UI_GUI* CreateButton(int x, int y, SDL_Rect rect);
+	UI_GUI* CreateLabel(iPoint pos, const char* text, SDL_Color color = {0,0,0,0});
+	UI_GUI* CreateSprite(iPoint pos, SDL_Rect rect);
+	UI_GUI* CreateButton(iPoint pos, SDL_Rect rect, const char* text = "");
 
 	SDL_Texture* GetAtlas() const;
 	p2List<UI_GUI*> gui_list;

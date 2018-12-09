@@ -5,11 +5,18 @@
 #include "j1Gui.h"
 
 
-UI_Button::UI_Button(SDL_Rect rect)
+UI_Button::UI_Button(SDL_Rect rect, const char* text)
 {
 	button_rect = rect;
+	button_text.create(text);
+}
 
-};
+bool UI_Button::Start()
+{
+	if (button_text.Length() > 0)
+		App->gui->gui_list.add(App->gui->CreateLabel({ pos_x + 10, pos_y + 5 }, button_text.GetString()));
+	return true;
+}
 
 bool UI_Button::PostUpdate()
 {

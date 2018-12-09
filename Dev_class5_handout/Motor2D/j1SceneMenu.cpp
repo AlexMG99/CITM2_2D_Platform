@@ -38,31 +38,28 @@ bool j1SceneMenu::Start()
 	App->render->camera = { -1100,0 };
 	LoadLevel();
 
-	App->gui->gui_list.add(App->gui->CreateButton(410, 95, SDL_Rect({ 4,5,176,40 })));
-	App->gui->gui_list.add(App->gui->CreateButton(420, 145, SDL_Rect({ 182,5,176,40 })));
+	App->gui->gui_list.add(App->gui->CreateButton({ 410, 95 }, SDL_Rect({ 4,5,176,40 }), "Start Game"));
+	App->gui->gui_list.add(App->gui->CreateButton({ 420, 145 }, SDL_Rect({ 182,5,176,40 })));
 	/*App->gui->gui_list.add(App->gui->CreateButton(430, 195, SDL_Rect({ 182,49,176,40 })));*/
-	App->gui->gui_list.add(App->gui->CreateButton(370, 224, SDL_Rect({ 5,173,120,28 })));
-	App->gui->gui_list.add(App->gui->CreateButton(660, 215, SDL_Rect({ 259,97,39,39 })));
+	App->gui->gui_list.add(App->gui->CreateButton({ 370, 224 }, SDL_Rect({ 5,173,120,28 }), "Exit"));
+	App->gui->gui_list.add(App->gui->CreateButton({ 660, 215 }, SDL_Rect({ 259,97,39,39 })));
 
-	App->gui->gui_list.add(App->gui->CreateButton(85, 35, SDL_Rect({ 182,5,176,40 })));
-	App->gui->gui_list.add(App->gui->CreateButton(85, 105, SDL_Rect({ 182,5,176,40 })));
+	App->gui->gui_list.add(App->gui->CreateButton({ 85, 35 }, SDL_Rect({ 182,5,176,40 })));
+	App->gui->gui_list.add(App->gui->CreateButton({ 85, 105 }, SDL_Rect({ 182,5,176,40 })));
 
-	App->gui->gui_list.add(App->gui->CreateButton(280, 215, SDL_Rect({259,149,38,31 })));
-	App->gui->gui_list.add(App->gui->CreateButton(760, 215, SDL_Rect({ 390,149,38,31 })));
+	App->gui->gui_list.add(App->gui->CreateButton({ 280, 215 }, SDL_Rect({ 259,149,38,31 })));
+	App->gui->gui_list.add(App->gui->CreateButton({ 760, 215 }, SDL_Rect({ 390,149,38,31 })));
 
-	App->gui->gui_list.add(App->gui->CreateSprite(385, 13, { 2,93,243,75 }));
+	App->gui->gui_list.add(App->gui->CreateSprite({ 385, 13 }, { 2,93,243,75 }));
 
-	App->gui->gui_list.add(App->gui->CreateLabel(400, 17, "Trinity's", { 0,0,0,0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel(410, 50, "Journey", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 400, 17 }, "Trinity's", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 410, 50 }, "Journey", { 0,0,0,0 }));
 	
+	App->gui->gui_list.add(App->gui->CreateLabel({ 429, 147 }, "Select ", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 509, 164 }, "Level", { 0,0,0,0 }));
 
-	App->gui->gui_list.add(App->gui->CreateLabel(420, 105, "Start Game", { 0,0,0,0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel(429, 147, "Select ", { 0,0,0,0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel(509, 164, "Level", { 0,0,0,0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel(400, 229, "Exit", { 0,0,0,0 }));
-
-	App->gui->gui_list.add(App->gui->CreateLabel(120, 45, "Level 1 ", { 0,0,0,0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel(120, 116, "Level 2 ", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 120, 45 }, "Level 1 ", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 120, 116 }, "Level 2 ", { 0,0,0,0 }));
 
 
 	App->font->title = App->font->Load("fonts/04B_30__.ttf", 18);
