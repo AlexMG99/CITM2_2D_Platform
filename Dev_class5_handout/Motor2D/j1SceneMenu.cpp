@@ -51,6 +51,10 @@ bool j1SceneMenu::Start()
 	App->gui->gui_list.add(App->gui->CreateButton({ 760, 215 }, SDL_Rect({ 390,149,38,31 })));
 
 	App->gui->gui_list.add(App->gui->CreateSprite({ 385, 13 }, { 2,93,243,75 }));
+	App->gui->gui_list.add(App->gui->CreateSprite({ 759, 7 }, { 2,212,283,178 }));
+
+	App->gui->gui_list.add(App->gui->CreateButton({ 775, 20 }, SDL_Rect({ 299,217,92,20 })));
+	
 
 	App->gui->gui_list.add(App->gui->CreateLabel({ 400, 17 }, "Trinity's", { 0,0,0,0 }));
 	App->gui->gui_list.add(App->gui->CreateLabel({ 410, 50 }, "Journey", { 0,0,0,0 }));

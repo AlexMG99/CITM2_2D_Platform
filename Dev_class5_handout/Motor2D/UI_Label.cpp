@@ -5,10 +5,11 @@
 #include "j1Fonts.h"
 
 
-UI_Label::UI_Label(const char* text, SDL_Color color)
+UI_Label::UI_Label(const char* text, SDL_Color color/*, Label_Type type*/)
 {
 	label_text = text;
 	label_color = color;
+	/*label_type = type;*/
 }
 
 

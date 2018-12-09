@@ -5,10 +5,15 @@
 #include "UI_GUI.h"
 #include "SDL/include/SDL.h"
 
+//enum Label_Type {
+//	TITLE,
+//	BUTTON
+//};
+
 class UI_Label : public UI_GUI
 {
 public:
-	UI_Label(const char* text, SDL_Color color);
+	UI_Label(const char* text, SDL_Color color/*, Label_Type type*/);
 	~UI_Label() {};
 
 	bool Start();
@@ -16,6 +21,7 @@ public:
 	void OnHover();
 
 private:
+	/*Label_Type label_type;*/
 	p2SString label_text;
 	SDL_Color label_color = { 0,0,0,255 };
 public:
