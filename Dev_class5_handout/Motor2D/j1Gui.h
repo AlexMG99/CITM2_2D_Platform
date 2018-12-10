@@ -4,7 +4,7 @@
 #include "j1Module.h"
 #include "p2List.h"
 #include "p2Point.h"
-
+#include "UI_Label.h"
 #include "SDL/include/SDL.h"
 
 #define CURSOR_WIDTH 2
@@ -42,7 +42,7 @@ public:
 	// TODO 2: Create the factory methods
 	// Gui creation functions
 
-	UI_GUI* CreateLabel(iPoint pos, const char* text, SDL_Color color = {0,0,0,0});
+	UI_GUI* CreateLabel(iPoint pos, const char* text, Label_Type type, SDL_Color color = {0,0,0,0});
 	UI_GUI* CreateSprite(iPoint pos, SDL_Rect rect);
 	UI_GUI* CreateButton(iPoint pos, SDL_Rect rect, const char* text = "");
 

@@ -6,6 +6,7 @@
 #include "j1Gui.h"
 #include "UI_GUI.h"
 #include "j1Render.h"
+#include "UI_Label.h"
 #include "j1Map.h"
 #include "j1Fonts.h"
 
@@ -53,21 +54,25 @@ bool j1SceneMenu::Start()
 	App->gui->gui_list.add(App->gui->CreateSprite({ 385, 13 }, { 2,93,243,75 }));
 	App->gui->gui_list.add(App->gui->CreateSprite({ 759, 7 }, { 2,212,283,178 }));
 
+
 	App->gui->gui_list.add(App->gui->CreateButton({ 775, 20 }, SDL_Rect({ 299,217,92,20 })));
+	App->gui->gui_list.add(App->gui->CreateButton({ 885, 20 }, SDL_Rect({ 370,98,36,34 })));
 	
 
-	App->gui->gui_list.add(App->gui->CreateLabel({ 400, 17 }, "Trinity's", { 0,0,0,0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel({ 410, 50 }, "Journey", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 400, 17 }, "Trinity's", TITLE, { 0, 0, 0, 0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 410, 50 }, "Journey", TITLE, { 0,0,0,0 }));
 	
-	App->gui->gui_list.add(App->gui->CreateLabel({ 429, 147 }, "Select ", { 0,0,0,0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel({ 509, 164 }, "Level", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 429, 147 }, "Select ",BUTTON, { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 509, 164 }, "Level",BUTTON, { 0,0,0,0 }));
 
-	App->gui->gui_list.add(App->gui->CreateLabel({ 120, 45 }, "Level 1 ", { 0,0,0,0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel({ 120, 116 }, "Level 2 ", { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 120, 45 }, "Level 1 ", BUTTON, { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 120, 116 }, "Level 2 ", BUTTON, { 0, 0, 0, 0 }));
 
+	App->gui->gui_list.add(App->gui->CreateLabel({ 775, 20 }, "Volume", BUTTON, { 0,0,0,0 }));
 
-	App->font->title = App->font->Load("fonts/04B_30__.ttf", 18);
-	//App->font->title_buttons = App->font->Load("fonts/04B_30__.ttf", 20);
+	
+	App->font->title = App->font->Load("fonts/04B_30__.ttf", 34);
+	App->font->title_buttons = App->font->Load("fonts/04B_30__.ttf", 18);
 	return ret;
 }
 

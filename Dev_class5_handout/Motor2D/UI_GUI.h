@@ -7,7 +7,7 @@ enum UI_Type
 {
 	LABEL = 0,
 	SPRITE,
-	BUTTON
+	BUTTONS
 };
 
 

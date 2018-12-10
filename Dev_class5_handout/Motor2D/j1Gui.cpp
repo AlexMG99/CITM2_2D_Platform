@@ -85,10 +85,10 @@ bool j1Gui::CleanUp()
 }
 
 
-UI_GUI* j1Gui::CreateLabel(iPoint pos, const char * text, SDL_Color color)
+UI_GUI* j1Gui::CreateLabel(iPoint pos, const char * text, Label_Type type, SDL_Color color)
 {
 	UI_GUI* label = nullptr;
-	label = new UI_Label(text, color);
+	label = new UI_Label(text, type, color);
 	label->pos_x = pos.x;
 	label->pos_y = pos.y;
 	label->type = LABEL;
@@ -113,7 +113,7 @@ UI_GUI*j1Gui::CreateButton(iPoint pos, SDL_Rect rect, const char* text)
 	button = new UI_Button(rect, text);
 	button->pos_x = pos.x;
 	button->pos_y = pos.y;
-	button->type = BUTTON;
+	button->type = BUTTONS;
 
 	return button;
 };

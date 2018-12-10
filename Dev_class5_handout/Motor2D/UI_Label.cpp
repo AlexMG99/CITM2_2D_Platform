@@ -5,18 +5,27 @@
 #include "j1Fonts.h"
 
 
-UI_Label::UI_Label(const char* text, SDL_Color color/*, Label_Type type*/)
+UI_Label::UI_Label(const char* text, Label_Type type, SDL_Color color)
 {
 	label_text = text;
+	label_type = type;
 	label_color = color;
-	/*label_type = type;*/
 }
 
 
 
 bool UI_Label::Start()
 {
-	tex = App->font->Print(label_text.GetString(), label_color, App->font->title);
+	switch (label_type) {
+
+	case TITLE:
+		tex = App->font->Print(label_text.GetString(), label_color, App->font->title);
+		break;
+
+	case BUTTON:
+		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_buttons);
+		break;
+	}
 	return true;
 }
 

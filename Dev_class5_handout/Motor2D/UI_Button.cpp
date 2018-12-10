@@ -14,7 +14,7 @@ UI_Button::UI_Button(SDL_Rect rect, const char* text)
 bool UI_Button::Start()
 {
 	if (button_text.Length() > 0)
-		App->gui->gui_list.add(App->gui->CreateLabel({ pos_x + 10, pos_y + 5 }, button_text.GetString()));
+		App->gui->gui_list.add(App->gui->CreateLabel({ pos_x + 10, pos_y + 5 }, button_text.GetString(),BUTTON));
 	return true;
 }
 
