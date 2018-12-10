@@ -21,7 +21,9 @@ bool UI_Label::Start()
 	case TITLE:
 		tex = App->font->Print(label_text.GetString(), label_color, App->font->title);
 		break;
-
+	case CONFIG:
+		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_config);
+		break;
 	case BUTTON:
 		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_buttons);
 		break;

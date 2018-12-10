@@ -51,13 +51,16 @@ bool j1SceneMenu::Start()
 	App->gui->gui_list.add(App->gui->CreateButton({ 280, 215 }, SDL_Rect({ 259,149,38,31 })));
 	App->gui->gui_list.add(App->gui->CreateButton({ 760, 215 }, SDL_Rect({ 390,149,38,31 })));
 
+	
+
 	App->gui->gui_list.add(App->gui->CreateSprite({ 385, 13 }, { 2,93,243,75 }));
 	App->gui->gui_list.add(App->gui->CreateSprite({ 759, 7 }, { 2,212,283,178 }));
 
-
-	App->gui->gui_list.add(App->gui->CreateButton({ 775, 20 }, SDL_Rect({ 299,217,92,20 })));
-	App->gui->gui_list.add(App->gui->CreateButton({ 885, 20 }, SDL_Rect({ 370,98,36,34 })));
 	
+	App->gui->gui_list.add(App->gui->CreateSprite({ 880, 28 }, { 307,226,125,18 }));
+	
+	App->gui->gui_list.add(App->gui->CreateButton({ 890, 28 }, SDL_Rect({ 291,247,15,16 })));
+	App->gui->gui_list.add(App->gui->CreateButton({ 965, 85 }, SDL_Rect({ 310,247,21,22 })));
 
 	App->gui->gui_list.add(App->gui->CreateLabel({ 400, 17 }, "Trinity's", TITLE, { 0, 0, 0, 0 }));
 	App->gui->gui_list.add(App->gui->CreateLabel({ 410, 50 }, "Journey", TITLE, { 0,0,0,0 }));
@@ -68,10 +71,13 @@ bool j1SceneMenu::Start()
 	App->gui->gui_list.add(App->gui->CreateLabel({ 120, 45 }, "Level 1 ", BUTTON, { 0,0,0,0 }));
 	App->gui->gui_list.add(App->gui->CreateLabel({ 120, 116 }, "Level 2 ", BUTTON, { 0, 0, 0, 0 }));
 
-	App->gui->gui_list.add(App->gui->CreateLabel({ 775, 20 }, "Volume", BUTTON, { 0,0,0,0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 775, 30 }, "Volume", CONFIG, { 0, 0, 0, 0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 775, 90 }, "Cap to 30 fps", CONFIG, { 0, 0, 0, 0 }));
+	
 
 	
 	App->font->title = App->font->Load("fonts/04B_30__.ttf", 34);
+	App->font->title_config = App->font->Load("fonts/04B_30__.ttf", 15);
 	App->font->title_buttons = App->font->Load("fonts/04B_30__.ttf", 18);
 	return ret;
 }

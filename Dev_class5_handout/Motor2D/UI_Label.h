@@ -7,6 +7,7 @@
 
 enum Label_Type {
 	TITLE,
+	CONFIG,
 	BUTTON
 };
 
