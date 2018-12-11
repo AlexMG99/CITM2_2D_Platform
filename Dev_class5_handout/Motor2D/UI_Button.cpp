@@ -3,6 +3,9 @@
 #include "j1Gui.h"
 #include "j1Window.h"
 #include "j1Render.h"
+#include "j1FadeToBlack.h"
+#include "j1Scene.h"
+#include "j1SceneMenu.h"
 #include "j1Input.h"
 #include "UI_Button.h"
 
@@ -21,6 +24,22 @@ bool UI_Button::Start()
 	if (button_text.Length() > 0)
 		App->gui->gui_list.add(App->gui->CreateLabel({ pos.x + 10, pos.y + 5 }, button_text.GetString(),BUTTON));
 	return true;
+}
+
+bool UI_Button::Update(float dt)
+{
+	bool ret = true;
+	if (OnClick())
+	{
+		switch (button_type)
+		{
+		case PLAY:
+			ret = App->fadeToBlack->FadeToBlack(App->scene_menu, App->scene, 1.00f);
+			break;
+		}
+	}
+
+	return ret;
 }
 
 bool UI_Button::PostUpdate()

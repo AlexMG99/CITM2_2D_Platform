@@ -6,7 +6,7 @@
 #include "j1Map.h"
 
 
-bool UI_GUI::Update(float dt)
+bool UI_GUI::PreUpdate(float dt)
 {
 	switch (state)
 	{

@@ -17,6 +17,7 @@ public:
 	UI_Button(const char* text, Button_Type type);
 	~UI_Button() {};
 	bool Start();
+	bool Update(float dt);
 
 	bool PostUpdate();
 	bool OnHover();
