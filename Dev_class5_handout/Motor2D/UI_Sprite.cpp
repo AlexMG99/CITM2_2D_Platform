@@ -13,6 +13,6 @@ UI_Sprite::UI_Sprite(SDL_Rect rect)
 
 bool UI_Sprite::PostUpdate()
 {
-	App->render->Blit(App->gui->GetAtlas(), pos_x, pos_y, &sprite_rect);
+	App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y, &sprite_rect);
 	return true;
 }

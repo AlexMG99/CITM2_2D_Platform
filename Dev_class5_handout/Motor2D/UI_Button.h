@@ -2,6 +2,15 @@
 #include "UI_GUI.h"
 #include "SDL/include/SDL.h"
 
+enum Button_Type
+{
+	PLAY,
+	CONTINUE,
+	SETTINGS,
+	CREDITS,
+	EXIT
+};
+
 class  UI_Button :public UI_GUI
 {
 public:
@@ -10,12 +19,14 @@ public:
 	bool Start();
 
 	bool PostUpdate();
-	void OnHover();
-	void OnClick();
+	bool OnHover();
+	bool OnClick();
 
 private:
 	SDL_Rect	button_rect;
+	SDL_Rect	button_rect_hover;
 	p2SString	button_text;
+	Button_Type	button_type;
 
 };
 

@@ -19,7 +19,7 @@ public:
 
 	bool Start();
 	bool PostUpdate();
-	void OnHover();
+	bool OnHover();
 
 private:
 	Label_Type label_type;

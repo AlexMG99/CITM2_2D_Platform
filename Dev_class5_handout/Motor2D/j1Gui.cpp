@@ -53,12 +53,23 @@ bool j1Gui::Start()
 }
 
 // Update all guis
-bool j1Gui::PreUpdate()
+bool j1Gui::PreUpdate(float dt)
 {
 	p2List_item<UI_GUI*>* item_gui = gui_list.start;
 	while (item_gui != nullptr)
 	{
-		item_gui->data->PreUpdate();
+		item_gui->data->PreUpdate(dt);
+		item_gui = item_gui->next;
+	}
+	return true;
+}
+
+bool j1Gui::Update(float dt)
+{
+	p2List_item<UI_GUI*>* item_gui = gui_list.start;
+	while (item_gui != nullptr)
+	{
+		item_gui->data->Update(dt);
 		item_gui = item_gui->next;
 	}
 	return true;
@@ -89,9 +100,8 @@ UI_GUI* j1Gui::CreateLabel(iPoint pos, const char * text, Label_Type type, SDL_C
 {
 	UI_GUI* label = nullptr;
 	label = new UI_Label(text, type, color);
-	label->pos_x = pos.x;
-	label->pos_y = pos.y;
-	label->type = LABEL;
+	label->pos.x = pos.x;
+	label->pos.y = pos.y;
 
 	return label;
 }
@@ -100,9 +110,8 @@ UI_GUI* j1Gui::CreateSprite(iPoint pos, SDL_Rect rect)
 {
 	UI_GUI* sprite = nullptr;
 	sprite = new UI_Sprite(rect);
-	sprite->pos_x = pos.x;
-	sprite->pos_y = pos.y;
-	sprite->type = SPRITE;
+	sprite->pos.x = pos.x;
+	sprite->pos.y = pos.y;
 
 	return sprite;
 }
@@ -111,9 +120,8 @@ UI_GUI*j1Gui::CreateButton(iPoint pos, SDL_Rect rect, const char* text)
 {
 	UI_GUI* button = nullptr;
 	button = new UI_Button(rect, text);
-	button->pos_x = pos.x;
-	button->pos_y = pos.y;
-	button->type = BUTTONS;
+	button->pos.x = pos.x;
+	button->pos.y = pos.y;
 
 	return button;
 };

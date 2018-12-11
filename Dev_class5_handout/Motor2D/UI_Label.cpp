@@ -33,10 +33,11 @@ bool UI_Label::Start()
 
 bool UI_Label::PostUpdate()
 {
-	App->render->Blit(tex, pos_x, pos_y);
+	App->render->Blit(tex, pos.x, pos.y);
 	return true;
 }
 
-void UI_Label::OnHover()
+bool UI_Label::OnHover()
 {
+	return true;
 }

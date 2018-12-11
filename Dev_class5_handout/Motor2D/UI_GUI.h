@@ -2,12 +2,13 @@
 #define _UI_GUI__H
 
 #include "j1Module.h"
+#include "p2Point.h"
 
-enum UI_Type
+enum UI_State
 {
-	LABEL = 0,
-	SPRITE,
-	BUTTONS
+	IDLE,
+	HOVER,
+	CLICK
 };
 
 
@@ -18,19 +19,19 @@ public:
 	~UI_GUI() {};
 
 	virtual bool Start() { return true; };
-	bool PreUpdate();
+	bool PreUpdate(float dt) { return true; };
+	bool Update(float dt);
 	virtual bool PostUpdate() { return true; };
 
-	virtual void OnClick() {};
-	virtual void OnHover() {};
+	virtual bool OnClick() { return true; };
+	virtual bool OnHover() { return true; };
 
 
 
 
 public:
-	UI_Type type;
-	int     pos_x = 0;
-	int     pos_y = 0;
+	UI_State	state = IDLE;
+	iPoint		pos;
 
 };
 
