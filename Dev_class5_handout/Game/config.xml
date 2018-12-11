@@ -21,7 +21,7 @@
   </window>
 
   <gui>
-    <atlas file="gui/UI_spritesheet.png"/>
+    <atlas file="gui/yellowSheet.png"/>
   </gui>
 
   <entityManager>

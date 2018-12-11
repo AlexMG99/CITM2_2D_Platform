@@ -12,7 +12,7 @@
 UI_Button::UI_Button(SDL_Rect rect, const char* text)
 {
 	button_rect = rect;
-	button_rect_hover = {2, 49, 178, 42};
+	button_rect_hover = {190,0,190,49};
 	button_text.create(text);
 }
 

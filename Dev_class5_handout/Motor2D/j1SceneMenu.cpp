@@ -39,7 +39,7 @@ bool j1SceneMenu::Start()
 	App->render->camera = { -1100,0 };
 	LoadLevel();
 
-	App->gui->gui_list.add(App->gui->CreateButton({ 410, 95 }, SDL_Rect({ 4,1,177,40 }), "Play"));
+	App->gui->gui_list.add(App->gui->CreateButton({ 410, 95 }, SDL_Rect({ 0,0,190,49 }), "Play"));
 	//App->gui->gui_list.add(App->gui->CreateButton({ 420, 145 }, SDL_Rect({ 4,1,177,40 }),"Continue" ));
 	//App->gui->gui_list.add(App->gui->CreateButton({ 370, 224 }, SDL_Rect({ 5,173,120,28 }), "Exit"));
 
@@ -78,9 +78,9 @@ bool j1SceneMenu::Start()
 	
 
 	
-	App->font->title = App->font->Load("fonts/04B_30__.ttf", 34);
-	App->font->title_config = App->font->Load("fonts/04B_30__.ttf", 15);
-	App->font->title_buttons = App->font->Load("fonts/04B_30__.ttf", 20);
+	App->font->title = App->font->Load("fonts/kenvector_future.ttf", 34);
+	App->font->title_config = App->font->Load("fonts/kenvector_future.ttf", 15);
+	App->font->title_buttons = App->font->Load("fonts/kenvector_future.ttf", 26);
 	return ret;
 }
 
