@@ -39,8 +39,15 @@ bool j1SceneMenu::Start()
 	App->render->camera = { -1100,0 };
 	LoadLevel();
 
-	App->gui->gui_list.add(App->gui->CreateButton({ 410, 95 }, PLAY, "Play"));
-	
+	App->gui->gui_list.add(App->gui->CreateButton({ 435, 70 }, PLAY, "Play"));
+	//App->gui->gui_list.add(App->gui->CreateButton({ 435, 140 }, SDL_Rect({ 0,0,190,49 }), "Continue"));
+
+	////Config Button
+	//App->gui->gui_list.add(App->gui->CreateButton({ 660, 215 }, SDL_Rect({ 342,98,38,38 })));
+
+	////Orange Sprite
+	App->gui->gui_list.add(App->gui->CreateSprite({ 771, 7 }, { 448,4,255,174 }));
+
 	App->font->title = App->font->Load("fonts/kenvector_future.ttf", 34);
 	App->font->title_config = App->font->Load("fonts/kenvector_future.ttf", 15);
 	App->font->title_buttons = App->font->Load("fonts/kenvector_future.ttf", 26);
