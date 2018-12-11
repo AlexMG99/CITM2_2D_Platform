@@ -39,37 +39,39 @@ bool j1SceneMenu::Start()
 	App->render->camera = { -1100,0 };
 	LoadLevel();
 
-	App->gui->gui_list.add(App->gui->CreateButton({ 410, 95 }, SDL_Rect({ 4,5,176,40 }), "Start Game"));
-	App->gui->gui_list.add(App->gui->CreateButton({ 420, 145 }, SDL_Rect({ 182,5,176,40 })));
-	/*App->gui->gui_list.add(App->gui->CreateButton(430, 195, SDL_Rect({ 182,49,176,40 })));*/
+	App->gui->gui_list.add(App->gui->CreateButton({ 410, 95 }, SDL_Rect({ 4,1,177,40 }), "Play"));
+	App->gui->gui_list.add(App->gui->CreateButton({ 420, 145 }, SDL_Rect({ 4,1,177,40 }),"Continue" ));
 	App->gui->gui_list.add(App->gui->CreateButton({ 370, 224 }, SDL_Rect({ 5,173,120,28 }), "Exit"));
-	App->gui->gui_list.add(App->gui->CreateButton({ 660, 215 }, SDL_Rect({ 259,97,39,39 })));
 
-	App->gui->gui_list.add(App->gui->CreateButton({ 85, 35 }, SDL_Rect({ 182,5,176,40 })));
-	App->gui->gui_list.add(App->gui->CreateButton({ 85, 105 }, SDL_Rect({ 182,5,176,40 })));
+	//Config Button
+	App->gui->gui_list.add(App->gui->CreateButton({ 660, 215 }, SDL_Rect({ 251,96,39,39 })));
 
-	App->gui->gui_list.add(App->gui->CreateButton({ 280, 215 }, SDL_Rect({ 259,149,38,31 })));
+	//App->gui->gui_list.add(App->gui->CreateButton({ 85, 35 }, SDL_Rect({ 182,5,176,40 })));
+	//App->gui->gui_list.add(App->gui->CreateButton({ 85, 105 }, SDL_Rect({ 182,5,176,40 })));
+
+	//App->gui->gui_list.add(App->gui->CreateButton({ 280, 215 }, SDL_Rect({ 259,149,38,31 })));
+
+	//Back Arrow
 	App->gui->gui_list.add(App->gui->CreateButton({ 760, 215 }, SDL_Rect({ 390,149,38,31 })));
 
 	
-
+	//Yellow Sprite
 	App->gui->gui_list.add(App->gui->CreateSprite({ 385, 13 }, { 2,93,243,75 }));
+	//Orange Sprite
 	App->gui->gui_list.add(App->gui->CreateSprite({ 759, 7 }, { 2,212,283,178 }));
 
-	
+	//Life Sprite
 	App->gui->gui_list.add(App->gui->CreateSprite({ 880, 28 }, { 307,226,125,18 }));
 	
+	//Life Button Move
 	App->gui->gui_list.add(App->gui->CreateButton({ 890, 28 }, SDL_Rect({ 291,247,15,16 })));
+
+	//Cap FPS
 	App->gui->gui_list.add(App->gui->CreateButton({ 965, 85 }, SDL_Rect({ 310,247,21,22 })));
 
 	App->gui->gui_list.add(App->gui->CreateLabel({ 400, 17 }, "Trinity's", TITLE, { 0, 0, 0, 0 }));
 	App->gui->gui_list.add(App->gui->CreateLabel({ 410, 50 }, "Journey", TITLE, { 0,0,0,0 }));
 	
-	App->gui->gui_list.add(App->gui->CreateLabel({ 429, 147 }, "Select ",BUTTON, { 0,0,0,0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel({ 509, 164 }, "Level",BUTTON, { 0,0,0,0 }));
-
-	App->gui->gui_list.add(App->gui->CreateLabel({ 120, 45 }, "Level 1 ", BUTTON, { 0,0,0,0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel({ 120, 116 }, "Level 2 ", BUTTON, { 0, 0, 0, 0 }));
 
 	App->gui->gui_list.add(App->gui->CreateLabel({ 775, 30 }, "Volume", CONFIG, { 0, 0, 0, 0 }));
 	App->gui->gui_list.add(App->gui->CreateLabel({ 775, 90 }, "Cap to 30 fps", CONFIG, { 0, 0, 0, 0 }));
@@ -78,7 +80,7 @@ bool j1SceneMenu::Start()
 	
 	App->font->title = App->font->Load("fonts/04B_30__.ttf", 34);
 	App->font->title_config = App->font->Load("fonts/04B_30__.ttf", 15);
-	App->font->title_buttons = App->font->Load("fonts/04B_30__.ttf", 18);
+	App->font->title_buttons = App->font->Load("fonts/04B_30__.ttf", 20);
 	return ret;
 }
 
