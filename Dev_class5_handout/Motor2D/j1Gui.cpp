@@ -11,7 +11,6 @@
 #include "UI_GUI.h"
 #include "UI_Label.h"
 #include "UI_Sprite.h"
-#include "UI_Button.h"
 
 #include "SDL/include/SDL.h"
 
@@ -116,10 +115,10 @@ UI_GUI* j1Gui::CreateSprite(iPoint pos, SDL_Rect rect)
 	return sprite;
 }
 
-UI_GUI*j1Gui::CreateButton(iPoint pos, const char* text)
+UI_GUI*j1Gui::CreateButton(iPoint pos, Button_Type type, const char* text)
 {
 	UI_GUI* button = nullptr;
-	button = new UI_Button(text);
+	button = new UI_Button(text, type);
 	button->pos.x = pos.x;
 	button->pos.y = pos.y;
 

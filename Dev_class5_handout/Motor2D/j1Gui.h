@@ -5,6 +5,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "UI_Label.h"
+#include "UI_Button.h"
 #include "SDL/include/SDL.h"
 
 #define CURSOR_WIDTH 2
@@ -46,7 +47,7 @@ public:
 
 	UI_GUI* CreateLabel(iPoint pos, const char* text, Label_Type type, SDL_Color color = {0,0,0,0});
 	UI_GUI* CreateSprite(iPoint pos, SDL_Rect rect);
-	UI_GUI* CreateButton(iPoint pos, const char* text = "");
+	UI_GUI* CreateButton(iPoint pos, Button_Type type, const char* text = "");
 
 	SDL_Texture* GetAtlas() const;
 	p2List<UI_GUI*> gui_list;
