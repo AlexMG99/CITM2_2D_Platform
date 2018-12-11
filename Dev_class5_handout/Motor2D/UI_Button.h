@@ -25,6 +25,7 @@ public:
 private:
 	SDL_Rect	button_rect;
 	SDL_Rect	button_rect_hover;
+	SDL_Rect	button_rect_click;
 	p2SString	button_text;
 	Button_Type	button_type;
 

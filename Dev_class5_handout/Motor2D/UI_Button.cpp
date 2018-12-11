@@ -13,6 +13,7 @@ UI_Button::UI_Button(SDL_Rect rect, const char* text)
 {
 	button_rect = rect;
 	button_rect_hover = {190,0,190,49};
+	button_rect_click = {0,192,190,51};
 	button_text.create(text);
 }
 
@@ -35,6 +36,9 @@ bool UI_Button::PostUpdate()
 	case HOVER:
 		ret = App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y, &button_rect_hover);
 		break;
+	case CLICK:
+		ret = App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y, &button_rect_click);
+		break;
 	}
 
 	return ret;
@@ -54,7 +58,16 @@ bool UI_Button::OnHover()
 
 bool UI_Button::OnClick()
 {
-	return true;
+	bool ret = false;
+
+	if (OnHover())
+	{
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+		{
+			ret = true;
+		}
+	}
+	return ret;
 }
 
 

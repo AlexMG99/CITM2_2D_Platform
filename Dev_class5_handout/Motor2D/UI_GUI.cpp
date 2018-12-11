@@ -22,7 +22,10 @@ bool UI_GUI::Update(float dt)
 		{
 			state = UI_State::IDLE;
 		}
-		
+		if (OnClick())
+		{
+			state = UI_State::CLICK;
+		}
 		break;
 
 	case UI_State::CLICK:
