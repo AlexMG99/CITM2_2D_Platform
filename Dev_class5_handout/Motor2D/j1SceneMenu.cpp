@@ -39,12 +39,12 @@ bool j1SceneMenu::Start()
 	App->render->camera = { -1100,0 };
 	LoadLevel();
 
-	App->gui->gui_list.add(App->gui->CreateButton({ 410, 95 }, SDL_Rect({ 0,0,190,49 }), "Play"));
+	App->gui->gui_list.add(App->gui->CreateButton({ 410, 95 }, "Play"));
 	//App->gui->gui_list.add(App->gui->CreateButton({ 420, 145 }, SDL_Rect({ 4,1,177,40 }),"Continue" ));
 	//App->gui->gui_list.add(App->gui->CreateButton({ 370, 224 }, SDL_Rect({ 5,173,120,28 }), "Exit"));
 
 	////Config Button
-	App->gui->gui_list.add(App->gui->CreateButton({ 660, 215 }, SDL_Rect({ 342,98,38,38 })));
+	//App->gui->gui_list.add(App->gui->CreateButton({ 660, 215 }, SDL_Rect({ 342,98,38,38 })));
 
 	////App->gui->gui_list.add(App->gui->CreateButton({ 85, 35 }, SDL_Rect({ 182,5,176,40 })));
 	////App->gui->gui_list.add(App->gui->CreateButton({ 85, 105 }, SDL_Rect({ 182,5,176,40 })));
@@ -67,7 +67,7 @@ bool j1SceneMenu::Start()
 	//App->gui->gui_list.add(App->gui->CreateButton({ 890, 28 }, SDL_Rect({ 291,247,15,16 })));
 
 	////Cap FPS
-	App->gui->gui_list.add(App->gui->CreateButton({ 965, 85 }, SDL_Rect({ 450,215,36,36 })));
+	//App->gui->gui_list.add(App->gui->CreateButton({ 965, 85 }, SDL_Rect({ 450,215,36,36 })));
 
 	//App->gui->gui_list.add(App->gui->CreateLabel({ 400, 17 }, "Trinity's", TITLE, { 0, 0, 0, 0 }));
 	//App->gui->gui_list.add(App->gui->CreateLabel({ 410, 50 }, "Journey", TITLE, { 0,0,0,0 }));

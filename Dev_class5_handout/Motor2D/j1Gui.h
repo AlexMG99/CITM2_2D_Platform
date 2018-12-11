@@ -46,7 +46,7 @@ public:
 
 	UI_GUI* CreateLabel(iPoint pos, const char* text, Label_Type type, SDL_Color color = {0,0,0,0});
 	UI_GUI* CreateSprite(iPoint pos, SDL_Rect rect);
-	UI_GUI* CreateButton(iPoint pos, SDL_Rect rect, const char* text = "");
+	UI_GUI* CreateButton(iPoint pos, const char* text = "");
 
 	SDL_Texture* GetAtlas() const;
 	p2List<UI_GUI*> gui_list;

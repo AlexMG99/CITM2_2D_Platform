@@ -9,11 +9,11 @@
 #include "j1Window.h"
 
 
-UI_Button::UI_Button(SDL_Rect rect, const char* text)
+UI_Button::UI_Button(const char* text)
 {
-	button_rect = rect;
+	button_rect = {0,0,190,49};
 	button_rect_hover = {190,0,190,49};
-	button_rect_click = {0,192,190,51};
+	button_rect_click = {0,194,190,51};
 	button_text.create(text);
 }
 
