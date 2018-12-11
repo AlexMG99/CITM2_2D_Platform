@@ -19,8 +19,8 @@ public:
 	~UI_GUI() {};
 
 	virtual bool Start() { return true; };
-	bool PreUpdate(float dt) { return true; };
-	bool Update(float dt);
+	bool PreUpdate(float dt) ;
+	virtual bool Update(float dt) { return true; };
 	virtual bool PostUpdate() { return true; };
 
 	virtual bool OnClick() { return true; };
