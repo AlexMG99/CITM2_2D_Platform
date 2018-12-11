@@ -104,6 +104,7 @@
     <ClCompile Include="UI_Button.cpp" />
     <ClCompile Include="UI_GUI.cpp" />
     <ClCompile Include="UI_Label.cpp" />
+    <ClCompile Include="UI_Slider.cpp" />
     <ClCompile Include="UI_Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +143,7 @@
     <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_GUI.h" />
     <ClInclude Include="UI_Label.h" />
+    <ClInclude Include="UI_Slider.h" />
     <ClInclude Include="UI_Sprite.h" />
   </ItemGroup>
   <ItemGroup>
