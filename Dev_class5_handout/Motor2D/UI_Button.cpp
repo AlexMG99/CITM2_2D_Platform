@@ -19,7 +19,6 @@ UI_Button::UI_Button(const char* text, Button_Type type, SDL_Rect idle_rect, SDL
 	if (rect_hover == NULL)
 	{
 		button_rect[HOVER] = idle_rect;
-
 	}
 	else
 	{
@@ -71,8 +70,7 @@ bool UI_Button::OnHover()
 {
 	int x, y;
 	App->input->GetMousePosition(x, y);
-	bool ret = pos.x < x && pos.y + App->render->camera.y < y && pos.x + button_rect[IDLE].w > x && pos.y + button_rect[IDLE].h > y;
-	return ret;
+	return pos.x < x && pos.y + App->render->camera.y < y && pos.x + button_rect[state].w > x && pos.y + button_rect[state].h > y;
 
 }
 

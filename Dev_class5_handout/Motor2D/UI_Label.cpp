@@ -44,9 +44,17 @@ bool UI_Label::PostUpdate()
 	{
 	case IDLE:
 		ChangeTexture({ 0,0,0,0 });
+		pos.y = parent->pos.y + 5;
+		pos.x = parent->pos.x + 10;
 		break;
 	case HOVER:
-		ChangeTexture({ 255,255,255,255 });
+		ChangeTexture({ 230,214,144,255 });
+		pos.y = parent->pos.y + 5;
+		pos.x = parent->pos.x + 12;
+		break;
+	case CLICK:
+		pos.y = parent->pos.y + 8;
+		pos.x = parent->pos.x + 12;
 		break;
 	}
 	return true;
