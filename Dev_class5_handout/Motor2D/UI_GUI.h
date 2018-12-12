@@ -8,7 +8,8 @@ enum UI_State
 {
 	IDLE,
 	HOVER,
-	CLICK
+	CLICK,
+	MAX_STATE
 };
 
 

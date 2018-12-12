@@ -125,10 +125,10 @@ UI_GUI* j1Gui::CreateSprite(iPoint pos, SDL_Rect rect)
 	return sprite;
 }
 
-UI_GUI*j1Gui::CreateButton(iPoint pos, Button_Type type, const char* text)
+UI_GUI*j1Gui::CreateButton(iPoint pos, Button_Type type, SDL_Rect idle_rect, SDL_Rect* idle_hover, SDL_Rect* idle_click, const char* text)
 {
 	UI_GUI* button = nullptr;
-	button = new UI_Button(text, type);
+	button = new UI_Button(text, type, idle_rect, idle_hover, idle_click);
 	button->pos.x = pos.x;
 	button->pos.y = pos.y;
 

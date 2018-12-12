@@ -32,9 +32,6 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	//Reset scene
-	void Reset() const;
-
 	//Load Game State
 	bool Load(pugi::xml_node&);
 

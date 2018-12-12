@@ -11,13 +11,31 @@
 
 
 
-UI_Button::UI_Button(const char* text, Button_Type type)
+UI_Button::UI_Button(const char* text, Button_Type type, SDL_Rect idle_rect, SDL_Rect* rect_hover, SDL_Rect* rect_click)
 {
-	button_rect = {0,0,190,49};
-	button_rect_hover = {190,0,190,49};
-	button_rect_click = {0,194,190,51};
-	button_text.create(text);
+	button_rect[IDLE] = idle_rect;
 
+	if (rect_hover == NULL)
+	{
+		button_rect[HOVER] = idle_rect;
+
+	}
+	else
+	{
+		button_rect[HOVER] = *rect_hover;
+	}
+
+	if (rect_click == NULL)
+	{
+		button_rect[CLICK] = *rect_hover;
+	}
+	else
+	{
+		button_rect[CLICK] = *rect_click;
+	}
+	
+	
+	button_text.create(text);
 	button_type = type;
 }
 
@@ -34,15 +52,15 @@ bool UI_Button::PostUpdate()
 	switch (state)
 	{
 	case IDLE:
-		ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect);
+		ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[IDLE]);
 		break;
 
 	case HOVER:
-		ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect_hover);
+		ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[HOVER]);
 		break;
 
 	case CLICK:
-		ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect_click);
+		ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[CLICK]);
 		break;
 	}
 
@@ -53,7 +71,7 @@ bool UI_Button::OnHover()
 {
 	int x, y;
 	App->input->GetMousePosition(x, y);
-	bool ret = pos.x < x && pos.y + App->render->camera.y < y && pos.x + button_rect.w > x && pos.y + button_rect.h > y;
+	bool ret = pos.x < x && pos.y + App->render->camera.y < y && pos.x + button_rect[IDLE].w > x && pos.y + button_rect[IDLE].h > y;
 	return ret;
 
 }

@@ -15,7 +15,7 @@ enum Button_Type
 class  UI_Button :public UI_GUI
 {
 public:
-	UI_Button(const char* text, Button_Type type);
+	UI_Button(const char* text, Button_Type type, SDL_Rect idle_rect, SDL_Rect* rect_hover, SDL_Rect* rect_click);
 	~UI_Button() {};
 
 	bool Start();
@@ -26,9 +26,7 @@ public:
 	bool OnClick();
 
 private:
-	SDL_Rect	button_rect;
-	SDL_Rect	button_rect_hover;
-	SDL_Rect	button_rect_click;
+	SDL_Rect	button_rect[MAX_STATE];
 	p2SString	button_text;
 	Button_Type	button_type;
 
