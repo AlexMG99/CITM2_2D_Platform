@@ -95,6 +95,7 @@
     <ClCompile Include="j1PerfTimer.cpp" />
     <ClCompile Include="j1Scene.cpp" />
     <ClCompile Include="j1Scene2.cpp" />
+    <ClCompile Include="j1Scene_UI.cpp" />
     <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="p2Log.cpp" />
     <ClCompile Include="j1Render.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
     <ClInclude Include="j1SceneMenu.h" />
+    <ClInclude Include="j1Scene_UI.h" />
     <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_GUI.h" />
     <ClInclude Include="UI_Label.h" />

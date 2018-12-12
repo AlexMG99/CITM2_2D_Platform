@@ -16,6 +16,7 @@ class j1Audio;
 class j1SceneMenu;
 class j1Scene;
 class j1Scene2;
+class j1Scene_UI;
 class j1Map;
 class j1PathFinding;
 class j1Entity_Manager;
@@ -95,6 +96,7 @@ public:
 	j1SceneMenu*		scene_menu;
 	j1Scene*			scene;
 	j1Scene2*			scene2;
+	j1Scene_UI*			scene_ui;
 	j1Entity_Manager*   entity_manager;
 	j1Map*				map;
 	j1PathFinding*		pathfinding;
