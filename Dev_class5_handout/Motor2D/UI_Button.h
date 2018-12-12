@@ -11,6 +11,7 @@ enum Button_Type
 	SETTINGS,
 	CREDIT,
 	MUTE,
+	CAPTO30,
 	EXIT
 };
 

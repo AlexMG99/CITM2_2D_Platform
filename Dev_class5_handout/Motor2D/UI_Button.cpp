@@ -48,7 +48,8 @@ bool UI_Button::PostUpdate()
 		switch (state)
 		{
 		case IDLE:
-			ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[IDLE]);
+	 
+			ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[IDLE]); //(-1100) 
 			break;
 
 		case HOVER:

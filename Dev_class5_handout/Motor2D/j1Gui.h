@@ -55,6 +55,7 @@ public:
 	p2List<UI_GUI*> gui_list;
 
 private:
+	bool interactive = false;
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
 

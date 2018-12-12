@@ -140,7 +140,7 @@ bool j1App::Awake()
 		}
 	}
 
-	scene_menu->Disable();
+	scene->Disable();
 	scene2->Disable();
 
 	PERF_PEEK(ptimer);

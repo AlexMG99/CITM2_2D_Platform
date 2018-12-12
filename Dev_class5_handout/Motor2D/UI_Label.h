@@ -30,6 +30,7 @@ private:
 	SDL_Color label_color;
 
 public:
+
 	mutable SDL_Texture* tex = nullptr;
 
 };

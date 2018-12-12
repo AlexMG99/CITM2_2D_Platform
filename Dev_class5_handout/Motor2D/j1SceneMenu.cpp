@@ -51,14 +51,26 @@ bool j1SceneMenu::Start()
 
 	SDL_Rect audio_rect_button[3] = { { 342,178,38,38 }, {342,98,38,38},{ 294,143,39,38 } };
 	App->gui->gui_list.add(App->gui->CreateButton({ 290, 213 }, MUTE, audio_rect_button[0], &audio_rect_button[1], &audio_rect_button[2]));
-	
-	
+
 	////Orange Sprite
-	App->gui->gui_list.add(App->gui->CreateSprite({ 771, 7 }, { 448,4,255,174 }));
+	App->gui->gui_list.add(App->gui->CreateSprite({ 405, 7 }, { 448,4,255,174 }));
+
+	SDL_Rect capto30_rect_button[3] = { { 422,215,36,36 }, { 458,215,36,36 }, { 381,36,36,36 } };
+	App->gui->gui_list.add(App->gui->CreateButton({ 385, 89 },CAPTO30, capto30_rect_button[0], &capto30_rect_button[1], &capto30_rect_button[2]));
+
+	
+
+	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 20 }, "Volume", CONFIG, { 0, 0, 0, 0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 60 }, "Fx  Volume", CONFIG, { 0, 0, 0, 0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 100 }, "Cap  to  30  fps", CONFIG, { 0, 0, 0, 0 }));
+
+	
 
 	App->font->title = App->font->Load("fonts/kenvector_future.ttf", 34);
+
 	App->font->title_config = App->font->Load("fonts/kenvector_future.ttf", 15);
-	App->font->title_buttons = App->font->Load("fonts/kenvector_future.ttf", 26);
+
+	App->font->title_buttons = App->font->Load("fonts/kenvector_future.ttf", 16);
 	return ret;
 }
 

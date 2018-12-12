@@ -111,6 +111,7 @@ UI_GUI* j1Gui::CreateLabel(iPoint pos, const char * text, Label_Type type, SDL_C
 	label = new UI_Label(text, type, color, parent);
 	label->pos.x = pos.x;
 	label->pos.y = pos.y;
+	interactive = true;
 
 	return label;
 }
@@ -121,6 +122,7 @@ UI_GUI* j1Gui::CreateSprite(iPoint pos, SDL_Rect rect)
 	sprite = new UI_Sprite(rect);
 	sprite->pos.x = pos.x;
 	sprite->pos.y = pos.y;
+	interactive = true;
 
 	return sprite;
 }
@@ -131,7 +133,7 @@ UI_GUI* j1Gui::CreateButton(iPoint pos, Button_Type type, SDL_Rect idle_rect, SD
 	button = new UI_Button(text, type, idle_rect, idle_hover, idle_click);
 	button->pos.x = pos.x;
 	button->pos.y = pos.y;
-
+	interactive = true;
 	return button;
 };
 // const getter for atlas
