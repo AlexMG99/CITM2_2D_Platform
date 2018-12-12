@@ -43,7 +43,7 @@ bool j1SceneMenu::Start()
 	//App->gui->gui_list.add(App->gui->CreateButton({ 435, 140 }, SDL_Rect({ 0,0,190,49 }), "Continue"));
 
 	////Config Button
-	//App->gui->gui_list.add(App->gui->CreateButton({ 660, 215 }, SDL_Rect({ 342,98,38,38 })));
+	App->gui->gui_list.add(App->gui->CreateButton({ 435, 130 }, SETTINGS, "Settings"));
 
 	////Orange Sprite
 	App->gui->gui_list.add(App->gui->CreateSprite({ 771, 7 }, { 448,4,255,174 }));

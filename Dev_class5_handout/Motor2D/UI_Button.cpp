@@ -17,6 +17,8 @@ UI_Button::UI_Button(const char* text, Button_Type type)
 	button_rect_hover = {190,0,190,49};
 	button_rect_click = {0,194,190,51};
 	button_text.create(text);
+
+	button_type = type;
 }
 
 bool UI_Button::Start()
@@ -36,8 +38,19 @@ bool UI_Button::Update(float dt)
 		case PLAY:
 			ret = App->fadeToBlack->FadeToBlack(App->scene_menu, App->scene, 1.00f);
 			break;
+		case SETTINGS:
+			velocity = 15.00f;
+			break;
+		default:
+			ret = false;
+			LOG("Button does not have any Type!");
+			break;
 		}
 	}
+	if (App->render->camera.x < -40)
+		App->render->camera.x += velocity;
+	else
+		velocity = 0.00f;
 
 	return ret;
 }
@@ -85,6 +98,7 @@ bool UI_Button::OnClick()
 	}
 	return ret;
 }
+
 
 
 

@@ -8,6 +8,7 @@
 enum Button_Type
 {
 	PLAY,
+	SETTINGS,
 	EXIT
 };
 
@@ -16,10 +17,12 @@ class  UI_Button :public UI_GUI
 public:
 	UI_Button(const char* text, Button_Type type);
 	~UI_Button() {};
-	bool Start();
-	bool Update(float dt);
 
+	bool Start();
+
+	bool Update(float dt);
 	bool PostUpdate();
+
 	bool OnHover();
 	bool OnClick();
 
@@ -29,6 +32,8 @@ private:
 	SDL_Rect	button_rect_click;
 	p2SString	button_text;
 	Button_Type	button_type;
+
+	float velocity = 0.00f;
 
 };
 
