@@ -4,6 +4,7 @@
 #include "j1Fonts.h"
 #include "j1Input.h"
 #include "j1Map.h"
+#include "j1Window.h"
 
 
 bool UI_GUI::PreUpdate(float dt)
@@ -38,6 +39,17 @@ bool UI_GUI::PreUpdate(float dt)
 	default:
 		break;
 	}
+	return true;
+}
+
+bool UI_GUI::Update(float dt)
+{
+
+	if (static_object)
+		position = { pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y - App->render->camera.y / (int)App->win->GetScale() };
+	else
+		position = { pos.x , pos.y };
+
 	return true;
 }
 

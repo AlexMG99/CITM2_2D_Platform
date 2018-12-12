@@ -44,22 +44,24 @@ bool UI_Button::Start()
 
 bool UI_Button::PostUpdate()
 {
-	bool ret = false;
-		switch (state)
-		{
-		case IDLE:
-	 
-			ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[IDLE]); //(-1100) 
-			break;
+	bool ret = true;
 
-		case HOVER:
-			ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[HOVER]);
-			break;
+	switch (state)
+	{
+	case IDLE:
 
-		case CLICK:
-			ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[CLICK]);
-			break;
-		}
+		ret = App->render->Blit(App->gui->GetAtlas(), position.x, position.y, &button_rect[IDLE]); //(-1100) 
+		break;
+
+	case HOVER:
+		ret = App->render->Blit(App->gui->GetAtlas(), position.x, position.y, &button_rect[HOVER]);
+		break;
+
+	case CLICK:
+		ret = App->render->Blit(App->gui->GetAtlas(), position.x, position.y, &button_rect[CLICK]);
+		break;
+	}
+
 	return ret;
 }
 

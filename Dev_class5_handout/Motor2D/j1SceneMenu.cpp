@@ -56,13 +56,13 @@ bool j1SceneMenu::Start()
 	App->gui->gui_list.add(App->gui->CreateSprite({ 405, 7 }, { 448,4,255,174 }));
 
 	SDL_Rect capto30_rect_button[3] = { { 422,215,36,36 }, { 458,215,36,36 }, { 381,36,36,36 } };
-	App->gui->gui_list.add(App->gui->CreateButton({ 385, 89 },CAPTO30, capto30_rect_button[0], &capto30_rect_button[1], &capto30_rect_button[2]));
+	App->gui->gui_list.add(App->gui->CreateButton({ 595, 89 },CAPTO30, capto30_rect_button[0], &capto30_rect_button[1], &capto30_rect_button[2]));
 
 	
 
-	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 20 }, "Volume", BUTTON, { 0, 0, 0, 0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 60 }, "Fx  Volume", BUTTON, { 0, 0, 0, 0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 100 }, "Cap  to  30  fps", BUTTON, { 0, 0, 0, 0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 20 }, "Volume",	CONFIG, { 0, 0, 0, 0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 60 }, "Fx  Volume", CONFIG, { 0, 0, 0, 0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 100 }, "Cap  to  30  fps", CONFIG, { 0, 0, 0, 0 }));
 
 	return ret;
 }

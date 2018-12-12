@@ -21,7 +21,7 @@ public:
 
 	virtual bool Start() { return true; };
 	bool PreUpdate(float dt) ;
-	virtual bool Update(float dt) { return true; };
+	virtual bool Update(float dt);
 	virtual bool PostUpdate() { return true; };
 
 	virtual bool OnHover() { return true; };
@@ -33,7 +33,10 @@ public:
 public:
 	UI_State	state = IDLE;
 	iPoint		pos;
+	iPoint		position;
 	UI_GUI*		parent = nullptr;
+
+	bool		static_object = true;
 
 };
 

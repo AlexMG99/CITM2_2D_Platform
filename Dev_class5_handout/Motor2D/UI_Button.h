@@ -32,7 +32,8 @@ private:
 	p2SString	button_text;
 	Button_Type	button_type;
 
-	float velocity = 0.00f;
+	float	velocity = 0.00f;
+	
 
 };
 

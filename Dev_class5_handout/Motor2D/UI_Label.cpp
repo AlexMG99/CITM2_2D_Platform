@@ -27,7 +27,7 @@ bool UI_Label::Start()
 
 bool UI_Label::PostUpdate()
 {
-	App->render->Blit(tex, pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y);
+	App->render->Blit(tex, position.x, position.y);
 	
 	switch (state)
 	{
