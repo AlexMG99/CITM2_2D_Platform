@@ -43,9 +43,16 @@ bool j1SceneMenu::Start()
 
 	//Menu Button
 	SDL_Rect rect_button[3] = { {0,0,190,49}, { 190,0,190,49 }, {0,195,190,49} };
-	App->gui->gui_list.add(App->gui->CreateButton({ 30, 70 }, PLAY, rect_button[0], &rect_button[1], &rect_button[2], "Play"));
-	App->gui->gui_list.add(App->gui->CreateButton({ 30, 130 }, SETTINGS, rect_button[0], &rect_button[1], &rect_button[2], "Settings"));
+	App->gui->gui_list.add(App->gui->CreateButton({ 70, 70 }, PLAY, rect_button[0], &rect_button[1], &rect_button[2], "Play"));
+	App->gui->gui_list.add(App->gui->CreateButton({ 70, 130 }, SETTINGS, rect_button[0], &rect_button[1], &rect_button[2], "Settings"));
+	
+	SDL_Rect credit_rect_button[3] = { { 587,213,38,38 }, {496,213,38,38},{ 541,213,39,38 } };
+	App->gui->gui_list.add(App->gui->CreateButton({ 15, 213 }, CREDIT, credit_rect_button[0], &credit_rect_button[1], &credit_rect_button[2]));
 
+	SDL_Rect audio_rect_button[3] = { { 342,178,38,38 }, {342,98,38,38},{ 294,143,39,38 } };
+	App->gui->gui_list.add(App->gui->CreateButton({ 290, 213 }, MUTE, audio_rect_button[0], &audio_rect_button[1], &audio_rect_button[2]));
+	
+	
 	////Orange Sprite
 	App->gui->gui_list.add(App->gui->CreateSprite({ 771, 7 }, { 448,4,255,174 }));
 

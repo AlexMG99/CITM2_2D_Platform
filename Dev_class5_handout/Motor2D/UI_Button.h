@@ -9,6 +9,8 @@ enum Button_Type
 {
 	PLAY,
 	SETTINGS,
+	CREDIT,
+	MUTE,
 	EXIT
 };
 
