@@ -3,9 +3,6 @@
 #include "j1Gui.h"
 #include "j1Window.h"
 #include "j1Render.h"
-#include "j1FadeToBlack.h"
-#include "j1Scene.h"
-#include "j1SceneMenu.h"
 #include "j1Input.h"
 #include "UI_Button.h"
 
@@ -13,7 +10,6 @@
 
 UI_Button::UI_Button(const char* text, Button_Type type, SDL_Rect idle_rect, SDL_Rect* rect_hover, SDL_Rect* rect_click)
 {
-	
 	button_rect[IDLE] = idle_rect;
 	
 	if (rect_hover == NULL)

@@ -6,22 +6,26 @@
 	<audio>
 		<volume value="26" />
 	</audio>
-	<scene />
-	<scene2 />
 	<map />
 	<pathfinding />
+	<fonts />
+	<scene_menu />
+	<gui />
+	<scene />
+	<scene2 />
 	<entityManager>
 		<player>
 			<position x="80" y="219" />
-			<velocity x="0" y="4.0800004" />
+			<velocity x="0" y="3.96000004" />
 			<state value="STATE_IDLE" />
 		</player>
 		<enemies>
 			<entity_bat x="0" y="0" />
 			<entity_bat x="1204" y="115" />
 			<entity_bat x="2453" y="75" />
-			<entity_crab x="320" y="158.039993" />
-			<entity_crab x="1034" y="179.039993" />
+			<entity_crab x="320" y="157.979996" />
+			<entity_crab x="1034" y="178.979996" />
+			<entity_crab x="200" y="-156.080032" />
 		</enemies>
 	</entityManager>
 	<fadetoblack>

@@ -4,6 +4,7 @@
 #include "j1Entity_Bat.h"
 #include "j1Entity_Crab.h"
 #include "j1Entity_Player.h"
+#include "j1Entity_Coin.h"
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Audio.h"
@@ -130,6 +131,9 @@ j1Entity* j1Entity_Manager::CreateEntity(Entity_Type type, int x, int y)
 	case PLAYER:
 		entity = new j1Entity_Player();
 		break;
+	case COIN:
+		entity = new j1Entity_Coin();
+		break;
 	default:
 		LOG("Enemy Type Incorrect!");
 		break;
@@ -158,6 +162,13 @@ void j1Entity_Manager::LoadEnemies(pugi::xml_document& entities_doc)
 	for (pugi::xml_node entity_crabs = crabs.child("crab"); entity_crabs; entity_crabs = entity_crabs.next_sibling("crab"))
 	{
 		CreateEntity(CRAB, entity_crabs.child("position").attribute("x").as_int(), entity_crabs.child("position").attribute("y").as_int());
+	}
+
+	pugi::xml_node coins = entities_doc.child("entityManager").child("coins");
+
+	for (pugi::xml_node entity_coins = coins.child("coin"); entity_coins; entity_coins = entity_coins.next_sibling("coin"))
+	{
+		CreateEntity(COIN, entity_coins.child("position").attribute("x").as_int(), entity_coins.child("position").attribute("y").as_int());
 	}
 
 }

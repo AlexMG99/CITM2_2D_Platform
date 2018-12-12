@@ -14,6 +14,11 @@
     </bat>
   </bats>
 
+  <coins>
+    <coin>
+      <position x="200" y="100"/>
+    </coin>
+  </coins>
   <crabs>
   <crab>
     <position x="320" y="153"/>

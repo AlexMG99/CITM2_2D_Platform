@@ -99,5 +99,20 @@
         </death>
       </animation>
     </bat>
+  
+    <coin>
+        <animation>
+          <idle title="idle" speed="7.0">
+            <frame x ="82" y="101" w="23" h="21"/>
+            <frame x ="105" y="101" w="23" h="21"/>
+            <frame x ="128" y="101" w="23" h="21"/>
+            <frame x ="151" y="101" w="23" h="21"/>
+            <frame x ="174" y="101" w="23" h="21"/>
+            <frame x ="197" y="101" w="23" h="21"/>
+            <frame x ="220" y="101" w="23" h="21"/>
+          </idle>
+        </animation>
+      </coin>
+  
   </entities>
 </entityManager>

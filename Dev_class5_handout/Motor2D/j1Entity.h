@@ -34,7 +34,8 @@ enum Entity_Type {
 
 	PLAYER,
 	CRAB,
-	BAT
+	BAT,
+	COIN
 
 };
 
@@ -81,7 +82,6 @@ public:
 	fPoint				acceleration;
 	bool				fly = false;
 	bool				counting = true; // uml
-
 
 	Entity_State		state = STATE_NONE;
 	Entity_Type			type = NONE;

@@ -160,9 +160,10 @@ p2Animation j1Entity::LoadAnimation(p2SString name, p2SString entity_name) const
 
 bool j1Entity::Entity_Draw(float dt)
 {
+	bool ret = true;
 	SDL_Rect rect = current_animation->GetCurrentFrame(dt);
-	App->render->Blit(App->entity_manager->graphics, (int)(position.x),(int)(position.y), &rect, flipX);
-	return true;
+	ret = App->render->Blit(App->entity_manager->graphics, (int)(position.x),(int)(position.y), &rect, flipX);
+	return ret;
 }
 
 void j1Entity::Entity_Collision(Collider* other_coll)
