@@ -400,6 +400,9 @@ void j1Entity_Player::Entity_Collision(Collider* other_coll)
 		state = STATE_DEATH;
 		break;
 
+	case COLLIDER_COIN:
+		break;
+
 	case COLLIDER_WIN:
 		if (App->scene->IsEnabled())
 		{

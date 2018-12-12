@@ -176,15 +176,22 @@ void j1Entity::Entity_Collision(Collider* other_coll)
 	switch (other_coll->type)
 	{
 	case COLLIDER_PLAYER:
-		if (App->entity_manager->GetPlayer()->position.y - other_coll->rect.h / 2 < coll->rect.y)
+		if (coll->type == COLLIDER_COIN)
 		{
-			state = STATE_DEATH;
-			App->audio->PlayFx(App->entity_manager->fx_jump);
-			App->entity_manager->GetPlayer()->state = STATE_JUMP;
+			to_delete = true;
 		}
-		else 
+		else
 		{
-			App->entity_manager->GetPlayer()->state = STATE_DEATH;
+			if (App->entity_manager->GetPlayer()->position.y - other_coll->rect.h / 2 < coll->rect.y)
+			{
+				state = STATE_DEATH;
+				App->audio->PlayFx(App->entity_manager->fx_jump);
+				App->entity_manager->GetPlayer()->state = STATE_JUMP;
+			}
+			else
+			{
+				App->entity_manager->GetPlayer()->state = STATE_DEATH;
+			}
 		}
 		break;
 	case COLLIDER_GROUND:
