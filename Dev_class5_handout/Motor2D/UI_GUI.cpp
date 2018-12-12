@@ -40,3 +40,17 @@ bool UI_GUI::PreUpdate(float dt)
 	}
 	return true;
 }
+
+bool UI_GUI::OnClick()
+{
+	bool ret = false;
+
+	if (OnHover())
+	{
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+		{
+			ret = true;
+		}
+	}
+	return ret;
+}

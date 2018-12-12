@@ -24,8 +24,8 @@ public:
 	virtual bool Update(float dt) { return true; };
 	virtual bool PostUpdate() { return true; };
 
-	virtual bool OnClick() { return true; };
 	virtual bool OnHover() { return true; };
+	bool OnClick();
 
 
 
@@ -33,6 +33,7 @@ public:
 public:
 	UI_State	state = IDLE;
 	iPoint		pos;
+	UI_GUI*		parent = nullptr;
 
 };
 

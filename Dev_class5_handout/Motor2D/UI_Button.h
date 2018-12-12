@@ -21,11 +21,10 @@ public:
 	~UI_Button() {};
 
 	bool Start();
-
 	bool PostUpdate();
 
 	bool OnHover();
-	bool OnClick();
+
 
 private:
 	SDL_Rect	button_rect[MAX_STATE];

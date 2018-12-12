@@ -43,15 +43,13 @@ UI_Button::UI_Button(const char* text, Button_Type type, SDL_Rect idle_rect, SDL
 bool UI_Button::Start()
 {
 	if (button_text.Length() > 0)
-		App->gui->gui_list.add(App->gui->CreateLabel({ pos.x + 10, pos.y + 5 }, button_text.GetString(),BUTTON));
+		App->gui->gui_list.add(App->gui->CreateLabel({ pos.x + 10, pos.y + 5 }, button_text.GetString(), BUTTON, {0,0,0,0}, this));
 	return true;
 }
 
 bool UI_Button::PostUpdate()
 {
 	bool ret = false;
-	switch (button_type) {
-	case PLAY:
 		switch (state)
 		{
 		case IDLE:
@@ -66,59 +64,6 @@ bool UI_Button::PostUpdate()
 			ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[CLICK]);
 			break;
 		}
-		break;
-		
-		case SETTINGS:
-			switch (state)
-			{
-			case IDLE:
-				ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[IDLE]);
-				break;
-
-			case HOVER:
-				ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[HOVER]);
-				break;
-
-			case CLICK:
-				ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[CLICK]);
-				break;
-			}
-			break;
-		case CREDIT:
-			switch (state)
-			{
-			case IDLE:
-				ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[IDLE]);
-				break;
-
-			case HOVER:
-				ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[HOVER]);
-				break;
-
-			case CLICK:
-				ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[CLICK]);
-				break;
-			}
-			break;
-		case MUTE:
-			switch (state)
-			{
-			case IDLE:
-				ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[IDLE]);
-				break;
-
-			case HOVER:
-				ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[HOVER]);
-				break;
-
-			case CLICK:
-				ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect[CLICK]);
-				break;
-			}
-			break;
-
-	}
-
 	return ret;
 }
 
@@ -131,19 +76,6 @@ bool UI_Button::OnHover()
 
 }
 
-bool UI_Button::OnClick()
-{
-	bool ret = false;
-
-	if (OnHover())
-	{
-		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
-		{
-			ret = true;
-		}
-	}
-	return ret;
-}
 
 
 

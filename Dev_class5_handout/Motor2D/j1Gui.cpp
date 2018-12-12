@@ -105,10 +105,10 @@ bool j1Gui::CleanUp()
 }
 
 
-UI_GUI* j1Gui::CreateLabel(iPoint pos, const char * text, Label_Type type, SDL_Color color)
+UI_GUI* j1Gui::CreateLabel(iPoint pos, const char * text, Label_Type type, SDL_Color color, UI_GUI* parent)
 {
 	UI_GUI* label = nullptr;
-	label = new UI_Label(text, type, color);
+	label = new UI_Label(text, type, color, parent);
 	label->pos.x = pos.x;
 	label->pos.y = pos.y;
 
