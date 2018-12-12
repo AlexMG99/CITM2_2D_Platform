@@ -31,7 +31,7 @@ bool j1Scene_UI::Start()
 	bool ret = true;
 
 	App->gui->gui_list.add(App->gui->CreateSprite({ 10,55 }, { 420,0,15,15 }));
-	/*App->gui->gui_list.add(App->gui->CreateLabel());*/
+	App->gui->gui_list.add(App->gui->CreateLabel({ 30, 55 }, "X ", Label_Type::CONFIG, {255,255,255,255}));
 	return ret;
 }
 

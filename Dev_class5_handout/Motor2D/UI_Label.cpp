@@ -44,17 +44,11 @@ bool UI_Label::PostUpdate()
 	{
 	case IDLE:
 		ChangeTexture({ 0,0,0,0 });
-		pos.y = parent->pos.y + 5;
-		pos.x = parent->pos.x + 10;
 		break;
 	case HOVER:
 		ChangeTexture({ 230,214,144,255 });
-		pos.y = parent->pos.y + 5;
-		pos.x = parent->pos.x + 12;
 		break;
 	case CLICK:
-		pos.y = parent->pos.y + 8;
-		pos.x = parent->pos.x + 12;
 		break;
 	}
 	return true;
@@ -66,7 +60,12 @@ bool UI_Label::OnHover()
 	App->input->GetMousePosition(x, y);
 	uint w, h;
 	App->tex->GetSize(tex, w, h);
-	return ((pos.x < x && pos.y + App->render->camera.y < y && pos.x + (int)w > x && pos.y + (int)h > y) || parent->OnHover());
+	bool ret = false;
+	if (parent != nullptr)
+	{
+		ret = parent->OnHover();
+	}
+	return ((pos.x < x && pos.y + App->render->camera.y < y && pos.x + (int)w > x && pos.y + (int)h > y) || ret);
 }
 
 void UI_Label::ChangeTexture(SDL_Color color)
