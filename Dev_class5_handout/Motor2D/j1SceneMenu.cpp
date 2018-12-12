@@ -39,11 +39,11 @@ bool j1SceneMenu::Start()
 	App->render->camera = { -1100,0 };
 	LoadLevel();
 
-	App->gui->gui_list.add(App->gui->CreateButton({ 435, 70 }, PLAY, "Play"));
+	App->gui->gui_list.add(App->gui->CreateButton({ 30, 70 }, PLAY, "OwO"));
 	//App->gui->gui_list.add(App->gui->CreateButton({ 435, 140 }, SDL_Rect({ 0,0,190,49 }), "Continue"));
 
 	////Config Button
-	App->gui->gui_list.add(App->gui->CreateButton({ 435, 130 }, SETTINGS, "Settings"));
+	App->gui->gui_list.add(App->gui->CreateButton({ 30, 130 }, SETTINGS, "Settings"));
 
 	////Orange Sprite
 	App->gui->gui_list.add(App->gui->CreateSprite({ 771, 7 }, { 448,4,255,174 }));
@@ -100,15 +100,9 @@ bool j1SceneMenu::PostUpdate()
 // Called before quitting
 bool j1SceneMenu::CleanUp()
 {
-	LOG("Freeing scene");
-
+	LOG("Freeing Scene Menu");
+	App->gui->CleanUp();
 	return true;
-}
-
-//Reload Scene
-void j1SceneMenu::Reset() const
-{
-
 }
 
 

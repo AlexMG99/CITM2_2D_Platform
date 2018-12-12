@@ -2,6 +2,7 @@
 #include "UI_Label.h"
 #include "j1Render.h"
 #include "j1Fonts.h"
+#include "j1Window.h"
 
 
 UI_Label::UI_Label(const char* text, Label_Type type, SDL_Color color)
@@ -32,7 +33,7 @@ bool UI_Label::Start()
 
 bool UI_Label::PostUpdate()
 {
-	App->render->Blit(tex, pos.x, pos.y);
+	App->render->Blit(tex, pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y);
 	return true;
 }
 

@@ -28,48 +28,21 @@ bool UI_Button::Start()
 	return true;
 }
 
-bool UI_Button::Update(float dt)
-{
-	bool ret = true;
-	if (OnClick())
-	{
-		switch (button_type)
-		{
-		case PLAY:
-			ret = App->fadeToBlack->FadeToBlack(App->scene_menu, App->scene, 1.00f);
-			break;
-		case SETTINGS:
-			velocity = 15.00f;
-			break;
-		default:
-			ret = false;
-			LOG("Button does not have any Type!");
-			break;
-		}
-	}
-	if (App->render->camera.x < -40)
-		App->render->camera.x += velocity;
-	else
-		velocity = 0.00f;
-
-	return ret;
-}
-
 bool UI_Button::PostUpdate()
 {
 	bool ret = false;
 	switch (state)
 	{
 	case IDLE:
-		ret = App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y, &button_rect);
+		ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect);
 		break;
 
 	case HOVER:
-		ret = App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y, &button_rect_hover);
+		ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect_hover);
 		break;
 
 	case CLICK:
-		ret = App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y, &button_rect_click);
+		ret = App->render->Blit(App->gui->GetAtlas(), pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y, &button_rect_click);
 		break;
 	}
 
@@ -80,7 +53,7 @@ bool UI_Button::OnHover()
 {
 	int x, y;
 	App->input->GetMousePosition(x, y);
-	bool ret = pos.x + App->render->camera.x / (int)App->win->GetScale() < x && pos.y + App->render->camera.y < y && pos.x + App->render->camera.x / (int)App->win->GetScale() + button_rect.w > x && pos.y + button_rect.h > y;
+	bool ret = pos.x < x && pos.y + App->render->camera.y < y && pos.x + button_rect.w > x && pos.y + button_rect.h > y;
 	return ret;
 
 }

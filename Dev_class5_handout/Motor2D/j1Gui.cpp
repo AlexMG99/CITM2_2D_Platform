@@ -91,6 +91,16 @@ bool j1Gui::CleanUp()
 {
 	LOG("Freeing GUI");
 
+	p2List_item<UI_GUI*>* item;
+	item = gui_list.start;
+
+	while (item != NULL)
+	{
+		RELEASE(item->data);
+		item = item->next;
+	}
+	gui_list.clear();
+
 	return true;
 }
 

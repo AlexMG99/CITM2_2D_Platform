@@ -50,6 +50,8 @@ public:
 	UI_GUI* CreateButton(iPoint pos, Button_Type type, const char* text = "");
 
 	SDL_Texture* GetAtlas() const;
+
+public:
 	p2List<UI_GUI*> gui_list;
 
 private:
