@@ -38,6 +38,14 @@ bool j1Fonts::Awake(pugi::xml_node& conf)
 	return ret;
 }
 
+bool j1Fonts::Start()
+{
+	title = Load("fonts/kenvector_future.ttf", 34);
+	title_config = Load("fonts/kenvector_future.ttf", 10);
+	title_buttons = Load("fonts/kenvector_future.ttf", 24);
+	return true;
+}
+
 // Called before quitting
 bool j1Fonts::CleanUp()
 {

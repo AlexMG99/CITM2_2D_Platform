@@ -21,18 +21,7 @@ UI_Label::UI_Label(const char* text, Label_Type type, SDL_Color color, UI_GUI* p
 
 bool UI_Label::Start()
 {
-	switch (label_type) {
-
-	case TITLE:
-		tex = App->font->Print(label_text.GetString(), label_color, App->font->title);
-		break;
-	case CONFIG:
-		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_config);
-		break;
-	case BUTTON:
-		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_buttons);
-		break;
-	}
+	ChangeTexture(label_color);
 	return true;
 }
 
@@ -70,7 +59,20 @@ bool UI_Label::OnHover()
 
 void UI_Label::ChangeTexture(SDL_Color color)
 {
-	App->tex->UnLoad(tex);
+	if(tex != nullptr)
+		App->tex->UnLoad(tex);
+
 	label_color = color;
-	tex = App->font->Print(label_text.GetString(), label_color, App->font->title_buttons);
+
+	switch (label_type) {
+	case TITLE:
+		tex = App->font->Print(label_text.GetString(), label_color, App->font->title);
+		break;
+	case CONFIG:
+		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_config);
+		break;
+	case BUTTON:
+		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_buttons);
+		break;
+	}
 }

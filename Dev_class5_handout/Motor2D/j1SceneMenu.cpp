@@ -60,17 +60,10 @@ bool j1SceneMenu::Start()
 
 	
 
-	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 20 }, "Volume", CONFIG, { 0, 0, 0, 0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 60 }, "Fx  Volume", CONFIG, { 0, 0, 0, 0 }));
-	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 100 }, "Cap  to  30  fps", CONFIG, { 0, 0, 0, 0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 20 }, "Volume", BUTTON, { 0, 0, 0, 0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 60 }, "Fx  Volume", BUTTON, { 0, 0, 0, 0 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 416, 100 }, "Cap  to  30  fps", BUTTON, { 0, 0, 0, 0 }));
 
-	
-
-	App->font->title = App->font->Load("fonts/kenvector_future.ttf", 34);
-
-	App->font->title_config = App->font->Load("fonts/kenvector_future.ttf", 15);
-
-	App->font->title_buttons = App->font->Load("fonts/kenvector_future.ttf", 16);
 	return ret;
 }
 
