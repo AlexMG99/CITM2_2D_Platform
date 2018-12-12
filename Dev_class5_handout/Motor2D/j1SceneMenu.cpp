@@ -36,14 +36,15 @@ bool j1SceneMenu::Awake(pugi::xml_node& config)
 bool j1SceneMenu::Start()
 {
 	bool ret = true;
-	App->render->camera = { -1100,0 };
+
 	LoadLevel();
+
+	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };
+
+	//Menu Button
 	SDL_Rect rect_button[3] = { {0,0,190,49}, { 190,0,190,49 }, {0,195,190,49} };
 	App->gui->gui_list.add(App->gui->CreateButton({ 30, 70 }, PLAY, rect_button[0], &rect_button[1], &rect_button[2], "Play"));
-	//App->gui->gui_list.add(App->gui->CreateButton({ 435, 140 }, SDL_Rect({ 0,0,190,49 }), "Continue"));
-
-	////Config Button
-	//App->gui->gui_list.add(App->gui->CreateButton({ 30, 130 }, SETTINGS, "Settings"));
+	App->gui->gui_list.add(App->gui->CreateButton({ 30, 130 }, SETTINGS, rect_button[0], &rect_button[1], &rect_button[2], "Settings"));
 
 	////Orange Sprite
 	App->gui->gui_list.add(App->gui->CreateSprite({ 771, 7 }, { 448,4,255,174 }));
