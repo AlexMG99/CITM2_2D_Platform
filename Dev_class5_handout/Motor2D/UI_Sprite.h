@@ -2,7 +2,7 @@
 #define _UI_SPRITE__H
 
 #include "p2Defs.h"
-#include "UI_GUI.h"
+#include "j1Gui.h"
 #include "SDL/include/SDL.h"
 
 class UI_Sprite : public UI_GUI

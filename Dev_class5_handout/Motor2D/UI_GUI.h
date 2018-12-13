@@ -36,7 +36,7 @@ public:
 	iPoint		position;
 	UI_GUI*		parent = nullptr;
 
-	bool		static_object = true;
+	bool		static_object = false;
 
 };
 

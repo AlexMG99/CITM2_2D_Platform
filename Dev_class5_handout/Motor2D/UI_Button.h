@@ -12,6 +12,7 @@ enum Button_Type
 	CREDIT,
 	MUTE,
 	CAPTO30,
+	VOLUME,
 	EXIT
 };
 

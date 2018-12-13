@@ -401,6 +401,7 @@ void j1Entity_Player::Entity_Collision(Collider* other_coll)
 		break;
 
 	case COLLIDER_COIN:
+		
 		break;
 
 	case COLLIDER_WIN:

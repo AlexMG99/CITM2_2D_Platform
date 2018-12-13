@@ -178,6 +178,7 @@ void j1Entity::Entity_Collision(Collider* other_coll)
 	case COLLIDER_PLAYER:
 		if (coll->type == COLLIDER_COIN)
 		{
+			
 			to_delete = true;
 		}
 		else

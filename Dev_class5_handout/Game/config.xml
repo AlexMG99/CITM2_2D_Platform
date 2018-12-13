@@ -28,6 +28,7 @@
     <fx_death>fx/player_death_fx.wav</fx_death>
     <fx_jump>fx/player_jump.wav</fx_jump>
     <fx_enemy_death>fx/enemy_death.wav</fx_enemy_death>
+    <fx_coin>fx/coin_fx.wav</fx_coin>
   </entityManager>
 
   <map>

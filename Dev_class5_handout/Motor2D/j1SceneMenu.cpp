@@ -53,10 +53,13 @@ bool j1SceneMenu::Start()
 	App->gui->gui_list.add(App->gui->CreateButton({ 290, 213 }, MUTE, audio_rect_button[0], &audio_rect_button[1], &audio_rect_button[2]));
 
 	////Orange Sprite
-	App->gui->gui_list.add(App->gui->CreateSprite({ 405, 7 }, { 448,4,255,174 }));
+	App->gui->gui_list.add(App->gui->CreateSprite({ 38, 7 }, { 448,4,255,174 }));
 
+
+	//Slider 
+	
 	SDL_Rect capto30_rect_button[3] = { { 422,215,36,36 }, { 458,215,36,36 }, { 381,36,36,36 } };
-	App->gui->gui_list.add(App->gui->CreateButton({ 595, 89 },CAPTO30, capto30_rect_button[0], &capto30_rect_button[1], &capto30_rect_button[2]));
+	App->gui->gui_list.add(App->gui->CreateButton({ 590, 89 },CAPTO30, capto30_rect_button[0], &capto30_rect_button[1], &capto30_rect_button[2]));
 
 	
 
