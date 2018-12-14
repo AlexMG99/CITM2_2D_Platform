@@ -36,6 +36,8 @@ public:
 	iPoint		position;
 	UI_GUI*		parent = nullptr;
 
+	/*SDL_Rect elementRect;*/ //interaction rect
+	
 	bool		static_object = false;
 
 };

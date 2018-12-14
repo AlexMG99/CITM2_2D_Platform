@@ -8,28 +8,32 @@
 #include "j1Render.h"
 #include "j1Fonts.h"
 #include "UI_Slider.h"
-#include "UI_Button.h"
+#include "UI_Thumb.h"
 
-UI_Slider::UI_Slider(SDL_Rect slider_box)
+
+UI_Thumb::UI_Thumb(iPoint pos, SDL_Rect s_thumb, UI_GUI* parent)
 {
-	s_box = slider_box;
+
+	thumb = s_thumb;
+	this->parent = parent;
 }
 
-bool UI_Slider::Start()
+bool UI_Thumb::Start()
 {
-	
-	return true;
+	return false;
 }
 
-bool UI_Slider::PostUpdate()
+
+bool UI_Thumb::PostUpdate()
 {
 	bool ret = true;
 
-	ret = App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y, &s_box);
-
+	ret = App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y, &thumb);
 
 	return ret;
 }
+
+
 
 //void UI_Slider::OnClick()
 //{

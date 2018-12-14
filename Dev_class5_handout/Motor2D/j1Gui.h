@@ -50,7 +50,7 @@ public:
 	UI_GUI* CreateLabel(iPoint pos, const char* text, Label_Type type, SDL_Color color = {0,0,0,0}, UI_GUI* parent = nullptr);
 	UI_GUI* CreateSprite(iPoint pos, SDL_Rect rect);
 	UI_GUI* CreateButton(iPoint pos, Button_Type type, SDL_Rect idle_rect, SDL_Rect* idle_hover = NULL, SDL_Rect* idle_click = NULL, const char* text = "");
-	/*UI_GUI* CreateSlider(iPoint pos, Button_Type type, SDL_Rect idle_rect, SDL_Rect* idle_hover = NULL, SDL_Rect* idle_click = NULL);*/
+	UI_GUI* CreateSlider(iPoint pos, SDL_Rect slider_box);
 
 	SDL_Texture* GetAtlas() const;
 

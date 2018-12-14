@@ -108,6 +108,7 @@
     <ClCompile Include="UI_Label.cpp" />
     <ClCompile Include="UI_Slider.cpp" />
     <ClCompile Include="UI_Sprite.cpp" />
+    <ClCompile Include="UI_Thumb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Entity.h" />
@@ -149,6 +150,7 @@
     <ClInclude Include="UI_Label.h" />
     <ClInclude Include="UI_Slider.h" />
     <ClInclude Include="UI_Sprite.h" />
+    <ClInclude Include="UI_Thumb.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Game\maps\hello2.tmx">

@@ -12,7 +12,7 @@
 #include "UI_Label.h"
 #include "UI_Slider.h"
 #include "UI_Sprite.h"
-
+#include "UI_Thumb.h"
 #include "SDL/include/SDL.h"
 
 
@@ -137,19 +137,18 @@ UI_GUI* j1Gui::CreateButton(iPoint pos, Button_Type type, SDL_Rect idle_rect, SD
 	interactive = true;
 	return button;
 }
-//UI_GUI * j1Gui::CreateSlider(iPoint pos, Button_Type type, SDL_Rect idle_rect, SDL_Rect * idle_hover, SDL_Rect * idle_click)
-//{
-//	UI_GUI*slider = nullptr;
-//	slider = new UI_Slider(type, idle_rect, idle_hover, idle_click);
-//	slider->pos.x = pos.x;
-//	slider->pos.y = pos.y;
-//	interactive = true;
-//
-//
-//
-//	return slider;
-//}
-//;
+UI_GUI * j1Gui::CreateSlider(iPoint pos, SDL_Rect slider_box)
+{
+	UI_GUI*slider = nullptr;
+	slider = new UI_Slider(slider_box);
+	slider->pos.x = pos.x;
+	slider->pos.y = pos.y;
+	/*interactive = true;*/
+
+
+
+	return slider;
+};
 
 
 // const getter for atlas
