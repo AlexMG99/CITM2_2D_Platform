@@ -35,7 +35,9 @@ bool UI_Label::PostUpdate()
 		ChangeTexture({ 0,0,0,0 });
 		break;
 	case HOVER:
-		ChangeTexture({ 230,214,144,255 });
+		if (label_type != CONFIG) {
+			ChangeTexture({ 230,214,144,255 });
+		}
 		break;
 	case CLICK:
 		break;

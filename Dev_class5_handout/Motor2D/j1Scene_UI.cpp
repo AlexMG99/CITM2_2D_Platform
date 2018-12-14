@@ -2,8 +2,12 @@
 #include "j1Scene_UI.h"
 #include "p2Log.h"
 #include "j1Input.h"
+#include "UI_GUI.h"
+#include "j1Render.h"
+#include "UI_Label.h"
 #include "j1Gui.h"
 #include "j1Fonts.h"
+#include "j1Timer.h"
 
 #include "Brofiler/Brofiler.h"
 #include "SDL/include/SDL.h"
@@ -31,9 +35,12 @@ bool j1Scene_UI::Start()
 {
 	bool ret = true;
 
-	App->gui->gui_list.add(App->gui->CreateSprite({ 10,55 }, { 420,0,15,15 }));
-	App->gui->gui_list.add(App->gui->CreateLabel({ 40, 55 }, "", Label_Type::CONFIG, {255,255,255,255}));
-
+	App->gui->gui_list.add(App->gui->CreateSprite({ 5,5 }, { 420,0,15,15 }));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 250, 55 }, "SCORE", Label_Type::CONFIG, {255,255,255,255}));
+	App->gui->gui_list.add(App->gui->CreateLabel({ 130, 55 }, "TIMER", Label_Type::CONFIG, { 255,255,255,255 }));
+	App->gui->gui_list.add(App->gui->CreateSprite({ -361,55 }, { 706,6,14,13 }));
+	App->gui->gui_list.add(App->gui->CreateSprite({ -341,55 }, { 706,6,14,13 }));
+	App->gui->gui_list.add(App->gui->CreateSprite({ -321,55 }, { 706,6,14,13 }));
 	return ret;
 }
 
@@ -55,7 +62,7 @@ bool j1Scene_UI::PreUpdate(float dt)
 bool j1Scene_UI::Update(float dt)
 {
 	BROFILER_CATEGORY("Update_SceneUI", Profiler::Color::DarkKhaki);
-
+	
 	return true;
 }
 
