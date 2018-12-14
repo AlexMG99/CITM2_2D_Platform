@@ -2,6 +2,8 @@
 #define _SCENE_PAUSE_H
 
 #include "j1Module.h"
+#include "j1PerfTimer.h"
+#include "j1Timer.h"
 #include "p2List.h"
 
 class j1Scene_UI : public j1Module
@@ -40,6 +42,10 @@ public:
 private:
 	p2SString			path;
 	p2List<j1Module*>	current_level;
+	j1PerfTimer			ptimer;
+
+	uint player_score;
+	c
 };
 
 #endif // !_SCENE_PAUSE__H

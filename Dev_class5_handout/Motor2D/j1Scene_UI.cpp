@@ -7,7 +7,7 @@
 #include "UI_Label.h"
 #include "j1Gui.h"
 #include "j1Fonts.h"
-#include "j1Timer.h"
+
 
 #include "Brofiler/Brofiler.h"
 #include "SDL/include/SDL.h"
@@ -33,6 +33,7 @@ bool j1Scene_UI::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene_UI::Start()
 {
+	PERF_START(ptimer);
 	bool ret = true;
 
 	App->gui->gui_list.add(App->gui->CreateLabel({ 250, 5 }, "SCORE", Label_Type::CONFIG, {255,255,255,255}, true));
@@ -41,7 +42,7 @@ bool j1Scene_UI::Start()
 	App->gui->gui_list.add(App->gui->CreateSprite({ 30,5 }, { 706,6,14,13 }, true));
 	App->gui->gui_list.add(App->gui->CreateSprite({ 50,5 }, { 706,6,14,13 }, true));
 
-	SDL_Rect audio_rect_button[3] = { { 342,178,38,38 }, {342,98,38,38},{ 294,143,39,38 } };
+	
 	return ret;
 }
 
@@ -63,7 +64,7 @@ bool j1Scene_UI::PreUpdate(float dt)
 bool j1Scene_UI::Update(float dt)
 {
 	BROFILER_CATEGORY("Update_SceneUI", Profiler::Color::DarkKhaki);
-	
+	PERF_PEEK(ptimer);
 	return true;
 }
 
