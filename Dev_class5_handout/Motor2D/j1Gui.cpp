@@ -144,11 +144,18 @@ UI_GUI * j1Gui::CreateSlider(iPoint pos, SDL_Rect slider_box)
 	slider->pos.x = pos.x;
 	slider->pos.y = pos.y;
 	/*interactive = true;*/
+     return slider;
+}
+UI_GUI * j1Gui::CreateThumb(iPoint pos, SDL_Rect s_thumb, UI_GUI * parent)
+{
+	UI_GUI* thumb = nullptr;
+	thumb = new UI_Thumb(s_thumb, parent);
+	thumb->pos.x = pos.x;
+	thumb->pos.y = pos.y;
 
-
-
-	return slider;
-};
+	return thumb;
+}
+;
 
 
 // const getter for atlas

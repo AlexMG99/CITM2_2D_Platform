@@ -11,7 +11,7 @@
 #include "UI_Thumb.h"
 
 
-UI_Thumb::UI_Thumb(iPoint pos, SDL_Rect s_thumb, UI_GUI* parent)
+UI_Thumb::UI_Thumb(SDL_Rect s_thumb, UI_GUI* parent)
 {
 
 	thumb = s_thumb;

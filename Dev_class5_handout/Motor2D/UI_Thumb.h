@@ -10,7 +10,7 @@ class SDL_Rect;
 class UI_Thumb : public UI_GUI
 {
 public:
-	UI_Thumb(iPoint pos, SDL_Rect s_thumb ,UI_GUI* parent);
+	UI_Thumb(SDL_Rect s_thumb ,UI_GUI* parent);
 	~UI_Thumb() {};
 
 	bool Start();

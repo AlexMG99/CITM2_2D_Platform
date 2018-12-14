@@ -17,7 +17,7 @@ UI_Slider::UI_Slider(SDL_Rect slider_box)
 
 bool UI_Slider::Start()
 {
-	
+	App->gui->gui_list.add(App->gui->CreateThumb({ pos.x+6, pos.y+1  }, {619,182,24,22},this));
 	return true;
 }
 
