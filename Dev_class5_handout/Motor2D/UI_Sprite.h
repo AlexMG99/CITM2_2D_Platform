@@ -8,7 +8,7 @@
 class UI_Sprite : public UI_GUI
 {
 public:
-	UI_Sprite(SDL_Rect rect);
+	UI_Sprite(SDL_Rect rect, UI_GUI* parent);
 	~UI_Sprite() {};
 
 	bool PostUpdate();

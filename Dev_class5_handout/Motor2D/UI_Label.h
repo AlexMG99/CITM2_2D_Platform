@@ -21,7 +21,6 @@ public:
 	bool PostUpdate();
 
 	bool OnHover();
-	bool OnClick();
 	void ChangeTexture(SDL_Color color);
 
 private:

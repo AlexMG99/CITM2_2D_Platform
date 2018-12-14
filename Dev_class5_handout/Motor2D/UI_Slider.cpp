@@ -10,9 +10,10 @@
 #include "UI_Slider.h"
 #include "UI_Button.h"
 
-UI_Slider::UI_Slider(SDL_Rect slider_box)
+UI_Slider::UI_Slider(SDL_Rect slider_box, UI_GUI* parent)
 {
 	s_box = slider_box;
+	this->parent = parent;
 }
 
 bool UI_Slider::Start()
@@ -30,7 +31,3 @@ bool UI_Slider::PostUpdate()
 
 	return ret;
 }
-
-//void UI_Slider::OnClick()
-//{
-//}
