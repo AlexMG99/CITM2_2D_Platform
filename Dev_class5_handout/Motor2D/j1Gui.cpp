@@ -106,35 +106,39 @@ bool j1Gui::CleanUp()
 }
 
 
-UI_GUI* j1Gui::CreateLabel(iPoint pos, const char * text, Label_Type type, SDL_Color color, UI_GUI* parent)
+UI_GUI* j1Gui::CreateLabel(iPoint pos, const char * text, Label_Type type, SDL_Color color, bool static_obj, UI_GUI* parent)
 {
 	UI_GUI* label = nullptr;
 	label = new UI_Label(text, type, color, parent);
 	label->pos.x = pos.x;
 	label->pos.y = pos.y;
-	interactive = true;
+
+	label->static_object = static_obj;
 
 	return label;
 }
 
-UI_GUI* j1Gui::CreateSprite(iPoint pos, SDL_Rect rect)
+UI_GUI* j1Gui::CreateSprite(iPoint pos, SDL_Rect rect, bool static_obj)
 {
 	UI_GUI* sprite = nullptr;
 	sprite = new UI_Sprite(rect);
 	sprite->pos.x = pos.x;
 	sprite->pos.y = pos.y;
-	interactive = true;
+
+	sprite->static_object = static_obj;
 
 	return sprite;
 }
 
-UI_GUI* j1Gui::CreateButton(iPoint pos, Button_Type type, SDL_Rect idle_rect, SDL_Rect* idle_hover, SDL_Rect* idle_click, const char* text)
+UI_GUI* j1Gui::CreateButton(iPoint pos, Button_Type type, SDL_Rect idle_rect, SDL_Rect* idle_hover, SDL_Rect* idle_click, const char* text, bool static_obj)
 {
 	UI_GUI* button = nullptr;
 	button = new UI_Button(text, type, idle_rect, idle_hover, idle_click);
 	button->pos.x = pos.x;
 	button->pos.y = pos.y;
-	interactive = true;
+
+	button->static_object = static_obj;
+
 	return button;
 }
 UI_GUI * j1Gui::CreateSlider(iPoint pos, SDL_Rect slider_box)
