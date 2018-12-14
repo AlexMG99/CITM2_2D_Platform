@@ -9,7 +9,7 @@
 class UI_Slider: public UI_GUI
 {
 public:
-	UI_Slider(SDL_Rect slider_box);
+	UI_Slider(SDL_Rect slider_box, UI_GUI* parent);
 	~UI_Slider() {};
 
 	bool Start();

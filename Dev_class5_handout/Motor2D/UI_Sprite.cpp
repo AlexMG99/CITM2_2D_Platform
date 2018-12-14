@@ -6,9 +6,10 @@
 #include "j1Gui.h"
 
 
-UI_Sprite::UI_Sprite(SDL_Rect rect)
+UI_Sprite::UI_Sprite(SDL_Rect rect, UI_GUI* parent)
 {
 	sprite_rect = rect;
+	this->parent = parent;
 }
 
 
