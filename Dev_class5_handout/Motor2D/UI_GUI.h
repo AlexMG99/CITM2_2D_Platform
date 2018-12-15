@@ -39,7 +39,6 @@ public:
 	/*SDL_Rect elementRect;*/ //interaction rect
 	
 	bool		static_object = false;
-
 };
 
 

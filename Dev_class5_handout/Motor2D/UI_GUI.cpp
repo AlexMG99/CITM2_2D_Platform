@@ -5,6 +5,8 @@
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Window.h"
+#include "j1Audio.h"
+#include "j1Gui.h"
 
 
 UI_GUI::~UI_GUI()
@@ -65,6 +67,10 @@ bool UI_GUI::OnClick()
 		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 		{
 			ret = true;
+		}
+		else if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+		{
+			App->audio->PlayFx(App->gui->fx_buton_pressed);
 		}
 	}
 	return ret;

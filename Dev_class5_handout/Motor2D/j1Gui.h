@@ -57,10 +57,12 @@ public:
 
 public:
 	p2List<UI_GUI*> gui_list;
-
+	uint			fx_buton_pressed;
 private:
-	SDL_Texture* atlas;
-	p2SString atlas_file_name;
+	SDL_Texture*	atlas;
+	p2SString		atlas_file_name;
+	p2SString		fx_button_pressed_string;
+	
 
 
 };

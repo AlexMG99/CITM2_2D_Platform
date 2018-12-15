@@ -4,6 +4,7 @@
 #include "p2Point.h"
 #include "j1App.h"
 #include "j1Render.h"
+#include "j1Audio.h"
 #include "j1Textures.h"
 #include "j1Fonts.h"
 #include "j1Input.h"
@@ -33,6 +34,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
+	fx_button_pressed_string = conf.child("fx_button").child_value();
 
 	return ret;
 }
@@ -41,6 +43,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
+	fx_buton_pressed = App->audio->LoadFx(fx_button_pressed_string.GetString());
 
 	p2List_item<UI_GUI*>* item_gui = gui_list.start;
 	while (item_gui != nullptr)

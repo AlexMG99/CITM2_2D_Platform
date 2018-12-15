@@ -22,6 +22,7 @@
 
   <gui>
     <atlas file="gui/yellowSheet.png"/>
+    <fx_button>fx/button_fx.wav</fx_button>
   </gui>
 
   <entityManager>

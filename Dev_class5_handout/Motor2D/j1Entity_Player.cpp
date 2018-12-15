@@ -3,6 +3,7 @@
 #include "j1Entity_Player.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
+#include "j1SceneMenu.h"
 #include "j1FadeToBlack.h"
 #include "j1Map.h"
 #include "j1Audio.h"
@@ -411,7 +412,7 @@ void j1Entity_Player::Entity_Collision(Collider* other_coll)
 		}
 		else if (App->scene2->IsEnabled())
 		{
-			App->fadeToBlack->FadeToBlack(App->scene2, App->scene);
+			App->fadeToBlack->FadeToBlack(App->scene2, App->scene_menu);
 		}
 		break;
 	}

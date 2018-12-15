@@ -48,8 +48,9 @@ bool j1SceneMenu::Start()
 	//Menu Button
 	SDL_Rect rect_button[3] = { {0,0,170,43}, { 190,0,170,43 }, {0,198,170,43} };
 	button_list.add(App->gui->CreateButton({ 90, 60 }, PLAY, rect_button[0], &rect_button[1], &rect_button[2], "Play"));
-	button_list.add(App->gui->CreateButton({ 90, 110 }, SETTINGS, rect_button[0], &rect_button[1], &rect_button[2], "Settings"));
-	button_list.add(App->gui->CreateButton({ 90, 160 }, CONTINUE, rect_button[0], &rect_button[1], &rect_button[2], "Continue"));
+	button_list.add(App->gui->CreateButton({ 90, 160 }, SETTINGS, rect_button[0], &rect_button[1], &rect_button[2], "Settings"));
+	button_list.add(App->gui->CreateButton({ 90, 110 }, CONTINUE, rect_button[0], &rect_button[1], &rect_button[2], "Continue"));
+	button_list.add(App->gui->CreateButton({ 90, 210 }, EXIT, rect_button[0], &rect_button[1], &rect_button[2], "Exit"));
 	SDL_Rect credit_rect_button[3] = { { 587,213,38,38 }, {496,213,38,38},{ 541,213,39,38 } };
 	button_list.add(App->gui->CreateButton({ 30, 213 }, CREDIT, credit_rect_button[0], &credit_rect_button[1], &credit_rect_button[2]));
 
@@ -105,7 +106,7 @@ bool j1SceneMenu::PreUpdate(float dt)
 bool j1SceneMenu::Update(float dt)
 {
 	BROFILER_CATEGORY("Update_SceneIntro", Profiler::Color::DarkKhaki);
-
+	bool ret = true;
 	App->map->Draw();
 
 	p2List_item<UI_Button*>* button_item = button_list.start;
@@ -121,12 +122,15 @@ bool j1SceneMenu::Update(float dt)
 			case SETTINGS:
 				App->render->camera.x = -1100;
 				break;
+			case EXIT:
+				ret = false;
+				break;
 			}
 		}
 		button_item = button_item->next;
 	}
 
-	return true;
+	return ret;
 }
 
 // Called each loop iteration
