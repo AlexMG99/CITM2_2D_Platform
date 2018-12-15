@@ -19,6 +19,7 @@
 #include "UI_Sprite.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
+#include "j1Scene_UI.h"
 
 #include "Brofiler/Brofiler.h"
 
@@ -57,7 +58,7 @@ bool j1Scene::Start()
 
 	RELEASE_ARRAY(data);
 
-	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };
+	App->render->camera = { -150, 0 };
 
 	pugi::xml_parse_result result = entities_files.load_file(path.GetString());
 
@@ -123,6 +124,7 @@ bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
 	App->map->CleanUp();
+	App->scene_ui->CleanUp();
 	App->entity_manager->CleanUp();
 
 	entities_files.reset();
@@ -155,6 +157,7 @@ void j1Scene::LoadLevel()
 	App->audio->PlayMusic(music_path.GetString());
 
 	App->entity_manager->Start();
+	App->scene_ui->Start();
 }
 
 

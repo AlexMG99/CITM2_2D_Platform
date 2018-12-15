@@ -20,10 +20,11 @@ class  UI_Button :public UI_GUI
 {
 public:
 	UI_Button(const char* text, Button_Type type, SDL_Rect idle_rect, SDL_Rect* rect_hover, SDL_Rect* rect_click, UI_GUI* parent);
-	~UI_Button() {};
+	~UI_Button();
 
 	bool Start();
 	bool PostUpdate();
+	Button_Type	GetType();
 
 	bool OnHover();
 

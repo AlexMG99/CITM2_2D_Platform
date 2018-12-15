@@ -2,6 +2,8 @@
 #define __j1SCENE_INTRO_H__
 
 #include "j1Module.h"
+#include "j1Gui.h"
+#include "UI_Button.h"
 
 struct SDL_Texture;
 
@@ -42,6 +44,8 @@ private:
 	p2SString			path;
 	p2SString			map_path;
 	p2List<j1Module*>	current_level;
+
+	p2List<UI_Button*>	button_list;
 
 };
 

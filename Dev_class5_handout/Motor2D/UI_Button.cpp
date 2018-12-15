@@ -36,10 +36,14 @@ UI_Button::UI_Button(const char* text, Button_Type type, SDL_Rect idle_rect, SDL
 	this->parent = parent;
 }
 
+UI_Button::~UI_Button()
+{
+}
+
 bool UI_Button::Start()
 {
 	if (button_text.Length() > 0)
-		App->gui->gui_list.add(App->gui->CreateLabel({ pos.x + 10, pos.y + 5 }, button_text.GetString(), BUTTON, {0,0,0,0}, static_object, this));
+		App->gui->CreateLabel({ pos.x + 10, pos.y + 5 }, button_text.GetString(), BUTTON, {0,0,0,0}, static_object, this);
 	return true;
 }
 
@@ -64,6 +68,11 @@ bool UI_Button::PostUpdate()
 	}
 
 	return ret;
+}
+
+Button_Type UI_Button::GetType()
+{
+	return button_type;
 }
 
 bool UI_Button::OnHover()

@@ -7,6 +7,10 @@
 #include "j1Window.h"
 
 
+UI_GUI::~UI_GUI()
+{
+}
+
 bool UI_GUI::PreUpdate(float dt)
 {
 	switch (state)

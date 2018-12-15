@@ -13,6 +13,7 @@
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
+#include "j1Scene_UI.h"
 
 #include "Brofiler/Brofiler.h"
 
@@ -119,6 +120,7 @@ bool j1Scene2::CleanUp()
 	LOG("Freeing scene");
 	App->map->CleanUp();
 	App->entity_manager->CleanUp();
+	App->scene_ui->CleanUp();
 
 	entities_files.reset();
 	return true;
@@ -149,4 +151,5 @@ void j1Scene2::LoadLevel()
 	App->audio->PlayMusic(music_path.GetString());
 
 	App->entity_manager->Start();
+	App->scene_ui->Start();
 }

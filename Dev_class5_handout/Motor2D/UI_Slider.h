@@ -14,7 +14,6 @@ public:
 
 	bool Start();
 	bool PostUpdate();
-	/*void OnClick();*/
 
 
 private:

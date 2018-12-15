@@ -15,7 +15,7 @@ class UI_Label : public UI_GUI
 {
 public:
 	UI_Label(const char* text, Label_Type type, SDL_Color color, UI_GUI* parent);
-	~UI_Label() {};
+	~UI_Label();
 
 	bool Start();
 	bool PostUpdate();

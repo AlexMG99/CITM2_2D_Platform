@@ -17,6 +17,15 @@ UI_Label::UI_Label(const char* text, Label_Type type, SDL_Color color, UI_GUI* p
 	this->parent = parent;
 }
 
+UI_Label::~UI_Label()
+{
+	if (tex != nullptr)
+	{
+		App->tex->UnLoad(tex);
+		tex = nullptr;
+	}
+}
+
 
 
 bool UI_Label::Start()
