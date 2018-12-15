@@ -122,7 +122,6 @@ bool j1SceneMenu::Update(float dt)
 				break;
 			case SETTINGS:
 				App->render->camera.x = -1100;
-
 				break;
 			case CONTINUE:
 				break;

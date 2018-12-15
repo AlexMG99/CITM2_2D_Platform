@@ -44,8 +44,10 @@ private:
 
 public:
 	char		player_score_string[5] = "0";
+	char		timer_string[20] = "0";
 	uint		player_score = 0;
 	UI_Label*	score_label = nullptr;
+	UI_Label*	timer_label = nullptr;
 };
 
 #endif // !_SCENE_PAUSE__H

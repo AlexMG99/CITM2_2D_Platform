@@ -54,7 +54,6 @@ bool UI_Button::PostUpdate()
 	switch (state)
 	{
 	case IDLE:
-
 		ret = App->render->Blit(App->gui->GetAtlas(), position.x, position.y, &button_rect[IDLE]); //(-1100) 
 		break;
 

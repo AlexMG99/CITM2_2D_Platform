@@ -36,9 +36,10 @@ bool j1Scene_UI::Start()
 	PERF_START(ptimer);
 	bool ret = true;
 	App->gui->CreateSprite({ 0,0 }, { 657,210,451,31 }, true);
-	App->gui->CreateLabel({ 200, 5 }, "SCORE", Label_Type::CONFIG, {255,255,255,255}, true);
-	score_label = App->gui->CreateLabel({ 270,5 }, player_score_string, Label_Type::CONFIG, { 255,255,255,255 }, true);
-	//App->gui->CreateLabel({ 130, 5 }, "TIMER", Label_Type::CONFIG, { 255,255,255,255 }, true);
+	App->gui->CreateLabel({ 220, 5 }, "SCORE", Label_Type::CONFIG, {255,255,255,255}, true);
+	score_label = App->gui->CreateLabel({ 290,5 }, player_score_string, Label_Type::CONFIG, { 255,255,255,255 }, true);
+	App->gui->CreateLabel({ 80, 5 }, "TIMER", Label_Type::CONFIG, { 255,255,255,255 }, true);
+	timer_label = App->gui->CreateLabel({ 165,5 }, timer_string, Label_Type::CONFIG, { 255,255,255,255 }, true);
 	App->gui->CreateSprite({ 10,5 }, { 706,6,14,13 }, true);
 	App->gui->CreateSprite({ 30,5 }, { 706,6,14,13 }, true);
 	App->gui->CreateSprite({ 50,5 }, { 706,6,14,13 }, true);
@@ -65,7 +66,10 @@ bool j1Scene_UI::PreUpdate(float dt)
 bool j1Scene_UI::Update(float dt)
 {
 	BROFILER_CATEGORY("Update_SceneUI", Profiler::Color::DarkKhaki);
-	PERF_PEEK(ptimer);
+	float timer = (float)ptimer.ReadMs() / 1000;
+	sprintf_s(timer_string, 20, "%.2f", timer);
+	timer_label->ChangeText(timer_string);
+	LOG("Hey");
 	return true;
 }
 

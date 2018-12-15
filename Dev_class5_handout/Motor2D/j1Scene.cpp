@@ -102,6 +102,7 @@ bool j1Scene::Update(float dt)
 	App->render->camera.y = (int)App->map->data.player_properties.Get("camera.y");
 
 	App->map->Draw();
+	App->scene_ui->Update(dt);
 	
 	return true;
 }

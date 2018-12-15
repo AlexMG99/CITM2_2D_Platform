@@ -34,10 +34,6 @@ private:
 	SDL_Rect	button_rect[MAX_STATE];
 	p2SString	button_text;
 	Button_Type	button_type;
-
-	float	velocity = 0.00f;
-	
-
 };
 
 #endif  // !_UI_BUTTON__H
