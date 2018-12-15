@@ -11,6 +11,7 @@
 #include "j1Map.h"
 #include "j1Fonts.h"
 #include "j1Scene.h"
+#include "j1Audio.h"
 #include "j1FadeToBlack.h"
 
 
@@ -121,6 +122,14 @@ bool j1SceneMenu::Update(float dt)
 				break;
 			case SETTINGS:
 				App->render->camera.x = -1100;
+
+				break;
+			case CONTINUE:
+				break;
+			case MUTE:
+				App->audio->Disable();
+				break;
+			case CAPTO30:
 				break;
 			case EXIT:
 				ret = false;
