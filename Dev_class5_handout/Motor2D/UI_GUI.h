@@ -34,6 +34,7 @@ public:
 	UI_State	state = IDLE;
 	iPoint		pos;
 	iPoint		position;
+	iPoint		mouse_position;
 	UI_GUI*		parent = nullptr;
 
 	/*SDL_Rect elementRect;*/ //interaction rect

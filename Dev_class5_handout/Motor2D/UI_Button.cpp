@@ -77,9 +77,7 @@ Button_Type UI_Button::GetType()
 
 bool UI_Button::OnHover()
 {
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	return pos.x < x && pos.y + App->render->camera.y < y && pos.x + button_rect[state].w > x && pos.y + button_rect[state].h > y;
+	return position.x < mouse_position.x && position.y  < mouse_position.y && position.x + button_rect[state].w > mouse_position.x && position.y + button_rect[state].h > mouse_position.y;
 
 }
 

@@ -50,10 +50,19 @@ bool UI_GUI::PreUpdate(float dt)
 
 bool UI_GUI::Update(float dt)
 {
+	int x, y;
+	App->input->GetMousePosition(x, y);
+
 	if (static_object)
+	{
 		position = { pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y - App->render->camera.y / (int)App->win->GetScale() };
+		mouse_position = { x,y };
+	}
 	else
+	{
 		position = { pos.x , pos.y };
+		mouse_position = { x - App->render->camera.x / (int)App->win->GetScale(), y - App->render->camera.y / (int)App->win->GetScale() };
+	}
 
 	return true;
 }

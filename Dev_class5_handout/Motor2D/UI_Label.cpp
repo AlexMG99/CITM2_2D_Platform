@@ -56,8 +56,6 @@ bool UI_Label::PostUpdate()
 
 bool UI_Label::OnHover()
 {
-	int x, y;
-	App->input->GetMousePosition(x, y);
 	uint w, h;
 	App->tex->GetSize(tex, w, h);
 	bool ret = false;
@@ -65,7 +63,7 @@ bool UI_Label::OnHover()
 	{
 		ret = parent->OnHover();
 	}
-	return ((pos.x < x && pos.y + App->render->camera.y < y && pos.x + (int)w > x && pos.y + (int)h > y) || ret);
+	return ((position.x < mouse_position.x && position.y < mouse_position.y && position.x + (int)w > mouse_position.x && position.y + (int)h > mouse_position.y) || ret);
 }
 
 void UI_Label::ChangeTexture(SDL_Color color)
