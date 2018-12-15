@@ -35,8 +35,8 @@ bool j1Scene_UI::Start()
 {
 	PERF_START(ptimer);
 	bool ret = true;
-	App->gui->CreateSprite({ 0,0 }, { 657,210,451,31 }, true);
-	App->gui->CreateLabel({ 220, 5 }, "SCORE", Label_Type::CONFIG, {255,255,255,255}, true);
+	App->gui->CreateSprite({ 0,0 }, { 649,203,451,24 }, true);
+	App->gui->CreateLabel({ 220, 5 }, "SCORE", Label_Type::CONFIG, { 255,255,255,255 }, true);
 	score_label = App->gui->CreateLabel({ 290,5 }, player_score_string, Label_Type::CONFIG, { 255,255,255,255 }, true);
 	App->gui->CreateLabel({ 80, 5 }, "TIMER", Label_Type::CONFIG, { 255,255,255,255 }, true);
 	timer_label = App->gui->CreateLabel({ 165,5 }, timer_string, Label_Type::CONFIG, { 255,255,255,255 }, true);
@@ -44,6 +44,11 @@ bool j1Scene_UI::Start()
 	App->gui->CreateSprite({ 30,5 }, { 706,6,14,13 }, true);
 	App->gui->CreateSprite({ 50,5 }, { 706,6,14,13 }, true);
 
+	App->gui->CreateSprite({ 80, 30 }, { 649,228,158,26 }, true);
+	App->gui->CreateSprite({ 80,70 }, { 824, 6, 157, 151 }, true);
+	App->gui->CreateLabel({ 100,35 }, "Pause Menu", CONFIG, {255,255,255,255}, true);
+	SDL_Rect button_rect[3] = { { 705,20,115,29 }, { 705,51,115,29 }, { 705,82,115,29 } };
+	App->gui->CreateButton({ 105,80 }, Button_Type::PLAY, button_rect[0], &button_rect[1], &button_rect[2], "Resume", true);
 	
 	return ret;
 }

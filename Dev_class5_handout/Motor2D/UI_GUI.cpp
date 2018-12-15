@@ -56,7 +56,7 @@ bool UI_GUI::Update(float dt)
 	if (static_object)
 	{
 		position = { pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y - App->render->camera.y / (int)App->win->GetScale() };
-		mouse_position = { x,y };
+		mouse_position = { x,y - App->render->camera.y / (int)App->win->GetScale() };
 	}
 	else
 	{

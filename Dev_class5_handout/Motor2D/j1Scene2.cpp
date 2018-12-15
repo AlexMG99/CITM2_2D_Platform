@@ -97,6 +97,7 @@ bool j1Scene2::Update(float dt)
 	}
 
 	App->map->Draw();
+	App->scene_ui->Update(dt);
 
 	return true;
 }

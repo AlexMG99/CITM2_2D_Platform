@@ -43,7 +43,7 @@ UI_Button::~UI_Button()
 bool UI_Button::Start()
 {
 	if (button_text.Length() > 0)
-		App->gui->CreateLabel({ pos.x + 10, pos.y + 5 }, button_text.GetString(), BUTTON, {0,0,0,0}, static_object, this);
+		App->gui->CreateLabel({ pos.x + 10, pos.y + 5 }, button_text.GetString(), CONFIG, {0,0,0,0}, static_object, this);
 	return true;
 }
 

@@ -58,7 +58,7 @@ bool j1Scene::Start()
 
 	RELEASE_ARRAY(data);
 
-	App->render->camera = { -150, 0 };
+	App->render->camera = { 0, -150 };
 
 	pugi::xml_parse_result result = entities_files.load_file(path.GetString());
 
@@ -70,6 +70,7 @@ bool j1Scene::Start()
 
 	App->entity_manager->LoadPlayer();
 	App->entity_manager->LoadEnemies(entities_files);
+	App->gui->Start();
 
 	return ret;
 }
@@ -99,7 +100,7 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x = -App->entity_manager->GetPlayer()->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
 	}
 
-	App->render->camera.y = (int)App->map->data.player_properties.Get("camera.y");
+	App->render->camera.y = -150;
 
 	App->map->Draw();
 	App->scene_ui->Update(dt);
