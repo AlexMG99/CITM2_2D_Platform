@@ -13,6 +13,7 @@
 #include "j1Pathfinding.h"
 #include "j1Collision.h"
 #include "j1Render.h"
+#include "j1Scene_UI.h"
 
 #include "Brofiler/Brofiler.h"
 
@@ -178,7 +179,9 @@ void j1Entity::Entity_Collision(Collider* other_coll)
 	case COLLIDER_PLAYER:
 		if (coll->type == COLLIDER_COIN)
 		{
-			
+			App->scene_ui->player_score += 100;
+			sprintf_s(App->scene_ui->player_score_string, 5, "%1d", App->scene_ui->player_score);
+			App->scene_ui->score_label->ChangeText(App->scene_ui->player_score_string);
 			to_delete = true;
 		}
 		else
@@ -186,6 +189,9 @@ void j1Entity::Entity_Collision(Collider* other_coll)
 			if (App->entity_manager->GetPlayer()->position.y - other_coll->rect.h / 2 < coll->rect.y)
 			{
 				state = STATE_DEATH;
+				App->scene_ui->player_score += 500;
+				sprintf_s(App->scene_ui->player_score_string, 5, "%1d", App->scene_ui->player_score);
+				App->scene_ui->score_label->ChangeText(App->scene_ui->player_score_string);
 				App->audio->PlayFx(App->entity_manager->fx_jump);
 				App->entity_manager->GetPlayer()->state = STATE_JUMP;
 			}

@@ -106,7 +106,7 @@ bool j1Gui::CleanUp()
 }
 
 
-UI_GUI* j1Gui::CreateLabel(iPoint pos, const char * text, Label_Type type, SDL_Color color, bool static_obj, UI_GUI* parent)
+UI_Label* j1Gui::CreateLabel(iPoint pos, const char * text, Label_Type type, SDL_Color color, bool static_obj, UI_GUI* parent)
 {
 	UI_GUI* label = nullptr;
 	label = new UI_Label(text, type, color, parent);
@@ -115,7 +115,9 @@ UI_GUI* j1Gui::CreateLabel(iPoint pos, const char * text, Label_Type type, SDL_C
 
 	label->static_object = static_obj;
 
-	return label;
+	gui_list.add(label);
+
+	return (UI_Label*)label;
 }
 
 UI_GUI* j1Gui::CreateSprite(iPoint pos, SDL_Rect rect, bool static_obj, UI_GUI* parent)
@@ -127,10 +129,12 @@ UI_GUI* j1Gui::CreateSprite(iPoint pos, SDL_Rect rect, bool static_obj, UI_GUI* 
 
 	sprite->static_object = static_obj;
 
+	gui_list.add(sprite);
+
 	return sprite;
 }
 
-UI_GUI* j1Gui::CreateButton(iPoint pos, Button_Type type, SDL_Rect idle_rect, SDL_Rect* idle_hover, SDL_Rect* idle_click, const char* text, bool static_obj, UI_GUI* parent)
+UI_Button* j1Gui::CreateButton(iPoint pos, Button_Type type, SDL_Rect idle_rect, SDL_Rect* idle_hover, SDL_Rect* idle_click, const char* text, bool static_obj, UI_GUI* parent)
 {
 	UI_GUI* button = nullptr;
 	button = new UI_Button(text, type, idle_rect, idle_hover, idle_click, parent);
@@ -139,25 +143,31 @@ UI_GUI* j1Gui::CreateButton(iPoint pos, Button_Type type, SDL_Rect idle_rect, SD
 
 	button->static_object = static_obj;
 
-	return button;
+	gui_list.add(button);
+
+	return (UI_Button*)button;
 }
-UI_GUI * j1Gui::CreateSlider(iPoint pos, SDL_Rect slider_box, UI_GUI* parent)
+UI_Slider * j1Gui::CreateSlider(iPoint pos, SDL_Rect slider_box, UI_GUI* parent)
 {
 	UI_GUI*slider = nullptr;
 	slider = new UI_Slider(slider_box, parent);
 	slider->pos.x = pos.x;
 	slider->pos.y = pos.y;
 
-     return slider;
+	gui_list.add(slider);
+
+    return (UI_Slider*)slider;
 }
-UI_GUI * j1Gui::CreateThumb(iPoint pos, SDL_Rect s_thumb, UI_GUI * parent)
+UI_Thumb * j1Gui::CreateThumb(iPoint pos, SDL_Rect s_thumb, UI_GUI * parent)
 {
 	UI_GUI* thumb = nullptr;
 	thumb = new UI_Thumb(s_thumb, parent);
 	thumb->pos.x = pos.x;
 	thumb->pos.y = pos.y;
 
-	return thumb;
+	gui_list.add(thumb);
+
+	return (UI_Thumb*)thumb;
 }
 ;
 

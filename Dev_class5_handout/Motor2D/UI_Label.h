@@ -22,6 +22,7 @@ public:
 
 	bool OnHover();
 	void ChangeTexture(SDL_Color color);
+	void ChangeText(const char* text);
 
 private:
 	Label_Type label_type;

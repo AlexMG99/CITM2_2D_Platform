@@ -36,11 +36,12 @@ bool j1Scene_UI::Start()
 	PERF_START(ptimer);
 	bool ret = true;
 
-	App->gui->gui_list.add(App->gui->CreateLabel({ 250, 5 }, "SCORE", Label_Type::CONFIG, {255,255,255,255}, true));
-	App->gui->gui_list.add(App->gui->CreateLabel({ 130, 5 }, "TIMER", Label_Type::CONFIG, { 255,255,255,255 }, true));
-	App->gui->gui_list.add(App->gui->CreateSprite({ 10,5 }, { 706,6,14,13 }, true));
-	App->gui->gui_list.add(App->gui->CreateSprite({ 30,5 }, { 706,6,14,13 }, true));
-	App->gui->gui_list.add(App->gui->CreateSprite({ 50,5 }, { 706,6,14,13 }, true));
+	App->gui->CreateLabel({ 200, 5 }, "SCORE", Label_Type::CONFIG, {255,255,255,255}, true);
+	score_label = App->gui->CreateLabel({ 270,5 }, player_score_string, Label_Type::CONFIG, { 255,255,255,255 }, true);
+	//App->gui->CreateLabel({ 130, 5 }, "TIMER", Label_Type::CONFIG, { 255,255,255,255 }, true);
+	App->gui->CreateSprite({ 10,5 }, { 706,6,14,13 }, true);
+	App->gui->CreateSprite({ 30,5 }, { 706,6,14,13 }, true);
+	App->gui->CreateSprite({ 50,5 }, { 706,6,14,13 }, true);
 
 	
 	return ret;

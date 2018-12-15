@@ -19,6 +19,9 @@
       <position x="200" y="180"/>
     </coin>
     <coin>
+      <position x="100" y="130"/>
+    </coin>
+    <coin>
       <position x="820" y="130"/>
     </coin>
     <coin>

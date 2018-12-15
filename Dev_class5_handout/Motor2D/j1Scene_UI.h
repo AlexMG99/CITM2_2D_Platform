@@ -5,6 +5,7 @@
 #include "j1PerfTimer.h"
 #include "j1Timer.h"
 #include "p2List.h"
+#include "UI_Label.h"
 
 class j1Scene_UI : public j1Module
 {
@@ -33,9 +34,6 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	//Reset scene
-	void Reset() const;
-
 	//Load Game State
 	bool Load(pugi::xml_node&);
 
@@ -44,8 +42,10 @@ private:
 	p2List<j1Module*>	current_level;
 	j1PerfTimer			ptimer;
 
-	uint player_score;
-	c
+public:
+	char		player_score_string[5] = "0";
+	uint		player_score = 0;
+	UI_Label*	score_label = nullptr;
 };
 
 #endif // !_SCENE_PAUSE__H

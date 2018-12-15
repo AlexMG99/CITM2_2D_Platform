@@ -78,3 +78,24 @@ void UI_Label::ChangeTexture(SDL_Color color)
 		break;
 	}
 }
+
+void UI_Label::ChangeText(const char * text)
+{
+	if (tex != nullptr)
+		App->tex->UnLoad(tex);
+
+	label_text.Clear();
+	label_text.create(text);
+
+	switch (label_type) {
+	case TITLE:
+		tex = App->font->Print(label_text.GetString(), label_color, App->font->title);
+		break;
+	case CONFIG:
+		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_config);
+		break;
+	case BUTTON:
+		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_buttons);
+		break;
+	}
+}
