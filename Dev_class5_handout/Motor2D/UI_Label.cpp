@@ -44,7 +44,7 @@ bool UI_Label::PostUpdate()
 		ChangeTexture({ 0,0,0,0 });
 		break;
 	case HOVER:
-		if (label_type != CONFIG) {
+		if (label_type != CONFIG && label_type != TITLE) {
 			ChangeTexture({ 230,214,144,255 });
 		}
 		break;

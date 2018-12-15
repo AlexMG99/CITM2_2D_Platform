@@ -46,18 +46,22 @@ bool j1SceneMenu::Start()
 	App->render->camera = { (int)App->map->data.player_properties.Get("camera.x"), (int)App->map->data.player_properties.Get("camera.y") };
 
 	//Menu Button
-	SDL_Rect rect_button[3] = { {0,0,190,49}, { 190,0,190,49 }, {0,195,190,49} };
-	button_list.add(App->gui->CreateButton({ 70, 70 }, PLAY, rect_button[0], &rect_button[1], &rect_button[2], "Play"));
-	button_list.add(App->gui->CreateButton({ 70, 130 }, SETTINGS, rect_button[0], &rect_button[1], &rect_button[2], "Settings"));
-	
+	SDL_Rect rect_button[3] = { {0,0,170,43}, { 190,0,170,43 }, {0,198,170,43} };
+	button_list.add(App->gui->CreateButton({ 90, 60 }, PLAY, rect_button[0], &rect_button[1], &rect_button[2], "Play"));
+	button_list.add(App->gui->CreateButton({ 90, 110 }, SETTINGS, rect_button[0], &rect_button[1], &rect_button[2], "Settings"));
+	button_list.add(App->gui->CreateButton({ 90, 160 }, CONTINUE, rect_button[0], &rect_button[1], &rect_button[2], "Continue"));
 	SDL_Rect credit_rect_button[3] = { { 587,213,38,38 }, {496,213,38,38},{ 541,213,39,38 } };
-	button_list.add(App->gui->CreateButton({ 15, 213 }, CREDIT, credit_rect_button[0], &credit_rect_button[1], &credit_rect_button[2]));
+	button_list.add(App->gui->CreateButton({ 30, 213 }, CREDIT, credit_rect_button[0], &credit_rect_button[1], &credit_rect_button[2]));
 
 	SDL_Rect audio_rect_button[3] = { { 342,178,38,38 }, {342,98,38,38},{ 294,143,39,38 } };
 	button_list.add(App->gui->CreateButton({ 290, 213 }, MUTE, audio_rect_button[0], &audio_rect_button[1], &audio_rect_button[2]));
 
+
+	//TITLE
+	App->gui->CreateSprite({ 48, 7 }, { 718,161,255,41 });
+
 	////Orange Sprite
-	App->gui->CreateSprite({ 38, 7 }, { 448,4,255,174 });
+	App->gui->CreateSprite({ 388, 7 }, { 448,4,255,174 });
 
 
 	//Slider 
@@ -69,7 +73,7 @@ bool j1SceneMenu::Start()
 	App->gui->CreateButton({ 590, 89 },CAPTO30, capto30_rect_button[0], &capto30_rect_button[1], &capto30_rect_button[2]);
 
 	
-
+	App->gui->CreateLabel({ 56, 16 }, "Trinity's Journey", TITLE, { 0, 0, 0, 0 });
 	App->gui->CreateLabel({ 416, 20 }, "Volume",	CONFIG, { 0, 0, 0, 0 });
 	App->gui->CreateLabel({ 416, 60 }, "Fx  Volume", CONFIG, { 0, 0, 0, 0 });
 	App->gui->CreateLabel({ 416, 100 }, "Cap  to  30  fps", CONFIG, { 0, 0, 0, 0 });

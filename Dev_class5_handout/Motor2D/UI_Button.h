@@ -9,6 +9,7 @@ enum Button_Type
 {
 	PLAY,
 	SETTINGS,
+	CONTINUE,
 	CREDIT,
 	MUTE,
 	CAPTO30,
