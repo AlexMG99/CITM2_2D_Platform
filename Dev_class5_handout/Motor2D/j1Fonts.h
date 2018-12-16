@@ -42,6 +42,7 @@ public:
 	_TTF_Font*			title_config;
 	_TTF_Font*			title_settings;
 	_TTF_Font*			title;
+	_TTF_Font*			credits;
 	_TTF_Font*			title_buttons;
 };
 

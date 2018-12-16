@@ -9,6 +9,7 @@ enum Label_Type {
 	TITLE,
 	FONT,
 	CONFIG,
+	CRED,
 	BUTTON
 };
 

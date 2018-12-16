@@ -6,6 +6,7 @@
 #include "j1PerfTimer.h"
 #include "j1Timer.h"
 #include "p2List.h"
+#include "j1Gui.h"
 #include "UI_Label.h"
 
 
@@ -39,15 +40,17 @@ public:
 
 
 private:
-	p2SString			path;
-	p2SString credits;
+	p2SString			  path;
+	UI_Label* credits_lbl = nullptr;
+
+	p2SString             credits;
 	p2DynArray<UI_Label*> labels;
 	int scrolling = 1;
 	bool over = false;
-
+	
 
 public:
-
+	p2List<UI_Button*>	button_list;
 };
 
 #endif // !_SCENE_PAUSE__H
