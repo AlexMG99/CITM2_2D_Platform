@@ -11,8 +11,10 @@
 #include "j1Map.h"
 #include "j1Fonts.h"
 #include "j1Scene.h"
+#include "j1Scene2.h"
 #include "j1Audio.h"
 #include "j1FadeToBlack.h"
+#include "j1Entity_Manager.h"
 
 
 #include "Brofiler/Brofiler.h"
@@ -97,12 +99,6 @@ bool j1SceneMenu::PreUpdate(float dt)
 {
 	BROFILER_CATEGORY("PreUpdate_SceneIntro", Profiler::Color::CornflowerBlue);
 
-	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
-		App->LoadGame();
-
-	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
-		App->SaveGame();
-
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= dt * 200;
 
@@ -133,6 +129,7 @@ bool j1SceneMenu::Update(float dt)
 				App->render->camera.x = -1100;
 				break;
 			case CONTINUE:
+				App->LoadGame();
 				break;
 			case MUTE:
 				App->audio->volume = 0;
@@ -173,6 +170,7 @@ bool j1SceneMenu::PostUpdate()
 bool j1SceneMenu::CleanUp()
 {
 	LOG("Freeing Scene Menu");
+	App->entity_manager->CleanUp();
 	App->map->CleanUp();
 	App->gui->CleanUp();
 	return true;
@@ -181,7 +179,19 @@ bool j1SceneMenu::CleanUp()
 
 bool j1SceneMenu::Load(pugi::xml_node& node)
 {
-
+	App->fadeToBlack->scene_id = node.parent().child("fadetoblack").child("scene").attribute("id").as_int();
+	if (App->fadeToBlack->scene_id == 1)
+	{
+		App->scene_menu->Disable();
+		App->scene->Enable();
+		App->entity_manager->Load(node);
+	}
+	else if (App->fadeToBlack->scene_id == 2)
+	{
+		App->scene_menu->Disable();
+		App->scene2->Enable();
+		App->entity_manager->Load(node);
+	}
 	return true;
 }
 

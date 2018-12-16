@@ -4,6 +4,7 @@
 #include "j1Input.h"
 #include "j1FadeToBlack.h"
 #include "j1Render.h"
+#include "j1SceneMenu.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
 #include "p2Log.h"
@@ -102,7 +103,11 @@ bool j1FadeToBlack::IsFading() const
 bool j1FadeToBlack::Save(pugi::xml_node& data) const
 {
 	pugi::xml_node fade= data.append_child("scene");
-	if (App->scene->IsEnabled())
+	if (App->scene_menu->IsEnabled())
+	{
+		scene_id = 0;
+	}
+	else if (App->scene->IsEnabled())
 	{
 		scene_id = 1;
 	}
