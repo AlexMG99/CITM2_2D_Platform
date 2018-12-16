@@ -7,11 +7,9 @@
 #include "j1Window.h"
 #include "j1Audio.h"
 #include "j1Gui.h"
+#include "j1FadeToBlack.h"
 
 
-UI_GUI::~UI_GUI()
-{
-}
 
 bool UI_GUI::PreUpdate(float dt)
 {
@@ -71,7 +69,7 @@ bool UI_GUI::OnClick()
 {
 	bool ret = false;
 
-	if (OnHover())
+	if (!App->fadeToBlack->IsFading() && OnHover())
 	{
 		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 		{

@@ -17,7 +17,7 @@ class UI_GUI
 {
 public:
 	UI_GUI() {};
-	virtual ~UI_GUI();
+	virtual ~UI_GUI() {};
 
 	virtual bool Start() { return true; };
 	bool PreUpdate(float dt) ;

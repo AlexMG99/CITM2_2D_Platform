@@ -1,5 +1,7 @@
 #include "j1App.h"
 #include "j1Scene_UI.h"
+#include "j1Scene.h"
+#include "j1SceneMenu.h"
 #include "p2Log.h"
 #include "j1Input.h"
 #include "UI_GUI.h"
@@ -7,6 +9,7 @@
 #include "UI_Label.h"
 #include "j1Gui.h"
 #include "j1Fonts.h"
+#include "j1FadeToBlack.h"
 
 
 #include "Brofiler/Brofiler.h"
@@ -88,7 +91,7 @@ bool j1Scene_UI::Update(float dt)
 				
 				break;
 			case EXIT:
-				
+				App->fadeToBlack->FadeToBlack(App->scene, App->scene_menu);
 				break;
 			}
 		}
@@ -115,7 +118,8 @@ bool j1Scene_UI::PostUpdate()
 bool j1Scene_UI::CleanUp()
 {
 	LOG("Freeing Scene Menu");
-	App->gui->CleanUp();
+	button_list.clear();
+	App->gui->Disable();
 	return true;
 }
 

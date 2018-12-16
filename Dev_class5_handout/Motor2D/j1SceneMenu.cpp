@@ -92,6 +92,8 @@ bool j1SceneMenu::Start()
 	App->gui->CreateLabel({ 416, 60 }, "Fx  Volume", FONT, { 0, 0, 0, 0 });
 	App->gui->CreateLabel({ 416, 100 }, "Cap  to  30  fps", FONT, { 0, 0, 0, 0 });
 
+	App->gui->Enable();
+
 	return ret;
 }
 
@@ -173,6 +175,8 @@ bool j1SceneMenu::PostUpdate()
 bool j1SceneMenu::CleanUp()
 {
 	LOG("Freeing Scene Menu");
+	button_list.clear();
+
 	App->entity_manager->CleanUp();
 	App->map->CleanUp();
 	App->gui->CleanUp();
@@ -203,5 +207,4 @@ void j1SceneMenu::LoadLevel()
 {
 	App->map->Load(map_path.GetString());
 	App->audio->PlayMusic(music_path.GetString());
-
 }

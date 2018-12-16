@@ -69,7 +69,11 @@ bool UI_Label::OnHover()
 void UI_Label::ChangeTexture(SDL_Color color)
 {
 	if(tex != nullptr)
+	{
 		App->tex->UnLoad(tex);
+		tex = nullptr;
+	}
+		
 
 	label_color = color;
 
@@ -92,7 +96,10 @@ void UI_Label::ChangeTexture(SDL_Color color)
 void UI_Label::ChangeText(const char * text)
 {
 	if (tex != nullptr)
+	{
 		App->tex->UnLoad(tex);
+		tex = nullptr;
+	}
 
 	label_text.Clear();
 	label_text.create(text);

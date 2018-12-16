@@ -105,6 +105,12 @@ bool j1Gui::CleanUp()
 	}
 	gui_list.clear();
 
+	if (atlas != nullptr)
+	{
+		App->tex->UnLoad(atlas);
+		atlas = nullptr;
+	}
+
 	return true;
 }
 
