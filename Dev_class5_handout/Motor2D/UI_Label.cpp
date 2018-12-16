@@ -44,7 +44,7 @@ bool UI_Label::PostUpdate()
 		ChangeTexture({ 0,0,0,0 });
 		break;
 	case HOVER:
-		if (label_type != FONT && label_type != TITLE) {
+		if (label_type != FONT && label_type != TITLE && label_type != CRED) {
 			ChangeTexture({ 230,214,144,255 });
 		}
 		break;
@@ -88,6 +88,9 @@ void UI_Label::ChangeTexture(SDL_Color color)
 	case CONFIG:
 		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_config);
 		break;
+	case CRED:
+		tex = App->font->Print(label_text.GetString(), label_color, App->font->credits);
+		break;
 	case BUTTON:
 		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_buttons);
 		break;
@@ -115,6 +118,9 @@ void UI_Label::ChangeText(const char * text)
 	case CONFIG:
 		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_config);
 		break;
+	case CRED:
+		tex = App->font->Print(label_text.GetString(), label_color, App->font->credits);
+			break;
 	case BUTTON:
 		tex = App->font->Print(label_text.GetString(), label_color, App->font->title_buttons);
 		break;

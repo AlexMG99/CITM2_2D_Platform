@@ -47,13 +47,14 @@ bool j1Scene_Credits::Start()
 	App->render->camera = { 0,0 };
 
 	p2SString credits;
-	//credits.create("MIT License		Copyright(c)[2018][Alex Morales & Laia Martinez] Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files(the Software), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions : The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
-	credits.create("LOL");
+	credits.create("MIT License		Copyright(c)[2018][Alex Morales & Laia Martinez] Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files(the Software), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions : The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
+	
 	/*uint w, h;
 	App->win->GetWindowSize(w, h);*/
-	App->gui->Enable();
+
 
 	App->gui->CreateSprite({ -2, 0 }, { 1121,4,373,301 });
+	/*App->gui->CreateLabel({ 0,0 },credits.GetString(), CRED, { 255,0,0,0 });*/
 	App->gui->CreateLabel({ 0,0 }, "MIT License", CRED, { 255,0,0,0 });
 	App->gui->CreateLabel({ 0,10 }, "Permission is hereby granted, free of charge, to any person obtaining a copy]", CRED, { 255,0,0,0 });
 	App->gui->CreateLabel({ 0,20 }, "of this software and associated documentation files (the Software), to deal", CRED, { 255,0,0,0 });
@@ -81,10 +82,10 @@ bool j1Scene_Credits::Start()
 
 	/*App->gui->CreateSprite({ 0,0 }, {1137,14,452,532});*/
 	SDL_Rect button_rect[3] = { { 705,20,115,29 }, { 705,51,115,29 }, { 705,82,115,29 } };
-	App->gui->CreateButton({ 98,218 }, Button_Type::BACK, button_rect[0], &button_rect[1], &button_rect[2], "BACK", true);
+	button_list.add(App->gui->CreateButton({ 98,218 }, Button_Type::BACK, button_rect[0], &button_rect[1], &button_rect[2], "BACK", true));
+	//button_list.add(App->gui->CreateButton({ 102, 185 }, Button_Type::EXIT, button_rect[0], &button_rect[1], &button_rect[2], "Exit", true));
 	
-	
-
+	App->gui->Enable();
 	return ret;
 }
 
@@ -102,6 +103,9 @@ bool j1Scene_Credits::PreUpdate(float dt)
 bool j1Scene_Credits::Update(float dt)
 {
 	BROFILER_CATEGORY("Update_SceneCredits", Profiler::Color::DarkKhaki);
+	
+	bool ret = true;
+	
 	p2List_item<UI_Button*>* button_item = button_list.start;
 	while (button_item != NULL)
 	{
@@ -113,9 +117,11 @@ bool j1Scene_Credits::Update(float dt)
 				App->fadeToBlack->FadeToBlack(App->scene_credits, App->scene_menu);
 				break;
 			}
-			button_item = button_item->next;
+			
 		}
-	}	return true;
+		button_item = button_item->next;
+	}	
+	return ret; 
 }
 
 // Called each loop iteration
@@ -135,7 +141,8 @@ bool j1Scene_Credits::PostUpdate()
 bool j1Scene_Credits::CleanUp()
 {
 	LOG("Freeing Scene Menu");
-	App->gui->CleanUp();
+	button_list.clear();
+	App->gui->Disable();
 	return true;
 }
 
