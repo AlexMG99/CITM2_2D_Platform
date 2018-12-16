@@ -38,6 +38,7 @@
 
   <scene_menu>
     <map path="Intro_Map.tmx"/>
+    <audio path="music/Were_the_Resistors.ogg"/>
   </scene_menu>
 
   <scene>

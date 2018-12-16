@@ -12,8 +12,12 @@ enum Button_Type
 	CONTINUE,
 	CREDIT,
 	MUTE,
+	UNMUTE,
 	CAPTO30,
 	VOLUME,
+	BACK,
+	SAVE,
+	LOAD,
 	EXIT
 };
 

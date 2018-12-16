@@ -7,6 +7,7 @@
 #include "p2List.h"
 #include "UI_Label.h"
 
+
 class j1Scene_UI : public j1Module
 {
 public:
@@ -41,6 +42,7 @@ private:
 	p2SString			path;
 	p2List<j1Module*>	current_level;
 	j1PerfTimer			ptimer;
+	
 
 public:
 	char		player_score_string[5] = "0";

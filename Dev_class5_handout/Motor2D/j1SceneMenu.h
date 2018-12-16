@@ -43,6 +43,7 @@ public:
 private:
 	p2SString			path;
 	p2SString			map_path;
+	p2SString           music_path;
 	p2List<j1Module*>	current_level;
 
 	p2List<UI_Button*>	button_list;
