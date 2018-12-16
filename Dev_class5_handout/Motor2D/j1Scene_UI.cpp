@@ -48,10 +48,10 @@ bool j1Scene_UI::Start()
 	App->gui->CreateSprite({ 80,70 }, { 824, 6, 157, 151 }, true);
 	App->gui->CreateLabel({ 100,35 }, "Pause Menu", FONT, {255,255,255,255}, true);
 	SDL_Rect button_rect[3] = { { 705,20,115,29 }, { 705,51,115,29 }, { 705,82,115,29 } };
-	App->gui->CreateButton({ 102,75 }, Button_Type::PLAY, button_rect[0], &button_rect[1], &button_rect[2], "Resume", true);
-	App->gui->CreateButton({ 102,108 }, Button_Type::SAVE, button_rect[0], &button_rect[1], &button_rect[2], "Save", true);
-	App->gui->CreateButton({ 102, 141 }, Button_Type::LOAD, button_rect[0], &button_rect[1], &button_rect[2], "Load", true);
-	App->gui->CreateButton({ 102, 185 }, Button_Type::EXIT, button_rect[0], &button_rect[1], &button_rect[2], "Exit", true);
+	button_list.add(App->gui->CreateButton({ 102,75 }, Button_Type::PLAY, button_rect[0], &button_rect[1], &button_rect[2], "Resume", true));
+	button_list.add(App->gui->CreateButton({ 102,108 }, Button_Type::SAVE, button_rect[0], &button_rect[1], &button_rect[2], "Save", true));
+	button_list.add(App->gui->CreateButton({ 102, 141 }, Button_Type::LOAD, button_rect[0], &button_rect[1], &button_rect[2], "Load", true));
+	button_list.add(App->gui->CreateButton({ 102, 185 }, Button_Type::EXIT, button_rect[0], &button_rect[1], &button_rect[2], "Exit", true));
 	return ret;
 }
 
@@ -76,7 +76,25 @@ bool j1Scene_UI::Update(float dt)
 	float timer = (float)ptimer.ReadMs() / 1000;
 	sprintf_s(timer_string, 20, "%.2f", timer);
 	timer_label->ChangeText(timer_string);
-	LOG("Hey");
+
+	p2List_item<UI_Button*>* button_item = button_list.start;
+	while (button_item != NULL)
+	{
+		if (button_item->data->OnClick())
+		{
+			switch (button_item->data->GetType())
+			{
+			case PLAY:
+				
+				break;
+			case EXIT:
+				
+				break;
+			}
+		}
+		button_item = button_item->next;
+	}
+
 	return true;
 }
 

@@ -5,6 +5,8 @@
 #include "j1PerfTimer.h"
 #include "j1Timer.h"
 #include "p2List.h"
+#include "j1Gui.h"
+#include "UI_Button.h"
 #include "UI_Label.h"
 
 
@@ -50,6 +52,8 @@ public:
 	uint		player_score = 0;
 	UI_Label*	score_label = nullptr;
 	UI_Label*	timer_label = nullptr;
+
+	p2List<UI_Button*>	button_list;
 };
 
 #endif // !_SCENE_PAUSE__H
