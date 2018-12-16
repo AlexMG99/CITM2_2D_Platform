@@ -106,7 +106,10 @@ bool j1Entity_Player::CheckState()
 	bool press_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN;
 	
 	if (App->paused)
+	{
+		velocity = { 0,0 };
 		return false;
+	}
 
 	switch (state)
 	{

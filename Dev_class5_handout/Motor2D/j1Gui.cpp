@@ -14,6 +14,7 @@
 #include "UI_Slider.h"
 #include "UI_Sprite.h"
 #include "UI_Thumb.h"
+#include "j1Scene_UI.h"
 #include "SDL/include/SDL.h"
 
 
@@ -87,8 +88,11 @@ bool j1Gui::PostUpdate()
 	{
 		if(item_gui->data->visible)
 			item_gui->data->PostUpdate();
+		if (item_gui->data->parent != nullptr)
+			item_gui->data->visible = item_gui->data->parent->visible;
 		item_gui = item_gui->next;
 	}
+
 	return true;
 }
 
@@ -187,6 +191,23 @@ UI_Thumb * j1Gui::CreateThumb(iPoint pos, SDL_Rect s_thumb, UI_GUI * parent)
 SDL_Texture* j1Gui::GetAtlas() const
 {
 	return atlas;
+}
+
+bool j1Gui::Load(pugi::xml_node &node)
+{
+	App->scene_ui->player_score = node.child("score").attribute("value").as_uint();
+	sprintf_s(App->scene_ui->player_score_string, 5, "%1d", App->scene_ui->player_score);
+	App->scene_ui->score_label->ChangeText(App->scene_ui->player_score_string);
+
+	return true;
+}
+
+bool j1Gui::Save(pugi::xml_node &node) const
+{
+	pugi::xml_node score = node.append_child("score");
+
+	score.append_attribute("value") = App->scene_ui->player_score;
+	return true;
 }
 
 // class Gui ---------------------------------------------------

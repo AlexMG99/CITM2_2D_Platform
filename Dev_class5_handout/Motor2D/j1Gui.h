@@ -55,6 +55,9 @@ public:
 	UI_Thumb* CreateThumb(iPoint pos, SDL_Rect s_thumb, UI_GUI* parent = nullptr);
 	SDL_Texture* GetAtlas() const;
 
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&)const;
+
 public:
 	p2List<UI_GUI*> gui_list;
 	uint			fx_buton_pressed;
