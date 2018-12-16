@@ -179,7 +179,7 @@ bool j1SceneMenu::CleanUp()
 
 	App->entity_manager->CleanUp();
 	App->map->CleanUp();
-	App->gui->CleanUp();
+	App->gui->Disable();
 	return true;
 }
 

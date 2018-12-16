@@ -54,6 +54,7 @@ public:
 	UI_Label*	timer_label = nullptr;
 
 	p2List<UI_Button*>	button_list;
+	p2List<UI_GUI*>		pause_ui_list;
 };
 
 #endif // !_SCENE_PAUSE__H

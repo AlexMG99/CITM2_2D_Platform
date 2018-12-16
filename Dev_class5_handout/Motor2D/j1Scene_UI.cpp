@@ -47,14 +47,27 @@ bool j1Scene_UI::Start()
 	App->gui->CreateSprite({ 30,5 }, { 706,6,14,13 }, true);
 	App->gui->CreateSprite({ 50,5 }, { 706,6,14,13 }, true);
 
-	App->gui->CreateSprite({ 80, 30 }, { 649,228,158,26 }, true);
-	App->gui->CreateSprite({ 80,70 }, { 824, 6, 157, 151 }, true);
-	App->gui->CreateLabel({ 100,35 }, "Pause Menu", FONT, {255,255,255,255}, true);
+	pause_ui_list.add(App->gui->CreateSprite({ 80, 30 }, { 649,228,158,26 }, true));
+	pause_ui_list.add(App->gui->CreateSprite({ 80,70 }, { 824, 6, 157, 151 }, true));
+	pause_ui_list.add(App->gui->CreateLabel({ 100,35 }, "Pause Menu", FONT, {255,255,255,255}, true));
 	SDL_Rect button_rect[3] = { { 705,20,115,29 }, { 705,51,115,29 }, { 705,82,115,29 } };
 	button_list.add(App->gui->CreateButton({ 102,75 }, Button_Type::PLAY, button_rect[0], &button_rect[1], &button_rect[2], "Resume", true));
 	button_list.add(App->gui->CreateButton({ 102,108 }, Button_Type::SAVE, button_rect[0], &button_rect[1], &button_rect[2], "Save", true));
 	button_list.add(App->gui->CreateButton({ 102, 141 }, Button_Type::LOAD, button_rect[0], &button_rect[1], &button_rect[2], "Load", true));
 	button_list.add(App->gui->CreateButton({ 102, 185 }, Button_Type::EXIT, button_rect[0], &button_rect[1], &button_rect[2], "Exit", true));
+
+	p2List_item<UI_Button*>* button_item = button_list.start;
+	while (button_item != NULL)
+	{
+		button_item->data->visible = false;
+		button_item = button_item->next;
+	}
+	p2List_item<UI_GUI*>* ui_item = pause_ui_list.start;
+	while (ui_item != NULL)
+	{
+		ui_item->data->visible = false;
+		ui_item = ui_item->next;
+	}
 	return ret;
 }
 
@@ -62,12 +75,6 @@ bool j1Scene_UI::Start()
 bool j1Scene_UI::PreUpdate(float dt)
 {
 	BROFILER_CATEGORY("PreUpdate_SceneUI", Profiler::Color::CornflowerBlue);
-
-	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
-		App->LoadGame();
-
-	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
-		App->SaveGame();
 
 	return true;
 }
@@ -88,7 +95,13 @@ bool j1Scene_UI::Update(float dt)
 			switch (button_item->data->GetType())
 			{
 			case PLAY:
-				
+				button_item->data->visible = !button_item->data->visible;
+				break;
+			case SAVE:
+				App->SaveGame();
+				break;
+			case LOAD:
+				App->LoadGame();
 				break;
 			case EXIT:
 				App->fadeToBlack->FadeToBlack(App->scene, App->scene_menu);
@@ -109,7 +122,20 @@ bool j1Scene_UI::PostUpdate()
 	bool ret = true;
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+	{
+		p2List_item<UI_Button*>* button_item = button_list.start;
+		while (button_item != NULL)
+		{
+			button_item->data->visible = !button_item->data->visible;
+			button_item = button_item->next;
+		}
+		p2List_item<UI_GUI*>* ui_item = pause_ui_list.start;
+		while (ui_item != NULL)
+		{
+			ui_item->data->visible = !ui_item->data->visible;
+			ui_item = ui_item->next;
+		}
+	}
 
 	return ret;
 }

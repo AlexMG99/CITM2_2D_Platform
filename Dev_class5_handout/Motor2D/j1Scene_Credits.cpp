@@ -42,7 +42,7 @@ bool j1Scene_Credits::Start()
 	SDL_Rect button_rect[3] = { { 705,20,115,29 }, { 705,51,115,29 }, { 705,82,115,29 } };
 	App->gui->CreateButton({ 18,215 }, Button_Type::BACK, button_rect[0], &button_rect[1], &button_rect[2], "Button", true);
 	
-	App->gui->Start();
+	App->gui->Enable();
 
 	return ret;
 }

@@ -51,6 +51,8 @@ bool UI_Label::PostUpdate()
 	case CLICK:
 		break;
 	}
+	if (parent != nullptr)
+		visible = parent->visible;
 	return true;
 }
 

@@ -70,7 +70,7 @@ bool j1Scene::Start()
 
 	App->entity_manager->LoadPlayer();
 	App->entity_manager->LoadEnemies(entities_files);
-	App->gui->Start();
+	App->gui->Enable();
 
 	return ret;
 }
@@ -118,6 +118,7 @@ bool j1Scene::PostUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		App->paused = !App->paused;
 
+	App->scene_ui->PostUpdate();
 	return ret;
 }
 

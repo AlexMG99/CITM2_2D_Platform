@@ -72,7 +72,8 @@ bool j1Gui::Update(float dt)
 	p2List_item<UI_GUI*>* item_gui = gui_list.start;
 	while (item_gui != nullptr)
 	{
-		item_gui->data->Update(dt);
+		if (item_gui->data->visible)
+			item_gui->data->Update(dt);
 		item_gui = item_gui->next;
 	}
 	return true;
@@ -84,7 +85,8 @@ bool j1Gui::PostUpdate()
 	p2List_item<UI_GUI*>* item_gui = gui_list.start;
 	while (item_gui != nullptr)
 	{
-		item_gui->data->PostUpdate();
+		if(item_gui->data->visible)
+			item_gui->data->PostUpdate();
 		item_gui = item_gui->next;
 	}
 	return true;

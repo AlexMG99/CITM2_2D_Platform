@@ -27,9 +27,6 @@ public:
 	virtual bool OnHover() { return true; };
 	bool OnClick();
 
-
-
-
 public:
 	UI_State	state = IDLE;
 	iPoint		pos;
@@ -42,6 +39,7 @@ public:
 	/*SDL_Rect elementRect;*/ //interaction rect
 	bool		drag = false;
 	bool		static_object = false;
+	bool		visible = true;
 };
 
 
