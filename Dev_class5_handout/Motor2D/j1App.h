@@ -105,6 +105,8 @@ public:
 	j1Fonts*			font = NULL;
 	j1Gui*				gui = NULL;
 
+	bool				paused = false;
+
 private:
 
 	p2List<j1Module*>	modules;

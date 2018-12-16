@@ -139,6 +139,7 @@ bool j1App::Awake()
 			item = item->next;
 		}
 	}
+
 	scene_ui->Disable();
 	scene->Disable();
 	scene2->Disable();
@@ -215,7 +216,13 @@ void j1App::PrepareUpdate()
 	frame_count++;
 	last_sec_frame_count++;
 
-	if (!fadeToBlack->IsFading()) dt = frame_time.ReadSec();
+	if (!fadeToBlack->IsFading())
+	{
+		if (paused)
+			dt = 0.0f;
+		else
+			dt = frame_time.ReadSec();
+	}
 	frame_time.Start();
 }
 

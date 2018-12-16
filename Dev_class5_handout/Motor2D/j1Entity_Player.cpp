@@ -49,13 +49,13 @@ bool j1Entity_Player::Entity_PreUpdate(float dt)
 {
 	BROFILER_CATEGORY("PreUpdate_EntityPlayer", Profiler::Color::CornflowerBlue);
 
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && state != STATE_GOD)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && state != STATE_GOD && !App->paused)
 	{
 		velocity.x = acceleration.x*dt;
 		if (state != STATE_CLING) flipX = SDL_FLIP_NONE;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE && state != STATE_GOD)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE && state != STATE_GOD && !App->paused)
 	{
 		velocity.x = -acceleration.x*dt;
 		if (state != STATE_CLING) flipX = SDL_FLIP_HORIZONTAL;
@@ -95,7 +95,7 @@ bool j1Entity_Player::Entity_Draw(float dt)
 	return true;
 }
 
-void j1Entity_Player::CheckState()
+bool j1Entity_Player::CheckState()
 {
 	bool pressed_right = App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT;
 	bool pressed_left = App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT;
@@ -104,6 +104,9 @@ void j1Entity_Player::CheckState()
 	bool released_left = App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP;
 	bool released_down = App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP;
 	bool press_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN;
+	
+	if (App->paused)
+		return false;
 
 	switch (state)
 	{
@@ -185,6 +188,7 @@ void j1Entity_Player::CheckState()
 	default:
 		break;
 	}
+	return true;
 }
 
 void j1Entity_Player::PerformActions(float dt)

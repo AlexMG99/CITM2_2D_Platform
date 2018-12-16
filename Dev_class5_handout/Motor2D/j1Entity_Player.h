@@ -41,7 +41,7 @@ public:
 	bool Save(pugi::xml_node& player_node) const;
 
 private:
-	void CheckState();
+	bool CheckState();
 	void PerformActions(float dt);
 	void DebugInputs();
 
