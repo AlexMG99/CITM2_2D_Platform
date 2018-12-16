@@ -40,6 +40,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	int flags = MIX_INIT_OGG;
 	int init = Mix_Init(flags);
 	volume = config.child("volume").attribute("value").as_int(26);
+	volume_fx = config.child("volume_fx").attribute("value").as_int(26);
 
 	if((init & flags) != flags)
 	{
@@ -80,6 +81,13 @@ bool j1Audio::Update(float dt)
 	BROFILER_CATEGORY("Update_Audio", Profiler::Color::DarkKhaki);
 
 	Mix_VolumeMusic(volume);
+
+	p2List_item<Mix_Chunk*>* chunk_item = fx.start;
+	while (chunk_item != NULL)
+	{
+		Mix_VolumeChunk(chunk_item->data, volume_fx);
+		chunk_item = chunk_item->next;
+	}
 	
 	return true;
 }

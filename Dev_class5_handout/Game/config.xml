@@ -56,6 +56,7 @@
   <audio>
     <folder>audio/</folder>
     <volume value = "26"/>
+    <volume_fx value="26"/>
   </audio>
     
   
