@@ -13,6 +13,7 @@
 #include "j1Scene.h"
 #include "j1Scene2.h"
 #include "j1Scene_UI.h"
+#include "j1Scene_Credits.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
 #include "j1Gui.h"
@@ -44,6 +45,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new j1Scene();
 	scene2 = new j1Scene2();
 	scene_ui = new j1Scene_UI();
+	scene_credits = new j1Scene_Credits();
 	map = new j1Map();
 	pathfinding = new j1PathFinding();
 	entity_manager = new j1Entity_Manager();
@@ -65,6 +67,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(scene2);
 	AddModule(scene_ui);
+	AddModule(scene_credits);
 	AddModule(gui);
 	AddModule(entity_manager);
 	AddModule(fadeToBlack);
@@ -139,7 +142,7 @@ bool j1App::Awake()
 			item = item->next;
 		}
 	}
-
+	scene_credits->Disable();
 	scene_ui->Disable();
 	scene->Disable();
 	scene2->Disable();

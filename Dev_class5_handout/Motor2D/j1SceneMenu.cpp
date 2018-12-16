@@ -12,6 +12,7 @@
 #include "j1Fonts.h"
 #include "j1Scene.h"
 #include "j1Scene2.h"
+#include "j1Scene_Credits.h"
 #include "j1Audio.h"
 #include "j1FadeToBlack.h"
 #include "j1Entity_Manager.h"
@@ -131,6 +132,8 @@ bool j1SceneMenu::Update(float dt)
 			case CONTINUE:
 				App->LoadGame();
 				break;
+			case CREDIT:
+				App->fadeToBlack->FadeToBlack(App->scene_menu, App->scene_credits);
 			case MUTE:
 				App->audio->volume = 0;
 				break;
