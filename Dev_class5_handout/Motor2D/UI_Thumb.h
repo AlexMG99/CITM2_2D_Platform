@@ -16,9 +16,11 @@ public:
 	bool Start();
 	bool PostUpdate();
 
+	void MoveThumb();
 
-private:
-	SDL_Rect thumb;
+public:
+	SDL_Rect thumb_box;
+	iPoint click_position;
 
 
 };

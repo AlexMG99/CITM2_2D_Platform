@@ -24,6 +24,8 @@ public:
 	virtual bool Update(float dt);
 	virtual bool PostUpdate() { return true; };
 
+	
+
 	virtual bool OnHover() { return true; };
 	bool OnClick();
 
@@ -33,10 +35,10 @@ public:
 	iPoint		position;
 	iPoint		mouse_position;
 	UI_GUI*		parent = nullptr;
-	/*SDL_Rect box = { 0,0,0,0 };*/
 	p2Point<int> pivot = { 0,0 };
 
 	/*SDL_Rect elementRect;*/ //interaction rect
+	
 	bool		drag = false;
 	bool		static_object = false;
 	bool		visible = true;

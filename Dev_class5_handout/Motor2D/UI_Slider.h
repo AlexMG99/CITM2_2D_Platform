@@ -5,12 +5,12 @@
 #include "j1Gui.h"
 #include "SDL/include/SDL.h"
 
-class UI_Sprite;
+class UI_Thumb;
 
 class UI_Slider: public UI_GUI
 {
 public:
-	UI_Slider(SDL_Rect slider_box, SDL_Rect* section, UI_GUI* parent, p2Point<int> pivot = {0,0});
+	UI_Slider(SDL_Rect slider_box,  UI_GUI* parent /*p2Point<int> pivot*/);
 
 	~UI_Slider() {};
 
@@ -20,8 +20,10 @@ public:
 	float GetThumbValue();
 
 private:
+	SDL_Rect box;
 	SDL_Rect s_box;
-	UI_Slider* thumb = nullptr;
+	UI_Thumb* thumb = nullptr;
+	
 	
 };
 

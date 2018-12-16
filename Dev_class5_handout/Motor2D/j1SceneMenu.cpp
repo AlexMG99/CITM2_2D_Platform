@@ -8,6 +8,7 @@
 #include "UI_Button.h"
 #include "j1Render.h"
 #include "UI_Label.h"
+#include "UI_Slider.h"
 #include "j1Map.h"
 #include "j1Fonts.h"
 #include "j1Scene.h"
@@ -60,6 +61,8 @@ bool j1SceneMenu::Start()
 	button_list.add(App->gui->CreateButton({ 30, 213 }, CREDIT, credit_rect_button[0], &credit_rect_button[1], &credit_rect_button[2]));
 	
 
+	
+	
 	//TITLE
 	App->gui->CreateSprite({ 48, 7 }, { 718,161,255,41 });
 
@@ -68,27 +71,27 @@ bool j1SceneMenu::Start()
 
 	//Audio
 	SDL_Rect mute_rect_button[3] = { { 1030, 6, 38, 38 }, { 986,6,38,38 }, { 294, 143, 39, 38 } };
-	button_list.add(App->gui->CreateButton({ 520, 170 }, MUTE, mute_rect_button[0], &mute_rect_button[1], &mute_rect_button[2]));
+	button_list.add(App->gui->CreateButton({ 570, 170 }, MUTE, mute_rect_button[0], &mute_rect_button[1], &mute_rect_button[2]));
 
 	SDL_Rect unmute_rect_button[3] = { { 342,178,38,38 }, {342,98,38,38},{ 986,48,39,38 } };
-	button_list.add(App->gui->CreateButton({ 460, 170 }, UNMUTE, unmute_rect_button[0], &unmute_rect_button[1], &unmute_rect_button[2]));
+	button_list.add(App->gui->CreateButton({ 440, 170 }, UNMUTE, unmute_rect_button[0], &unmute_rect_button[1], &unmute_rect_button[2]));
 
 
 	SDL_Rect back_rect[3] = { { 705,20,115,29 }, { 705,51,115,29 }, { 705,82,115,29 } };
 	button_list.add(App->gui->CreateButton({ 398,10 }, BACK, back_rect[0], &back_rect[1], &back_rect[2], "Back"));
 	//Slider 
 	//App->gui->CreateSlider({ 506, 15}, { 450,182,133,25 });
-
+	App->gui->CreateSlider({ 500,59 }, { 450,182,133,25 });
 
 	//Capto30
-	SDL_Rect capto30_rect_button[3] = { { 422,215,36,36 }, { 458,215,36,36 }, { 381,36,36,36 } };
-	App->gui->CreateButton({ 590, 89 },CAPTO30, capto30_rect_button[0], &capto30_rect_button[1], &capto30_rect_button[2]);
+	/*SDL_Rect capto30_rect_button[3] = { { 422,215,36,36 }, { 458,215,36,36 }, { 381,36,36,36 } };
+	App->gui->CreateButton({ 590, 89 },CAPTO30, capto30_rect_button[0], &capto30_rect_button[1], &capto30_rect_button[2]);*/
 
 	
 	App->gui->CreateLabel({ 56, 16 }, "Trinity's Journey", TITLE, { 0, 0, 0, 0 });
 	App->gui->CreateLabel({ 416, 59 }, "Volume", FONT, { 0, 0, 0, 0 });
 	App->gui->CreateLabel({ 416, 99 }, "Fx  Volume", FONT, { 0, 0, 0, 0 });
-	App->gui->CreateLabel({ 416, 133 }, "Cap  to  30  fps", FONT, { 0, 0, 0, 0 });
+	/*App->gui->CreateLabel({ 416, 133 }, "Cap  to  30  fps", FONT, { 0, 0, 0, 0 });*/
 
 	App->gui->Enable();
 

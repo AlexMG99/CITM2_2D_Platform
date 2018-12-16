@@ -46,12 +46,15 @@ private:
 	void DebugInputs();
 
 private:
+
 	bool			godMode = false;
 	bool			falling = false;
 	SDL_Texture*	player_tex = nullptr;
 	p2Animation		jump_anim;
 	p2Animation     duck_anim;
 	p2Animation     cling_anim;
+
+	
 
 
 

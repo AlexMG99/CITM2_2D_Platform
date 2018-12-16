@@ -48,6 +48,8 @@ private:
 	j1Entity*           player;
 
 public:
+
+            
 	SDL_Texture*		graphics = nullptr;
 	SDL_Texture*		player_graphics = nullptr;
 	SDL_Texture*		debug_tex = nullptr;

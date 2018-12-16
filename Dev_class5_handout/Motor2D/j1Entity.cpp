@@ -5,6 +5,7 @@
 #include "j1Audio.h"
 #include "j1Entity.h"
 #include "j1Entity_Manager.h"
+#include "j1FadeToBlack.h"
 #include "j1Player.h"
 #include "j1Input.h"
 #include "j1Map.h"
@@ -13,6 +14,7 @@
 #include "j1Pathfinding.h"
 #include "j1Collision.h"
 #include "j1Render.h"
+#include "j1SceneMenu.h"
 #include "j1Scene_UI.h"
 
 #include "Brofiler/Brofiler.h"
@@ -130,6 +132,7 @@ void j1Entity::SetAnimations(float dt)
 
 		case STATE_DEATH:
 			current_animation = &death_anim;
+
 			if (death_anim.Finished())
 			{
 				to_delete = true;
@@ -190,6 +193,7 @@ void j1Entity::Entity_Collision(Collider* other_coll)
 			{
 				state = STATE_DEATH;
 				App->scene_ui->player_score += 500;
+				
 				sprintf_s(App->scene_ui->player_score_string, 5, "%1d", App->scene_ui->player_score);
 				App->scene_ui->score_label->ChangeText(App->scene_ui->player_score_string);
 				App->audio->PlayFx(App->entity_manager->fx_jump);
@@ -197,6 +201,7 @@ void j1Entity::Entity_Collision(Collider* other_coll)
 			}
 			else
 			{
+			
 				App->entity_manager->GetPlayer()->state = STATE_DEATH;
 			}
 		}

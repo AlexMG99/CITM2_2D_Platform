@@ -1,6 +1,7 @@
 #include "j1App.h"
 #include "j1Scene_UI.h"
 #include "j1Scene.h"
+#include "j1Scene2.h"
 #include "j1SceneMenu.h"
 #include "p2Log.h"
 #include "j1Input.h"
@@ -9,6 +10,7 @@
 #include "UI_Label.h"
 #include "j1Gui.h"
 #include "j1Fonts.h"
+#include "j1Entity_Manager.h"
 #include "j1FadeToBlack.h"
 
 
@@ -43,9 +45,13 @@ bool j1Scene_UI::Start()
 	score_label = App->gui->CreateLabel({ 290,5 }, player_score_string, Label_Type::CONFIG, { 255,255,255,255 }, true);
 	App->gui->CreateLabel({ 80, 5 }, "TIMER", Label_Type::FONT, { 255,255,255,255 }, true);
 	timer_label = App->gui->CreateLabel({ 165,5 }, timer_string, Label_Type::CONFIG, { 255,255,255,255 }, true);
-	App->gui->CreateSprite({ 10,5 }, { 706,6,14,13 }, true);
-	App->gui->CreateSprite({ 30,5 }, { 706,6,14,13 }, true);
-	App->gui->CreateSprite({ 50,5 }, { 706,6,14,13 }, true);
+	
+	
+	
+	hearts[0]= (App->gui->CreateSprite({ 10,5 }, { 706,6,14,13 }, true));
+	hearts[1]= (App->gui->CreateSprite({ 30,5 }, { 706,6,14,13 }, true));
+	hearts[2]= (App->gui->CreateSprite({ 30,5 }, { 706,6,14,13 }, true));
+
 
 	pause_ui_list.add(App->gui->CreateSprite({ 80, 30 }, { 649,228,158,26 }, true));
 	pause_ui_list.add(App->gui->CreateSprite({ 80,70 }, { 824, 6, 157, 151 }, true));
@@ -86,6 +92,39 @@ bool j1Scene_UI::Update(float dt)
 	float timer = (float)ptimer.ReadMs() / 1000;
 	sprintf_s(timer_string, 20, "%.2f", timer);
 	timer_label->ChangeText(timer_string);
+	
+
+	if (player_lifes == 3) 
+	{
+		hearts[0]->visible = true;
+		hearts[1]->visible = true;
+		hearts[2]->visible = true;
+	}
+	if (player_lifes == 2)
+	{
+		hearts[0]->visible = true;
+		hearts[1]->visible = true;
+		hearts[2]->visible = false;
+	}
+	if (player_lifes == 1)
+	{
+		hearts[0]->visible = true;
+		hearts[1]->visible = false;
+		hearts[2]->visible = false;
+	}
+	if (player_lifes == 0)
+	{
+		hearts[0]->visible = false;
+		hearts[1]->visible = false;
+		hearts[2]->visible = false;
+		if (App->scene) {
+			App->fadeToBlack->FadeToBlack(App->scene, App->scene_menu);
+		}
+		else
+			App->fadeToBlack->FadeToBlack(App->scene, App->scene2);
+
+	}
+
 
 	p2List_item<UI_Button*>* button_item = button_list.start;
 	while (button_item != NULL)

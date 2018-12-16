@@ -99,7 +99,7 @@ bool j1Scene::Update(float dt)
 	{
 		App->render->camera.x = -App->entity_manager->GetPlayer()->position.x*App->win->GetScale() + App->win->GetWidth() / 4;
 	}
-
+	
 	App->render->camera.y = -150;
 
 	App->map->Draw();

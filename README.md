@@ -52,6 +52,7 @@ Alex Morales:
 - Enemies Fx
 - UML
 
+
 Laia Martinez:
 - Load & Save enemies 
 - Created Structure enemies
@@ -61,8 +62,10 @@ Laia Martinez:
 - Enemies Spritesheet 
 - UML
 
+
 ## Credits
 * **[GitHub Project Page](https://github.com/AlexMG99/CITM2_2D_Platform)**
+* **[Link to the website](https://laiamartinezmot.wixsite.com/trinitysjourney)**
 
 ## Disclosure
 We do not own any of the sprites, tilesets, music or sfx presented in this game. Authors credited below

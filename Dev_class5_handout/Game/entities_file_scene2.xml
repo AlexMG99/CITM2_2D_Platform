@@ -22,6 +22,28 @@
       <position x="1500" y="150"/>
     </crab>
   </crabs>
-
+  <coins>
+    <coin>
+      <position x="200" y="180"/>
+    </coin>
+    <coin>
+      <position x="100" y="130"/>
+    </coin>
+    <coin>
+      <position x="820" y="130"/>
+    </coin>
+    <coin>
+      <position x="1520" y="130"/>
+    </coin>
+    <coin>
+      <position x="1590" y="230"/>
+    </coin>
+    <coin>
+      <position x="1860" y="230"/>
+    </coin>
+    <coin>
+      <position x="2190" y="90"/>
+    </coin>
+  </coins>
 </entityManager>
 

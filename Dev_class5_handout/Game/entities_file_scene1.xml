@@ -27,6 +27,15 @@
     <coin>
       <position x="1520" y="130"/>
     </coin>
+    <coin>
+      <position x="1590" y="230"/>
+    </coin>
+    <coin>
+      <position x="1860" y="230"/>
+    </coin>
+    <coin>
+      <position x="2190" y="90"/>
+    </coin>
   </coins>
   <crabs>
   <crab>

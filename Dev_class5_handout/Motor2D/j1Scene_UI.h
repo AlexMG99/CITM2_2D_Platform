@@ -7,6 +7,7 @@
 #include "p2List.h"
 #include "j1Gui.h"
 #include "UI_Button.h"
+#include "UI_Sprite.h"
 #include "UI_Label.h"
 
 
@@ -47,13 +48,18 @@ private:
 	
 
 public:
+	
+
 	char		player_score_string[5] = "0";
 	char		timer_string[20] = "0";
+	uint        player_lifes = 3;
+	UI_GUI*     hearts[3] = {nullptr,nullptr,nullptr};
 	uint		player_score = 0;
 	UI_Label*	score_label = nullptr;
 	UI_Label*	timer_label = nullptr;
 
 	p2List<UI_Button*>	button_list;
+	/*p2List<UI_GUI*>	hearts[3];*/
 	p2List<UI_GUI*>		pause_ui_list;
 };
 

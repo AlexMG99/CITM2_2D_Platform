@@ -51,12 +51,14 @@ bool UI_GUI::Update(float dt)
 	int x, y;
 	App->input->GetMousePosition(x, y);
 
+	
+
 	if (static_object)
 	{
 		position = { pos.x - App->render->camera.x / (int)App->win->GetScale(), pos.y - App->render->camera.y / (int)App->win->GetScale() };
 		mouse_position = { x - App->render->camera.x / (int)App->win->GetScale(),y - App->render->camera.y / (int)App->win->GetScale() };
 	}
-	else
+	else if(!static_object && !drag)
 	{
 		position = { pos.x , pos.y };
 		mouse_position = { x - App->render->camera.x / (int)App->win->GetScale(), y - App->render->camera.y / (int)App->win->GetScale() };
@@ -64,6 +66,13 @@ bool UI_GUI::Update(float dt)
 
 	return true;
 }
+
+
+
+
+
+
+
 
 bool UI_GUI::OnClick()
 {

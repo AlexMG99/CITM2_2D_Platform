@@ -8,6 +8,7 @@
 #include "j1Map.h"
 #include "j1Audio.h"
 #include "j1Render.h"
+#include "j1Scene_UI.h"
 #include "j1Textures.h"
 #include "j1Input.h"
 #include "p2Log.h"
@@ -233,6 +234,9 @@ void j1Entity_Player::PerformActions(float dt)
 		velocity.x = 0;
 		current_animation = &death_anim;
 
+		if (App->scene_ui->player_lifes > 0) {
+			App->scene_ui->player_lifes--;
+		}
 		if (App->scene->IsEnabled())
 		{
 			App->scene->Reset();

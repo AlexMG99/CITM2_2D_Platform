@@ -1,5 +1,6 @@
 #include "j1App.h"
 #include "p2Log.h"
+#include "p2Point.h"
 #include "j1Gui.h"
 #include "j1Window.h"
 #include "j1Scene.h"
@@ -11,10 +12,12 @@
 #include "UI_Thumb.h"
 
 
+
 UI_Thumb::UI_Thumb(SDL_Rect s_thumb, UI_GUI* parent)
 {
+	
 
-	thumb = s_thumb;
+	thumb_box = s_thumb;
 	this->parent = parent;
 }
 
@@ -28,9 +31,15 @@ bool UI_Thumb::PostUpdate()
 {
 	bool ret = true;
 
-	ret = App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y, &thumb);
+	ret = App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y, &thumb_box);
 
 	return ret;
+}
+
+void UI_Thumb::MoveThumb()
+{
+
+
 }
 
 
