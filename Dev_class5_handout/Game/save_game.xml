@@ -15,22 +15,21 @@
 	<scene_menu />
 	<scene_menu />
 	<gui>
-		<score value="0" />
+		<score value="100" />
 	</gui>
 	<entityManager>
 		<player>
-			<position x="80" y="219" />
+			<position x="120.800011" y="219" />
 			<velocity x="0" y="4.0800004" />
 			<state value="STATE_IDLE" />
 		</player>
 		<enemies>
+			<entity_crab x="320" y="158.039993" />
+			<entity_crab x="1034" y="179.039993" />
 			<entity_bat x="0" y="0" />
 			<entity_bat x="1204" y="115" />
 			<entity_bat x="2453" y="75" />
-			<entity_crab x="320" y="158.039993" />
-			<entity_crab x="1034" y="179.039993" />
 			<entity_coin x="200" y="180" />
-			<entity_coin x="100" y="130" />
 			<entity_coin x="820" y="130" />
 			<entity_coin x="1520" y="130" />
 			<entity_coin x="1590" y="230" />
@@ -43,6 +42,6 @@
 	</fadetoblack>
 	<collision />
 	<renderer>
-		<camera x="0" y="-150" />
+		<camera x="-106" y="-150" />
 	</renderer>
 </game_state>

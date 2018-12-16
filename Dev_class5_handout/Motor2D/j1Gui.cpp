@@ -173,12 +173,12 @@ UI_Slider * j1Gui::CreateSlider(iPoint pos, SDL_Rect slider_box, UI_GUI* parent/
 
     return (UI_Slider*)slider;
 }
-UI_Thumb * j1Gui::CreateThumb(iPoint pos, SDL_Rect s_thumb, UI_GUI * parent)
+UI_Thumb * j1Gui::CreateThumb(SDL_Rect s_thumb, UI_GUI * parent)
 {
 	UI_GUI* thumb = nullptr;
 	thumb = new UI_Thumb(s_thumb, parent);
-	thumb->pos.x = pos.x;
-	thumb->pos.y = pos.y;
+	thumb->pos.x = parent->pos.x + 1;
+	thumb->pos.y = parent->pos.y + 1;
 
 	gui_list.add(thumb);
 

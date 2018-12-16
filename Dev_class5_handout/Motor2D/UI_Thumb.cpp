@@ -10,6 +10,7 @@
 #include "j1Fonts.h"
 #include "UI_Slider.h"
 #include "UI_Thumb.h"
+#include "j1Audio.h"
 
 
 
@@ -31,7 +32,36 @@ bool UI_Thumb::PostUpdate()
 {
 	bool ret = true;
 
-	ret = App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y, &thumb_box);
+	ret = App->render->Blit(App->gui->GetAtlas(), position.x, position.y, &thumb_box);
+
+	if (OnClick())
+	{
+		drag = true;
+		if (position.x > parent->position.x )
+		{
+			position.x = mouse_position.x - 10;
+		}
+		else
+		{
+			position.x = parent->position.x + 1;
+		}
+
+		if ( position.x < parent->position.x + 109)
+		{
+			position.x = mouse_position.x - 10;
+		}
+		else
+		{
+			position.x = parent->position.x + 108;
+		}
+		
+		
+		App->audio->volume = (((position.x - parent->position.x) / 128.00f)*100.00f);
+		LOG("%i", position.x);
+		LOG("%i", parent->position.x);
+		LOG("%f", App->audio->volume);
+		
+	}
 
 	return ret;
 }
@@ -42,8 +72,8 @@ void UI_Thumb::MoveThumb()
 
 }
 
+bool UI_Thumb::OnHover()
+{
+	return position.x < mouse_position.x && position.y  < mouse_position.y && position.x + thumb_box.w > mouse_position.x && position.y + thumb_box.h > mouse_position.y;
 
-
-//void UI_Slider::OnClick()
-//{
-//}
+}

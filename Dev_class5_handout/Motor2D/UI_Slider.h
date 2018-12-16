@@ -20,9 +20,10 @@ public:
 	float GetThumbValue();
 
 private:
-	SDL_Rect box;
+	UI_Thumb*	thumb = nullptr;
+	SDL_Rect	box;
+public:
 	SDL_Rect s_box;
-	UI_Thumb* thumb = nullptr;
 	
 	
 };

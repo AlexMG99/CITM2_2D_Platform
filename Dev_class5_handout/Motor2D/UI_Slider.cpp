@@ -20,9 +20,7 @@ UI_Slider::UI_Slider(SDL_Rect slider_box, UI_GUI* parent /*p2Point<int> pivo*/)
 
 bool UI_Slider::Start()
 {
-	
-	thumb = App->gui->CreateThumb({ pos.x + 1, pos.y + 1}, { 619,182,24,22 }, this);
-	thumb->drag = true;
+	thumb = App->gui->CreateThumb({ 619,182,24,22 }, this);
 	return true;
 }
 
@@ -30,23 +28,12 @@ bool UI_Slider::PostUpdate()
 {
 	bool ret = true;
 
-	ret = App->render->Blit(App->gui->GetAtlas(), pos.x, pos.y , &s_box);
+	ret = App->render->Blit(App->gui->GetAtlas(), position.x, position.y , &s_box);
 
 
 
 	return ret;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 float UI_Slider::GetThumbValue()
 {

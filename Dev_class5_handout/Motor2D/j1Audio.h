@@ -43,7 +43,7 @@ public:
 
 public:
 	_Mix_Music*			music;
-    uint				volume;
+    float				volume;
 	uint				volume_fx;
 private:
 	p2SString			folder;

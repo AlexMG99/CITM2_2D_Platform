@@ -16,6 +16,7 @@ public:
 	bool Start();
 	bool PostUpdate();
 
+	bool OnHover();
 	void MoveThumb();
 
 public:
