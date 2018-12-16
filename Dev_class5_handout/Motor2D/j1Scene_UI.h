@@ -37,8 +37,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	//Load Game State
-	bool Load(pugi::xml_node&);
+private:
+	void ChangeVisibility();
 
 private:
 	p2SString			path;

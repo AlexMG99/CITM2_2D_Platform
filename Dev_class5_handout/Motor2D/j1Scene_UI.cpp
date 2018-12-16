@@ -95,7 +95,8 @@ bool j1Scene_UI::Update(float dt)
 			switch (button_item->data->GetType())
 			{
 			case PLAY:
-				button_item->data->visible = !button_item->data->visible;
+				ChangeVisibility();
+				App->paused = false;
 				break;
 			case SAVE:
 				App->SaveGame();
@@ -123,18 +124,7 @@ bool j1Scene_UI::PostUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
-		p2List_item<UI_Button*>* button_item = button_list.start;
-		while (button_item != NULL)
-		{
-			button_item->data->visible = !button_item->data->visible;
-			button_item = button_item->next;
-		}
-		p2List_item<UI_GUI*>* ui_item = pause_ui_list.start;
-		while (ui_item != NULL)
-		{
-			ui_item->data->visible = !ui_item->data->visible;
-			ui_item = ui_item->next;
-		}
+		ChangeVisibility();
 	}
 
 	return ret;
@@ -149,11 +139,19 @@ bool j1Scene_UI::CleanUp()
 	return true;
 }
 
-
-bool j1Scene_UI::Load(pugi::xml_node& node)
+void j1Scene_UI::ChangeVisibility()
 {
-	
-
-	return true;
+	p2List_item<UI_Button*>* button_item = button_list.start;
+	while (button_item != NULL)
+	{
+		button_item->data->visible = !button_item->data->visible;
+		button_item = button_item->next;
+	}
+	p2List_item<UI_GUI*>* ui_item = pause_ui_list.start;
+	while (ui_item != NULL)
+	{
+		ui_item->data->visible = !ui_item->data->visible;
+		ui_item = ui_item->next;
+	}
 }
 
