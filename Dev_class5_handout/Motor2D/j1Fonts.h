@@ -40,6 +40,7 @@ public:
 	p2List<_TTF_Font*>	fonts;
 	_TTF_Font*			default;
 	_TTF_Font*			title_config;
+	_TTF_Font*			title_settings;
 	_TTF_Font*			title;
 	_TTF_Font*			title_buttons;
 };

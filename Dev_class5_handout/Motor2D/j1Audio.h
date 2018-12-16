@@ -41,13 +41,14 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 
+public:
+	_Mix_Music*			music;
+    uint				volume;
+	uint				volume_fx;
 private:
 	p2SString			folder;
-
-	_Mix_Music*			music;
 	p2List<Mix_Chunk*>	fx;
-	uint				volume;
-	uint				volume_fx;
+
 };
 
 #endif // __j1AUDIO_H__

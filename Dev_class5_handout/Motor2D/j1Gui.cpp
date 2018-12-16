@@ -150,17 +150,17 @@ UI_Button* j1Gui::CreateButton(iPoint pos, Button_Type type, SDL_Rect idle_rect,
 
 	return (UI_Button*)button;
 }
-UI_Slider * j1Gui::CreateSlider(iPoint pos, SDL_Rect slider_box, UI_GUI* parent)
-{
-	UI_GUI*slider = nullptr;
-	slider = new UI_Slider(slider_box, parent);
-	slider->pos.x = pos.x;
-	slider->pos.y = pos.y;
-
-	gui_list.add(slider);
-
-    return (UI_Slider*)slider;
-}
+//UI_Slider * j1Gui::CreateSlider(iPoint pos, SDL_Rect slider_box, UI_GUI* parent)
+//{
+//	UI_GUI*slider = nullptr;
+//	slider = new UI_Slider(slider_box, parent);
+//	slider->pos.x = pos.x;
+//	slider->pos.y = pos.y;
+//
+//	gui_list.add(slider);
+//
+//    return (UI_Slider*)slider;
+//}
 UI_Thumb * j1Gui::CreateThumb(iPoint pos, SDL_Rect s_thumb, UI_GUI * parent)
 {
 	UI_GUI* thumb = nullptr;
