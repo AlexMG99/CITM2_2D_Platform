@@ -40,7 +40,7 @@ public:
 	p2Point<int> pivot = { 0,0 };
 
 	/*SDL_Rect elementRect;*/ //interaction rect
-	bool drag = false;
+	bool		drag = false;
 	bool		static_object = false;
 };
 

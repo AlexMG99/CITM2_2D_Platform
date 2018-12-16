@@ -65,8 +65,8 @@ bool j1SceneMenu::Start()
 	button_list.add(App->gui->CreateButton({ 290, 113 }, UNMUTE, unmute_rect_button[0], &unmute_rect_button[1], &unmute_rect_button[2]));
 
 	
-	SDL_Rect back_rect[3] = { { 705,20,115,29 }, { 705,51,115,29 }, { 705,82,115,29 } };
-	button_list.add(App->gui->CreateButton({ 455,200 }, BACK , back_rect[0], &back_rect[1], &back_rect[2], "BACK"));
+	SDL_Rect back_rect[3] = { { 1025,90,40,33 }, { 982,90,40,33 }, { 1071,90,40,33 } };
+	button_list.add(App->gui->CreateButton({ 375,200 }, BACK , back_rect[0], &back_rect[1], &back_rect[2]));
 
 	//TITLE
 	App->gui->CreateSprite({ 48, 7 }, { 718,161,255,41 });
