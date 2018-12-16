@@ -6,7 +6,7 @@
 
 j1Entity_Coin::j1Entity_Coin() : j1Entity("coin")
 {
-	name.create("entity_crab");
+	name.create("entity_coin");
 
 	coll = App->collision->AddCollider({ 30, 30, 28, 28 }, COLLIDER_COIN, App->entity_manager);
 

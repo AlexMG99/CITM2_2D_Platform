@@ -209,7 +209,11 @@ bool j1Entity_Manager::Load(pugi::xml_node & entity_node)
 	for (pugi::xml_node bat = entity_node.child("enemies").child("entity_bat"); bat; bat = bat.next_sibling("entity_bat"))
 	{
 		(CreateEntity(BAT, bat.attribute("x").as_float(), bat.attribute("y").as_float()));
-		
+	}
+
+	for (pugi::xml_node coin = entity_node.child("enemies").child("entity_coin"); coin; coin = coin.next_sibling("entity_coin"))
+	{
+		(CreateEntity(COIN, coin.attribute("x").as_float(), coin.attribute("y").as_float()));
 	}
 
 	return true;
